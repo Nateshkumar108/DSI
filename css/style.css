@@ -885,3 +885,11 @@ border: 2px solid #fff;
 .pdtop5 {
 	padding-top: 5em;
 }
+
+.plain-text {
+	text-transform: none;
+}
+
+.font30 {
+	font-size: 30px !important;
+}
