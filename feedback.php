@@ -4,8 +4,8 @@ $field_email = $_POST['cf_email'];
  $field_subject= $_POST['cf_subject'];
  $field_message = $_POST['cf_message'];
 
-$mail_to = 'ammar@perfect108.com';
-$subject = 'Contact Form from a Digital Space inc site visitor '.$field_name;
+$mail_to = 'info@digitalspacesinc.com';
+$subject = 'Digital Space Inc contact'.$field_name;
 
 $body_message = 'Name: '.$field_name."\n";
 $body_message .= 'E-mail: '.$field_email."\n";
