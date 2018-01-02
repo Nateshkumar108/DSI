@@ -35,7 +35,7 @@ function apiCal(fromDate,toDate){
                     type: 'column'
                   },
                   title: {
-                    text: 'Digital_spaces_PPC'
+                    text: 'DSI People Counter'
                   },
                   subtitle: {
                     text: 'Visitors per hour'
@@ -106,7 +106,7 @@ function apiCal(fromDate,toDate){
                     type: 'column'
                   },
                   title: {
-                    text: 'Digital_spaces_PPC'
+                    text: 'DSI People Counter'
                   },
                   subtitle: {
                     text: 'Visitors per hour'
@@ -179,7 +179,7 @@ function apiCal(fromDate,toDate){
                     type: 'column'
                   },
                   title: {
-                    text: 'Digital_spaces_PPC'
+                    text: 'DSI People Counter'
                   },
                   subtitle: {
                     text: 'Visitors per hour'
