@@ -47,6 +47,7 @@ function myAgeCounter() {
     s3.style.display = "none";
     s4.style.display = "none";
     s5.style.display = "none";
+    $('#agc').addClass('active-tab');
     $('#ppc').removeClass('active-tab');
     $('#trkMap').removeClass('active-tab');
 

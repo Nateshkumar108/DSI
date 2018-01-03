@@ -195,14 +195,14 @@
                         //Natesh your api call here for demographics
                     } else if($('#ppc').hasClass('active-tab')) {
                         //Check which tab is currently active
-                    if($('#in').hasClass('active')){
-                        value = 'in';
-                    } else if($('#out').hasClass('active')){
-                        value = 'out';
-                    } else {
-                        value = 'in-out';
-                    }
-                    apiCal(fromDate, toDate, value);
+                        if ($('#in').hasClass('active')) {
+                            value = 'in';
+                        } else if ($('#out').hasClass('active')) {
+                            value = 'out';
+                        } else {
+                            value = 'in-out';
+                        }
+                        apiCal(fromDate, toDate, value);
                     }
                     
                 }
