@@ -62,7 +62,7 @@
                 <h3>Workspace</h3>
                 <ul class="workspaceButton">
                     <li>
-                        <button class="peopleCounter" id="ppc" onclick="myPeopleCounter()">People Counter</button>
+                        <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()">People Counter</button>
                     </li>
                     <li>
                         <button class="ageCount" id="agc" onclick="myAgeCounter()">Age Counter</button>
@@ -161,10 +161,10 @@
             <div class="calender">
                 <div id="datepicker"></div>
             </div>
-            <div class="time">
+            <!-- <div class="time">
                 <div id="slider"></div>
 
-            </div>
+            </div> -->
         </div>
     </div>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
@@ -191,7 +191,10 @@
                     var fromDate = year + "-" + month + "-" + day;
                     let value = null;
 
-                    //Check which tab is currently active
+                    if($('#agc').hasClass('active-tab')){
+                        //Natesh your api call here for demographics
+                    } else if($('#ppc').hasClass('active-tab')) {
+                        //Check which tab is currently active
                     if($('#in').hasClass('active')){
                         value = 'in';
                     } else if($('#out').hasClass('active')){
@@ -200,10 +203,12 @@
                         value = 'in-out';
                     }
                     apiCal(fromDate, toDate, value);
+                    }
+                    
                 }
             });
 
-            $("#slider").slider();
+            // $("#slider").slider();
 
             $('#in').click(function () {
                 $("#datepicker").datepicker("setDate", new Date());

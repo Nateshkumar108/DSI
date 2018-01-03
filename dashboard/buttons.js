@@ -24,6 +24,8 @@ function myPeopleCounter() {
     s3.style.display = "none";
     s4.style.display = "none";
     s5.style.display = "block";
+    $('#agc').removeClass('active-tab');
+    $('#trkMap').removeClass('active-tab');
     
 
 
@@ -45,6 +47,8 @@ function myAgeCounter() {
     s3.style.display = "none";
     s4.style.display = "none";
     s5.style.display = "none";
+    $('#ppc').removeClass('active-tab');
+    $('#trkMap').removeClass('active-tab');
 
    
 }
@@ -62,5 +66,7 @@ function myTrackMap(){
     s3.style.display = "block";
     s4.style.display = "block";
     s5.style.display = "none";
+    $('#ppc').removeClass('active-tab');
+    $('#agc').removeClass('active-tab');
     
 }
