@@ -189,13 +189,24 @@
                     var month = today.getMonth() + 1;
                     var year = today.getFullYear();
                     var fromDate = year + "-" + month + "-" + day;
-                    apiCal(fromDate, toDate, 'in-out');
+                    let value = null;
+
+                    //Check which tab is currently active
+                    if($('#in').hasClass('active')){
+                        value = 'in';
+                    } else if($('#out').hasClass('active')){
+                        value = 'out';
+                    } else {
+                        value = 'in-out';
+                    }
+                    apiCal(fromDate, toDate, value);
                 }
             });
 
             $("#slider").slider();
 
             $('#in').click(function () {
+                $("#datepicker").datepicker("setDate", new Date());
                 if (!$(this).hasClass('active')) {
                     $(this).addClass('active');
                     $('#out').removeClass('active');
@@ -204,6 +215,7 @@
             });
 
             $('#out').click(function () {
+                $("#datepicker").datepicker("setDate", new Date());
                 if (!$(this).hasClass('active')) {
                     $(this).addClass('active');
                     $('#in').removeClass('active');
@@ -213,6 +225,7 @@
             });
 
             $('#inout').click(function () {
+                $("#datepicker").datepicker("setDate", new Date());
                 if (!$(this).hasClass('active')) {
                     $(this).addClass('active');
                     $('#in').removeClass('active');
