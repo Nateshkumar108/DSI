@@ -162,10 +162,10 @@
             <div class="calender">
                 <div id="datepicker"></div>
             </div>
-            <div class="time">
+            <!-- <div class="time">
                 <div id="slider"></div>
 
-            </div>
+            </div> -->
         </div>
     </div>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
@@ -194,7 +194,10 @@
                     var fromDate = year + "-" + month + "-" + day;
                     let value = null;
 
-                    //Check which tab is currently active
+                    if($('#agc').hasClass('active-tab')){
+                        demoApi(fromDate, toDate);
+                    } else if($('#ppc').hasClass('active-tab')) {
+                        //Check which tab is currently active
                     if($('#in').hasClass('active')){
                         value = 'in';
                     } else if($('#out').hasClass('active')){
@@ -203,11 +206,12 @@
                         value = 'in-out';
                     }
                     apiCal(fromDate, toDate, value);
-                    demoApi(fromDate, toDate);
+                    }
+                    
                 }
             });
 
-            $("#slider").slider();
+            // $("#slider").slider();
 
             $('#in').click(function () {
                 $("#datepicker").datepicker("setDate", new Date());
