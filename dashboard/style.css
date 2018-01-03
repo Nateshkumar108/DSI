@@ -75,8 +75,22 @@ body {
 .rooms{
   height: 150px;
 }
-.highcharts{
+.graphs{
   width: 65%;
+}
+.highcharts{
+  width: 100%;
+  
+}
+.ageCounter{
+  width: 100%;
+  display:none;
+
+}
+.trackMaps{
+  width: 100%;
+  display: none;
+
 }
 .event{
   width: 25%;
@@ -152,4 +166,8 @@ body {
 
 .calender {
   padding: 10px;
+}
+
+.chartButton button.active {
+  background: #2E3561 ;
 }

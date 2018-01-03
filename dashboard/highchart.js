@@ -6,7 +6,7 @@ var outData=0;
 var inoutData=0;
 $(document).ready(function () {
 
-
+  
 
   /*var url = "https://eds.modcam.io/v1/peoplecounter/installation";
   const installation = "5a420343b7e14e0007d73376";
@@ -51,7 +51,7 @@ $(document).ready(function () {
               type: 'column'
             },
             title: {
-              text: 'Digital_spaces_PPC'
+              text: 'DSI People Counter'
             },
             subtitle: {
               text: 'Visitors per hour'
@@ -127,7 +127,7 @@ $(document).ready(function () {
               type: 'column'
             },
             title: {
-              text: 'Digital_spaces_PPC'
+              text: 'DSI People Counter'
             },
             subtitle: {
               text: 'Visitors per hour'
@@ -205,7 +205,7 @@ $(document).ready(function () {
               type: 'column'
             },
             title: {
-              text: 'Digital_spaces_PPC'
+              text: 'DSI People Counter'
             },
             subtitle: {
               text: 'Visitors per hour'
@@ -282,7 +282,7 @@ $(document).ready(function () {
             type: 'column'
           },
           title: {
-            text: 'Digital_spaces_PPC'
+            text: 'DSI People Counter'
           },
           subtitle: {
             text: 'Visitors per hour'

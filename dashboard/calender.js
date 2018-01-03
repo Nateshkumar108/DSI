@@ -1,8 +1,8 @@
-function apiCal(fromDate,toDate, value){
-    var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/"+toDate+"?st=00:00&et=24:00";
+function apiCal(fromDate, toDate, value) {
+  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=00:00&et=24:00";
 
-    var inppc = [];
-    var times = [];
+  var inppc = [];
+  var times = [];
 
   switch (value) {
     case 'in':
@@ -22,7 +22,6 @@ function apiCal(fromDate,toDate, value){
           inppc = [];
           times = [];
           for (let item of data.data[0].items) {
-            console.log('in', item.in);
             inppc.push(item.in);
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
@@ -32,7 +31,7 @@ function apiCal(fromDate,toDate, value){
               type: 'column'
             },
             title: {
-              text: 'Digital_spaces_PPC'
+              text: 'DSI People Counter'
             },
             subtitle: {
               text: 'Visitors per hour'
@@ -72,7 +71,6 @@ function apiCal(fromDate,toDate, value){
       break;
     case 'out':
       $.ajax({
-
         headers: {
           'Access-Control-Allow-Headers': '*',
           'Content-Type': 'application/json',
@@ -80,8 +78,6 @@ function apiCal(fromDate,toDate, value){
           'x-client-id': 'digispc',
           'x-api-key': '20d24f4d6cc964cae3050afd1610c29b'
         },
-
-
         url: furl,
         crossDomain: true,
         method: 'GET',
@@ -90,7 +86,6 @@ function apiCal(fromDate,toDate, value){
           outppc = [];
           times = [];
           for (let item of data.data[0].items) {
-            console.log('out', item.out);
             outppc.push(item.out);
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
@@ -100,7 +95,7 @@ function apiCal(fromDate,toDate, value){
               type: 'column'
             },
             title: {
-              text: 'Digital_spaces_PPC'
+              text: 'DSI People Counter'
             },
             subtitle: {
               text: 'Visitors per hour'
@@ -140,7 +135,6 @@ function apiCal(fromDate,toDate, value){
       break;
     case 'in-out':
       $.ajax({
-
         headers: {
           'Access-Control-Allow-Headers': '*',
           'Content-Type': 'application/json',
@@ -148,8 +142,6 @@ function apiCal(fromDate,toDate, value){
           'x-client-id': 'digispc',
           'x-api-key': '20d24f4d6cc964cae3050afd1610c29b'
         },
-
-
         url: furl,
         crossDomain: true,
         method: 'GET',
@@ -159,7 +151,6 @@ function apiCal(fromDate,toDate, value){
           outppc = [];
           times = [];
           for (let item of data.data[0].items) {
-            console.log('in', item.in);
             inppc.push(item.in);
             outppc.push(item.out);
             var timeArray = item.date.split(" ");

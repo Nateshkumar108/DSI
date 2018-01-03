@@ -52,7 +52,9 @@
 
 <body>
     <header>
-        <img src="img/logo.png" alt="" style="width: 179px;">
+        <a href="http://www.digitalspacesinc.com/">
+            <img src="img/logo.png" alt="" style="width: 179px;">
+        </a>
     </header>
     <div class="dashboard">
         <div class="tabs">
@@ -60,41 +62,50 @@
                 <h3>Workspace</h3>
                 <ul class="workspaceButton">
                     <li>
-                        <button class="occupancyReport">Occupancy Report</button>
+                        <button class="peopleCounter" id="ppc" onclick="myPeopleCounter()">People Counter</button>
                     </li>
                     <li>
-                        <button class="flowReport">Flow Report</button>
+                        <button class="ageCount" id="agc" onclick="myAgeCounter()">Age Counter</button>
                     </li>
                     <li>
-                        <button class="dwellReport">Dwell Report</button>
+                        <button class="trakMap" id="trkMap" onclick="myTrackMap()">Track Map</button>
                     </li>
                 </ul>
             </div>
-            <div class="rooms">
-                <h3>Rooms</h3>
-                <ul class="roomsButton">
-                    <li>
-                        <button class="occupancyReport">Occupancy Report</button>
-                    </li>
-                    <li>
-                        <button class="dwellReport">Dwell Report</button>
-                    </li>
-                </ul>
-            </div>
+            <!-- <div class="rooms">
+                  <h3>Rooms</h3>
+                  <ul class="roomsButton">
+                    <li><button class="occupancyReport">Occupancy Report</button></li>
+                    <li><button class="dwellReport">Dwell Report</button></li>
+                  </ul>
+                </div> -->
         </div>
-        <div class="highcharts">
-            <ul class="chartButton">
-                <li>
-                    <button name="in" id="in">IN</button>
-                </li>
-                <li>
-                    <button name="out" id="out">OUT</button>
-                </li>
-                <li>
-                    <button name="in" id="inout">IN/OUT</button>
-                </li>
-            </ul>
-            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <div class="graphs">
+            <div class="highcharts" id="hiChart">
+                <ul class="chartButton">
+                    <li>
+                        <button name="in" id="in" class="">IN</button>
+                    </li>
+                    <li>
+                        <button name="out" id="out" class="">OUT</button>
+                    </li>
+                    <li>
+                        <button name="in" id="inout" class="active">IN/OUT</button>
+                    </li>
+                </ul>
+
+
+
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+            <div class="ageCounter" id="agCount">
+
+                <h1>AGE COUNTER</h1>
+            </div>
+            <div class="trackMaps" id="trackMap">
+
+                <h1>TRACK MAP</h1>
+            </div>
         </div>
         <div class="event">
             <div class="selectZone">
@@ -103,40 +114,44 @@
                     <ul class="labels">
                         <li>Facility:</li>
                         <li>Floor:</li>
-                        <li>Wing:</li>
-                        <li>Zone:</li>
+                        <li>Room:</li>
+                        <li>Sensor:</li>
                     </ul>
                     <ul class="slectDropdown">
                         <li>
-                            <select>
-                                <option value="volvo">Parkwood</option>
-                                <option value="saab">Hillbay</option>
-                                <option value="opel">Omnaro</option>
-                                <option value="audi">Rahnot</option>
+                            <select disabled>
+                                <option value="volvo">Regus</option>
+
+                            </select>
+                        </li>
+                        <li>
+                            <select disabled>
+                                <option value="volvo">7th Floor </option>
+
+                            </select>
+                        </li>
+                        <li>
+                            <select id="dd">
+                                <option value="volvo">Select Room</option>
+                                <option id="r704">704</option>
+                                <option id="r705">705</option>
+                                <option id="r706">706</option>
+
+                                <option id="rdo">Deepak's Office</option>
                             </select>
                         </li>
                         <li>
                             <select>
-                                <option value="volvo">Floor 1</option>
-                                <option value="saab">Floor 2</option>
-                                <option value="opel">Floor 3</option>
-                                <option value="audi">Floor 4</option>
-                            </select>
-                        </li>
-                        <li>
-                            <select>
-                                <option value="volvo">East</option>
-                                <option value="saab">West</option>
-                                <option value="opel">North</option>
-                                <option value="audi">South</option>
-                            </select>
-                        </li>
-                        <li>
-                            <select>
-                                <option value="volvo">Zone 1</option>
-                                <option value="saab">Zone 2</option>
-                                <option value="opel">Zone 3</option>
-                                <option value="audi">Zone 4</option>
+                                <option value="volvo">Select Sensor</option>
+                                <option id="s1">001EAA</option>
+                                <option id="s2">001EEC</option>
+                                <option id="s3">001D5F</option>
+                                <option id="s4">001438</option>
+                                <option id="s5">001E56</option>
+
+                                <!-- <option value="saab">001EEC</option>
+                                    <option value="opel">001D5F</option>
+                                    <option value="audi">001438</option> -->
                             </select>
                         </li>
                     </ul>
@@ -158,10 +173,11 @@
     <script src="js/utility/highcharts/highcharts.js"></script>
     <script src="js/utility/highcharts/highcharts-more.js"></script>
     <script src="highchart.js"></script>
+    <script src="buttons.js"></script>
     <script type="text/javascript">
         $(function () {
             $("#datepicker").datepicker({
-                onSelect: function(date){
+                onSelect: function (date) {
                     var tomorrow = new Date(new Date(date).getTime() + (24 * 60 * 60 * 1000));
                     var day = tomorrow.getDate();
                     var month = tomorrow.getMonth() + 1;
@@ -176,8 +192,33 @@
                     apiCal(fromDate, toDate, 'in-out');
                 }
             });
-            
+
             $("#slider").slider();
+
+            $('#in').click(function () {
+                if (!$(this).hasClass('active')) {
+                    $(this).addClass('active');
+                    $('#out').removeClass('active');
+                    $('#inout').removeClass('active');
+                }
+            });
+
+            $('#out').click(function () {
+                if (!$(this).hasClass('active')) {
+                    $(this).addClass('active');
+                    $('#in').removeClass('active');
+                    $('#inout').removeClass('active');
+
+                }
+            });
+
+            $('#inout').click(function () {
+                if (!$(this).hasClass('active')) {
+                    $(this).addClass('active');
+                    $('#in').removeClass('active');
+                    $('#out').removeClass('active');
+                }
+            });
         });
 
     </script>
