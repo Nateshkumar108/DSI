@@ -62,7 +62,7 @@
                 <h3>Workspace</h3>
                 <ul class="workspaceButton">
                     <li>
-                        <button class="peopleCounter" id="ppc" onclick="myPeopleCounter()">People Counter</button>
+                        <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()">People Counter</button>
                     </li>
                     <li>
                         <button class="ageCount" id="agc" onclick="myAgeCounter()">Age Counter</button>
@@ -99,8 +99,9 @@
                 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>
             <div class="ageCounter" id="agCount">
+                    <div id="demogra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-                <h1>AGE COUNTER</h1>
+                <!-- <h1>AGE COUNTER</h1> -->
             </div>
             <div class="trackMaps" id="trackMap">
 
@@ -173,6 +174,8 @@
     <script src="js/utility/highcharts/highcharts.js"></script>
     <script src="js/utility/highcharts/highcharts-more.js"></script>
     <script src="highchart.js"></script>
+    <script src="demographic.js"></script>
+    <script src="demoApiCal.js"></script>
     <script src="buttons.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -200,6 +203,7 @@
                         value = 'in-out';
                     }
                     apiCal(fromDate, toDate, value);
+                    demoApi(fromDate, toDate);
                 }
             });
 
