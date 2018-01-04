@@ -4,6 +4,9 @@ var times = [];
 var inData=0;
 var outData=0;
 var inoutData=0;
+
+console.log("DATESDFGHJKJHGFD"+fromDate)
+console.log("DATESDFGHJKJHGFD"+toDate)
 $(document).ready(function () {
 
   
@@ -15,7 +18,8 @@ $(document).ready(function () {
   //var outer_range_end = $('outer_range_end').val();
   var date = ""
   // var furl = url+'/'+installation+'/'+projction+'/'+outer_range_start+'/'+outer_range_end;*/
-  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/2017-12-26/2017-12-27?st=00:00&et=24:00";
+
+var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate +"/"+ toDate +"?st=00:00&et=24:00";
   $('#in').click(function(){
     inData=1;
     outData=0;
@@ -48,7 +52,8 @@ $(document).ready(function () {
         }
           Highcharts.chart('container', {
             chart: {
-              type: 'column'
+              type: 'column',
+              height: 70 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -127,7 +132,8 @@ $(document).ready(function () {
         }
           Highcharts.chart('container', {
             chart: {
-              type: 'column'
+              type: 'column',
+              height: 70 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -208,7 +214,8 @@ $(document).ready(function () {
         }
           Highcharts.chart('container', {
             chart: {
-              type: 'column'
+              type: 'column',
+              height: 70 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -288,7 +295,8 @@ $(document).ready(function () {
       }
         Highcharts.chart('container', {
           chart: {
-            type: 'column'
+            type: 'column',
+            height: 70 + '%'
           },
           title: {
             text: 'DSI People Counter'
@@ -343,4 +351,3 @@ $(document).ready(function () {
   //var inppc= [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4];
   
 });
-

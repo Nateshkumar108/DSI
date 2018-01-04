@@ -28,7 +28,8 @@ function apiCal(fromDate, toDate, value) {
           }
           Highcharts.chart('container', {
             chart: {
-              type: 'column'
+              type: 'column',
+              height: 70 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -92,7 +93,8 @@ function apiCal(fromDate, toDate, value) {
           }
           Highcharts.chart('container', {
             chart: {
-              type: 'column'
+              type: 'column',
+              height: 70 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -161,7 +163,8 @@ function apiCal(fromDate, toDate, value) {
           }
           Highcharts.chart('container', {
             chart: {
-              type: 'column'
+              type: 'column',
+              height: 70 + '%'
             },
             title: {
               text: 'Digital_spaces_PPC'

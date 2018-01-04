@@ -168,6 +168,20 @@
             </div> -->
         </div>
     </div>
+    <script>
+    var today = new Date();
+var day = today.getDate();
+var month = today.getMonth() + 1;
+var year = today.getFullYear();
+var fromDate = year + "-" + month + "-" + day;
+var tomorrowDate=new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+var tomorrow = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+var day = tomorrow.getDate();
+var month = tomorrow.getMonth() + 1;
+var year = tomorrow.getFullYear();
+var calDate;
+var calNextDate;
+var toDate = year + "-" + month + "-" + day;</script>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="calender.js"></script>
@@ -186,16 +200,18 @@
                     var month = tomorrow.getMonth() + 1;
                     var year = tomorrow.getFullYear();
                     var toDate = year + "-" + month + "-" + day;
+                    calNextDate=toDate;
 
                     var today = new Date(new Date(date));
                     var day = today.getDate();
                     var month = today.getMonth() + 1;
                     var year = today.getFullYear();
                     var fromDate = year + "-" + month + "-" + day;
+                    calDate=fromDate;
                     let value = null;
 
                     if($('#agc').hasClass('active-tab')){
-                        demoApi(fromDate, toDate);
+                         demoApi(fromDate, toDate);
                     } else if($('#ppc').hasClass('active-tab')) {
                         //Check which tab is currently active
                         if ($('#in').hasClass('active')) {

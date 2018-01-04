@@ -11,7 +11,7 @@ $(document).ready(function () {
   //var outer_range_end = $('outer_range_end').val();
   var date = ""
   // var furl = url+'/'+installation+'/'+projction+'/'+outer_range_start+'/'+outer_range_end;*/
-  var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/range/2018-01-02/2018-01-03?st=00:00&et=24:00";
+  var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/range/" + fromDate +"/"+ toDate +"?st=00:00&et=24:00";
   
   $.ajax({
 
@@ -55,7 +55,8 @@ $(document).ready(function () {
       }
         Highcharts.chart('demogra', {
           chart: {
-            type: 'column'
+            type: 'column',
+            height: 70 + '%'
           },
           title: {
             text: 'DSI Demographics'

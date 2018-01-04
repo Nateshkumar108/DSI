@@ -27,6 +27,8 @@ function myPeopleCounter() {
     $('#ppc').addClass('active-tab');
     $('#agc').removeClass('active-tab');
     $('#trkMap').removeClass('active-tab');
+
+   
     
 
 
@@ -36,6 +38,7 @@ function myPeopleCounter() {
 }
 
 function myAgeCounter() {
+    demoApi(calDate, calNextDate);
     hiChart.style.display = "none";
     agCount.style.display = "block";
     trackMap.style.display = "none";
@@ -48,9 +51,11 @@ function myAgeCounter() {
     s3.style.display = "none";
     s4.style.display = "none";
     s5.style.display = "none";
+    
     $('#agc').addClass('active-tab');
     $('#ppc').removeClass('active-tab');
     $('#trkMap').removeClass('active-tab');
+    
 
    
 }
