@@ -56,6 +56,9 @@ $(document).ready(function () {
             subtitle: {
               text: 'Visitors per hour'
             },
+            credits: {
+              enabled: false
+          },
             xAxis: {
               categories: times,
               crosshair: true
@@ -132,6 +135,9 @@ $(document).ready(function () {
             subtitle: {
               text: 'Visitors per hour'
             },
+            credits: {
+              enabled: false
+          },
             xAxis: {
               categories: times,
               crosshair: true
@@ -210,6 +216,9 @@ $(document).ready(function () {
             subtitle: {
               text: 'Visitors per hour'
             },
+            credits: {
+              enabled: false
+          },
             xAxis: {
               categories: times,
               crosshair: true
@@ -287,6 +296,9 @@ $(document).ready(function () {
           subtitle: {
             text: 'Visitors per hour'
           },
+          credits: {
+            enabled: false
+        },
           xAxis: {
             categories: times,
             crosshair: true

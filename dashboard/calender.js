@@ -100,6 +100,9 @@ function apiCal(fromDate, toDate, value) {
             subtitle: {
               text: 'Visitors per hour'
             },
+            credits: {
+              enabled: false
+          },
             xAxis: {
               categories: times,
               crosshair: true
@@ -166,6 +169,9 @@ function apiCal(fromDate, toDate, value) {
             subtitle: {
               text: 'Visitors per hour'
             },
+            credits: {
+              enabled: false
+          },
             xAxis: {
               categories: times,
               crosshair: true
