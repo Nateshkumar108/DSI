@@ -173,3 +173,7 @@ body {
 .chartButton button.active {
   background: #2E3561 ;
 }
+
+button, .hand-pointer {
+  cursor: pointer;
+}
