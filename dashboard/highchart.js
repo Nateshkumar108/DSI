@@ -89,7 +89,7 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
               }
             },
             series: [{
-              name: 'In',
+              name: 'IN',
               data: inppc
         
             }]
@@ -169,7 +169,7 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
               }
             },
             series: [{
-              name: 'Out',
+              name: 'OUT',
               data: outppc
         
             }]
@@ -236,14 +236,14 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
                 text: 'PERSONS'
               }
             },
-            tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-            },
+            // tooltip: {
+            //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+            //   footerFormat: '</table>',
+            //   shared: true,
+            //   useHTML: true
+            // },
             plotOptions: {
               column: {
                 pointPadding: 0.2,
@@ -251,11 +251,11 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
               }
             },
             series: [{
-              name: 'In',
+              name: 'IN',
               data: inppc
         
             },{
-              name: 'Out',
+              name: 'OUT',
               data: outppc
             }]
           });
@@ -317,20 +317,21 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
               text: 'PERSONS'
             }
           },
-          tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-              '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-          },
-          plotOptions: {
-            column: {
-              pointPadding: 0.2,
-              borderWidth: 0
-            }
-          },
+    //       tooltip: {
+    //     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+    //     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+    //         '<td style="padding:0"><b>{point.x} persons</b></td></tr>',
+    //     footerFormat: '</table>',
+    //     shared: true,
+    //     useHTML: true,
+    // },
+    
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
           series: [{
             name: 'IN',
             data: inppc
@@ -352,7 +353,7 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
   
 });
 Highcharts.createElement('link', {
-  href: 'https://fonts.googleapis.com/css?family=Unica+One',
+  href: 'https://fonts.googleapis.com/css?family=Open+Sans',
   rel: 'stylesheet',
   type: 'text/css'
 }, null, document.getElementsByTagName('head')[0]);
@@ -364,12 +365,12 @@ Highcharts.theme = {
      backgroundColor: {
         linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
         stops: [
-           [0, '#2a2a2b'],
-           [1, '#3e3e40']
+           [0, '#2b2b2d'],
+           [1, '#2b2b2d']
         ]
      },
      style: {
-        fontFamily: '\'Unica One\', sans-serif'
+        fontFamily: '\'Open Sans\', sans-serif'
      },
      plotBorderColor: '#606063'
   },

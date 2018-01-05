@@ -9,6 +9,8 @@
     <link rel="icon" href="../img/favicon-96x96.png" type="image/png">
     <link rel="stylesheet" href="js/utility/jquery-ui/jquery-ui.css">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    
 
     <style type="text/css">
         .input-calendar {
@@ -111,7 +113,57 @@
         <div class="event">
             <div class="selectZone">
                 <h3>SELECT ZONE</h3>
-                <ul class="dropdowns">
+                <ul class="labdown">
+                   <ul>
+                        <li>FACILITY:</li>
+                        <li>
+                                <select disabled>
+                                    <option value="volvo">REGUS</option>
+    
+                                </select>
+                            </li>
+                   </ul>
+                   <ul>
+                       <li>FLOOR:</li>
+                       <li>
+                            <select disabled>
+                            <option value="volvo">7TH FLOOR </option>
+
+                        </select>
+                       </li>
+                   </ul>
+                   <ul>
+                        <li>ROOM:</li>
+                        <li>
+                                <select id="dd">
+                                    <option value="volvo">SELECT ROOM</option>
+                                    <option id="r704" style="display:none;">704</option>
+                                    <option id="r705" style="display:none;">705</option>
+                                    <option id="r706">706</option>
+    
+                                    <option id="rdo">DEEPAK'S OFFICE</option>
+                                </select>
+                            </li>
+                   </ul>
+                   <ul>
+                        <li>SENSOR:</li>
+                        <li>
+                                <select>
+                                    <option value="volvo">SELECT SENSOR</option>
+                                    <option id="s1" style="display:none;">001EAA</option>
+                                    <option id="s2">001EEC</option>
+                                    <option id="s3" style="display:none;">001D5F</option>
+                                    <option id="s4" style="display:none;">001438</option>
+                                    <option id="s5">001E56</option>
+    
+                                    <!-- <option value="saab">001EEC</option>
+                                        <option value="opel">001D5F</option>
+                                        <option value="audi">001438</option> -->
+                                </select>
+                            </li>
+                   </ul> 
+                </ul>
+                <!-- <ul class="dropdowns">
                     <ul class="labels">
                         <li>FACILITY:</li>
                         <li>FLOOR:</li>
@@ -153,10 +205,10 @@
                                 <!-- <option value="saab">001EEC</option>
                                     <option value="opel">001D5F</option>
                                     <option value="audi">001438</option> -->
-                            </select>
+                            <!-- </select>
                         </li>
                     </ul>
-                </ul>
+                </ul> -->
             </div>
 
             <div class="calender">
