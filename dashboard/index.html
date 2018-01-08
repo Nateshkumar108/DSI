@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
 
-        </title>
-        <link rel = "stylesheet" href = "style.css">
-      
-        <link rel="icon" href="../img/favicon-96x96.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="demo/css/semantic.ui.min.css">
-    <link rel="stylesheet" type="text/css" href="demo/css/prism.css"/>
-    <link rel="stylesheet" type="text/css" href="demo/css/calendar-style.css"/>
-    <link rel="stylesheet" type="text/css" href="demo/css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="dist/css/pignose.calendar.min.css"/>
+<head>
+    <title>
+        DSI Dashboard
+    </title>
+
+    <link rel="icon" href="../img/favicon-96x96.png" type="image/png">
+    <link rel="stylesheet" href="js/utility/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    
+
     <style type="text/css">
         .input-calendar {
             display: block;
@@ -50,434 +50,267 @@
             background-color: #5a6268;
         }
     </style>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="calender.js"></script>
-    <script>
-    $( function() {
-      $( "#slider" ).slider();
-    } );
-    </script>
-     
-     <script src="highcharts.js"></script>
-     <script src="highcharts-more.js"></script>
-     <script src="highchart.js"></script>
-     
-    </head>
-    <body>
-        <header>
-                <img src="img/logo.png" alt="" style="width: 179px;">
-        </header>
-        <div class="dashboard">
-              <div class="tabs">
-                <div class="workspace">
-                  <h3>Workspace</h3>
-                  <ul class="workspaceButton">
-                    <li><button class="occupancyReport">Occupancy Report</button></li>
-                    <li><button class="flowReport">Flow Report</button></li>
-                    <li><button class="dwellReport">Dwell Report</button></li>
-                  </ul>
-                </div>
-                <div class="rooms">
+</head>
+
+<body>
+    <header>
+        <a href="http://www.digitalspacesinc.com/">
+            <img src="img/logo.png" alt="" style="width: 179px;">
+        </a>
+    </header>
+    <div class="dashboard">
+        <div class="tabs">
+            <div class="workspace">
+                <h3>WORKSPACE</h3>
+                <ul class="workspaceButton">
+                    <li>
+                        <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()">PEOPLE COUNTER</button>
+                    </li>
+                    <li>
+                        <button class="ageCount" id="agc" onclick="myAgeCounter()">DEMOGRAPHICS</button>
+                    </li>
+                    <li>
+                        <button class="trakMap" id="trkMap" onclick="myTrackMap()">TRACK MAP</button>
+                    </li>
+                </ul>
+            </div>
+            <!-- <div class="rooms">
                   <h3>Rooms</h3>
                   <ul class="roomsButton">
                     <li><button class="occupancyReport">Occupancy Report</button></li>
                     <li><button class="dwellReport">Dwell Report</button></li>
                   </ul>
-                </div>
-              </div>
-              <div class="highcharts">
-                  <ul class="chartButton">
-                      <li><button name="in" id="in">IN</button></li>
-                      <li><button name="out" id="out">OUT</button></li>
-                      <li><button name="in" id="inout">IN/OUT</button></li>
-                  </ul>
-                    
-                    
-                    
-                  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-              </div>
-              <div class="event">
-                <div class="selectZone">
-                    <h3>Select Zone</h3>
-                    <ul class="dropdowns">
-                        <ul class="labels">
-                            <li>Facility:</li>
-                            <li>Floor:</li>
-                            <li>Wing:</li>
-                            <li>Zone:</li>
-                        </ul>
-                        <ul class="slectDropdown">
-                            <li>
-                                <select>
-                                    <option value="volvo">Parkwood</option>
-                                    <option value="saab">Hillbay</option>
-                                    <option value="opel">Omnaro</option>
-                                    <option value="audi">Rahnot</option>
-                                </select>
-                            </li>
-                            <li>
-                                <select>
-                                    <option value="volvo">Floor 1</option>
-                                    <option value="saab">Floor 2</option>
-                                    <option value="opel">Floor 3</option>
-                                    <option value="audi">Floor 4</option>
-                                </select>
-                            </li>
-                            <li>
-                                <select>
-                                    <option value="volvo">East</option>
-                                    <option value="saab">West</option>
-                                    <option value="opel">North</option>
-                                    <option value="audi">South</option>
-                                </select>
-                            </li>
-                            <li>
-                                <select>
-                                    <option value="volvo">Zone 1</option>
-                                    <option value="saab">Zone 2</option>
-                                    <option value="opel">Zone 3</option>
-                                    <option value="audi">Zone 4</option>
-                                </select>
-                            </li>
-                    </ul>
+                </div> -->
+        </div>
+        <div class="graphs">
+            <div class="highcharts" id="hiChart">
+                <ul class="chartButton">
+                    <li>
+                        <button name="in" id="in" class="">IN</button>
+                    </li>
+                    <li>
+                        <button name="out" id="out" class="">OUT</button>
+                    </li>
+                    <li>
+                        <button name="in" id="inout" class="active">IN/OUT</button>
+                    </li>
                 </ul>
-                    
-                     
-                     
-                    
-                </div>
-    
-                <div class="calender">
-                        <div id="theme-dark" class="article">
-                                
-                                <div class="calendar-dark" id="mainCalendar"></div>
-                               
-                            
-                              
-                            </div>
-                  
-                </div>
-                <div class="time"> 
-                        <div id="slider"></div> 
-                  
-                </div>
-                </div>
+
+
+
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>
-            <script type="text/javascript" src="demo/js/jquery.latest.min.js"></script>
-<script type="text/javascript" src="demo/js/semantic.ui.min.js"></script>
-<script type="text/javascript" src="demo/js/prism.min.js"></script>
-<script type="text/javascript" src="dist/js/pignose.calendar.full.min.js"></script>
-<script type="text/javascript">
-    //<![CDATA[
-    $(function () {
-        $('#wrapper .version strong').text('v' + $.fn.pignoseCalendar.version);
+            <div class="ageCounter" id="agCount">
+                    <div id="demogra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-        function onSelectHandler(date, context) {
-            /**
-             * @date is an array which be included dates(clicked date at first index)
-             * @context is an object which stored calendar interal data.
-             * @context.calendar is a root element reference.
-             * @context.calendar is a calendar element reference.
-             * @context.storage.activeDates is all toggled data, If you use toggle type calendar.
-             * @context.storage.events is all events associated to this date
-             */
+                <!-- <h1>AGE COUNTER</h1> -->
+            </div>
+            <div class="trackMaps" id="trackMap">
 
-            var $element = context.element;
-            var $calendar = context.calendar;
-            var $box = $element.siblings('.box').show();
-            var text = 'You selected date ';
+                <h1>TRACK MAP</h1>
+            </div>
+        </div>
+        <div class="event">
+            <div class="selectZone">
+                <h3>SELECT ZONE</h3>
+                <ul class="labdown">
+                   <ul>
+                        <li>FACILITY:</li>
+                        <li>
+                                <select disabled>
+                                    <option value="volvo">REGUS</option>
+    
+                                </select>
+                            </li>
+                   </ul>
+                   <ul>
+                       <li>FLOOR:</li>
+                       <li>
+                            <select disabled>
+                            <option value="volvo">7TH FLOOR </option>
 
-            if (date[0] !== null) {
-                text += date[0].format('YYYY-MM-DD');
-            }
+                        </select>
+                       </li>
+                   </ul>
+                   <ul>
+                        <li>ROOM:</li>
+                        <li>
+                                <select id="dd">
+                                    <option value="volvo">SELECT ROOM</option>
+                                    <option id="r704" style="display:none;">704</option>
+                                    <option id="r705" style="display:none;">705</option>
+                                    <option id="r706">706</option>
+    
+                                    <option id="rdo">DEEPAK'S OFFICE</option>
+                                </select>
+                            </li>
+                   </ul>
+                   <ul>
+                        <li>SENSOR:</li>
+                        <li>
+                                <select>
+                                    <option value="volvo">SELECT SENSOR</option>
+                                    <option id="s1" style="display:none;">001EAA</option>
+                                    <option id="s2">001EEC</option>
+                                    <option id="s3" style="display:none;">001D5F</option>
+                                    <option id="s4" style="display:none;">001438</option>
+                                    <option id="s5">001E56</option>
+    
+                                    <!-- <option value="saab">001EEC</option>
+                                        <option value="opel">001D5F</option>
+                                        <option value="audi">001438</option> -->
+                                </select>
+                            </li>
+                   </ul> 
+                </ul>
+                <!-- <ul class="dropdowns">
+                    <ul class="labels">
+                        <li>FACILITY:</li>
+                        <li>FLOOR:</li>
+                        <li>ROOM:</li>
+                        <li>SENSOR:</li>
+                    </ul>
+                    <ul class="slectDropdown">
+                        <li>
+                            <select disabled>
+                                <option value="volvo">REGUS</option>
 
-            if (date[0] !== null && date[1] !== null) {
-                text += ' ~ ';
-            }
-            else if (date[0] === null && date[1] == null) {
-                text += 'nothing';
-            }
+                            </select>
+                        </li>
+                        <li>
+                            <select disabled>
+                                <option value="volvo">7TH FLOOR </option>
 
-            if (date[1] !== null) {
-                text += date[1].format('YYYY-MM-DD');
-            }
+                            </select>
+                        </li>
+                        <li>
+                            <select id="dd">
+                                <option value="volvo">SELECT ROOM</option>
+                                <option id="r704" style="display:none;">704</option>
+                                <option id="r705" style="display:none;">705</option>
+                                <option id="r706">706</option>
 
-            console.log("hello world123344");
-            console.log('date=' ,date);
+                                <option id="rdo">DEEPAK'S OFFICE</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select>
+                                <option value="volvo">SELECT ROOM</option>
+                                <option id="s1" style="display:none;">001EAA</option>
+                                <option id="s2">001EEC</option>
+                                <option id="s3" style="display:none;">001D5F</option>
+                                <option id="s4" style="display:none;">001438</option>
+                                <option id="s5">001E56</option>
 
-            var tomorrow = new Date(new Date(date[0]).getTime() + 24 * 60 * 60 * 1000); 
-            var day = tomorrow.getDate();
-            var month = tomorrow.getMonth() + 1;
-            var year = tomorrow.getFullYear();
-            var toDate=year + "-" + month + "-" + day;
+                                <!-- <option value="saab">001EEC</option>
+                                    <option value="opel">001D5F</option>
+                                    <option value="audi">001438</option> -->
+                            <!-- </select>
+                        </li>
+                    </ul>
+                </ul> -->
+            </div>
 
-            var today = new Date(new Date(date[0]).getTime()); 
-            var day = today.getDate();
-            var month = today.getMonth() + 1;
-            var year = today.getFullYear();
-            var fromDate=year + "-" + month + "-" + day;
-            console.log("fromDate:" + fromDate);
-            console.log("toDate" + toDate);
-            apiCal(fromDate,toDate);
-            $box.text(text);
-        }
+            <div class="calender">
+                <div id="datepicker"></div>
+            </div>
+            <!-- <div class="time">
+                <div id="slider"></div>
 
-        function onApplyHandler(date, context) {
-            /**
-             * @date is an array which be included dates(clicked date at first index)
-             * @context is an object which stored calendar interal data.
-             * @context.calendar is a root element reference.
-             * @context.calendar is a calendar element reference.
-             * @context.storage.activeDates is all toggled data, If you use toggle type calendar.
-             * @context.storage.events is all events associated to this date
-             */
+            </div> -->
+        </div>
+    </div>
+    <script>
+    var today = new Date();
+var day = today.getDate();
+var month = today.getMonth() + 1;
+var year = today.getFullYear();
+var fromDate = year + "-" + month + "-" + day;
+var tomorrowDate=new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+var tomorrow = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+var day = tomorrow.getDate();
+var month = tomorrow.getMonth() + 1;
+var year = tomorrow.getFullYear();
+var calDate;
+var calNextDate;
+var toDate = year + "-" + month + "-" + day;</script>
+    <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="calender.js"></script>
+    <script src="js/utility/highcharts/highcharts.js"></script>
+    <script src="js/utility/highcharts/highcharts-more.js"></script>
+    <script src="highchart.js"></script>
+    <script src="demographic.js"></script>
+    <script src="demoApiCal.js"></script>
+    <script src="buttons.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#datepicker").datepicker({
+                onSelect: function (date) {
+                    var tomorrow = new Date(new Date(date).getTime() + (24 * 60 * 60 * 1000));
+                    var day = tomorrow.getDate();
+                    var month = tomorrow.getMonth() + 1;
+                    var year = tomorrow.getFullYear();
+                    var toDate = year + "-" + month + "-" + day;
+                    calNextDate=toDate;
 
-            var $element = context.element;
-            var $calendar = context.calendar;
-            var $box = $element.siblings('.box').show();
-            var text = 'You applied date ';
+                    var today = new Date(new Date(date));
+                    var day = today.getDate();
+                    var month = today.getMonth() + 1;
+                    var year = today.getFullYear();
+                    var fromDate = year + "-" + month + "-" + day;
+                    calDate=fromDate;
+                    let value = null;
 
-            if (date[0] !== null) {
-                text += date[0].format('YYYY-MM-DD');
-            }
-
-            if (date[0] !== null && date[1] !== null) {
-                text += ' ~ ';
-            }
-            else if (date[0] === null && date[1] == null) {
-                text += 'nothing';
-            }
-
-            if (date[1] !== null) {
-                text += date[1].format('YYYY-MM-DD');
-            }
-
-            console.log("Hello world!");
-
-            
-
-            $box.text(text);
-        }
-
-        // Default Calendar
-        $('.calendar').pignoseCalendar({
-            select: onSelectHandler
-        });
-
-        // Input Calendar
-        $('.input-calendar').pignoseCalendar({
-            apply: onApplyHandler,
-            buttons: true, // It means you can give bottom button controller to the modal which be opened when you click.
-        });
-
-        // Calendar modal
-        var $btn = $('.btn-calendar').pignoseCalendar({
-            apply: onApplyHandler,
-            modal: true, // It means modal will be showed when you click the target button.
-            buttons: true
-        });
-
-        // Color theme type Calendar
-        $('.calendar-dark').pignoseCalendar({
-            theme: 'dark', // light, dark, blue
-            select: onSelectHandler
-        });
-
-        // Blue theme type Calendar
-        $('.calendar-blue').pignoseCalendar({
-            theme: 'blue', // light, dark, blue
-            select: onSelectHandler
-        });
-
-        // Schedule Calendar
-        $('.calendar-schedules').pignoseCalendar({
-            scheduleOptions: {
-                colors: {
-                    holiday: '#2fabb7',
-                    seminar: '#5c6270',
-                    meetup: '#ef8080'
-                }
-            },
-            schedules: [{
-                name: 'holiday',
-                date: '2017-08-08'
-            }, {
-                name: 'holiday',
-                date: '2017-09-16'
-            }, {
-                name: 'holiday',
-                date: '2017-10-01',
-            }, {
-                name: 'holiday',
-                date: '2017-10-05'
-            }, {
-                name: 'holiday',
-                date: '2017-10-18',
-            }, {
-                name: 'seminar',
-                date: '2017-11-14'
-            }, {
-                name: 'seminar',
-                date: '2017-12-01',
-            }, {
-                name: 'meetup',
-                date: '2018-01-16'
-            }, {
-                name: 'meetup',
-                date: '2018-02-01',
-            }, {
-                name: 'meetup',
-                date: '2018-02-18'
-            }, {
-                name: 'meetup',
-                date: '2018-03-04',
-            }, {
-                name: 'meetup',
-                date: '2018-04-01'
-            }, {
-                name: 'meetup',
-                date: '2018-04-19',
-            }],
-            select: function (date, context) {
-                var message = `You selected ${(date[0] === null ? 'null' : date[0].format('YYYY-MM-DD'))}.
-							   <br />
-							   <br />
-							   <strong>Events for this date</strong>
-							   <br />
-							   <br />
-							   <div class="schedules-date"></div>`;
-                var $target = context.calendar.parent().next().show().html(message);
-
-                console.log("Hello world");
-
-                for (var idx in context.storage.schedules) {
-                    var schedule = context.storage.schedules[idx];
-                    if (typeof schedule !== 'object') {
-                        continue;
+                    if($('#agc').hasClass('active-tab')){
+                         demoApi(fromDate, toDate);
+                    } else if($('#ppc').hasClass('active-tab')) {
+                        //Check which tab is currently active
+                        if ($('#in').hasClass('active')) {
+                            value = 'in';
+                        } else if ($('#out').hasClass('active')) {
+                            value = 'out';
+                        } else {
+                            value = 'in-out';
+                        }
+                        apiCal(fromDate, toDate, value);
                     }
-                    $target.find('.schedules-date').append('<span class="ui label default">' + schedule.name + '</span>');
+                    
                 }
-            }
-        });
-
-        // Multiple picker type Calendar
-        $('.multi-select-calendar').pignoseCalendar({
-            multiple: true,
-            select: onSelectHandler
-        });
-
-        // Toggle type Calendar
-        $('.toggle-calendar').pignoseCalendar({
-            toggle: true,
-            select: function (date, context) {
-                var message = `You selected ${(date[0] === null ? 'null' : date[0].format('YYYY-MM-DD'))}.
-                                <br />
-                                <br />
-                                <strong>Events for this date</strong>
-                                <br />
-                                <br />
-                                <div class="active-dates"></div>`;
-                var $target = context.calendar.parent().next().show().html(message);
-                console.log("Hello world!");
-                for (var idx in context.storage.activeDates) {
-                    var date = context.storage.activeDates[idx];
-                    if (typeof date !== 'string') {
-                        continue;
-                    }
-                    $target.find('.active-dates').append('<span class="ui label default">' + date + '</span>');
-                }
-            }
-        });
-
-        // Disabled date settings.
-        (function () {
-            // IIFE Closure
-            var times = 30;
-            var disabledDates = [];
-            for (var i = 0; i < times; /* Do not increase index */) {
-                var year = moment().year();
-                var month = 0;
-                var day = parseInt(Math.random() * 364 + 1);
-                var date = moment().year(year).month(month).date(day).format('YYYY-MM-DD');
-                if ($.inArray(date, disabledDates) === -1) {
-                    disabledDates.push(date);
-                    i++;
-                }
-            }
-
-            disabledDates.sort();
-
-            var $dates = $('.disabled-dates-calendar').siblings('.guide').find('.guide-dates');
-            for (var idx in disabledDates) {
-                $dates.append('<span>' + disabledDates[idx] + '</span>');
-            }
-
-            $('.disabled-dates-calendar').pignoseCalendar({
-                select: onSelectHandler,
-                disabledDates: disabledDates
             });
-        }());
 
-        // Disabled Weekdays Calendar.
-        $('.disabled-weekdays-calendar').pignoseCalendar({
-            select: onSelectHandler,
-            disabledWeekdays: [0, 6]
-        });
+            // $("#slider").slider();
 
-        // Disabled Range Calendar.
-        var minDate = moment().set('dates', Math.min(moment().day(), 2 + 1)).format('YYYY-MM-DD');
-        var maxDate = moment().set('dates', Math.max(moment().day(), 24 + 1)).format('YYYY-MM-DD');
-        $('.disabled-range-calendar').pignoseCalendar({
-            select: onSelectHandler,
-            minDate: minDate,
-            maxDate: maxDate
-        });
+            $('#in').click(function () {
+                $("#datepicker").datepicker("setDate", new Date());
+                if (!$(this).hasClass('active')) {
+                    $(this).addClass('active');
+                    $('#out').removeClass('active');
+                    $('#inout').removeClass('active');
+                }
+            });
 
-        // Multiple Week Select
-        $('.pick-weeks-calendar').pignoseCalendar({
-            pickWeeks: true,
-            multiple: true,
-            select: onSelectHandler
-        });
+            $('#out').click(function () {
+                $("#datepicker").datepicker("setDate", new Date());
+                if (!$(this).hasClass('active')) {
+                    $(this).addClass('active');
+                    $('#in').removeClass('active');
+                    $('#inout').removeClass('active');
 
-        // Disabled Ranges Calendar.
-        $('.disabled-ranges-calendar').pignoseCalendar({
-            select: onSelectHandler,
-            disabledRanges: [
-                ['2016-10-05', '2016-10-21'],
-                ['2016-11-01', '2016-11-07'],
-                ['2016-11-19', '2016-11-21'],
-                ['2016-12-05', '2016-12-08'],
-                ['2016-12-17', '2016-12-18'],
-                ['2016-12-29', '2016-12-30'],
-                ['2017-01-10', '2017-01-20'],
-                ['2017-02-10', '2017-04-11'],
-                ['2017-07-04', '2017-07-09'],
-                ['2017-12-01', '2017-12-25'],
-                ['2018-02-10', '2018-02-26'],
-                ['2018-05-10', '2018-09-17'],
-            ]
-        });
-        // I18N Calendar
-        $('.language-calendar').each(function () {
-            var $this = $(this);
-            var lang = $this.data('lang');
-            $this.pignoseCalendar({
-                lang: lang
+                }
+            });
+
+            $('#inout').click(function () {
+                $("#datepicker").datepicker("setDate", new Date());
+                if (!$(this).hasClass('active')) {
+                    $(this).addClass('active');
+                    $('#in').removeClass('active');
+                    $('#out').removeClass('active');
+                }
             });
         });
 
-        // This use for DEMO page tab component.
-        $('.menu .item').tab();
-    });
-    //]]>
-</script>
-<script src="highcharts-more.js"></script>
-<!-- <script src="highchart.js"></script> -->
-<script src="highchart.js"></script>
+    </script>
+</body>
 
-    </body>
 </html>
