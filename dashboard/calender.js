@@ -1,3 +1,5 @@
+
+
 function apiCal(fromDate, toDate, value) {
   var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=00:00&et=24:00";
 
@@ -26,10 +28,11 @@ function apiCal(fromDate, toDate, value) {
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
           }
+          loadCaptions("in",furl);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
-              height: 70 + '%'
+              height: 65 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -69,6 +72,8 @@ function apiCal(fromDate, toDate, value) {
           });
         }
       });
+     
+      
       break;
     case 'out':
       $.ajax({
@@ -91,10 +96,11 @@ function apiCal(fromDate, toDate, value) {
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
           }
+          loadCaptions("out",furl);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
-              height: 70 + '%'
+              height: 65 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -137,6 +143,7 @@ function apiCal(fromDate, toDate, value) {
           });
         }
       });
+     
       break;
     case 'in-out':
       $.ajax({
@@ -161,10 +168,11 @@ function apiCal(fromDate, toDate, value) {
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
           }
+          loadCaptions("inout",furl);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
-              height: 70 + '%'
+              height: 65 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -210,6 +218,7 @@ function apiCal(fromDate, toDate, value) {
           });
         }
       });
+      
       break;
 
     default:
