@@ -8,7 +8,8 @@
 
     <link rel="icon" href="../img/favicon-96x96.png" type="image/png">
     <link rel="stylesheet" href="js/utility/jquery-ui/jquery-ui.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     
 
@@ -131,13 +132,14 @@
                 
             </div>
             <div class="ageCounter" id="agCount">
-                    <div id="demogra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <div id="demogra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
                 <!-- <h1>AGE COUNTER</h1> -->
             </div>
             <div class="trackMaps" id="trackMap">
 
                 <h1>TRACK MAP</h1>
+                <div id="imgalign"></div>
             </div>
         </div>
         <div class="event">
@@ -241,32 +243,55 @@
                 </ul> -->
             </div>
 
-            <div class="calender">
-                <div id="datepicker"></div>
+            <div class="calendars">
+                <span id="txt-main-cal" class="active-calendar hand-pointer">Calendar</span>
+                <span id="txt-custom-cal" class="hand-pointer">Custom</span>
             </div>
+
+            <div id="main-calendar">
+                <div class="calender">
+                    <div id="datepicker"></div>
+                </div>
+            </div>
+            <div id="custom-calendar">
+                <label for="from" class="lbl-calendar">From: </label>
+                <input type="text" id="from" name="from">
+                <div class="clearfix"></div>
+                <label for="to" class="lbl-calendar">To: </label>
+                <input type="text" id="to" name="to">
+
+                <div class="clearfix"></div>
+                <div class="search-button">
+                    <button class="button" onclick="customCalSearch()">Search</button>
+                </div>
+                
+            </div>
+            
             <!-- <div class="time">
                 <div id="slider"></div>
 
             </div> -->
         </div>
     </div>
-    <script>
-    var today = new Date();
-var day = today.getDate();
-var month = today.getMonth() + 1;
-var year = today.getFullYear();
-var fromDate = year + "-" + month + "-" + day;
-var tomorrowDate=new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
-var tomorrow = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
-var day = tomorrow.getDate();
-var month = tomorrow.getMonth() + 1;
-var year = tomorrow.getFullYear();
-var calDate;
-var calNextDate;
-var toDate = year + "-" + month + "-" + day;</script>
+    <script type="text/javascript">
+        var today = new Date();
+        var day = today.getDate();
+        var month = today.getMonth() + 1;
+        var year = today.getFullYear();
+        var fromDate = year + "-" + month + "-" + day;
+        var tomorrowDate = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+        var tomorrow = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+        var day = tomorrow.getDate();
+        var month = tomorrow.getMonth() + 1;
+        var year = tomorrow.getFullYear();
+        var toDate = year + "-" + month + "-" + day;
+        var calDate = fromDate;
+        var calNextDate = toDate;
+    </script>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="calender.js"></script>
+
     <script src="js/utility/highcharts/highcharts.js"></script>
     <script src="js/utility/highcharts/highcharts-more.js"></script>
     <script src="highchart.js"></script>
@@ -281,8 +306,10 @@ var totalIO = document.getElementById("totalIO");
 var totalI = document.getElementById("totalI");
 var totalO = document.getElementById("totalO");
 </script>
-    <script type="text/javascript">
+<script type="text/javascript">
         $(function () {
+            $('#custom-calendar').hide();
+
             $("#datepicker").datepicker({
                 onSelect: function (date) {
                     var tomorrow = new Date(new Date(date).getTime() + (24 * 60 * 60 * 1000));
@@ -290,16 +317,16 @@ var totalO = document.getElementById("totalO");
                     var month = tomorrow.getMonth() + 1;
                     var year = tomorrow.getFullYear();
                     var toDate = year + "-" + month + "-" + day;
-                    calNextDate=toDate;
+                    calNextDate = toDate;
 
                     var today = new Date(new Date(date));
                     var day = today.getDate();
                     var month = today.getMonth() + 1;
                     var year = today.getFullYear();
                     var fromDate = year + "-" + month + "-" + day;
-                    calDate=fromDate;
+                    calDate = fromDate;
                     let value = null;
-                    
+
                     if($('#agc').hasClass('active-tab')){
                          demoApi(fromDate, toDate);
                     } else if($('#ppc').hasClass('active-tab')) {
@@ -316,14 +343,13 @@ var totalO = document.getElementById("totalO");
                         }
                         apiCal(fromDate, toDate, value);
                     }
-                    
+
                 }
             });
 
             // $("#slider").slider();
 
             $('#in').click(function () {
-                $("#datepicker").datepicker("setDate", new Date());
                 if (!$(this).hasClass('active')) {
                     $(this).addClass('active');
                     $('#out').removeClass('active');
@@ -338,7 +364,6 @@ var totalO = document.getElementById("totalO");
             });
 
             $('#out').click(function () {
-                $("#datepicker").datepicker("setDate", new Date());
                 if (!$(this).hasClass('active')) {
                     $(this).addClass('active');
                     $('#in').removeClass('active');
@@ -354,7 +379,6 @@ var totalO = document.getElementById("totalO");
             });
 
             $('#inout').click(function () {
-                $("#datepicker").datepicker("setDate", new Date());
                 if (!$(this).hasClass('active')) {
                     $(this).addClass('active');
                     $('#in').removeClass('active');
@@ -367,7 +391,80 @@ var totalO = document.getElementById("totalO");
                             avgO.style.display = "none";
                 }
             });
+
+
+            $('#txt-main-cal').click(function(){
+                $('#main-calendar').show();
+                $('#custom-calendar').hide();
+                $('#txt-main-cal').addClass('active-calendar');
+                $('#txt-custom-cal').removeClass('active-calendar');
+            });
+
+            $('#txt-custom-cal').click(function(){
+                $('#main-calendar').hide();
+                $('#custom-calendar').show();
+                $('#txt-main-cal').removeClass('active-calendar');
+                $('#txt-custom-cal').addClass('active-calendar');
+            });
+
+
+            
+            var fromCustomCal = $("#from").datepicker({
+                showOn: "both",
+                buttonText: '<i class="fa fa-calendar" aria-hidden="true"></i>'
+            })
+            .on("change", function () {
+                toCustomCal.datepicker("option", "minDate", getCustomDate(this));
+            });
+            fromCustomCal.datepicker("setDate", new Date());
+
+            var toCustomCal = $("#to").datepicker({
+                showOn: "both",
+                buttonText: '<i class="fa fa-calendar" aria-hidden="true"></i>'
+            })
+            .on("change", function () {
+                fromCustomCal.datepicker("option", "maxDate", getCustomDate(this));
+            });
+            toCustomCal.datepicker("setDate", new Date());
+
+            function getCustomDate(element) {
+                var date;
+                var dateFormat = "mm/dd/yy";
+                try {
+                    date = $.datepicker.parseDate(dateFormat, element.value);
+                } catch (error) {
+                    date = null;
+                }
+
+                return date;
+            }  
         });
+
+        function customCalSearch(){
+            let fromDate = $("#from" ).datepicker( "getDate" );
+            let toDate = $("#to").datepicker( "getDate" );
+
+            if(fromDate.getDate() == toDate.getDate()){
+                toDate = new Date(new Date(toDate).getTime() + (24 * 60 * 60 * 1000));
+            }
+
+            fromDate = fromDate.getFullYear() + "-" + (fromDate.getMonth() + 1) + "-" + fromDate.getDate();
+            calDate = fromDate;
+
+            toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + toDate.getDate();
+            calNextDate = toDate;
+
+            let value = null;
+            //Check which tab is currently active
+            if ($('#in').hasClass('active')) {
+                value = 'in';
+            } else if ($('#out').hasClass('active')) {
+                value = 'out';
+            } else {
+                value = 'in-out';
+            }
+            apiCal(fromDate, toDate, value);
+            }
 
     </script>
 </body>
