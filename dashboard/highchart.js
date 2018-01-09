@@ -4,7 +4,10 @@ var times = [];
 var inData=0;
 var outData=0;
 var inoutData=0;
-
+var totalIN=0;
+var totalOUT=0;
+var totalINOUT=0;
+var avgINOUT=0;
 console.log("DATESDFGHJKJHGFD"+fromDate)
 console.log("DATESDFGHJKJHGFD"+toDate)
 $(document).ready(function () {
@@ -570,6 +573,10 @@ Highcharts.setOptions(Highcharts.theme);
 
 
 function loadCaptions(value,furl){
+  var totalIN=0;
+var totalOUT=0;
+var totalINOUT=0;
+var avgINOUT=0;
   $.ajax({
 
     headers: {
