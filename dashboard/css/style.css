@@ -246,3 +246,36 @@ button, .hand-pointer {
   color: #1DB0EC;
 }
 
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.lbl-calendar {
+  width: 20%;
+  display: inline-block;
+  text-align: right;
+  padding: 5px;
+}
+
+.white {
+  color: #fff;
+}
+
+.search-button{
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.button {
+  height: 25px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: white;
+  border: 1px solid white;
+  background: transparent;
+  width: 8em;
+}

@@ -8,7 +8,8 @@
 
     <link rel="icon" href="../img/favicon-96x96.png" type="image/png">
     <link rel="stylesheet" href="js/utility/jquery-ui/jquery-ui.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     
 
@@ -223,7 +224,17 @@
                 </div>
             </div>
             <div id="custom-calendar">
-                <span>Volia!! Custom Calendar displayed</span>
+                <label for="from" class="lbl-calendar">From: </label>
+                <input type="text" id="from" name="from">
+                <div class="clearfix"></div>
+                <label for="to" class="lbl-calendar">To: </label>
+                <input type="text" id="to" name="to">
+
+                <div class="clearfix"></div>
+                <div class="search-button">
+                    <button class="button" onclick="customCalSearch()">Search</button>
+                </div>
+                
             </div>
             
             <!-- <div class="time">
@@ -297,7 +308,6 @@
             // $("#slider").slider();
 
             $('#in').click(function () {
-                $("#datepicker").datepicker("setDate", new Date());
                 if (!$(this).hasClass('active')) {
                     $(this).addClass('active');
                     $('#out').removeClass('active');
@@ -306,7 +316,6 @@
             });
 
             $('#out').click(function () {
-                $("#datepicker").datepicker("setDate", new Date());
                 if (!$(this).hasClass('active')) {
                     $(this).addClass('active');
                     $('#in').removeClass('active');
@@ -316,7 +325,6 @@
             });
 
             $('#inout').click(function () {
-                $("#datepicker").datepicker("setDate", new Date());
                 if (!$(this).hasClass('active')) {
                     $(this).addClass('active');
                     $('#in').removeClass('active');
@@ -338,7 +346,65 @@
                 $('#txt-main-cal').removeClass('active-calendar');
                 $('#txt-custom-cal').addClass('active-calendar');
             });
+
+
+            
+            var fromCustomCal = $("#from").datepicker({
+                showOn: "both",
+                buttonText: '<i class="fa fa-calendar" aria-hidden="true"></i>'
+            })
+            .on("change", function () {
+                toCustomCal.datepicker("option", "minDate", getCustomDate(this));
+            });
+            fromCustomCal.datepicker("setDate", new Date());
+
+            var toCustomCal = $("#to").datepicker({
+                showOn: "both",
+                buttonText: '<i class="fa fa-calendar" aria-hidden="true"></i>'
+            })
+            .on("change", function () {
+                fromCustomCal.datepicker("option", "maxDate", getCustomDate(this));
+            });
+            toCustomCal.datepicker("setDate", new Date());
+
+            function getCustomDate(element) {
+                var date;
+                var dateFormat = "mm/dd/yy";
+                try {
+                    date = $.datepicker.parseDate(dateFormat, element.value);
+                } catch (error) {
+                    date = null;
+                }
+
+                return date;
+            }  
         });
+
+        function customCalSearch(){
+            let fromDate = $("#from" ).datepicker( "getDate" );
+            let toDate = $("#to").datepicker( "getDate" );
+
+            if(fromDate.getDate() == toDate.getDate()){
+                toDate = new Date(new Date(toDate).getTime() + (24 * 60 * 60 * 1000));
+            }
+
+            fromDate = fromDate.getFullYear() + "-" + (fromDate.getMonth() + 1) + "-" + fromDate.getDate();
+            calDate = fromDate;
+
+            toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + toDate.getDate();
+            calNextDate = toDate;
+
+            let value = null;
+            //Check which tab is currently active
+            if ($('#in').hasClass('active')) {
+                value = 'in';
+            } else if ($('#out').hasClass('active')) {
+                value = 'out';
+            } else {
+                value = 'in-out';
+            }
+            apiCal(fromDate, toDate, value);
+            }
 
     </script>
 </body>
