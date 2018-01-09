@@ -4,10 +4,7 @@ var times = [];
 var inData=0;
 var outData=0;
 var inoutData=0;
-var totalIN=0;
-var totalOUT=0;
-var totalINOUT=0;
-var avgINOUT=0;
+
 console.log("DATESDFGHJKJHGFD"+fromDate)
 console.log("DATESDFGHJKJHGFD"+toDate)
 $(document).ready(function () {
@@ -78,14 +75,14 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
                 text: 'PERSONS'
               }
             },
-            tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-            },
+            // tooltip: {
+            //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+            //   footerFormat: '</table>',
+            //   shared: true,
+            //   useHTML: true
+            // },
             plotOptions: {
               column: {
                 pointPadding: 0.2,
@@ -160,14 +157,14 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
                 text: 'PERSONS'
               }
             },
-            tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-            },
+            // tooltip: {
+            //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+            //   footerFormat: '</table>',
+            //   shared: true,
+            //   useHTML: true
+            // },
             plotOptions: {
               column: {
                 pointPadding: 0.2,
