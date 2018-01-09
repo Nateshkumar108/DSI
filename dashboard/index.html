@@ -99,13 +99,14 @@
                 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             </div>
             <div class="ageCounter" id="agCount">
-                    <div id="demogra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <div id="demogra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
                 <!-- <h1>AGE COUNTER</h1> -->
             </div>
             <div class="trackMaps" id="trackMap">
 
                 <h1>TRACK MAP</h1>
+                <div id="imgalign"></div>
             </div>
         </div>
         <div class="event">
@@ -159,40 +160,54 @@
                 </ul>
             </div>
 
-            <div class="calender">
-                <div id="datepicker"></div>
+            <div class="calendars">
+                <span id="txt-main-cal" class="active-calendar hand-pointer">Calendar</span>
+                <span id="txt-custom-cal" class="hand-pointer">Custom</span>
             </div>
+
+            <div id="main-calendar">
+                <div class="calender">
+                    <div id="datepicker"></div>
+                </div>
+            </div>
+            <div id="custom-calendar">
+                <span>Volia!! Custom Calendar displayed</span>
+            </div>
+            
             <!-- <div class="time">
                 <div id="slider"></div>
 
             </div> -->
         </div>
     </div>
-    <script>
-    var today = new Date();
-var day = today.getDate();
-var month = today.getMonth() + 1;
-var year = today.getFullYear();
-var fromDate = year + "-" + month + "-" + day;
-var tomorrowDate=new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
-var tomorrow = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
-var day = tomorrow.getDate();
-var month = tomorrow.getMonth() + 1;
-var year = tomorrow.getFullYear();
-var calDate;
-var calNextDate;
-var toDate = year + "-" + month + "-" + day;</script>
+    <script type="text/javascript">
+        var today = new Date();
+        var day = today.getDate();
+        var month = today.getMonth() + 1;
+        var year = today.getFullYear();
+        var fromDate = year + "-" + month + "-" + day;
+        var tomorrowDate = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+        var tomorrow = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+        var day = tomorrow.getDate();
+        var month = tomorrow.getMonth() + 1;
+        var year = tomorrow.getFullYear();
+        var toDate = year + "-" + month + "-" + day;
+        var calDate = fromDate;
+        var calNextDate = toDate;
+    </script>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="calender.js"></script>
-    <script src="js/utility/highcharts/highcharts.js"></script>
-    <script src="js/utility/highcharts/highcharts-more.js"></script>
-    <script src="highchart.js"></script>
-    <script src="demographic.js"></script>
-    <script src="demoApiCal.js"></script>
-    <script src="buttons.js"></script>
+    <script type="text/javascript" src="js/utility/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="js/utility/highcharts/highcharts-more.js"></script>
+    <script type="text/javascript" src="highchart.js"></script>
+    <script type="text/javascript" src="demographic.js"></script>
+    <script type="text/javascript" src="demoApiCal.js"></script>
+    <script type="text/javascript" src="buttons.js"></script>
     <script type="text/javascript">
         $(function () {
+            $('#custom-calendar').hide();
+
             $("#datepicker").datepicker({
                 onSelect: function (date) {
                     var tomorrow = new Date(new Date(date).getTime() + (24 * 60 * 60 * 1000));
@@ -200,19 +215,19 @@ var toDate = year + "-" + month + "-" + day;</script>
                     var month = tomorrow.getMonth() + 1;
                     var year = tomorrow.getFullYear();
                     var toDate = year + "-" + month + "-" + day;
-                    calNextDate=toDate;
+                    calNextDate = toDate;
 
                     var today = new Date(new Date(date));
                     var day = today.getDate();
                     var month = today.getMonth() + 1;
                     var year = today.getFullYear();
                     var fromDate = year + "-" + month + "-" + day;
-                    calDate=fromDate;
+                    calDate = fromDate;
                     let value = null;
 
-                    if($('#agc').hasClass('active-tab')){
-                         demoApi(fromDate, toDate);
-                    } else if($('#ppc').hasClass('active-tab')) {
+                    if ($('#agc').hasClass('active-tab')) {
+                        demoApi(fromDate, toDate);
+                    } else if ($('#ppc').hasClass('active-tab')) {
                         //Check which tab is currently active
                         if ($('#in').hasClass('active')) {
                             value = 'in';
@@ -223,7 +238,7 @@ var toDate = year + "-" + month + "-" + day;</script>
                         }
                         apiCal(fromDate, toDate, value);
                     }
-                    
+
                 }
             });
 
@@ -255,6 +270,21 @@ var toDate = year + "-" + month + "-" + day;</script>
                     $('#in').removeClass('active');
                     $('#out').removeClass('active');
                 }
+            });
+
+
+            $('#txt-main-cal').click(function(){
+                $('#main-calendar').show();
+                $('#custom-calendar').hide();
+                $('txt-main-cal').addClass('active-calendar');
+                $('txt-custom-cal').removeClass('active-calendar');
+            });
+
+            $('#txt-custom-cal').click(function(){
+                $('#main-calendar').hide();
+                $('#custom-calendar').show();
+                $('txt-main-cal').removeClass('active-calendar');
+                $('txt-custom-cal').addClass('active-calendar');
             });
         });
 
