@@ -62,7 +62,7 @@ function apiCal(fromDate, toDate, value) {
               }
             },
             series: [{
-              name: 'In',
+              name: 'IN',
               data: inppc
 
             }]
@@ -130,7 +130,7 @@ function apiCal(fromDate, toDate, value) {
               }
             },
             series: [{
-              name: 'Out',
+              name: 'OUT',
               data: outppc
 
             }]
@@ -167,7 +167,7 @@ function apiCal(fromDate, toDate, value) {
               height: 70 + '%'
             },
             title: {
-              text: 'Digital_spaces_PPC'
+              text: 'DSI People Counter'
             },
             subtitle: {
               text: 'Visitors per hour'
@@ -200,11 +200,11 @@ function apiCal(fromDate, toDate, value) {
               }
             },
             series: [{
-              name: 'In',
+              name: 'IN',
               data: inppc
 
             }, {
-              name: 'Out',
+              name: 'OUT',
               data: outppc
             }]
           });
