@@ -129,7 +129,10 @@
             <div class="trackMaps" id="trackMap">
 
                 <h1>TRACK MAP</h1>
-                <div id="imgalign"></div>
+                <div class="floor-plan">
+                        <div id="trackmap" class="img-trackmap"></div>
+                </div>
+               
             </div>
         </div>
         <div class="event">
@@ -177,60 +180,10 @@
                                 <option id="s3" style="display:none;">001D5F</option>
                                 <option id="s4" style="display:none;">001438</option>
                                 <option id="s5">001E56</option>
-
-                                <!-- <option value="saab">001EEC</option>
-                                        <option value="opel">001D5F</option>
-                                        <option value="audi">001438</option> -->
                             </select>
                         </li>
                     </ul>
                 </ul>
-                <!-- <ul class="dropdowns">
-                    <ul class="labels">
-                        <li>FACILITY:</li>
-                        <li>FLOOR:</li>
-                        <li>ROOM:</li>
-                        <li>SENSOR:</li>
-                    </ul>
-                    <ul class="slectDropdown">
-                        <li>
-                            <select disabled>
-                                <option value="volvo">REGUS</option>
-
-                            </select>
-                        </li>
-                        <li>
-                            <select disabled>
-                                <option value="volvo">7TH FLOOR </option>
-
-                            </select>
-                        </li>
-                        <li>
-                            <select id="dd">
-                                <option value="volvo">SELECT ROOM</option>
-                                <option id="r704" style="display:none;">704</option>
-                                <option id="r705" style="display:none;">705</option>
-                                <option id="r706">706</option>
-
-                                <option id="rdo">DEEPAK'S OFFICE</option>
-                            </select>
-                        </li>
-                        <li>
-                            <select>
-                                <option value="volvo">SELECT ROOM</option>
-                                <option id="s1" style="display:none;">001EAA</option>
-                                <option id="s2">001EEC</option>
-                                <option id="s3" style="display:none;">001D5F</option>
-                                <option id="s4" style="display:none;">001438</option>
-                                <option id="s5">001E56</option>
-
-                                <!-- <option value="saab">001EEC</option>
-                                    <option value="opel">001D5F</option>
-                                    <option value="audi">001438</option> -->
-                <!-- </select>
-                        </li>
-                    </ul>
-                </ul> -->
             </div>
 
             <div class="calendars">
@@ -282,12 +235,13 @@
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="calender.js"></script>
 
-    <script src="js/utility/highcharts/highcharts.js"></script>
-    <script src="js/utility/highcharts/highcharts-more.js"></script>
-    <script src="highchart.js"></script>
-    <script src="demographic.js"></script>
-    <script src="demoApiCal.js"></script>
-    <script src="buttons.js"></script>
+    <script type="text/javascript" src="js/utility/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="js/utility/highcharts/highcharts-more.js"></script>
+    <script type="text/javascript" src="highchart.js"></script>
+    <script type="text/javascript" src="demographic.js"></script>
+    <script type="text/javascript" src="demoApiCal.js"></script>
+    <script type="text/javascript" src="trackmap.js"></script>
+    <script type="text/javascript" src="buttons.js"></script>
     <script type="text/javascript">
         var avgI = document.getElementById("avgI");
         var avgO = document.getElementById("avgO");
@@ -332,6 +286,8 @@
 
                         }
                         apiCal(fromDate, toDate, value);
+                    } else if ($('#trkMap').hasClass('active-tab')) {
+                        generateTrackmap(fromDate, toDate);
                     }
 
                 }

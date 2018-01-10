@@ -316,3 +316,11 @@ button, .hand-pointer {
   background: transparent;
   width: 8em;
 }
+
+.floor-plan {
+	background: no-repeat center/80%  url('../img/floor.png');
+}
+
+.img-trackmap {
+  text-align: center;
+}
