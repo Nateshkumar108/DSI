@@ -85,21 +85,51 @@
         </div>
         <div class="graphs">
             <div class="highcharts" id="hiChart">
-                <ul class="chartButton">
-                    <li>
-                        <button name="in" id="in" class="">IN</button>
-                    </li>
-                    <li>
-                        <button name="out" id="out" class="">OUT</button>
-                    </li>
-                    <li>
-                        <button name="in" id="inout" class="active">IN/OUT</button>
-                    </li>
+                <ul class="highchartTab">
+                    <ul class="chartButton">
+                            <li>
+                                <button name="in" id="in" class="">IN</button>
+                            </li>
+                            <li>
+                                <button name="out" id="out" class="">OUT</button>
+                            </li>
+                            <li>
+                                <button name="in" id="inout" class="active">IN/OUT</button>
+                            </li>
+                        </ul>
+                        <ul class="chartValues">
+                            <ul id="avgI" style="display:none;">
+                                    <li><p id="avgIn"></p></li>
+                                    <li class="captions"><span>average</span><span> per hour</span></li>
+                            </ul>
+                            <ul id="avgO" style="display:none;">
+                                    <li><p id="avgOut"></p></li>
+                                    <li class="captions"><span>average</span><span> per hour</span></li>
+                            </ul>
+                            <ul id="avgIO" style="display:block;">
+                                    <li><p id="avgInOut"></p></li>
+                                    <li class="captions"><span>average</span><span> per hour</span></li>
+                            </ul>
+                        <ul id="totalIO" style="display:block;">
+                                <li><p id="totalInOut"></p></li>
+                                <li class="captions"><span>total</span><span> this period</span></li>
+                        </ul>
+                        <ul id="totalI" style="display:block;">
+                                <li><p id="totalIn"></p></li>
+                                <li class="captions"><span>in</span><span> this period</span></li>
+                        </ul>
+                        <ul id="totalO" style="display:block;">
+                                <li><p id="totalOut"></p></li>
+                                <li class="captions"><span>out</span><span> this period</span></li>
+                        </ul>
+                    </ul>
                 </ul>
+               
 
 
 
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <div id="container" style="min-width: 310px; margin: 0 auto"></div>
+                
             </div>
             <div class="ageCounter" id="agCount">
                 <div id="demogra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
@@ -261,13 +291,22 @@
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="calender.js"></script>
-    <script type="text/javascript" src="js/utility/highcharts/highcharts.js"></script>
-    <script type="text/javascript" src="js/utility/highcharts/highcharts-more.js"></script>
-    <script type="text/javascript" src="highchart.js"></script>
-    <script type="text/javascript" src="demographic.js"></script>
-    <script type="text/javascript" src="demoApiCal.js"></script>
-    <script type="text/javascript" src="buttons.js"></script>
-    <script type="text/javascript">
+
+    <script src="js/utility/highcharts/highcharts.js"></script>
+    <script src="js/utility/highcharts/highcharts-more.js"></script>
+    <script src="highchart.js"></script>
+    <script src="demographic.js"></script>
+    <script src="demoApiCal.js"></script>
+    <script src="buttons.js"></script>
+    <script>
+    var avgI = document.getElementById("avgI");
+var avgO = document.getElementById("avgO");
+var avgIO = document.getElementById("avgIO");
+var totalIO = document.getElementById("totalIO");
+var totalI = document.getElementById("totalI");
+var totalO = document.getElementById("totalO");
+</script>
+<script type="text/javascript">
         $(function () {
             $('#custom-calendar').hide();
 
@@ -288,16 +327,19 @@
                     calDate = fromDate;
                     let value = null;
 
-                    if ($('#agc').hasClass('active-tab')) {
-                        demoApi(fromDate, toDate);
-                    } else if ($('#ppc').hasClass('active-tab')) {
+                    if($('#agc').hasClass('active-tab')){
+                         demoApi(fromDate, toDate);
+                    } else if($('#ppc').hasClass('active-tab')) {
                         //Check which tab is currently active
                         if ($('#in').hasClass('active')) {
                             value = 'in';
+                           
                         } else if ($('#out').hasClass('active')) {
                             value = 'out';
+                           
                         } else {
                             value = 'in-out';
+                           
                         }
                         apiCal(fromDate, toDate, value);
                     }
@@ -312,6 +354,12 @@
                     $(this).addClass('active');
                     $('#out').removeClass('active');
                     $('#inout').removeClass('active');
+                    avgI.style.display = "block";
+                            totalI.style.display = "block";
+                            avgO.style.display = "none";
+                            totalO.style.display = "none";
+                            avgIO.style.display = "none";
+                            totalIO.style.display = "none";
                 }
             });
 
@@ -320,6 +368,12 @@
                     $(this).addClass('active');
                     $('#in').removeClass('active');
                     $('#inout').removeClass('active');
+                    avgI.style.display = "none";
+                            totalI.style.display = "none";
+                            avgO.style.display = "block";
+                            totalO.style.display = "block";
+                            avgIO.style.display = "none";
+                            totalIO.style.display = "none";
 
                 }
             });
@@ -329,6 +383,12 @@
                     $(this).addClass('active');
                     $('#in').removeClass('active');
                     $('#out').removeClass('active');
+                    avgIO.style.display = "block";
+                            totalIO.style.display = "block";
+                            totalI.style.display = "block";
+                            totalO.style.display = "block";
+                            avgI.style.display = "none";
+                            avgO.style.display = "none";
                 }
             });
 

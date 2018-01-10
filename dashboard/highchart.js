@@ -4,7 +4,10 @@ var times = [];
 var inData=0;
 var outData=0;
 var inoutData=0;
-
+var totalIN=0;
+var totalOUT=0;
+var totalINOUT=0;
+var avgINOUT=0;
 console.log("DATESDFGHJKJHGFD"+fromDate)
 console.log("DATESDFGHJKJHGFD"+toDate);
 var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + calDate +"/"+ calNextDate +"?st=00:00&et=24:00";
@@ -52,10 +55,11 @@ $(document).ready(function () {
           var timeArray=item.date.split(" ");
           times.push(timeArray[1]);
         }
+        loadCaptions("in",furl);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
-              height: 70 + '%'
+              height: 65 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -76,14 +80,14 @@ $(document).ready(function () {
                 text: 'PERSONS'
               }
             },
-            tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-            },
+            // tooltip: {
+            //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+            //   footerFormat: '</table>',
+            //   shared: true,
+            //   useHTML: true
+            // },
             plotOptions: {
               column: {
                 pointPadding: 0.2,
@@ -129,14 +133,16 @@ $(document).ready(function () {
         times = [];
         for (let item of data.data[0].items) {
           console.log('out', item.out);
+          totalOUT=totalOUT + item.out;
           outppc.push(item.out);
           var timeArray=item.date.split(" ");
           times.push(timeArray[1]);
         }
+        loadCaptions("out",furl);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
-              height: 70 + '%'
+              height: 65 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -157,14 +163,14 @@ $(document).ready(function () {
                 text: 'PERSONS'
               }
             },
-            tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-            },
+            // tooltip: {
+            //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+            //   footerFormat: '</table>',
+            //   shared: true,
+            //   useHTML: true
+            // },
             plotOptions: {
               column: {
                 pointPadding: 0.2,
@@ -209,17 +215,21 @@ $(document).ready(function () {
         inppc = [];
         outppc = [];
         times = [];
+        
         for (let item of data.data[0].items) {
           console.log('in', item.in);
+          totalIN=totalIN + item.in;
+          totalOUT=totalOUT + item.out;
           inppc.push(item.in);
           outppc.push(item.out);
           var timeArray=item.date.split(" ");
           times.push(timeArray[1]);
         }
+        loadCaptions("inout",furl);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
-              height: 70 + '%'
+              height: 65 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -296,10 +306,11 @@ $(document).ready(function () {
         var timeArray=item.date.split(" ");
         times.push(timeArray[1]);
       }
+      loadCaptions("inout",furl); 
         Highcharts.chart('container', {
           chart: {
             type: 'column',
-            height: 70 + '%'
+            height: 65 + '%'
           },
           title: {
             text: 'DSI People Counter'
@@ -562,3 +573,66 @@ Highcharts.theme = {
 
 // Apply the theme
 Highcharts.setOptions(Highcharts.theme);
+
+
+function loadCaptions(value,furl){
+  var totalIN=0;
+var totalOUT=0;
+var totalINOUT=0;
+var avgINOUT=0;
+  $.ajax({
+
+    headers: {
+      'Access-Control-Allow-Headers': '*',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'x-client-id': 'digispc',
+      'x-api-key': '20d24f4d6cc964cae3050afd1610c29b'
+    },
+  
+  
+    url: furl,
+    crossDomain: true,
+    method: 'GET',
+    dataType: 'JSON',
+    success: function (data) {
+      console.log("Data was ", data);
+      console.log("Data was ", data.data[0].items);
+      inppc = [];
+      outppc = [];
+      times = [];
+      for (let item of data.data[0].items) {
+        console.log('in', item.in);
+        inppc.push(item.in);
+        totalIN=totalIN + item.in;
+        totalOUT=totalOUT + item.out;
+        outppc.push(item.out);
+        var timeArray=item.date.split(" ");
+        times.push(timeArray[1]);
+      }
+      totalINOUT=totalIN + totalOUT;
+      avgIN=totalIN/24;
+      avgOUT=totalOUT/24;
+      avgINOUT=totalINOUT/24;
+
+switch (value) {
+  case 'in':
+    document.getElementById("avgIn").innerHTML = Math.round(avgIN);
+    document.getElementById("totalIn").innerHTML = totalIN;
+   break;
+   case 'out':
+    document.getElementById("avgOut").innerHTML = Math.round(avgOUT);
+    document.getElementById("totalOut").innerHTML = totalOUT;
+   break;
+   case 'inout':
+   document.getElementById("avgInOut").innerHTML = Math.round(avgINOUT);
+   document.getElementById("totalInOut").innerHTML = totalINOUT;
+   document.getElementById("totalIn").innerHTML = totalIN;
+   document.getElementById("totalOut").innerHTML = totalOUT;
+   break;
+   default:
+      break;
+}
+}
+});
+  }

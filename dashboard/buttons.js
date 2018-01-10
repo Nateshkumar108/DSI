@@ -10,7 +10,6 @@ var s2 = document.getElementById("s2");
 var s3 = document.getElementById("s3");
 var s4 = document.getElementById("s4");
 var s5 = document.getElementById("s5");
-
 function myPeopleCounter() {
     hiChart.style.display = "block";
     agCount.style.display = "none";

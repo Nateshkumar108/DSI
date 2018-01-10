@@ -26,10 +26,11 @@ function apiCal(fromDate, toDate, value) {
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
           }
+          loadCaptions("in",furl);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
-              height: 70 + '%'
+              height: 65 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -47,14 +48,14 @@ function apiCal(fromDate, toDate, value) {
                 text: 'PERSONS'
               }
             },
-            tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-            },
+            // tooltip: {
+            //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+            //   footerFormat: '</table>',
+            //   shared: true,
+            //   useHTML: true
+            // },
             plotOptions: {
               column: {
                 pointPadding: 0.2,
@@ -69,6 +70,8 @@ function apiCal(fromDate, toDate, value) {
           });
         }
       });
+     
+      
       break;
     case 'out':
       $.ajax({
@@ -91,10 +94,11 @@ function apiCal(fromDate, toDate, value) {
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
           }
+          loadCaptions("out",furl);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
-              height: 70 + '%'
+              height: 65 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -115,14 +119,14 @@ function apiCal(fromDate, toDate, value) {
                 text: 'PERSONS'
               }
             },
-            tooltip: {
-              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-              pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-              footerFormat: '</table>',
-              shared: true,
-              useHTML: true
-            },
+            // tooltip: {
+            //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+            //   footerFormat: '</table>',
+            //   shared: true,
+            //   useHTML: true
+            // },
             plotOptions: {
               column: {
                 pointPadding: 0.2,
@@ -137,6 +141,7 @@ function apiCal(fromDate, toDate, value) {
           });
         }
       });
+     
       break;
     case 'in-out':
       $.ajax({
@@ -161,10 +166,11 @@ function apiCal(fromDate, toDate, value) {
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
           }
+          loadCaptions("inout",furl);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
-              height: 70 + '%'
+              height: 65 + '%'
             },
             title: {
               text: 'DSI People Counter'
@@ -210,6 +216,7 @@ function apiCal(fromDate, toDate, value) {
           });
         }
       });
+      
       break;
 
     default:

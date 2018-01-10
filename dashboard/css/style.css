@@ -164,14 +164,13 @@ body {
 }
 .chartButton{
   list-style: none;
-    display: flex;
-    padding: 0;
-    background: #343435;
-    margin: 0;
+  display: flex;
+  width: 40%;
 }
 
 .chartButton li{
-  width: 34%;
+  width: 25%;
+  margin-right: 2%;
 }
 .chartButton button{
   background: transparent;
@@ -233,6 +232,44 @@ button, .hand-pointer {
   margin-bottom: 20px;
   color: black;
   font-family: 'Open Sans', sans-serif;
+}
+
+.chartValues{
+  display: flex;
+  width: 60%;
+  list-style: none;
+  color: white;
+  justify-content: flex-end;
+  font-size: 12px;
+}
+.chartValues ul{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin-left: 4%;
+}
+.chartValues ul li{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36%;
+}
+.captions{
+  display: flex;
+  flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.chartValues ul li p{
+  color:#1DAFEB;
+  font-size: 14px;
+}
+.highchartTab{
+  display: flex;
+    padding: 0;
+    margin:0;
+    margin-bottom: 2%;
 }
 
 .calendars {
