@@ -65,8 +65,9 @@ body {
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
     margin-bottom: 20px;
-    background:#1DAFEB;
-    color: white;
+    background:transparent;
+    border: 1px solid #1DAFEB;
+    color: #1DAFEB;
 
 }
 .roomsButton{
@@ -182,8 +183,9 @@ body {
 
 }
 .chartButton button:hover{
-  background:#1DAFEB;
-  border: 1px solid white;
+  background:transparent;
+  border: 1px solid #1DAFEB;
+  color: #1DAFEB;
   height: 28px;
     font-size: small;
    
@@ -205,6 +207,13 @@ body {
 
 .chartButton button.active {
   background:#1DAFEB;
+  border: 1px solid #1DAFEB;
+
+}
+.chartButton button.active:hover {
+  background:transparent;
+  border: 1px solid #1DAFEB;
+  color:#1DAFEB;
 
 }
 
