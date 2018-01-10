@@ -14,6 +14,12 @@
 </head>
 
 <body>
+
+    <div id="page-loader" className={(this.state.isPageLoad) ? "show" : "hide"}>
+        <div class="loader"></div>
+    </div> 
+
+
     <header>
         <a href="http://www.digitalspacesinc.com/">
             <img src="img/logo.png" alt="" style="width: 179px;">
@@ -204,9 +210,9 @@
                 <input type="text" id="to" name="to">
 
                 <div class="clearfix"></div>
-                <div class="search-button">
+                <!-- <div class="search-button">
                     <button class="button" onclick="customCalSearch()">Search</button>
-                </div>
+                </div> -->
 
             </div>
 
@@ -214,6 +220,25 @@
                 <div id="slider"></div>
 
             </div> -->
+            <div class="medium-space"></div>
+            <div class="clearfix"></div>    
+            <div>
+                <span>Time:</span>
+                <div class="timer">
+                    <input type="number" id="fhr" class="input-timer" min="0" max="23" placeholder="hh" value="00" />
+                    <span>:</span>
+                    <input type="number" id="fmin" class="input-timer" min="0" max="59" placeholder="mm" value="00"/>
+                    <span class="lbl-to-timer ">to</span>
+                    <input type="number" id="thr" class="input-timer"  min="0" max="23" placeholder="hh" value="24"/>
+                    <span>:</span>
+                    <input type="number" id="tmin" class="input-timer" min="0" max="59" placeholder="mm" value="00"/>
+                </div>
+            </div>
+            <div class="medium-space"></div>
+            <div class="clearfix"></div>
+             <div class="search-button">
+                    <button class="button" onclick="customCalSearch()">Search</button>
+                </div>
         </div>
     </div>
     <script type="text/javascript">
@@ -285,7 +310,15 @@
                             value = 'in-out';
 
                         }
-                        apiCal(fromDate, toDate, value);
+
+                        var from_hr = $('#fhr').val();
+            var from_min = $('#fmin').val();
+            var start_time = from_hr+":"+from_min;
+            var to_hr = $('#thr').val();
+            var to_min = $('#tmin').val();
+            var end_time = to_hr+":"+to_min;
+            apiCal(fromDate, toDate, value,start_time,end_time);
+
                     } else if ($('#trkMap').hasClass('active-tab')) {
                         generateTrackmap(fromDate, toDate);
                     }
@@ -368,7 +401,16 @@
                 } else {
                     value = 'in-out';
                 }
-                apiCal(fromDate, toDate, value);
+                
+                var from_hr = $('#fhr').val();
+            var from_min = $('#fmin').val();
+            var start_time = from_hr+":"+from_min;
+            var to_hr = $('#thr').val();
+            var to_min = $('#tmin').val();
+            var end_time = to_hr+":"+to_min;
+            apiCal(fromDate, toDate, value,start_time,end_time);
+
+
             }
         }
 

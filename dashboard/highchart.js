@@ -27,6 +27,7 @@ $(document).ready(function () {
     inData = 1;
     outData = 0;
     inoutData = 0;
+
     var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + calDate + "/" + calNextDate + "?st=00:00&et=24:00";
 
     if (!$(this).hasClass('active')) {
@@ -40,7 +41,7 @@ $(document).ready(function () {
       avgIO.style.display = "none";
       totalIO.style.display = "none";
     }
-
+    $('#page-loader').show();
     $.ajax({
       headers: {
         'Access-Control-Allow-Headers': '*',
@@ -56,6 +57,7 @@ $(document).ready(function () {
       success: function (data) {
         //console.log("Data was ", data);
         //console.log("Data was ", data.data[0].items);
+        $('#page-loader').hide();
         inppc = [];
         times = [];
         for (let item of data.data[0].items) {
@@ -133,7 +135,7 @@ $(document).ready(function () {
       totalIO.style.display = "none";
 
     }
-
+    $('#page-loader').show();
     $.ajax({
       headers: {
         'Access-Control-Allow-Headers': '*',
@@ -149,6 +151,7 @@ $(document).ready(function () {
       success: function (data) {
         //console.log("Data was ", data);
         //console.log("Data was ", data.data[0].items);
+        $('#page-loader').hide();
         outppc = [];
         times = [];
         for (let item of data.data[0].items) {
@@ -226,7 +229,7 @@ $(document).ready(function () {
       avgI.style.display = "none";
       avgO.style.display = "none";
     }
-
+    $('#page-loader').show();
     $.ajax({
 
       headers: {
@@ -243,6 +246,7 @@ $(document).ready(function () {
       method: 'GET',
       dataType: 'JSON',
       success: function (data) {
+        $('#page-loader').hide();
         console.log("Data was ", data);
         console.log("Data was ", data.data[0].items);
         inppc = [];
@@ -311,7 +315,7 @@ $(document).ready(function () {
       }
     });
   });
-
+$('#page-loader').show();
   $.ajax({
     headers: {
       'Access-Control-Allow-Headers': '*',
@@ -325,6 +329,7 @@ $(document).ready(function () {
     method: 'GET',
     dataType: 'JSON',
     success: function (data) {
+      $('#page-loader').hide();
       console.log("Data was ", data);
       console.log("Data was ", data.data[0].items);
       inppc = [];

@@ -333,3 +333,40 @@ button, .hand-pointer {
 .img-trackmap {
   text-align: center;
 }
+
+.input-timer {
+  width: 30px;
+}
+
+.medium-space {
+  margin-bottom: 10px;
+}
+
+.timer {
+  padding-left: 2em;
+  display: inline-block;
+}
+
+.lbl-to-timer {
+  margin: 0 5px;
+}
+
+#page-loader {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  background: rgba(0,0,0,0.8); 
+  z-index: 100000;
+  overflow: hidden;
+}
+.loader {
+    width: 100%;
+    height: 100%;
+    background: url('load-icon.gif') no-repeat;
+    position: absolute;
+    top: 39%;
+    left: 39%;
+}
