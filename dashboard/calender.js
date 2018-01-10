@@ -1,11 +1,12 @@
-function apiCal(fromDate, toDate, value) {
-  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=00:00&et=24:00";
+function apiCal(fromDate, toDate, value,start_time,end_time) {
+  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
 
   var inppc = [];
   var times = [];
 
   switch (value) {
     case 'in':
+    $('#page-loader').show();
       $.ajax({
         headers: {
           'Access-Control-Allow-Headers': '*',
@@ -71,9 +72,10 @@ function apiCal(fromDate, toDate, value) {
         }
       });
      
-      
+      $('#page-loader').hide();
       break;
     case 'out':
+    $('#page-loader').show();
       $.ajax({
         headers: {
           'Access-Control-Allow-Headers': '*',
@@ -141,9 +143,10 @@ function apiCal(fromDate, toDate, value) {
           });
         }
       });
-     
+     $('#page-loader').hide();
       break;
     case 'in-out':
+    $('#page-loader').show();
       $.ajax({
         headers: {
           'Access-Control-Allow-Headers': '*',
@@ -216,7 +219,7 @@ function apiCal(fromDate, toDate, value) {
           });
         }
       });
-      
+      $('#page-loader').hide();
       break;
 
     default:
