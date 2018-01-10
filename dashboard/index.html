@@ -394,16 +394,20 @@
             toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + toDate.getDate();
             calNextDate = toDate;
 
-            let value = null;
-            //Check which tab is currently active
-            if ($('#in').hasClass('active')) {
-                value = 'in';
-            } else if ($('#out').hasClass('active')) {
-                value = 'out';
-            } else {
-                value = 'in-out';
-            }
-            apiCal(fromDate, toDate, value);
+            if ($('#agc').hasClass('active-tab')) {
+                demoApi(fromDate, toDate);
+            } else if ($('#ppc').hasClass('active-tab')) {
+                //Check which tab is currently active
+                let value = null;
+                if ($('#in').hasClass('active')) {
+                    value = 'in';
+                } else if ($('#out').hasClass('active')) {
+                    value = 'out';
+                } else {
+                    value = 'in-out';
+                }
+                apiCal(fromDate, toDate, value);
+                }
             }
 
     </script>

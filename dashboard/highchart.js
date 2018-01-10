@@ -6,7 +6,8 @@ var outData=0;
 var inoutData=0;
 
 console.log("DATESDFGHJKJHGFD"+fromDate)
-console.log("DATESDFGHJKJHGFD"+toDate)
+console.log("DATESDFGHJKJHGFD"+toDate);
+var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + calDate +"/"+ calNextDate +"?st=00:00&et=24:00";
 $(document).ready(function () {
 
   
@@ -19,11 +20,12 @@ $(document).ready(function () {
   var date = ""
   // var furl = url+'/'+installation+'/'+projction+'/'+outer_range_start+'/'+outer_range_end;*/
 
-var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate +"/"+ toDate +"?st=00:00&et=24:00";
   $('#in').click(function(){
     inData=1;
     outData=0;
     inoutData=0;
+    var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + calDate +"/"+ calNextDate +"?st=00:00&et=24:00";
+
     $.ajax({
 
       headers: {
@@ -104,6 +106,7 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
     inData=0;
     outData=1;
     inoutData=0;
+    var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + calDate +"/"+ calNextDate +"?st=00:00&et=24:00";
     $.ajax({
 
       headers: {
@@ -184,6 +187,7 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
     inData=0;
     outData=0;
     inoutData=1;
+    var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + calDate +"/"+ calNextDate +"?st=00:00&et=24:00";
     $.ajax({
 
       headers: {
@@ -263,7 +267,6 @@ var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e
   
       }
     });
-  
   });
   $.ajax({
 
