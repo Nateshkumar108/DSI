@@ -257,14 +257,13 @@
         var toDate = year + "-" + month + "-" + day;
         var calDate = fromDate;
         var calNextDate = toDate;
-
         var from_hr;
         var from_min;
-        var start_time;
+        var start_time="00:00";
         var to_hr;
         var to_min;
-        var end_time; 
-
+        var end_time="24:00"; 
+        
     </script>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
@@ -320,14 +319,7 @@
                         } else {
                             value = 'in-out';
 
-                        }
-
-                    from_hr = $('#fhr').val();
-                    from_min = $('#fmin').val();
-                    start_time = from_hr+":"+from_min;
-                    to_hr = $('#thr').val();
-                    to_min = $('#tmin').val();
-                    end_time = to_hr+":"+to_min;    
+                        }   
            
             // apiCal(fromDate, toDate, value,start_time,end_time);
 
@@ -414,6 +406,13 @@
                     value = 'in-out';
                 }
 
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min; 
+
                 apiCal(selectedDate, nextDate, value, start_time, end_time);
             }
             
@@ -422,14 +421,14 @@
             let fromDate = $("#from").datepicker("getDate");
             let toDate = $("#to").datepicker("getDate");
 
-            if (fromDate.getDate() == toDate.getDate()) {
+            
                 toDate = new Date(new Date(toDate).getTime() + (24 * 60 * 60 * 1000));
-            }
+            
 
             fromDate = fromDate.getFullYear() + "-" + (fromDate.getMonth() + 1) + "-" + fromDate.getDate();
             calDate = fromDate;
 
-            toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + toDate.getDate();
+            toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + (toDate.getDate());
             calNextDate = toDate;
 
             if ($('#agc').hasClass('active-tab')) {
@@ -444,9 +443,14 @@
                 } else {
                     value = 'in-out';
                 }
-                
 
-        
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min;    
+
             apiCal(fromDate, toDate, value,start_time,end_time);
 
             }
