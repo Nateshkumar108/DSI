@@ -259,10 +259,10 @@
         var calNextDate = toDate;
         var from_hr;
         var from_min;
-        var start_time;
+        var start_time="00:00";
         var to_hr;
         var to_min;
-        var end_time; 
+        var end_time="24:00"; 
         
     </script>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
@@ -319,13 +319,7 @@
                         } else {
                             value = 'in-out';
 
-                        }
-                    from_hr = $('#fhr').val();
-                    from_min = $('#fmin').val();
-                    start_time = from_hr+":"+from_min;
-                    to_hr = $('#thr').val();
-                    to_min = $('#tmin').val();
-                    end_time = to_hr+":"+to_min;    
+                        }   
            
             // apiCal(fromDate, toDate, value,start_time,end_time);
 
@@ -412,6 +406,13 @@
                     value = 'in-out';
                 }
 
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min; 
+
                 apiCal(selectedDate, nextDate, value, start_time, end_time);
             }
             
@@ -442,8 +443,14 @@
                 } else {
                     value = 'in-out';
                 }
-                
-        
+
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min;    
+
             apiCal(fromDate, toDate, value,start_time,end_time);
 
             }
