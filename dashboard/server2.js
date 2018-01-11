@@ -13,5 +13,5 @@ proxy.on('proxyRes', function (proxyRes, req, res) {
 
 
 http.createServer(function(req, res) {
-    proxy.web(req, res, { target: 'https://eds.modcam.io', changeOrigin: true });
-}).listen(3000);
+    proxy.web(req, res, { target: 'https://eds2.modcam.io', changeOrigin: true });
+}).listen(3001);
