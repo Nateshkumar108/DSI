@@ -253,6 +253,12 @@
         var toDate = year + "-" + month + "-" + day;
         var calDate = fromDate;
         var calNextDate = toDate;
+        var from_hr = $('#fhr').val();
+        var from_min = $('#fmin').val();
+        var start_time = from_hr+":"+from_min;
+        var to_hr = $('#thr').val();
+        var to_min = $('#tmin').val();
+        var end_time = to_hr+":"+to_min;
     </script>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
@@ -309,12 +315,7 @@
 
                         }
 
-                        var from_hr = $('#fhr').val();
-            var from_min = $('#fmin').val();
-            var start_time = from_hr+":"+from_min;
-            var to_hr = $('#thr').val();
-            var to_min = $('#tmin').val();
-            var end_time = to_hr+":"+to_min;
+                        
             apiCal(fromDate, toDate, value,start_time,end_time);
 
                     } else if ($('#trkMap').hasClass('active-tab')) {
@@ -400,12 +401,6 @@
                     value = 'in-out';
                 }
                 
-                var from_hr = $('#fhr').val();
-            var from_min = $('#fmin').val();
-            var start_time = from_hr+":"+from_min;
-            var to_hr = $('#thr').val();
-            var to_min = $('#tmin').val();
-            var end_time = to_hr+":"+to_min;
             apiCal(fromDate, toDate, value,start_time,end_time);
 
 
