@@ -421,14 +421,14 @@
             let fromDate = $("#from").datepicker("getDate");
             let toDate = $("#to").datepicker("getDate");
 
-            if (fromDate.getDate() == toDate.getDate()) {
+            
                 toDate = new Date(new Date(toDate).getTime() + (24 * 60 * 60 * 1000));
-            }
+            
 
             fromDate = fromDate.getFullYear() + "-" + (fromDate.getMonth() + 1) + "-" + fromDate.getDate();
             calDate = fromDate;
 
-            toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + toDate.getDate();
+            toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + (toDate.getDate());
             calNextDate = toDate;
 
             if ($('#agc').hasClass('active-tab')) {
