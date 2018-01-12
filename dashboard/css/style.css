@@ -108,6 +108,7 @@ body {
 .trackMaps{
   width: 100%;
   display: none;
+  position: relative;
 
 }
 .event{
@@ -327,11 +328,14 @@ button, .hand-pointer {
 }
 
 .floor-plan {
-	background: no-repeat center/80%  url('../img/floor.PNG');
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
 
 .img-trackmap {
-  text-align: center;
+  background: no-repeat url('../img/floor.PNG');
+  position: relative;
 }
 
 .input-timer {
@@ -369,4 +373,10 @@ button, .hand-pointer {
     position: absolute;
     top: 39%;
     left: 39%;
+}
+
+#imageTemp { position: absolute;}
+
+.abs {
+  position: absolute;
 }
