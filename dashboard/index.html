@@ -54,13 +54,13 @@
                 <ul class="highchartTab">
                     <ul class="chartButton">
                         <li>
-                            <button name="in" id="in" class="">IN</button>
+                            <button name="in" id="in" class="" onclick="refresh();">IN</button>
                         </li>
                         <li>
-                            <button name="out" id="out" class="">OUT</button>
+                            <button name="out" id="out" class="" onclick="refresh();">OUT</button>
                         </li>
                         <li>
-                            <button name="in" id="inout" class="active">IN/OUT</button>
+                            <button name="in" id="inout" class="active" onclick="refresh();">IN/OUT</button>
                         </li>
                     </ul>
                     <ul class="chartValues">
@@ -415,6 +415,7 @@
 
                 apiCal(selectedDate, nextDate, value, start_time, end_time);
             }
+
             
         }
         function customCalSearch() {
