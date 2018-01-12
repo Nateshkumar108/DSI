@@ -54,13 +54,13 @@
                 <ul class="highchartTab">
                     <ul class="chartButton">
                         <li>
-                            <button name="in" id="in" class="">IN</button>
+                            <button name="in" id="in" class="" onclick="refresh();">IN</button>
                         </li>
                         <li>
-                            <button name="out" id="out" class="">OUT</button>
+                            <button name="out" id="out" class="" onclick="refresh();">OUT</button>
                         </li>
                         <li>
-                            <button name="in" id="inout" class="active">IN/OUT</button>
+                            <button name="in" id="inout" class="active" onclick="refresh();">IN/OUT</button>
                         </li>
                     </ul>
                     <ul class="chartValues">
@@ -200,6 +200,8 @@
                 <div class="calender">
                     <div id="datepicker"></div>
                 </div>
+            
+                
             </div>
             <div id="custom-calendar">
                 <label for="from" class="lbl-calendar">From: </label>
@@ -209,9 +211,7 @@
                 <input type="text" id="to" name="to">
 
                 <div class="clearfix"></div>
-                <!-- <div class="search-button">
-                    <button class="button" onclick="customCalSearch()">Search</button>
-                </div> -->
+                
 
             </div>
 
@@ -235,9 +235,13 @@
             </div>
             <div class="medium-space"></div>
             <div class="clearfix"></div>
-             <div class="search-button">
-                    <button class="button" onclick="customCalSearch()">Search</button>
-                </div>
+
+            <div class="search-button">
+                <button class="button" id="main-btn" onclick="mainCalSearch()">Search</button>
+                <div class="clearfix"></div>
+                <button class="button" id="custom-btn" onclick="customCalSearch()">Search</button>
+            </div>
+
         </div>
     </div>
     <script type="text/javascript">
@@ -254,6 +258,13 @@
         var toDate = year + "-" + month + "-" + day;
         var calDate = fromDate;
         var calNextDate = toDate;
+        var from_hr;
+        var from_min;
+        var start_time="00:00";
+        var to_hr;
+        var to_min;
+        var end_time="24:00"; 
+        
     </script>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
@@ -277,6 +288,7 @@
     <script type="text/javascript">
         $(function () {
             $('#custom-calendar').hide();
+            $('#custom-btn').hide();
 
             $("#datepicker").datepicker({
                 onSelect: function (date) {
@@ -308,15 +320,9 @@
                         } else {
                             value = 'in-out';
 
-                        }
-
-                        var from_hr = $('#fhr').val();
-            var from_min = $('#fmin').val();
-            var start_time = from_hr+":"+from_min;
-            var to_hr = $('#thr').val();
-            var to_min = $('#tmin').val();
-            var end_time = to_hr+":"+to_min;
-            apiCal(fromDate, toDate, value,start_time,end_time);
+                        }   
+           
+            // apiCal(fromDate, toDate, value,start_time,end_time);
 
                     } else if ($('#trkMap').hasClass('active-tab')) {
                         generateTrackmap(fromDate, toDate);
@@ -332,6 +338,8 @@
                 $('#custom-calendar').hide();
                 $('#txt-main-cal').addClass('active-calendar');
                 $('#txt-custom-cal').removeClass('active-calendar');
+                $('#main-btn').show();
+                $('#custom-btn').hide();
             });
 
             $('#txt-custom-cal').click(function () {
@@ -339,6 +347,8 @@
                 $('#custom-calendar').show();
                 $('#txt-main-cal').removeClass('active-calendar');
                 $('#txt-custom-cal').addClass('active-calendar');
+                $('#main-btn').hide();
+                $('#custom-btn').show();
             });
 
 
@@ -374,18 +384,53 @@
             }
         });
 
+        function mainCalSearch(){
+            let selectedDate = $("#datepicker").datepicker("getDate");
+            let nextDate = new Date(new Date(selectedDate).getTime() + (24 * 60 * 60 * 1000));
+
+            selectedDate = selectedDate.getFullYear() + "-" + (selectedDate.getMonth() + 1) + "-" + selectedDate.getDate();
+            calDate = selectedDate;
+
+            nextDate = nextDate.getFullYear() + "-" + (nextDate.getMonth() + 1) + "-" + nextDate.getDate();
+            calNextDate = nextDate;
+
+            if ($('#agc').hasClass('active-tab')) {
+                demoApi(fromDate, toDate);
+            } else if ($('#ppc').hasClass('active-tab')) {
+                //Check which tab is currently active
+                let value = null;
+                if ($('#in').hasClass('active')) {
+                    value = 'in';
+                } else if ($('#out').hasClass('active')) {
+                    value = 'out';
+                } else {
+                    value = 'in-out';
+                }
+
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min; 
+
+                apiCal(selectedDate, nextDate, value, start_time, end_time);
+            }
+
+            
+        }
         function customCalSearch() {
             let fromDate = $("#from").datepicker("getDate");
             let toDate = $("#to").datepicker("getDate");
 
-            if (fromDate.getDate() == toDate.getDate()) {
+            
                 toDate = new Date(new Date(toDate).getTime() + (24 * 60 * 60 * 1000));
-            }
+            
 
             fromDate = fromDate.getFullYear() + "-" + (fromDate.getMonth() + 1) + "-" + fromDate.getDate();
             calDate = fromDate;
 
-            toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + toDate.getDate();
+            toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + (toDate.getDate());
             calNextDate = toDate;
 
             if ($('#agc').hasClass('active-tab')) {
@@ -400,15 +445,15 @@
                 } else {
                     value = 'in-out';
                 }
-                
-                var from_hr = $('#fhr').val();
-            var from_min = $('#fmin').val();
-            var start_time = from_hr+":"+from_min;
-            var to_hr = $('#thr').val();
-            var to_min = $('#tmin').val();
-            var end_time = to_hr+":"+to_min;
-            apiCal(fromDate, toDate, value,start_time,end_time);
 
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min;    
+
+            apiCal(fromDate, toDate, value,start_time,end_time);
 
             }
         }

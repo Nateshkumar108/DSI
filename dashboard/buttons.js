@@ -79,4 +79,8 @@ function myTrackMap() {
 
     generateTrackmap(calDate, calNextDate);
 
+function refresh(){
+    apiCal(fromDate, toDate, value,start_time,end_time);
+}
+
 }
