@@ -12,8 +12,57 @@ function generateTrackmap(fromDt, toDt) {
 
     xhr.onload = function (e) {
         if (this.status == 200) {
-            var data = btoa(String.fromCharCode.apply(null, new Uint8Array(this.response)));
-            $("#trackmap").html('<img src="data:image/png;base64,' + data + '" />');
+           // var data = btoa(String.fromCharCode.apply(null, new Uint32Array(this.response)));
+            var array = new Uint32Array(this.response);
+             var d_canvas = document.getElementById('canvas');
+              var context = d_canvas.getContext('2d');
+              let width = array[0];
+              let height = array[1];
+              var imgData = context.createImageData(width , height); // width x height
+              var data = imgData.data;
+
+              var nonZeroCount = 0;
+              var total = 0;
+
+              var arrString = "[";
+
+              for (var i = 0; i < array.length; i++) {
+                  if (array[i] != 0) {
+                    nonZeroCount += 1;
+
+                    // console.log(i + " " + array[i]);
+                  }
+                  total += 1;
+
+                  arrString += array[i] + ", ";
+
+              }
+
+              arrString += "]";
+
+              // copy img byte-per-byte into our ImageData
+              /*let len = array[0] * array[1] * 4; 
+              for (var i = 1; i < 100; i++) {
+                for(var j=0;j<len;j++) {
+                    data[i*j] = array[j];
+                }
+              }
+
+              debugger;*/
+
+              console.log("nonZeroCount was ", nonZeroCount);
+              console.log("total count was ", total);
+              console.log("array was ", arrString);
+
+              let len = array[0] * array[1] * 4;
+
+              for (var i = 2; i < len; i++) {
+                    data[i-2] = array[i];
+              }
+
+
+              // now we can draw our imagedata onto the canvas
+              context.putImageData(imgData, 0, 0);
 
             // var canvas = getImageFor32BitInteger(this.response);
             // let urlForImage = canvas.toDataURL();
