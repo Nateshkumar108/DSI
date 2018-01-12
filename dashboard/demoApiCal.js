@@ -4,6 +4,8 @@ var totalMale=0;
 var totalFeMale=0;
 var sumMale=0;
 var sumFemale=0;
+var avgMALE=0;
+var avgFEMALE=0;
 function demoApi(fromDate, toDate){
 
   
@@ -38,23 +40,25 @@ function demoApi(fromDate, toDate){
     
      var i=0;
      var it=[];
-     var maleCount = [];
-    var femaleCount = [];
+    maleCount = [];
+    femaleCount = [];
+
+    totalMale=0;
+    totalFeMale=0;
+    sumMale=0;
+    sumFemale=0;
       for (let item of data.data[0].items) {
         for (i=0;i<20;i++){
             console.log('man', item.male[i]);
             maleCount.push(item.male[i]);
-            totalMale=totalMale + item.male[i];
+            // totalMale=totalMale + item.male[i];
             femaleCount.push(item.female[i]);
-            totalFeMale=totalFeMale + item.female[i];
-            demodata(item.male[i],item.female[i],i);
+            // totalFeMale=totalFeMale + item.female[i];
+            // demodata(item.male[i],item.female[i],i);
             
             
         }
-        var avgMALE= sumMale/totalMale;
-        var avgFEMALE= sumFemale/totalFeMale;
-        document.getElementById("avgMale").innerHTML = Math.round(avgMALE);
-        document.getElementById("avgFeMale").innerHTML = Math.round(avgFEMALE);
+       
         
         // for (let it of item.male) {
         //     console.log('goof', it[i]);
@@ -67,6 +71,11 @@ function demoApi(fromDate, toDate){
         i++;
         console.log("i=" + i);
       }
+      // avgMALE= sumMale/totalMale;
+      // avgFEMALE= sumFemale/totalFeMale;
+      // document.getElementById("avgMale").innerHTML = Math.round(avgMALE);
+      // document.getElementById("avgFeMale").innerHTML = Math.round(avgFEMALE);
+      demoStats(fromDate, toDate,start_time,end_time);
         Highcharts.chart('demogra', {
           chart: {
             type: 'column',
@@ -121,8 +130,65 @@ function demoApi(fromDate, toDate){
 
 }
 
-function demoStats(){
-  
+function demoStats(fromDate, toDate,start_time,end_time){
+
+  var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/range/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
+ 
+  $.ajax({
+
+    headers: {
+      'Access-Control-Allow-Headers': '*',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'x-client-id': 'digispc',
+      'x-api-key': '20d24f4d6cc964cae3050afd1610c29b'
+    },
+
+
+    url: furl,
+    crossDomain: true,
+    method: 'GET',
+    dataType: 'JSON',
+    success: function (data) {
+    //   console.log("Data was ", data);
+    //   console.log("Data was ", data.data[0].items);
+    
+     var i=0;
+     var it=[];
+     maleCount = [];
+    femaleCount = [];
+
+    totalMale=0;
+    totalFeMale=0;
+    sumMale=0;
+    sumFemale=0;
+      for (let item of data.data[0].items) {
+        for (i=0;i<20;i++){
+            console.log('man', item.male[i]);
+            maleCount.push(item.male[i]);
+            totalMale=totalMale + item.male[i];
+            femaleCount.push(item.female[i]);
+            totalFeMale=totalFeMale + item.female[i];
+            demodata(item.male[i],item.female[i],i);
+            
+            
+        }
+ 
+        i++;
+      
+      }
+      avgMALE= sumMale/totalMale;
+      avgFEMALE= sumFemale/totalFeMale;
+      if(!avgMALE){
+        avgMALE=0;
+      }
+      if(!avgFEMALE){
+        avgFEMALE=0;
+      }
+      document.getElementById("avgMale").innerHTML = Math.round(avgMALE);
+      document.getElementById("avgFeMale").innerHTML = Math.round(avgFEMALE);
+    }
+  });
 }
 function demodata(male,female,i){
 

@@ -135,14 +135,16 @@
                         </li>
                         <li class="captions">
                             <span>Male</span>
+                            <span> this period</span>
                         </li>
                     </ul>
                     <ul>
                         <li>
-                            <p id="avgFeMale"></p>
+                            <p id="avgFeMale" style="color:#ff61ff;"></p>
                         </li>
                         <li class="captions">
                                 <span>Female</span>
+                                <span> this period</span>
                             </li>
                         
                     </ul>
@@ -327,7 +329,8 @@
                     let value = null;
 
                     if ($('#agc').hasClass('active-tab')) {
-                        demoApi(fromDate, toDate);
+                        demoApi(fromDate, toDate,start_time,end_time);
+                        demoStats(fromDate, toDate,start_time,end_time);
                     } else if ($('#ppc').hasClass('active-tab')) {
                         //Check which tab is currently active
                         if ($('#in').hasClass('active')) {
@@ -414,7 +417,14 @@
             calNextDate = nextDate;
 
             if ($('#agc').hasClass('active-tab')) {
-                demoApi(fromDate, toDate);
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min;
+                demoApi(fromDate, toDate,start_time,end_time);
+                demoStats(fromDate, toDate,start_time,end_time);
             } else if ($('#ppc').hasClass('active-tab')) {
                 //Check which tab is currently active
                 let value = null;
@@ -453,7 +463,14 @@
             calNextDate = toDate;
 
             if ($('#agc').hasClass('active-tab')) {
-                demoApi(fromDate, toDate);
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min;    
+                demoApi(fromDate, toDate,start_time,end_time);
+                demoStats(fromDate, toDate,start_time,end_time);
             } else if ($('#ppc').hasClass('active-tab')) {
                 //Check which tab is currently active
                 let value = null;
