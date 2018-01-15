@@ -66,7 +66,15 @@ $(document).ready(function () {
           var timeArray = item.date.split(" ");
           times.push(timeArray[1]);
         }
-        loadCaptions("in", furl);
+        loadCaptions("in", furl,fromDate,toDate,start_time,end_time);
+        if($('#txt-custom-cal').hasClass('active-calendar'))
+        {
+          customCalSearch();
+        }
+        else
+        {
+          mainCalSearch();
+        }
         Highcharts.chart('container', {
           chart: {
             type: 'column',
@@ -91,14 +99,6 @@ $(document).ready(function () {
               text: 'PERSONS'
             }
           },
-          // tooltip: {
-          //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-          //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-          //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-          //   footerFormat: '</table>',
-          //   shared: true,
-          //   useHTML: true
-          // },
           plotOptions: {
             column: {
               pointPadding: 0.2,
@@ -161,7 +161,15 @@ $(document).ready(function () {
           var timeArray = item.date.split(" ");
           times.push(timeArray[1]);
         }
-        loadCaptions("out", furl);
+        loadCaptions("out", furl,fromDate,toDate,start_time,end_time);
+        if($('#txt-custom-cal').hasClass('active-calendar'))
+        {
+          customCalSearch();
+        }
+        else
+        {
+          mainCalSearch();
+        }
         Highcharts.chart('container', {
           chart: {
             type: 'column',
@@ -263,6 +271,14 @@ $(document).ready(function () {
           times.push(timeArray[1]);
         }
         loadCaptions("inout", furl);
+        if($('#txt-custom-cal').hasClass('active-calendar'))
+        {
+          customCalSearch();
+        }
+        else
+        {
+          mainCalSearch();
+        }
         Highcharts.chart('container', {
           chart: {
             type: 'column',
@@ -342,7 +358,10 @@ $('#page-loader').show();
         var timeArray = item.date.split(" ");
         times.push(timeArray[1]);
       }
-      loadCaptions("inout", furl);
+      
+      loadCaptions("inout", furl,fromDate,toDate,start_time,end_time);
+      loadCaptions("in", furl,fromDate,toDate,start_time,end_time);
+      loadCaptions("out", furl,fromDate,toDate,start_time,end_time);
       Highcharts.chart('container', {
         chart: {
           type: 'column',
@@ -607,11 +626,17 @@ Highcharts.theme = {
 Highcharts.setOptions(Highcharts.theme);
 
 
-function loadCaptions(value, furl) {
+function loadCaptions(value, furl,fromDate,toDate,start_time,end_time) {
   var totalIN = 0;
   var totalOUT = 0;
   var totalINOUT = 0;
   var avgINOUT = 0;
+  from=fromDate.split("-");
+  to=toDate.split("-");
+  var diff = to[2]-from[2];
+  start=start_time.split(":");
+  end=end_time.split(":");
+  var timeSpan=end[0]-start[0];
   $.ajax({
 
     headers: {
@@ -643,9 +668,18 @@ function loadCaptions(value, furl) {
         times.push(timeArray[1]);
       }
       totalINOUT = totalIN + totalOUT;
-      avgIN = totalIN / 24;
-      avgOUT = totalOUT / 24;
-      avgINOUT = totalINOUT / 24;
+      if($('#txt-custom-cal').hasClass('active-calendar')){
+        avgIN = totalIN / diff;
+        avgOUT = totalOUT / diff;
+        avgINOUT = totalINOUT / diff;
+  
+      } else{
+        avgIN = totalIN / timeSpan;
+        avgOUT = totalOUT / timeSpan;
+        avgINOUT = totalINOUT / timeSpan;
+  
+      }
+      
 
       switch (value) {
         case 'in':

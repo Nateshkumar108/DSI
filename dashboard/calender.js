@@ -27,7 +27,7 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
           }
-          loadCaptions("in",furl);
+          loadCaptions("in",furl,fromDate,toDate,start_time,end_time);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
@@ -96,7 +96,7 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
           }
-          loadCaptions("out",furl);
+          loadCaptions("out",furl,fromDate,toDate,start_time,end_time);
           Highcharts.chart('container', {
             chart: {
               type: 'column',
@@ -169,7 +169,7 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
             var timeArray = item.date.split(" ");
             times.push(timeArray[1]);
           }
-          loadCaptions("inout",furl);
+          loadCaptions("inout",furl,fromDate,toDate,start_time,end_time);
           Highcharts.chart('container', {
             chart: {
               type: 'column',

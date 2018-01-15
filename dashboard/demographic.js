@@ -34,12 +34,21 @@ $(document).ready(function () {
     
      var i=0;
      var it=[];
+     maleCount = [];
+    femaleCount = [];
+
+    totalMale=0;
+    totalFeMale=0;
+    sumMale=0;
+    sumFemale=0;
       for (let item of data.data[0].items) {
         console.log("HAHAHAHAHAHA");
         for (i=0;i<20;i++){
-            console.log('mard', item.male[i]);
+            
             maleCount.push(item.male[i]);
+           
             femaleCount.push(item.female[i]);
+            
         }
         
         // for (let it of item.male) {
@@ -53,6 +62,7 @@ $(document).ready(function () {
         i++;
         console.log("i=" + i);
       }
+      demoStats(fromDate, toDate,start_time,end_time)
         Highcharts.chart('demogra', {
           chart: {
             type: 'column',
