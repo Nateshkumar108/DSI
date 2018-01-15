@@ -13,7 +13,7 @@ function generateTrackmap(fromDt, toDt) {
     xhr.onload = function (e) {
         if (this.status == 200) {
             var data = btoa(String.fromCharCode.apply(null, new Uint8Array(this.response)));
-            drawArea(data);
+            drawArea(data, fromDt, toDt);
 
             // var canvas = getImageFor32BitInteger(this.response);
             // let urlForImage = canvas.toDataURL();
@@ -43,12 +43,18 @@ function getImageFor32BitInteger(data) {
     return canvas;
 }
 
-function drawArea(data) {
+function drawArea(data, fromDt, toDt) {
     var canvas, context, canvaso, contexto;
 
     // The active tool instance.
     var tool;
     var boxCoordintates;
+    var bX;
+    var bY;
+    var bWidth;
+    var bHeight;
+    var stDt = fromDt;
+    var etDt = toDt;
 
     function init() {
         // Find the canvas element.
@@ -96,6 +102,7 @@ function drawArea(data) {
         canvas.addEventListener('mousedown', ev_canvas, false);
         canvas.addEventListener('mousemove', ev_canvas, false);
         canvas.addEventListener('mouseup', ev_canvas, false);
+        canvas.addEventListener('click', ev_canvas, false);
 
         tool = new tools["rect"]();
     }
@@ -138,6 +145,14 @@ function drawArea(data) {
         var tool = this;
         this.started = false;
 
+        this.click = function(ev) {
+            var x = Math.min(ev._x, tool.x0),
+                y = Math.min(ev._y, tool.y0);
+            console.log('*****************');
+            console.log(x,y,bX,bY);
+
+        }
+
         this.mousedown = function (ev) {
             tool.started = true;
             tool.x0 = ev._x;
@@ -160,6 +175,13 @@ function drawArea(data) {
                 return;
             }
 
+            //Format is x1,y1-x2,y2
+            boxCoordintates = x + "," + y + "-" + (x + w) + "," + (y + h);
+            bX = x;
+            bY = y;
+            bWidth = w;
+            bHeight = h; 
+
             context.strokeRect(x, y, w, h);
         };
 
@@ -167,11 +189,85 @@ function drawArea(data) {
             if (tool.started) {
                 tool.mousemove(ev);
                 tool.started = false;
-                img_update();
+                
+                getBoxData(boxCoordintates, stDt, etDt);
+                
+                
+
             }
         };
     };
 
     init();
+
+    function getBoxData(coordinates, fromDt, toDt) {
+        var stDt = fromDt;
+        var etDt = toDt;
+        var furl = "http://18.216.208.225:3001/v1/tracker/installation/5a4e2d0b9963080006dc9dfb/aoi/" + stDt + "/" + etDt + "?st=00:00&et=23:59&zones=" + coordinates;
+
+        $.ajax({
+            headers: {
+              'Access-Control-Allow-Headers': '*',
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*',
+              'x-client-id': 'digispc',
+              'x-api-key': '20d24f4d6cc964cae3050afd1610c29b'
+            },
+            url: furl,
+            crossDomain: true,
+            method: 'GET',
+            dataType: 'JSON',
+            success: function (data) {
+                var boxData = data["data"][0];
+                console.log('-----------------------');
+                console.log(boxData);
+                context.font = 'bold 15px Calibri';
+                context.textAlign = 'center';
+
+                var textX = (((bX + bWidth) - bX)/2) + bX;
+                var textY = (15 + bY);
+                context.fillText('Area', textX, textY);
+
+
+                var bAvgSecX = textX;
+                var bAvgSecY = (((bY + bHeight) - bY)/2) + bY;
+                var bAvgSecText = "Avg: " + boxData["averageTimeSpent"] + " secs"  
+                context.fillText(bAvgSecText, bAvgSecX, bAvgSecY);
+
+                context.font='20px FontAwesome';
+                context.fillText('\uf057', bX-10, bY-2);
+
+                context.font='15px FontAwesome';
+                var bNorthX = textX;
+                var bNorthY = bY - 5;
+                var bNorthText = "\uf176" + boxData["north"]["out"] + "  \uf175" + boxData["north"]["in"];
+                context.fillText(bNorthText, bNorthX, bNorthY);
+
+                var bSouthX = textX;
+                var bSouthY = bY + bHeight + 15;
+                var bSouthText = "\uf176" + boxData["south"]["in"] + "  \uf175" + boxData["south"]["out"];
+                context.fillText(bSouthText, bSouthX, bSouthY);
+
+                var bWestX = bX - 10;
+
+                context.fillText("\uf177", bWestX, bAvgSecY - 15);
+                context.fillText(boxData["west"]["out"], bWestX, bAvgSecY - 5);
+                context.fillText("\uf178", bWestX, bAvgSecY + 10);
+                context.fillText(boxData["west"]["in"], bWestX, bAvgSecY + 20);
+
+                var bEastX = bX + bWidth + 10;
+
+                context.fillText("\uf177", bEastX, bAvgSecY - 15);
+                context.fillText(boxData["east"]["in"], bEastX, bAvgSecY - 5);
+                context.fillText("\uf178", bEastX, bAvgSecY + 10);
+                context.fillText(boxData["east"]["out"], bEastX, bAvgSecY + 20);
+
+                img_update();
+                
+            }
+          });
+    }
+
+
 
 }
