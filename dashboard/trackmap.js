@@ -145,12 +145,11 @@ function drawArea(data, fromDt, toDt) {
         var tool = this;
         this.started = false;
 
-        this.click = function(ev) {
-            var x = Math.min(ev._x, tool.x0),
-                y = Math.min(ev._y, tool.y0);
-            console.log('*****************');
-            console.log(x,y,bX,bY);
-
+        this.click = function (ev) {
+            var x = Math.min(ev._x, tool.x0);
+            var y = Math.min(ev._y, tool.y0);
+            // console.log('*****************');
+            // console.log(x, y, bX, bY);
         }
 
         this.mousedown = function (ev) {
@@ -180,7 +179,7 @@ function drawArea(data, fromDt, toDt) {
             bX = x;
             bY = y;
             bWidth = w;
-            bHeight = h; 
+            bHeight = h;
 
             context.strokeRect(x, y, w, h);
         };
@@ -189,11 +188,7 @@ function drawArea(data, fromDt, toDt) {
             if (tool.started) {
                 tool.mousemove(ev);
                 tool.started = false;
-                
                 getBoxData(boxCoordintates, stDt, etDt);
-                
-                
-
             }
         };
     };
@@ -207,11 +202,11 @@ function drawArea(data, fromDt, toDt) {
 
         $.ajax({
             headers: {
-              'Access-Control-Allow-Headers': '*',
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*',
-              'x-client-id': 'digispc',
-              'x-api-key': '20d24f4d6cc964cae3050afd1610c29b'
+                'Access-Control-Allow-Headers': '*',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'x-client-id': 'digispc',
+                'x-api-key': '20d24f4d6cc964cae3050afd1610c29b'
             },
             url: furl,
             crossDomain: true,
@@ -219,25 +214,25 @@ function drawArea(data, fromDt, toDt) {
             dataType: 'JSON',
             success: function (data) {
                 var boxData = data["data"][0];
-                console.log('-----------------------');
-                console.log(boxData);
+                // console.log('-----------------------');
+                // console.log(boxData);
                 context.font = 'bold 15px Calibri';
                 context.textAlign = 'center';
 
-                var textX = (((bX + bWidth) - bX)/2) + bX;
+                var textX = (((bX + bWidth) - bX) / 2) + bX;
                 var textY = (15 + bY);
                 context.fillText('Area', textX, textY);
 
 
                 var bAvgSecX = textX;
-                var bAvgSecY = (((bY + bHeight) - bY)/2) + bY;
-                var bAvgSecText = "Avg: " + boxData["averageTimeSpent"] + " secs"  
+                var bAvgSecY = (((bY + bHeight) - bY) / 2) + bY;
+                var bAvgSecText = "Avg: " + boxData["averageTimeSpent"] + " secs"
                 context.fillText(bAvgSecText, bAvgSecX, bAvgSecY);
 
-                context.font='20px FontAwesome';
-                context.fillText('\uf057', bX-10, bY-2);
+                // context.font = '20px FontAwesome';
+                // context.fillText('\uf057', bX - 10, bY - 2);
 
-                context.font='15px FontAwesome';
+                context.font = '15px FontAwesome';
                 var bNorthX = textX;
                 var bNorthY = bY - 5;
                 var bNorthText = "\uf176" + boxData["north"]["out"] + "  \uf175" + boxData["north"]["in"];
@@ -263,9 +258,9 @@ function drawArea(data, fromDt, toDt) {
                 context.fillText(boxData["east"]["out"], bEastX, bAvgSecY + 20);
 
                 img_update();
-                
+
             }
-          });
+        });
     }
 
 
