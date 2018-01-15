@@ -270,7 +270,15 @@ $(document).ready(function () {
           var timeArray = item.date.split(" ");
           times.push(timeArray[1]);
         }
-        loadCaptions("inout", furl,fromDate,toDate,start_time,end_time);
+        loadCaptions("inout", furl);
+        if($('#txt-custom-cal').hasClass('active-calendar'))
+        {
+          customCalSearch();
+        }
+        else
+        {
+          mainCalSearch();
+        }
         Highcharts.chart('container', {
           chart: {
             type: 'column',
