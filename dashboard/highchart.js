@@ -263,6 +263,14 @@ $(document).ready(function () {
           times.push(timeArray[1]);
         }
         loadCaptions("inout", furl);
+        if($('#txt-custom-cal').hasClass('active-calendar'))
+        {
+          customCalSearch();
+        }
+        else
+        {
+          mainCalSearch();
+        }
         Highcharts.chart('container', {
           chart: {
             type: 'column',
