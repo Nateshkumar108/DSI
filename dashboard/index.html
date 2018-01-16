@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>
         DSI Dashboard
     </title>
@@ -14,7 +15,7 @@
 </head>
 
 <body>
-
+    <div class="div-fake-hidden"><i class="fa fa-square-o fa-3x"></i></div>
     <div id="page-loader" className={(this.state.isPageLoad) ? "show" : "hide"}>
         <div class="loader"></div>
     </div> 
@@ -178,7 +179,7 @@
                         </li>
                         <li class="captions">
                             <span>Male</span>
-                            <span> this period</span>
+                            <span>Avg this period</span>
                         </li>
                     </ul>
                     <ul>
@@ -187,7 +188,7 @@
                         </li>
                         <li class="captions">
                                 <span>Female</span>
-                                <span> this period</span>
+                                <span> Avg this period</span>
                             </li>
                         
                     </ul>
@@ -197,11 +198,13 @@
 
                 <!-- <h1>AGE COUNTER</h1> -->
             </div>
+            
             <div class="trackMaps" id="trackMap">
                 <div class="floor-plan">
-                        <div id="trackmap" class="img-trackmap"></div>
+                    <canvas id="trackmap" class="img-trackmap" width="591" height="583">
+                        <!-- <canvas id="imageView"></canvas> -->
+                    </canvas>
                 </div>
-               
             </div>
         </div>
         <!-- <div class="occupancyrpt" id="occrpt">
@@ -354,7 +357,7 @@
     <script type="text/javascript" src="highchart.js"></script>
     <script type="text/javascript" src="demographic.js"></script>
     <script type="text/javascript" src="demoApiCal.js"></script>
-    <script type="text/javascript" src="trackmap.js"></script>
+    <script type="text/javascript" charset="utf-8" src="trackmap.js" ></script>
     <script type="text/javascript" src="buttons.js"></script>
     <script type="text/javascript">
         var avgI = document.getElementById("avgI");
