@@ -180,7 +180,7 @@ function avgData(){
         console.log("***** startDate",fromDate);
         console.log("***** toDate",toDate);
            
-        var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/days/" + fromDate + "/2018-01-17?st=00:00&et=24:00"; 
+        var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/days/" + fromDate + "/" + toDate +"?st=00:00&et=24:00"; 
        
         $.ajax({
       

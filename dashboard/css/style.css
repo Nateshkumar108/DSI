@@ -444,8 +444,7 @@ button, .hand-pointer {
   background: #126687;
   font-size: 14px;
   width: 30px;
-  display: flex;
-  justify-content: center;
+  text-align: center;
 
 }
 .orptbtn
