@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>
         DSI Dashboard
     </title>
@@ -14,7 +15,7 @@
 </head>
 
 <body>
-
+    <div class="div-fake-hidden"><i class="fa fa-square-o fa-3x"></i></div>
     <div id="page-loader" className={(this.state.isPageLoad) ? "show" : "hide"}>
         <div class="loader"></div>
     </div> 
@@ -54,13 +55,13 @@
                 <ul class="highchartTab">
                     <ul class="chartButton">
                         <li>
-                            <button name="in" id="in" class="" onclick="refreshApi()">IN</button>
+                            <button name="in" id="in" class="" onclick="refresh()">IN</button>
                         </li>
                         <li>
-                            <button name="out" id="out" class="" onclick="refreshApi()">OUT</button>
+                            <button name="out" id="out" class="" onclick="refresh()">OUT</button>
                         </li>
                         <li>
-                            <button name="in" id="inout" class="active" onclick="refreshApi()">IN/OUT</button>
+                            <button name="in" id="inout" class="active" onclick="refresh()">IN/OUT</button>
                         </li>
                     </ul>
                     <ul class="chartValues">
@@ -128,16 +129,44 @@
 
             </div>
             <div class="ageCounter" id="agCount">
+                <ul class="MaleFemale">
+                    <ul>
+                        <li>
+                                <p id="avgMale"></p>
+                        </li>
+                        <li class="captions">
+                            <span>Male</span>
+                            <span>Avg this period</span>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <p id="avgFeMale" style="color:#ff61ff;"></p>
+                        </li>
+                        <li class="captions">
+                                <span>Female</span>
+                                <span> Avg this period</span>
+                            </li>
+                        
+                    </ul>
+                    
+                </ul>
                 <div id="demogra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
                 <!-- <h1>AGE COUNTER</h1> -->
             </div>
+            
             <div class="trackMaps" id="trackMap">
                 <div class="floor-plan">
+<<<<<<< HEAD
                         <div id="trackmap" class="img-trackmap"></div>
                         <canvas id="canvas" width="480" height="320"></canvas>
+=======
+                    <canvas id="trackmap" class="img-trackmap" width="591" height="583">
+                        <!-- <canvas id="imageView"></canvas> -->
+                    </canvas>
+>>>>>>> master
                 </div>
-               
             </div>
         </div>
         <div class="event">
@@ -276,7 +305,7 @@
     <script type="text/javascript" src="highchart.js"></script>
     <script type="text/javascript" src="demographic.js"></script>
     <script type="text/javascript" src="demoApiCal.js"></script>
-    <script type="text/javascript" src="trackmap.js"></script>
+    <script type="text/javascript" charset="utf-8" src="trackmap.js" ></script>
     <script type="text/javascript" src="buttons.js"></script>
     <script type="text/javascript" src="utilization.js"></script>
     <script type="text/javascript">
@@ -310,7 +339,8 @@
                     value = null;
 
                     if ($('#agc').hasClass('active-tab')) {
-                        demoApi(fromDate, toDate);
+                        demoApi(fromDate, toDate,start_time,end_time);
+                        demoStats(fromDate, toDate,start_time,end_time);
                     } else if ($('#ppc').hasClass('active-tab')) {
                         //Check which tab is currently active
                         if ($('#in').hasClass('active')) {
@@ -397,7 +427,14 @@
             calNextDate = nextDate;
 
             if ($('#agc').hasClass('active-tab')) {
-                demoApi(fromDate, toDate);
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min;
+                demoApi(fromDate, toDate,start_time,end_time);
+                demoStats(fromDate, toDate,start_time,end_time);
             } else if ($('#ppc').hasClass('active-tab')) {
                 //Check which tab is currently active
                 let value = null;
@@ -436,7 +473,14 @@
             calNextDate = toDate;
 
             if ($('#agc').hasClass('active-tab')) {
-                demoApi(fromDate, toDate);
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min;    
+                demoApi(fromDate, toDate,start_time,end_time);
+                demoStats(fromDate, toDate,start_time,end_time);
             } else if ($('#ppc').hasClass('active-tab')) {
                 //Check which tab is currently active
                 let value = null;

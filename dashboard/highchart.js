@@ -67,6 +67,14 @@ $(document).ready(function () {
           times.push(timeArray[1]);
         }
         loadCaptions("in", furl,fromDate,toDate,start_time,end_time);
+        if($('#txt-custom-cal').hasClass('active-calendar'))
+        {
+          customCalSearch();
+        }
+        else
+        {
+          mainCalSearch();
+        }
         Highcharts.chart('container', {
           chart: {
             type: 'column',
@@ -91,14 +99,6 @@ $(document).ready(function () {
               text: 'PERSONS'
             }
           },
-          // tooltip: {
-          //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-          //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-          //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-          //   footerFormat: '</table>',
-          //   shared: true,
-          //   useHTML: true
-          // },
           plotOptions: {
             column: {
               pointPadding: 0.2,
@@ -162,6 +162,14 @@ $(document).ready(function () {
           times.push(timeArray[1]);
         }
         loadCaptions("out", furl,fromDate,toDate,start_time,end_time);
+        if($('#txt-custom-cal').hasClass('active-calendar'))
+        {
+          customCalSearch();
+        }
+        else
+        {
+          mainCalSearch();
+        }
         Highcharts.chart('container', {
           chart: {
             type: 'column',
@@ -262,7 +270,15 @@ $(document).ready(function () {
           var timeArray = item.date.split(" ");
           times.push(timeArray[1]);
         }
-        loadCaptions("inout", furl,fromDate,toDate,start_time,end_time);
+        loadCaptions("inout", furl);
+        if($('#txt-custom-cal').hasClass('active-calendar'))
+        {
+          customCalSearch();
+        }
+        else
+        {
+          mainCalSearch();
+        }
         Highcharts.chart('container', {
           chart: {
             type: 'column',
