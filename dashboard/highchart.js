@@ -8,8 +8,8 @@ var totalIN = 0;
 var totalOUT = 0;
 var totalINOUT = 0;
 var avgINOUT = 0;
-console.log("DATESDFGHJKJHGFD" + fromDate)
-console.log("DATESDFGHJKJHGFD" + toDate);
+//console.log("DATESDFGHJKJHGFD" + fromDate)
+//console.log("DATESDFGHJKJHGFD" + toDate);
 
 var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=00:00&et=24:00";
 
@@ -55,13 +55,13 @@ $(document).ready(function () {
       method: 'GET',
       dataType: 'JSON',
       success: function (data) {
-        //console.log("Data was ", data);
-        //console.log("Data was ", data.data[0].items);
+        ////console.log("Data was ", data);
+        ////console.log("Data was ", data.data[0].items);
         $('#page-loader').hide();
         inppc = [];
         times = [];
         for (let item of data.data[0].items) {
-          console.log('in', item.in);
+          //console.log('in', item.in);
           inppc.push(item.in);
           var timeArray = item.date.split(" ");
           times.push(timeArray[1]);
@@ -149,13 +149,13 @@ $(document).ready(function () {
       method: 'GET',
       dataType: 'JSON',
       success: function (data) {
-        //console.log("Data was ", data);
-        //console.log("Data was ", data.data[0].items);
+        ////console.log("Data was ", data);
+        ////console.log("Data was ", data.data[0].items);
         $('#page-loader').hide();
         outppc = [];
         times = [];
         for (let item of data.data[0].items) {
-          console.log('out', item.out);
+          //console.log('out', item.out);
           totalOUT = totalOUT + item.out;
           outppc.push(item.out);
           var timeArray = item.date.split(" ");
@@ -255,14 +255,14 @@ $(document).ready(function () {
       dataType: 'JSON',
       success: function (data) {
         $('#page-loader').hide();
-        console.log("Data was ", data);
-        console.log("Data was ", data.data[0].items);
+        //console.log("Data was ", data);
+        //console.log("Data was ", data.data[0].items);
         inppc = [];
         outppc = [];
         times = [];
 
         for (let item of data.data[0].items) {
-          console.log('in', item.in);
+          //console.log('in', item.in);
           totalIN = totalIN + item.in;
           totalOUT = totalOUT + item.out;
           inppc.push(item.in);
@@ -346,13 +346,13 @@ $('#page-loader').show();
     dataType: 'JSON',
     success: function (data) {
       $('#page-loader').hide();
-      console.log("Data was ", data);
-      console.log("Data was ", data.data[0].items);
+      //console.log("Data was ", data);
+      //console.log("Data was ", data.data[0].items);
       inppc = [];
       outppc = [];
       times = [];
       for (let item of data.data[0].items) {
-        console.log('in', item.in);
+        //console.log('in', item.in);
         inppc.push(item.in);
         outppc.push(item.out);
         var timeArray = item.date.split(" ");
@@ -653,13 +653,13 @@ function loadCaptions(value, furl,fromDate,toDate,start_time,end_time) {
     method: 'GET',
     dataType: 'JSON',
     success: function (data) {
-      console.log("Data was ", data);
-      console.log("Data was ", data.data[0].items);
+      //console.log("Data was ", data);
+      //console.log("Data was ", data.data[0].items);
       inppc = [];
       outppc = [];
       times = [];
       for (let item of data.data[0].items) {
-        console.log('in', item.in);
+        //console.log('in', item.in);
         inppc.push(item.in);
         totalIN = totalIN + item.in;
         totalOUT = totalOUT + item.out;

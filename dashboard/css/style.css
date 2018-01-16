@@ -105,6 +105,11 @@ body {
   display:none;
 
 }
+ageCounter ul ul p{
+  width: 30px;
+  display: flex;
+  justify-content: center;
+}
 .MaleFemale{
   display: flex;
   list-style: none;
@@ -411,6 +416,10 @@ button, .hand-pointer {
     height: 36%;
 }
 .MaleFemale ul li p{
-  color:#1DAFEB;
+  color:white;
+  background: #126687;
   font-size: 14px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
 }
