@@ -77,7 +77,7 @@ function myTrackMap() {
     $('#txt-custom-cal').removeClass('active-calendar');
     $('#txt-custom-cal').hide();
 
-    generateTrackmap(calDate, calNextDate);
+    generateTrackmap(calDate, calNextDate,start_time,end_time);
 
 
 
