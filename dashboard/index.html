@@ -41,13 +41,13 @@
                     </li>
                 </ul>
             </div>
-            <!-- <div class="rooms">
-                  <h3>Rooms</h3>
+            <div class="rooms">
+                  <h3>ROOMS</h3>
                   <ul class="roomsButton">
-                    <li><button class="occupancyReport">Occupancy Report</button></li>
+                    <li><button class="occupancyReport" id="occrpt" onclick="occupyrpt()">Occupancy Report</button></li>
                     <li><button class="dwellReport">Dwell Report</button></li>
                   </ul>
-                </div> -->
+                </div>
         </div>
         <div class="graphs">
             <div class="highcharts" id="hiChart">
@@ -63,6 +63,7 @@
                             <button name="in" id="inout" class="active" onclick="refresh()">IN/OUT</button>
                         </li>
                     </ul>
+                    
                     <ul class="chartValues">
                         <ul id="avgI" style="display:none;">
                             <li>
@@ -71,6 +72,15 @@
                             <li class="captions">
                                 <span>average</span>
                                 <span> per hour</span>
+                            </li>
+                        </ul>
+                        <ul id="avgID" style="display:none;">
+                            <li>
+                                <p id="avgInD"></p>
+                            </li>
+                            <li class="captions">
+                                <span>average</span>
+                                <span> per day</span>
                             </li>
                         </ul>
                         <ul id="avgO" style="display:none;">
@@ -82,6 +92,15 @@
                                 <span> per hour</span>
                             </li>
                         </ul>
+                        <ul id="avgOD" style="display:none;">
+                            <li>
+                                <p id="avgOutD"></p>
+                            </li>
+                            <li class="captions">
+                                <span>average</span>
+                                <span> per day</span>
+                            </li>
+                        </ul>
                         <ul id="avgIO" style="display:block;">
                             <li>
                                 <p id="avgInOut"></p>
@@ -89,6 +108,15 @@
                             <li class="captions">
                                 <span>average</span>
                                 <span> per hour</span>
+                            </li>
+                        </ul>
+                        <ul id="avgIOD" style="display:none;">
+                            <li>
+                                <p id="avgInOutD"></p>
+                            </li>
+                            <li class="captions">
+                                <span>average</span>
+                                <span> per day</span>
                             </li>
                         </ul>
                         <ul id="totalIO" style="display:block;">
@@ -127,6 +155,21 @@
                 <div id="container" style="min-width: 310px; margin: 0 auto"></div>
 
             </div>
+            <div class="occupancyrpt" id="occrpt">
+                    <div class="graphs">
+                        <div class="highcharts" id="hiChartOR">
+                            <ul class="highchartTab">
+                                <ul class="chartButton">
+                                     <li>
+                                        <button name="graph" id="graph" class="orptbtn" onclick="">GRAPH</button>
+                                    </li>
+                                    <li>
+                                        <button name="Ocalendar" id="Ocalendar" class="orptbtn" onclick="">CALENDAR</button>
+                                    </li> 
+                                </ul>
+                            </div>
+                        </div>
+                    </div> 
             <div class="ageCounter" id="agCount">
                 <ul class="MaleFemale">
                     <ul>
@@ -161,6 +204,21 @@
                
             </div>
         </div>
+        <!-- <div class="occupancyrpt" id="occrpt">
+            <div class="graphs">
+                <div class="highcharts" id="hiChartOR">
+                    <ul class="highchartTab">
+                        <ul class="chartButton">
+                             <li>
+                                <button name="graph" id="graph" class="orptbtn" onclick="">GRAPH</button>
+                            </li>
+                            <li>
+                                <button name="Ocalendar" id="Ocalendar" class="orptbtn" onclick="">CALENDAR</button>
+                            </li> 
+                        </ul>
+                    </div>
+                </div>
+            </div>  -->
         <div class="event">
             <div class="selectZone">
                 <h3>SELECT ZONE</h3>
@@ -264,7 +322,7 @@
             </div>
 
         </div>
-    </div>
+
     <script type="text/javascript">
         var today = new Date();
         var day = today.getDate();
@@ -310,7 +368,8 @@
         $(function () {
             $('#custom-calendar').hide();
             $('#custom-btn').hide();
-
+            $('#graph').hide();
+            $('#Ocalendar').hide();
             $("#datepicker").datepicker({
                 onSelect: function (date) {
                     var tomorrow = new Date(new Date(date).getTime() + (24 * 60 * 60 * 1000));

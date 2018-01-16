@@ -34,12 +34,37 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#out').removeClass('active');
       $('#inout').removeClass('active');
-      avgI.style.display = "block";
-      totalI.style.display = "block";
-      avgO.style.display = "none";
-      totalO.style.display = "none";
-      avgIO.style.display = "none";
-      totalIO.style.display = "none";
+      // avgI.style.display = "block";
+      // totalI.style.display = "block";
+      // avgO.style.display = "none";
+      // totalO.style.display = "none";
+      // avgIO.style.display = "none";
+      // totalIO.style.display = "none";
+      if($('#txt-custom-cal').hasClass('active-calendar'))
+      {
+        avgI.style.display = "none";
+        avgID.style.display = "block"
+        totalI.style.display = "block";
+        avgO.style.display = "none";
+        avgOD.style.display = "none";
+        avgIOD.style.display = "none";
+        totalO.style.display = "none";
+        avgIO.style.display = "none";
+        totalIO.style.display = "none";
+      }
+      else
+      {
+        avgI.style.display = "block";
+        avgID.style.display = "none"
+        totalI.style.display = "block";
+        avgO.style.display = "none";
+        avgOD.style.display = "none";
+        avgIOD.style.display = "none";
+        totalO.style.display = "none";
+        avgIO.style.display = "none";
+        totalIO.style.display = "none";
+      }
+      
     }
     $('#page-loader').show();
     $.ajax({
@@ -127,12 +152,36 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#in').removeClass('active');
       $('#inout').removeClass('active');
-      avgI.style.display = "none";
-      totalI.style.display = "none";
-      avgO.style.display = "block";
-      totalO.style.display = "block";
-      avgIO.style.display = "none";
-      totalIO.style.display = "none";
+      // avgI.style.display = "none";
+      // totalI.style.display = "none";
+      // avgO.style.display = "block";
+      // totalO.style.display = "block";
+      // avgIO.style.display = "none";
+      // totalIO.style.display = "none";
+      if($('#txt-custom-cal').hasClass('active-calendar'))
+      {
+        avgI.style.display = "none";
+        avgID.style.display = "none"
+        totalI.style.display = "none";
+        avgO.style.display = "none";
+        avgOD.style.display = "block";
+        avgIOD.style.display = "none";
+        totalO.style.display = "block";
+        avgIO.style.display = "none";
+        totalIO.style.display = "none";
+      }
+      else
+      {
+        avgI.style.display = "none";
+        avgID.style.display = "none"
+        totalI.style.display = "none";
+        avgO.style.display = "block";
+        avgOD.style.display = "none";
+        avgIOD.style.display = "none";
+        totalO.style.display = "block";
+        avgIO.style.display = "none";
+        totalIO.style.display = "none";
+      }
 
     }
     $('#page-loader').show();
@@ -230,12 +279,36 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#in').removeClass('active');
       $('#out').removeClass('active');
-      avgIO.style.display = "block";
-      totalIO.style.display = "block";
-      totalI.style.display = "block";
-      totalO.style.display = "block";
-      avgI.style.display = "none";
-      avgO.style.display = "none";
+      // avgIO.style.display = "block";
+      // totalIO.style.display = "block";
+      // totalI.style.display = "block";
+      // totalO.style.display = "block";
+      // avgI.style.display = "none";
+      // avgO.style.display = "none";
+      if($('#txt-custom-cal').hasClass('active-calendar'))
+      {
+        avgI.style.display = "none";
+        avgID.style.display = "none"
+        totalI.style.display = "block";
+        avgO.style.display = "none";
+        avgOD.style.display = "none";
+        totalO.style.display = "block";
+        avgIO.style.display = "none";
+        totalIO.style.display = "block";
+        avgIOD.style.display = "block";
+      }
+      else
+      {
+        avgI.style.display = "none";
+        avgID.style.display = "none"
+        totalI.style.display = "block";
+        avgO.style.display = "none";
+        avgOD.style.display = "none";
+        avgIOD.style.display = "none";
+        totalO.style.display = "block";
+        avgIO.style.display = "block";
+        totalIO.style.display = "block";
+      }
     }
     $('#page-loader').show();
     $.ajax({
@@ -270,7 +343,8 @@ $(document).ready(function () {
           var timeArray = item.date.split(" ");
           times.push(timeArray[1]);
         }
-        loadCaptions("inout", furl);
+        // loadCaptions("inout", furl);
+        loadCaptions("inout", furl,fromDate,toDate,start_time,end_time);
         if($('#txt-custom-cal').hasClass('active-calendar'))
         {
           customCalSearch();
@@ -684,14 +758,17 @@ function loadCaptions(value, furl,fromDate,toDate,start_time,end_time) {
       switch (value) {
         case 'in':
           document.getElementById("avgIn").innerHTML = Math.round(avgIN);
+          document.getElementById("avgInD").innerHTML = Math.round(avgIN);
           document.getElementById("totalIn").innerHTML = totalIN;
           break;
         case 'out':
           document.getElementById("avgOut").innerHTML = Math.round(avgOUT);
+          document.getElementById("avgOutD").innerHTML = Math.round(avgOUT);
           document.getElementById("totalOut").innerHTML = totalOUT;
           break;
         case 'inout':
           document.getElementById("avgInOut").innerHTML = Math.round(avgINOUT);
+          document.getElementById("avgInOutD").innerHTML = Math.round(avgINOUT);
           document.getElementById("totalInOut").innerHTML = totalINOUT;
           document.getElementById("totalIn").innerHTML = totalIN;
           document.getElementById("totalOut").innerHTML = totalOUT;
