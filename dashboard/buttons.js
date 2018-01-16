@@ -11,6 +11,11 @@ var s3 = document.getElementById("s3");
 var s4 = document.getElementById("s4");
 var s5 = document.getElementById("s5");
 function myPeopleCounter() {
+    $('#graph').hide();
+    $('#oCalendar').hide();
+    $('#in').show();
+    $('#out').show();
+    $('#inout').show();
     hiChart.style.display = "block";
     agCount.style.display = "none";
     trackMap.style.display = "none";
@@ -23,6 +28,15 @@ function myPeopleCounter() {
     s3.style.display = "none";
     s4.style.display = "none";
     s5.style.display = "block";
+    avgI.style.display = "block";
+    avgID.style.display = "none"
+    totalI.style.display = "block";
+    avgO.style.display = "none";
+    avgOD.style.display = "none";
+    totalO.style.display = "block";
+    avgIO.style.display = "none";
+    totalIO.style.display = "block";
+    avgIOD.style.display = "none";
     $('#ppc').addClass('active-tab');
     $('#agc').removeClass('active-tab');
     $('#trkMap').removeClass('active-tab');
@@ -34,6 +48,11 @@ function myPeopleCounter() {
 
 function myAgeCounter() {
     demoApi(calDate, calNextDate);
+    $('#graph').hide();
+    $('#oCalendar').hide();
+    $('#in').show();
+    $('#out').show();
+    $('#inout').show();
     hiChart.style.display = "none";
     agCount.style.display = "block";
     trackMap.style.display = "none";
@@ -54,6 +73,9 @@ function myAgeCounter() {
 }
 
 function myTrackMap() {
+    $('#graph').hide();
+    $('#oCalendar').hide();
+
     hiChart.style.display = "none";
     agCount.style.display = "none";
     trackMap.style.display = "block";
@@ -84,4 +106,24 @@ function myTrackMap() {
 }
 function refresh(){
     apiCal(fromDate, toDate, value,start_time,end_time);
+}
+
+function occupyrpt(){
+    $('#graph').show();
+    $('#oCalendar').show();
+    $('#in').hide();
+    $('#out').hide();
+    $('#inout').hide();
+    hiChart.style.display = "none";
+    agCount.style.display = "none";
+    trackMap.style.display = "none";
+    avgI.style.display = "none";
+    avgID.style.display = "none"
+    totalI.style.display = "none";
+    avgO.style.display = "none";
+    avgOD.style.display = "none";
+    totalO.style.display = "none";
+    avgIO.style.display = "none";
+    totalIO.style.display = "none";
+    avgIOD.style.display = "none";
 }

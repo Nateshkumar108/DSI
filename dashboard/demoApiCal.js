@@ -17,7 +17,7 @@ function demoApi(fromDate, toDate){
   //var outer_range_end = $('outer_range_end').val();
   var date = ""
   // var furl = url+'/'+installation+'/'+projction+'/'+outer_range_start+'/'+outer_range_end;*/
-  var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/range/" + fromDate + "/" + toDate + "?st=00:00&et=24:00";
+  var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/range/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
  
   $.ajax({
 
