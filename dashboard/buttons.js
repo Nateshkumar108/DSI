@@ -78,9 +78,8 @@ function myTrackMap() {
     $('#txt-custom-cal').hide();
 
     generateTrackmap(calDate, calNextDate);
-
-function refresh(){
-    apiCal(fromDate, toDate, value,start_time,end_time);
 }
 
+function refreshApi(){
+    apiCal(fromDate, toDate, value,start_time,end_time);
 }
