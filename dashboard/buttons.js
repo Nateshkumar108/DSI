@@ -12,7 +12,7 @@ var s4 = document.getElementById("s4");
 var s5 = document.getElementById("s5");
 function myPeopleCounter() {
     $('#graph').hide();
-    $('#Ocalendar').hide();
+    $('#oCalendar').hide();
     $('#in').show();
     $('#out').show();
     $('#inout').show();
@@ -49,7 +49,7 @@ function myPeopleCounter() {
 function myAgeCounter() {
     demoApi(calDate, calNextDate);
     $('#graph').hide();
-    $('#Ocalendar').hide();
+    $('#oCalendar').hide();
     $('#in').show();
     $('#out').show();
     $('#inout').show();
@@ -74,7 +74,7 @@ function myAgeCounter() {
 
 function myTrackMap() {
     $('#graph').hide();
-    $('#Ocalendar').hide();
+    $('#oCalendar').hide();
 
     hiChart.style.display = "none";
     agCount.style.display = "none";
@@ -110,7 +110,7 @@ function refresh(){
 
 function occupyrpt(){
     $('#graph').show();
-    $('#Ocalendar').show();
+    $('#oCalendar').show();
     $('#in').hide();
     $('#out').hide();
     $('#inout').hide();
