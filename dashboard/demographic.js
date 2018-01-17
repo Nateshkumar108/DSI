@@ -29,8 +29,8 @@ $(document).ready(function () {
     method: 'GET',
     dataType: 'JSON',
     success: function (data) {
-    //   console.log("Data was ", data);
-    //   console.log("Data was ", data.data[0].items);
+    //   //console.log("Data was ", data);
+    //   //console.log("Data was ", data.data[0].items);
     
      var i=0;
      var it=[];
@@ -42,7 +42,7 @@ $(document).ready(function () {
     sumMale=0;
     sumFemale=0;
       for (let item of data.data[0].items) {
-        console.log("HAHAHAHAHAHA");
+        //console.log("HAHAHAHAHAHA");
         for (i=0;i<20;i++){
             
             maleCount.push(item.male[i]);
@@ -52,7 +52,7 @@ $(document).ready(function () {
         }
         
         // for (let it of item.male) {
-        //     console.log('goof', it[i]);
+        //     //console.log('goof', it[i]);
         //  maleCount.push(it.male);
          
         // }
@@ -60,9 +60,11 @@ $(document).ready(function () {
         // var timeArray=item.date.split(" ");
         // times.push(timeArray[1]);
         i++;
-        console.log("i=" + i);
+        //console.log("i=" + i);
       }
-      demoStats(fromDate, toDate,start_time,end_time)
+      avgData();
+      avgMonthData();
+      // demoStats(fromDate, toDate,start_time,end_time)
         Highcharts.chart('demogra', {
           chart: {
             type: 'column',
@@ -115,10 +117,72 @@ $(document).ready(function () {
     }
   });
 
-
-
-
   //var maleCount= [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4];
   
 });
 
+// function avgData(){
+//   var today = new Date();
+//       var day = today.getDate();
+//       var month = today.getMonth() + 1;
+//       var year = today.getFullYear();
+//       var todayDate = year + "-" + month + "-" + day;
+//       todayD=todayDate.split("-");
+//       if(todayD[2]==7){
+//         weekDate=1;
+//       }
+//       if(todayD[2]>7){
+//         weekDate=todayD[2]-7;
+//       }
+//       else if(todayD[2]<7){
+//         daysLeft= 7-todayD[2];
+//         var dim=daysInMonth(month,year);
+//         ////console.log("~~~~~~~~~~~~~~DIM", dim);
+//         weekDate=dim-daysLeft;
+       
+//       }
+//       todayDate= year + "-" + month + "-" + weekDate;
+//      fromDate=todayDate;
+//      todayDate= year + "-" + month + "-" + weekDate;
+//      toDate=todayDate;
+//      sumMaleWeek=0;
+//       for(i=0;i<7;i++){
+//         fromDate = year + "-" + month + "-" + weekDate;
+//         toDate = year + "-" + month + "-" + weekDate;
+//         demoStats(fromDate, toDate,start_time,end_time)
+
+//         weekDate=weekDate+ 1;
+        
+//         sumMaleWeek = sumMaleWeek + avgMALE;
+//         ////console.log("*********** sumMaleWeek" + sumMaleWeek);
+//         sumFemaleWeek = sumFemaleWeek + avgFEMALE;
+        
+//       }
+//       avgMaleWEEK=sumMaleWeek/7;
+//       avgFemaleWEEK=sumFemaleWeek/7;
+//       ////console.log("!!!!!!!!!!!! avgMaleWEEK",avgMaleWEEK);
+//       document.getElementById("avgMaleWeek").innerHTML = Math.round(avgMaleWEEK);
+//       document.getElementById("avgFemaleWeek").innerHTML = Math.round(avgFemaleWEEK);
+//     }
+  
+
+
+// function daysInMonth(month,year){
+
+//   switch(month){
+//     case 1,3,5,7,8,10,12:
+//       totalDays=31;
+//       break;
+//     case 2:
+//       if(year%4==0){
+//         totalDays=29;
+//       }
+//       totalDays=28;
+//       break;  
+//     case 4,6,9,11:
+//       totalDays=30;
+//       break;
+
+//   }
+//   return totalDays;
+// }
