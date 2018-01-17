@@ -135,6 +135,7 @@ function occupyrpt(){
 function oCalendar() {
     $('#graph').show();
     $('#oCalendarBtn').show();
+    $('#OccupancyReportChart').hide();
     $('#in').hide();
     $('#out').hide();
     $('#inout').hide();
@@ -156,4 +157,16 @@ function oCalendar() {
     $('#agc').removeClass('active-tab');
     $('#calendar').addClass('active-tab');
     $('#calendar').show();
+}
+
+function occuRpt(){
+    document.getElementById("occrpt").style.display = "block";
+    hiChart.style.display = "none";
+    agCount.style.display = "none";
+    trackMap.style.display = "none";
+}
+
+function graphButtonChart(){
+    $('#calendar').hide();
+    $('#OccupancyReportChart').show();
 }
