@@ -1,5 +1,5 @@
-function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,end_time) {
-  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
+function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time, end_time) {
+  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
 
 
   $.ajax({
@@ -15,7 +15,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,e
     method: 'GET',
     dataType: 'JSON',
     success: function (data) {
-		  console.log("data coming from getPeopleCounterAndFindUtilization was ", data.data[0].items);
+      console.log("data coming from getPeopleCounterAndFindUtilization was ", data.data[0].items);
 
       var capacity = 3;
 
@@ -37,24 +37,24 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,e
 
           if (date == currDate) {
             numPeople += item.in - item.out;
-            if (numPeople < 0 ) {
+            if (numPeople < 0) {
               numPeople = 0;
             }
             var util = (numPeople / capacity) * 100;
             utilArr.push(util);
 
-            if (i == length-1) {
+            if (i == length - 1) {
               // add utilization for the last date
-              var total = utilArr.reduce((a,b) => a+b, 0);
-              var utilAvg = total/utilArr.length;
+              var total = utilArr.reduce((a, b) => a + b, 0);
+              var utilAvg = total / utilArr.length;
               dateToUtilMap[date] = utilAvg;
             }
 
           } else {
             if (i != 0) {
               // push average utilization for a day into dateToUtilMap
-              var total = utilArr.reduce((a,b) => a+b, 0);
-              var utilAvg = total/utilArr.length;
+              var total = utilArr.reduce((a, b) => a + b, 0);
+              var utilAvg = total / utilArr.length;
               dateToUtilMap[date] = utilAvg;
             }
 
@@ -79,7 +79,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,e
         var length = data.data[0].items.length;
         for (var i = 0; i < length; i++) {
           var item = data.data[0].items[i];
-          numPeople += item.in -item.out;
+          numPeople += item.in - item.out;
           if (numPeople < 0) {
             numPeople = 0;
           }
@@ -97,9 +97,9 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,e
 }
 
 
-function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end_time) {
+function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, end_time) {
 
-  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
+  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
 
 
   $.ajax({
@@ -142,10 +142,10 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end
             }
             occupancyArr.push(numPeople);
 
-            if (i == length-1) {
+            if (i == length - 1) {
               // add occupancy for the last date
-              var total = occupancyArr.reduce((a,b) => a+b, 0);
-              var occAvg = total/occupancyArr.length;
+              var total = occupancyArr.reduce((a, b) => a + b, 0);
+              var occAvg = total / occupancyArr.length;
               occAvg = Math.round(occAvg);
               dateToOccupancylMap[date] = occAvg;
             }
@@ -153,8 +153,8 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end
           } else {
             if (i != 0) {
               // push average occupancy for a day into dateToOccupancyMap
-              var total = occupancyArr.reduce((a,b) => a+b, 0);
-              var occAvg = total/occupancyArr.length;
+              var total = occupancyArr.reduce((a, b) => a + b, 0);
+              var occAvg = total / occupancyArr.length;
               occAvg = Math.round(occAvg);
               dateToOccupancylMap[date] = occAvg;
             }
@@ -180,7 +180,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end
         var length = data.data[0].items.length;
         for (var i = 0; i < length; i++) {
           var item = data.data[0].items[i];
-          numPeople += item.in -item.out;
+          numPeople += item.in - item.out;
           if (numPeople < 0) {
             numPeople = 0;
           }
@@ -197,33 +197,32 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end
 
 }
 
-var FetchUtilization = (function(){
+var utilization;
+var FetchUtilization =  {
+    
+    setUtilizationDateDictionary: function (data) {
+      utilization = data;
+    },
+    getUtilizationDateDictionary: function () {
+      return utilization;
+    },
+    setUtilizationTimeDictionary: function (data) {
+      utilization = data;
+    },
+    getUtilizationTimeDictionary: function () {
+      return utilization;
+    },
 
-let utilization;
-
-function setUtilizationDateDictionary(data) {
-  utilization = data;
-}
-function getUtilizationDateDictionary() {
-  return utilization;
-}
-function setUtilizationTimeDictionary(data) {
-  utilization = data;
-}
-function getUtilizationTimeDictionary() {
-  return utilization;
-}
-
-function setOccupancyDateDictionary(data) {
-  utilization = data;
-}
-function getOccupancyDateDictionary() {
-  return utilization;
-}
-function setOccupancyTimeDictionary(data) {
-  utilization = data;
-}
-function getOccupancyTimeDictionary() {
-  return utilization;
-}
-}());
+    setOccupancyDateDictionary: function (data) {
+      utilization = data;
+    },
+    getOccupancyDateDictionary: function () {
+      return utilization;
+    },
+    setOccupancyTimeDictionary: function (data) {
+      utilization = data;
+    },
+    getOccupancyTimeDictionary: function () {
+      return utilization;
+    }
+  };

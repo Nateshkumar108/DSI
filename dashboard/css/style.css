@@ -461,10 +461,11 @@ button, .hand-pointer {
   margin: 0 auto;
 }
 
-.utilisation-div{
+.utilization-div{
   text-align: center;
   position:relative; 
-  top:25px;
+  font-weight: 100;
+  top:30px;
 }
 
 .fc-toolbar{
