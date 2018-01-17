@@ -153,27 +153,23 @@
                     </ul>
                 </ul>
 
-
-
-
             <div id="container" style="min-width: 310px; margin: 0 auto"></div>
 
             </div>
-            <div class="occupancyrpt" id="occrpt">
-                    <div class="graphs">
-                        <div class="highcharts" id="hiChartOR">
-                            <ul class="highchartTab">
-                                <ul class="chartButton">
-                                     <li>
-                                        <button name="graph" id="graph" class="orptbtn" onclick="">GRAPH</button>
-                                    </li>
-                                    <li>
-                                        <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">CALENDAR</button>
-                                    </li> 
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
+            <div class="occupancyrpt" id="occrpt" onclick="occuRpt()">
+                <ul class="occupancyReportTab">
+                        <ul class="chartButton">
+                            <li>
+                                <button name="graph" id="graph" class="orptbtn" onclick="graphButtonChart()">GRAPH</button>
+                            </li>
+                            <li>
+                                <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">CALENDAR</button>
+                            </li> 
+                        </ul>
+                </ul>
+                <div id="OccupancyReportChart" style="min-width: 310px; margin: 0 auto"></div>
+            </div>        
+                    
             <div class="ageCounter" id="agCount">
                 <ul class="MaleFemale">
                     
@@ -388,6 +384,8 @@
     <script type="text/javascript" charset="utf-8" src="trackmap.js" ></script>
     <script type="text/javascript" src="buttons.js"></script>
     <script type="text/javascript" src="utilization.js"></script>
+    <script type="text/javascript" src="occupancyGraph.js"></script>
+    
     <script type="text/javascript">
         var avgI = document.getElementById("avgI");
         var avgO = document.getElementById("avgO");
