@@ -6,7 +6,7 @@ var sumMale=0;
 var sumFemale=0;
 var avgMALE=0;
 var avgFEMALE=0;
-function demoApi(fromDate, toDate){
+function demoApi(fromDate, toDate,start_time,end_time){
 
   
 

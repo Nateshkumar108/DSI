@@ -30,6 +30,7 @@
         </a>
     </header>
     <div class="dashboard">
+        
         <div class="tabs">
             <div class="workspace">
                 <h3>WORKSPACE</h3>
@@ -53,6 +54,7 @@
                   </ul>
                 </div>
         </div>
+
         <div class="graphs">
             <div class="highcharts" id="hiChart">
                 <ul class="highchartTab">
@@ -153,12 +155,10 @@
                     </ul>
                 </ul>
 
-
-
-
             <div id="container" style="min-width: 310px; margin: 0 auto"></div>
 
             </div>
+
             <div class="occupancyrpt" id="occrpt">
                     <div class="graphs">
                         <div class="highcharts" id="hiChartOR">
@@ -173,7 +173,8 @@
                                 </ul>
                             </div>
                         </div>
-                    </div> 
+            </div> 
+
             <div class="ageCounter" id="agCount">
                 <ul class="MaleFemale">
                     
@@ -401,6 +402,7 @@
             $('#custom-btn').hide();
             $('#graph').hide();
             $('#oCalendarBtn').hide();
+
             $("#datepicker").datepicker({
                 onSelect: function (date) {
                     document.getElementById("monthavg").style.display = "none";
@@ -421,8 +423,8 @@
                     let value = null;
 
                     if ($('#agc').hasClass('active-tab')) {
-                        demoApi(fromDate, toDate,start_time,end_time);
-                        demoStats(fromDate, toDate,start_time,end_time);
+                          // demoApi(fromDate, toDate,start_time,end_time);
+                          // demoStats(fromDate, toDate,start_time,end_time);
                     } else if ($('#ppc').hasClass('active-tab')) {
                         //Check which tab is currently active
                         if ($('#in').hasClass('active')) {
@@ -519,8 +521,8 @@
                 to_hr = $('#thr').val();
                 to_min = $('#tmin').val();
                 end_time = to_hr+":"+to_min;
-                demoApi(fromDate, toDate,start_time,end_time);
-                demoStats(fromDate, toDate,start_time,end_time);
+                demoApi(calDate, calNextDate,start_time,end_time);
+                demoStats(calDate, calNextDate,start_time,end_time);
             } else if ($('#ppc').hasClass('active-tab')) {
                 //Check which tab is currently active
                 let value = null;
