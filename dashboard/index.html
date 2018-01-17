@@ -159,21 +159,20 @@
 
             </div>
 
-            <div class="occupancyrpt" id="occrpt">
-                    <div class="graphs">
-                        <div class="highcharts" id="hiChartOR">
-                            <ul class="highchartTab">
-                                <ul class="chartButton">
-                                     <li>
-                                        <button name="graph" id="graph" class="orptbtn" onclick="">GRAPH</button>
-                                    </li>
-                                    <li>
-                                        <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">CALENDAR</button>
-                                    </li> 
-                                </ul>
-                            </div>
-                        </div>
-            </div> 
+            <div class="occupancyrpt" id="occrpt" onclick="occuRpt()">
+                <ul class="occupancyReportTab">
+                        <ul class="chartButton">
+                            <li>
+                                <button name="graph" id="graph" class="orptbtn" onclick="graphButtonChart()">GRAPH</button>
+                            </li>
+                            <li>
+                                <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">CALENDAR</button>
+                            </li> 
+                        </ul>
+                </ul>
+                <div id="OccupancyReportChart" style="min-width: 310px; margin: 0 auto"></div>
+            </div>        
+                    
 
             <div class="ageCounter" id="agCount">
                 <ul class="MaleFemale">
@@ -388,6 +387,9 @@
     <script type="text/javascript" src="demoavg.js"></script>
     <script type="text/javascript" charset="utf-8" src="trackmap.js" ></script>
     <script type="text/javascript" src="buttons.js"></script>
+    <script type="text/javascript" src="utilization.js"></script>
+    <script type="text/javascript" src="occupancyGraph.js"></script>
+    
     <script type="text/javascript">
         var avgI = document.getElementById("avgI");
         var avgO = document.getElementById("avgO");
@@ -420,7 +422,7 @@
                     var year = today.getFullYear();
                     var fromDate = year + "-" + month + "-" + day;
                     calDate = fromDate;
-                    let value = null;
+                    value = null;
 
                     if ($('#agc').hasClass('active-tab')) {
                           // demoApi(fromDate, toDate,start_time,end_time);
@@ -687,6 +689,7 @@
           var mm = today.getMonth() + 1;
           var yyyy = today.getFullYear();
           var currentDate = yyyy + '-' + mm + '-' + dd;
+        
     
           $('#calendar').fullCalendar({
             header: {
@@ -703,11 +706,16 @@
     
             dayRender: function (date, cell) {
     
-              date = moment(date).format("YYYY-M-DD");
-    
-              if (date === currentDate) {
-                $(cell).html('<div class="utilisation-div" >50% utilisation</div>');
-              }
+                date = moment(date).format("YYYY-M-DD");
+
+                //console.log('kunal'+date);
+
+                
+
+                if (date === currentDate) {
+                    $(cell).html('<div class="utilization-div" >50% utilization</div>');
+                }
+            
             },
     
             dayClick: function (date) {
