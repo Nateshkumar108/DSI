@@ -67,7 +67,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,e
             utilArr.push(util);
           }
         }
-        return dateToUtilMap;
+        FetchUtilization.setUtilizationDate(dateToUtilMap);
         console.log("dateToUtilMap was ", dateToUtilMap);
 
       } else {
@@ -89,7 +89,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,e
         }
 
         console.log("timeToUtilMap was ", timeToUtilMap);
-        return timeToUtilMap;
+        FetchUtilization.setUtilizationTime(timeToUtilMap);
       }
 
     }
@@ -169,7 +169,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end
         }
 
         console.log("dateToOccupancylMap was ", dateToOccupancylMap);
-        return dateToOccupancylMap;
+        FetchUtilization.setOccupancyDate(dateToOccupancylMap);
 
       } else {
         // show hours in x-axis
@@ -188,7 +188,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end
           timeToOccupancyMap[time] = numPeople;
         }
         console.log("timeToOccupancyMap was ", timeToOccupancyMap);
-        return timeToOccupancyMap;
+        FetchUtilization.setOccupancyTime(timeToOccupancyMap);
       }
 
     }
@@ -196,3 +196,34 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end
 
 
 }
+
+var FetchUtilization = (function(){
+
+let utilization;
+
+function setUtilizationDateDictionary(data) {
+  utilization = data;
+}
+function getUtilizationDateDictionary() {
+  return utilization;
+}
+function setUtilizationTimeDictionary(data) {
+  utilization = data;
+}
+function getUtilizationTimeDictionary() {
+  return utilization;
+}
+
+function setOccupancyDateDictionary(data) {
+  utilization = data;
+}
+function getOccupancyDateDictionary() {
+  return utilization;
+}
+function setOccupancyTimeDictionary(data) {
+  utilization = data;
+}
+function getOccupancyTimeDictionary() {
+  return utilization;
+}
+}());

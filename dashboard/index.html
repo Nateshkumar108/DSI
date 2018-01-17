@@ -684,6 +684,7 @@
           var mm = today.getMonth() + 1;
           var yyyy = today.getFullYear();
           var currentDate = yyyy + '-' + mm + '-' + dd;
+        
     
           $('#calendar').fullCalendar({
             header: {
@@ -700,11 +701,16 @@
     
             dayRender: function (date, cell) {
     
-              date = moment(date).format("YYYY-M-DD");
-    
-              if (date === currentDate) {
-                $(cell).html('<div class="utilisation-div" >50% utilisation</div>');
-              }
+                date = moment(date).format("YYYY-M-DD");
+
+                //console.log('kunal'+date);
+
+                
+
+                if (date === currentDate) {
+                    $(cell).html('<div class="utilization-div" >50% utilization</div>');
+                }
+            
             },
     
             dayClick: function (date) {
