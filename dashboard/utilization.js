@@ -1,5 +1,5 @@
 function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,end_time) {
-  var furl = "http://localhost:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
+  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
 
 
   $.ajax({
@@ -67,7 +67,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,e
             utilArr.push(util);
           }
         }
-
+        return dateToUtilMap;
         console.log("dateToUtilMap was ", dateToUtilMap);
 
       } else {
@@ -89,6 +89,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,e
         }
 
         console.log("timeToUtilMap was ", timeToUtilMap);
+        return timeToUtilMap;
       }
 
     }
@@ -98,7 +99,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value,start_time,e
 
 function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end_time) {
 
-  var furl = "http://localhost:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
+  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
 
 
   $.ajax({
@@ -168,6 +169,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end
         }
 
         console.log("dateToOccupancylMap was ", dateToOccupancylMap);
+        return dateToOccupancylMap;
 
       } else {
         // show hours in x-axis
@@ -186,6 +188,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value,start_time,end
           timeToOccupancyMap[time] = numPeople;
         }
         console.log("timeToOccupancyMap was ", timeToOccupancyMap);
+        return timeToOccupancyMap;
       }
 
     }

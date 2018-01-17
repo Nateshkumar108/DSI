@@ -1,5 +1,5 @@
 function generateTrackmap(fromDt, toDt) {
-    var furl = "http://localhost:3001/v1/tracker/motion/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDt + "/" + toDt + "?st=00:00&et=23:59&blackpoint=25&whitepoint=1000";
+    var furl = "http://18.216.208.225:3001/v1/tracker/motion/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDt + "/" + toDt + "?st=00:00&et=23:59&blackpoint=25&whitepoint=1000";
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', furl, true);
