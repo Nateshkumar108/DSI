@@ -107,7 +107,8 @@ function myTrackMap() {
 
 
 }
-function refresh(){
+
+function refreshApi(){
     apiCal(fromDate, toDate, value,start_time,end_time);
 }
 

@@ -387,6 +387,7 @@
     <script type="text/javascript" src="demoavg.js"></script>
     <script type="text/javascript" charset="utf-8" src="trackmap.js" ></script>
     <script type="text/javascript" src="buttons.js"></script>
+    <script type="text/javascript" src="utilization.js"></script>
     <script type="text/javascript">
         var avgI = document.getElementById("avgI");
         var avgO = document.getElementById("avgO");
@@ -418,7 +419,7 @@
                     var year = today.getFullYear();
                     var fromDate = year + "-" + month + "-" + day;
                     calDate = fromDate;
-                    let value = null;
+                    value = null;
 
                     if ($('#agc').hasClass('active-tab')) {
                         demoApi(fromDate, toDate,start_time,end_time);
