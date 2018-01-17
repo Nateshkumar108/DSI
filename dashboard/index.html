@@ -8,10 +8,13 @@
     </title>
 
     <link rel="icon" href="../img/favicon-96x96.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="css/full-calendar/fullcalendar.css" />
+    <link rel="stylesheet" type="text/css" href="css/full-calendar/fullcalendar.print.css" media='print' />
     <link rel="stylesheet" href="js/utility/jquery-ui/jquery-ui.css">
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script type="text/javascript" src="demoavg.js"></script>
 </head>
 
 <body>
@@ -42,13 +45,13 @@
                     </li>
                 </ul>
             </div>
-            <!-- <div class="rooms">
-                  <h3>Rooms</h3>
+            <div class="rooms">
+                  <h3>ROOMS</h3>
                   <ul class="roomsButton">
-                    <li><button class="occupancyReport">Occupancy Report</button></li>
+                    <li><button class="occupancyReport" id="occrpt" onclick="occupyrpt()">Occupancy Report</button></li>
                     <li><button class="dwellReport">Dwell Report</button></li>
                   </ul>
-                </div> -->
+                </div>
         </div>
         <div class="graphs">
             <div class="highcharts" id="hiChart">
@@ -64,6 +67,7 @@
                             <button name="in" id="inout" class="active" onclick="refresh()">IN/OUT</button>
                         </li>
                     </ul>
+                    
                     <ul class="chartValues">
                         <ul id="avgI" style="display:none;">
                             <li>
@@ -72,6 +76,15 @@
                             <li class="captions">
                                 <span>average</span>
                                 <span> per hour</span>
+                            </li>
+                        </ul>
+                        <ul id="avgID" style="display:none;">
+                            <li>
+                                <p id="avgInD"></p>
+                            </li>
+                            <li class="captions">
+                                <span>average</span>
+                                <span> per day</span>
                             </li>
                         </ul>
                         <ul id="avgO" style="display:none;">
@@ -83,6 +96,15 @@
                                 <span> per hour</span>
                             </li>
                         </ul>
+                        <ul id="avgOD" style="display:none;">
+                            <li>
+                                <p id="avgOutD"></p>
+                            </li>
+                            <li class="captions">
+                                <span>average</span>
+                                <span> per day</span>
+                            </li>
+                        </ul>
                         <ul id="avgIO" style="display:block;">
                             <li>
                                 <p id="avgInOut"></p>
@@ -90,6 +112,15 @@
                             <li class="captions">
                                 <span>average</span>
                                 <span> per hour</span>
+                            </li>
+                        </ul>
+                        <ul id="avgIOD" style="display:none;">
+                            <li>
+                                <p id="avgInOutD"></p>
+                            </li>
+                            <li class="captions">
+                                <span>average</span>
+                                <span> per day</span>
                             </li>
                         </ul>
                         <ul id="totalIO" style="display:block;">
@@ -125,29 +156,59 @@
 
 
 
-                <div id="container" style="min-width: 310px; margin: 0 auto"></div>
+            <div id="container" style="min-width: 310px; margin: 0 auto"></div>
 
             </div>
+            <div class="occupancyrpt" id="occrpt">
+                    <div class="graphs">
+                        <div class="highcharts" id="hiChartOR">
+                            <ul class="highchartTab">
+                                <ul class="chartButton">
+                                     <li>
+                                        <button name="graph" id="graph" class="orptbtn" onclick="">GRAPH</button>
+                                    </li>
+                                    <li>
+                                        <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">CALENDAR</button>
+                                    </li> 
+                                </ul>
+                            </div>
+                        </div>
+                    </div> 
             <div class="ageCounter" id="agCount">
                 <ul class="MaleFemale">
+                    
                     <ul>
                         <li>
                                 <p id="avgMale"></p>
+                            <p id="avgFeMale" style="background:#992399;"></p>
                         </li>
                         <li class="captions">
-                            <span>Male</span>
-                            <span>Avg this period</span>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <p id="avgFeMale" style="color:#ff61ff;"></p>
-                        </li>
-                        <li class="captions">
-                                <span>Female</span>
-                                <span> Avg this period</span>
+                                <span>AGE</span>
+                                <span> TODAY</span>
                             </li>
                         
+                    </ul>
+                    <ul id="weekavg">
+                            <li>
+                                <p id="avgMaleWeek"></p>
+                                <p id="avgFemaleWeek" style="background:#992399;"></p>
+                            </li>
+                            <li class="captions">
+                                    <span>AGE</span>
+                                    <span> THIS WEEK</span>
+                                </li>
+                            
+                    </ul>
+                    <ul id="monthavg">
+                            <li>
+                                <p id="avgMaleMonthWeek"></p>
+                                <p id="avgFemaleMonthWeek" style="background:#992399;"></p>
+                            </li>
+                            <li class="captions">
+                                    <span>AGE</span>
+                                    <span> THIS MONTH</span>
+                                </li>
+                            
                     </ul>
                     
                 </ul>
@@ -158,17 +219,30 @@
             
             <div class="trackMaps" id="trackMap">
                 <div class="floor-plan">
-<<<<<<< HEAD
-                        <div id="trackmap" class="img-trackmap"></div>
-                        <canvas id="canvas" width="480" height="320"></canvas>
-=======
                     <canvas id="trackmap" class="img-trackmap" width="591" height="583">
                         <!-- <canvas id="imageView"></canvas> -->
                     </canvas>
->>>>>>> master
                 </div>
             </div>
+
+            <div class="oCalendar" id="calendar"></div>
+            <div class="clearfix"></div> 
         </div>
+        <!-- <div class="occupancyrpt" id="occrpt">
+            <div class="graphs">
+                <div class="highcharts" id="hiChartOR">
+                    <ul class="highchartTab">
+                        <ul class="chartButton">
+                             <li>
+                                <button name="graph" id="graph" class="orptbtn" onclick="">GRAPH</button>
+                            </li>
+                            <li>
+                                <button name="oCalendar" id="oCalendar" class="orptbtn" onclick="">CALENDAR</button>
+                            </li> 
+                        </ul>
+                    </div>
+                </div>
+            </div>  -->
         <div class="event">
             <div class="selectZone">
                 <h3>SELECT ZONE</h3>
@@ -257,9 +331,9 @@
                     <span>:</span>
                     <input type="number" id="fmin" class="input-timer" min="0" max="59" placeholder="mm" value="00"/>
                     <span class="lbl-to-timer ">to</span>
-                    <input type="number" id="thr" class="input-timer"  min="0" max="23" placeholder="hh" value="24"/>
+                    <input type="number" id="thr" class="input-timer"  min="0" max="23" placeholder="hh" value="23"/>
                     <span>:</span>
-                    <input type="number" id="tmin" class="input-timer" min="0" max="59" placeholder="mm" value="00"/>
+                    <input type="number" id="tmin" class="input-timer" min="0" max="59" placeholder="mm" value="59"/>
                 </div>
             </div>
             <div class="medium-space"></div>
@@ -272,7 +346,7 @@
             </div>
 
         </div>
-    </div>
+
     <script type="text/javascript">
         var today = new Date();
         var day = today.getDate();
@@ -292,19 +366,25 @@
         var start_time="00:00";
         var to_hr;
         var to_min;
-        var end_time="24:00"; 
-        var value = "";
-        
+        var end_time="23:59";
+        var avgMALE=0;
+        var avgFEMALE=0;
+        var sumMaleWeek=0;
+        var sumFemaleWeek=0; 
+
     </script>
+    <script type="text/javascript" src="js/utility/full-calendar/moment.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="calender.js"></script>
+    <script type="text/javascript" src="js/utility/full-calendar/fullcalendar.js"></script>
 
     <script type="text/javascript" src="js/utility/highcharts/highcharts.js"></script>
     <script type="text/javascript" src="js/utility/highcharts/highcharts-more.js"></script>
     <script type="text/javascript" src="highchart.js"></script>
     <script type="text/javascript" src="demographic.js"></script>
     <script type="text/javascript" src="demoApiCal.js"></script>
+    <script type="text/javascript" src="demoavg.js"></script>
     <script type="text/javascript" charset="utf-8" src="trackmap.js" ></script>
     <script type="text/javascript" src="buttons.js"></script>
     <script type="text/javascript" src="utilization.js"></script>
@@ -320,9 +400,12 @@
         $(function () {
             $('#custom-calendar').hide();
             $('#custom-btn').hide();
-
+            $('#graph').hide();
+            $('#oCalendarBtn').hide();
             $("#datepicker").datepicker({
                 onSelect: function (date) {
+                    document.getElementById("monthavg").style.display = "none";
+                document.getElementById("weekavg").style.display = "none";
                     var tomorrow = new Date(new Date(date).getTime() + (24 * 60 * 60 * 1000));
                     var day = tomorrow.getDate();
                     var month = tomorrow.getMonth() + 1;
@@ -356,9 +439,11 @@
            
             // apiCal(fromDate, toDate, value,start_time,end_time);
 
-                    } else if ($('#trkMap').hasClass('active-tab')) {
-                        generateTrackmap(fromDate, toDate);
-                    }
+                    } 
+
+                    // else if ($('#trkMap').hasClass('active-tab')) {
+                    //     generateTrackmap(fromDate, toDate);
+                    // }
 
                 }
             });
@@ -427,6 +512,8 @@
             calNextDate = nextDate;
 
             if ($('#agc').hasClass('active-tab')) {
+                document.getElementById("monthavg").style.display = "none";
+                document.getElementById("weekavg").style.display = "none";
                 from_hr = $('#fhr').val();
                 from_min = $('#fmin').val();
                 start_time = from_hr+":"+from_min;
@@ -451,14 +538,61 @@
                 start_time = from_hr+":"+from_min;
                 to_hr = $('#thr').val();
                 to_min = $('#tmin').val();
-                end_time = to_hr+":"+to_min; 
+                end_time = to_hr+":"+to_min;
+                
+                if($('#in').hasClass('active'))
+                {
+                    avgI.style.display = "block";
+                    avgID.style.display = "none"
+                    totalI.style.display = "block";
+                    avgO.style.display = "none";
+                    avgOD.style.display = "none";
+                    avgIOD.style.display = "none";
+                    totalO.style.display = "none";
+                    avgIO.style.display = "none";
+                    totalIO.style.display = "none";
+                }
+                else if($('#out').hasClass('active'))
+                {
+                    avgI.style.display = "none";
+                    avgID.style.display = "none"
+                    totalI.style.display = "none";
+                    avgO.style.display = "block";
+                    avgOD.style.display = "none";
+                    avgIOD.style.display = "none";
+                    totalO.style.display = "block";
+                    avgIO.style.display = "none";
+                    totalIO.style.display = "none";
+                }
+                else
+                {
+                    avgI.style.display = "none";
+                    avgID.style.display = "none"
+                    totalI.style.display = "block";
+                    avgO.style.display = "none";
+                    avgOD.style.display = "none";
+                    avgIOD.style.display = "none";
+                    totalO.style.display = "block";
+                    avgIO.style.display = "block";
+                    totalIO.style.display = "block";
+                }
 
                 apiCal(selectedDate, nextDate, value, start_time, end_time);
+            }
+            else if ($('#trkMap').hasClass('active-tab')) {
+                from_hr = $('#fhr').val();
+                from_min = $('#fmin').val();
+                start_time = from_hr+":"+from_min;
+                to_hr = $('#thr').val();
+                to_min = $('#tmin').val();
+                end_time = to_hr+":"+to_min;  
+                generateTrackmap(selectedDate, nextDate,start_time,end_time);
             }
 
             
         }
         function customCalSearch() {
+            
             let fromDate = $("#from").datepicker("getDate");
             let toDate = $("#to").datepicker("getDate");
 
@@ -473,6 +607,8 @@
             calNextDate = toDate;
 
             if ($('#agc').hasClass('active-tab')) {
+                document.getElementById("monthavg").style.display = "none";
+                document.getElementById("weekavg").style.display = "none";
                 from_hr = $('#fhr').val();
                 from_min = $('#fmin').val();
                 start_time = from_hr+":"+from_min;
@@ -497,7 +633,44 @@
                 start_time = from_hr+":"+from_min;
                 to_hr = $('#thr').val();
                 to_min = $('#tmin').val();
-                end_time = to_hr+":"+to_min;    
+                end_time = to_hr+":"+to_min; 
+                
+                if($('#in').hasClass('active'))
+                {
+                    avgI.style.display = "none";
+                    avgID.style.display = "block"
+                    totalI.style.display = "block";
+                    avgO.style.display = "none";
+                    avgOD.style.display = "none";
+                    avgIOD.style.display = "none";
+                    totalO.style.display = "none";
+                    avgIO.style.display = "none";
+                    totalIO.style.display = "none";
+                }
+                else if($('#out').hasClass('active'))
+                {
+                    avgI.style.display = "none";
+                    avgID.style.display = "none"
+                    totalI.style.display = "none";
+                    avgO.style.display = "none";
+                    avgOD.style.display = "block";
+                    avgIOD.style.display = "none";
+                    totalO.style.display = "block";
+                    avgIO.style.display = "none";
+                    totalIO.style.display = "none";
+                }
+                else
+                {
+                    avgI.style.display = "none";
+                    avgID.style.display = "none"
+                    totalI.style.display = "block";
+                    avgO.style.display = "none";
+                    avgOD.style.display = "none";
+                    totalO.style.display = "block";
+                    avgIO.style.display = "none";
+                    totalIO.style.display = "block";
+                    avgIOD.style.display = "block";
+                }
 
             apiCal(fromDate, toDate, value,start_time,end_time);
 
@@ -505,6 +678,72 @@
         }
 
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+          // page is now ready, initialize the calendar... 
+          var today = new Date
+          var dd = today.getDate();
+          var mm = today.getMonth() + 1;
+          var yyyy = today.getFullYear();
+          var currentDate = yyyy + '-' + mm + '-' + dd;
+    
+          $('#calendar').fullCalendar({
+            header: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'month,basicWeek,basicDay'
+            },
+    
+            defaultDate: currentDate,
+            navLinks: true, // can click day/week names to navigate views
+            editable: true,
+            selectable: true,
+            eventLimit: true, // allow "more" link when too many events
+    
+            dayRender: function (date, cell) {
+    
+              date = moment(date).format("YYYY-M-DD");
+    
+              if (date === currentDate) {
+                $(cell).html('<div class="utilisation-div" >50% utilisation</div>');
+              }
+            },
+    
+            dayClick: function (date) {
+    
+              $(this).css('background-color', 'yellow');;
+    
+            },
+    
+            events: [
+              {
+                title: 'All Day Event',
+                start: '2018-01-01'
+              },
+              {
+                title: 'Long Event',
+                start: '2018-01-07',
+                end: '2018-01-10'
+              },
+              {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2018-12-09T16:00:00'
+              },
+              {
+                title: 'Lunch',
+                start: '2018-07-16T12:00:00'
+              },
+              {
+                title: 'Click for Google',
+                url: 'http://google.com/',
+                start: '2018-01-28'
+              }
+            ]
+          });
+        });
+    
+      </script>
 </body>
 
 </html>
