@@ -12,7 +12,7 @@ var s4 = document.getElementById("s4");
 var s5 = document.getElementById("s5");
 function myPeopleCounter() {
     $('#graph').hide();
-    $('#oCalendar').hide();
+    $('#oCalendarBtn').hide();
     $('#in').show();
     $('#out').show();
     $('#inout').show();
@@ -49,7 +49,7 @@ function myPeopleCounter() {
 function myAgeCounter() {
     demoApi(calDate, calNextDate);
     $('#graph').hide();
-    $('#oCalendar').hide();
+    $('#oCalendarBtn').hide();
     $('#in').show();
     $('#out').show();
     $('#inout').show();
@@ -74,7 +74,7 @@ function myAgeCounter() {
 
 function myTrackMap() {
     $('#graph').hide();
-    $('#oCalendar').hide();
+    $('#oCalendarBtn').hide();
 
     hiChart.style.display = "none";
     agCount.style.display = "none";
@@ -110,7 +110,7 @@ function refresh(){
 
 function occupyrpt(){
     $('#graph').show();
-    $('#oCalendar').show();
+    $('#oCalendarBtn').show();
     $('#in').hide();
     $('#out').hide();
     $('#inout').hide();
@@ -126,4 +126,29 @@ function occupyrpt(){
     avgIO.style.display = "none";
     totalIO.style.display = "none";
     avgIOD.style.display = "none";
+}
+function oCalendar() {
+    $('#graph').show();
+    $('#oCalendarBtn').show();
+    $('#in').hide();
+    $('#out').hide();
+    $('#inout').hide();
+    console.log("Hello world!");
+    hiChart.style.display = "none";
+    agCount.style.display = "none";
+    trackMap.style.display = "none";
+    avgI.style.display = "none";
+    avgID.style.display = "none"
+    totalI.style.display = "none";
+    avgO.style.display = "none";
+    avgOD.style.display = "none";
+    totalO.style.display = "none";
+    avgIO.style.display = "none";
+    totalIO.style.display = "none";
+    avgIOD.style.display = "none";
+    $('#trkMap').removeClass('active-tab');
+    $('#ppc').removeClass('active-tab');
+    $('#agc').removeClass('active-tab');
+    $('#calendar').addClass('active-tab');
+    $('#calendar').show();
 }

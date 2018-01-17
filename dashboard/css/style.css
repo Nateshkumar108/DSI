@@ -442,3 +442,36 @@ button, .hand-pointer {
 {
   width : 100%;
 }
+.oCalendar{
+  background-color:rgb(212, 211, 211);
+  width: 100%;
+  display: none;
+  position: relative;
+  top: 25px;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.utilisation-div{
+  text-align: center;
+  position:relative; 
+  top:25px;
+}
+
+.fc-toolbar{
+  background-color: #2b2b2d;
+}
+.fc-toolbar.fc-header-toolbar{
+  margin-bottom: 0em;
+}
+.fc-center{
+  color: #fff;
+}
+.fc-head{
+  background-color: #2b2b2d;
+  color: #fff;
+}
+.fc-today {
+  background:green;
+  font-weight: bold;
+}
