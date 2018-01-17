@@ -537,7 +537,44 @@
                 start_time = from_hr+":"+from_min;
                 to_hr = $('#thr').val();
                 to_min = $('#tmin').val();
-                end_time = to_hr+":"+to_min; 
+                end_time = to_hr+":"+to_min;
+                
+                if($('#in').hasClass('active'))
+                {
+                    avgI.style.display = "block";
+                    avgID.style.display = "none"
+                    totalI.style.display = "block";
+                    avgO.style.display = "none";
+                    avgOD.style.display = "none";
+                    avgIOD.style.display = "none";
+                    totalO.style.display = "none";
+                    avgIO.style.display = "none";
+                    totalIO.style.display = "none";
+                }
+                else if($('#out').hasClass('active'))
+                {
+                    avgI.style.display = "none";
+                    avgID.style.display = "none"
+                    totalI.style.display = "none";
+                    avgO.style.display = "block";
+                    avgOD.style.display = "none";
+                    avgIOD.style.display = "none";
+                    totalO.style.display = "block";
+                    avgIO.style.display = "none";
+                    totalIO.style.display = "none";
+                }
+                else
+                {
+                    avgI.style.display = "none";
+                    avgID.style.display = "none"
+                    totalI.style.display = "block";
+                    avgO.style.display = "none";
+                    avgOD.style.display = "none";
+                    avgIOD.style.display = "none";
+                    totalO.style.display = "block";
+                    avgIO.style.display = "block";
+                    totalIO.style.display = "block";
+                }
 
                 apiCal(selectedDate, nextDate, value, start_time, end_time);
             }
@@ -595,7 +632,44 @@
                 start_time = from_hr+":"+from_min;
                 to_hr = $('#thr').val();
                 to_min = $('#tmin').val();
-                end_time = to_hr+":"+to_min;    
+                end_time = to_hr+":"+to_min; 
+                
+                if($('#in').hasClass('active'))
+                {
+                    avgI.style.display = "none";
+                    avgID.style.display = "block"
+                    totalI.style.display = "block";
+                    avgO.style.display = "none";
+                    avgOD.style.display = "none";
+                    avgIOD.style.display = "none";
+                    totalO.style.display = "none";
+                    avgIO.style.display = "none";
+                    totalIO.style.display = "none";
+                }
+                else if($('#out').hasClass('active'))
+                {
+                    avgI.style.display = "none";
+                    avgID.style.display = "none"
+                    totalI.style.display = "none";
+                    avgO.style.display = "none";
+                    avgOD.style.display = "block";
+                    avgIOD.style.display = "none";
+                    totalO.style.display = "block";
+                    avgIO.style.display = "none";
+                    totalIO.style.display = "none";
+                }
+                else
+                {
+                    avgI.style.display = "none";
+                    avgID.style.display = "none"
+                    totalI.style.display = "block";
+                    avgO.style.display = "none";
+                    avgOD.style.display = "none";
+                    totalO.style.display = "block";
+                    avgIO.style.display = "none";
+                    totalIO.style.display = "block";
+                    avgIOD.style.display = "block";
+                }
 
             apiCal(fromDate, toDate, value,start_time,end_time);
 
