@@ -12,6 +12,7 @@ var s4 = document.getElementById("s4");
 var s5 = document.getElementById("s5");
 function myPeopleCounter() {
     $('#graph').hide();
+    $('#OccupancyReportChart').hide();
     $('#oCalendarBtn').hide();
     $('#in').show();
     $('#out').show();
@@ -50,6 +51,7 @@ function myPeopleCounter() {
 function myAgeCounter() {
     demoApi(calDate, calNextDate);
     $('#graph').hide();
+    $('#OccupancyReportChart').hide();
     $('#oCalendarBtn').hide();
     $('#in').show();
     $('#out').show();
@@ -77,7 +79,7 @@ function myAgeCounter() {
 function myTrackMap() {
     $('#graph').hide();
     $('#oCalendarBtn').hide();
-
+    $('#OccupancyReportChart').hide();
     hiChart.style.display = "none";
     agCount.style.display = "none";
     trackMap.style.display = "block";
@@ -159,8 +161,13 @@ function oCalendar() {
     $('#calendar').show();
 }
 
-function occuRpt(){
-    document.getElementById("occrpt").style.display = "block";
+function occupyrpt()
+{
+    //document.getElementById("occrpt").style.display = "block";
+    $('#graph').show();
+    $('#oCalendarBtn').show();
+    $('#OccupancyReportChart').show();
+    $('#calendar').hide();
     hiChart.style.display = "none";
     agCount.style.display = "none";
     trackMap.style.display = "none";
@@ -169,4 +176,5 @@ function occuRpt(){
 function graphButtonChart(){
     $('#calendar').hide();
     $('#OccupancyReportChart').show();
+   // document.getElementById("OccupancyReportChart").style.display = "block";
 }
