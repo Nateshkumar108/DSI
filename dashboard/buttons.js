@@ -41,6 +41,7 @@ function myPeopleCounter() {
     $('#agc').removeClass('active-tab');
     $('#trkMap').removeClass('active-tab');
     $('#txt-custom-cal').show();
+    $('#calendar').hide();
     // $("hiChart").show();
     // $("agCount").hide();
     // $("trackMap").hide();
@@ -70,6 +71,7 @@ function myAgeCounter() {
     $('#ppc').removeClass('active-tab');
     $('#trkMap').removeClass('active-tab');
     $('#txt-custom-cal').show();
+    $('#calendar').hide();
 }
 
 function myTrackMap() {
@@ -98,6 +100,7 @@ function myTrackMap() {
     $('#txt-main-cal').addClass('active-calendar');
     $('#txt-custom-cal').removeClass('active-calendar');
     $('#txt-custom-cal').hide();
+    $('#calendar').hide();
 
     generateTrackmap(calDate, calNextDate,start_time,end_time);
 
@@ -126,6 +129,7 @@ function occupyrpt(){
     avgIO.style.display = "none";
     totalIO.style.display = "none";
     avgIOD.style.display = "none";
+    $('#calendar').hide();
 }
 function oCalendar() {
     $('#graph').show();
