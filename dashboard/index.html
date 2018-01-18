@@ -163,12 +163,21 @@
                 <ul class="occupancyReportTab">
                         <ul class="chartButton">
                             <li>
+                                <button name="occupancy" id="occupancyBtn" class="orptbtns" onclick="graphButtonChart()">OCCUPANCY</button>
+                            </li>
+                            <li>
+                                <button name="utilization" id="utilizationBtn" class="orptbtns" onclick="oCalendar()">UTILIZATION</button>
+                            </li> 
+                        </ul>
+                        <ul class="chartButton">
+                            <li>
                                 <button name="graph" id="graph" class="orptbtn" onclick="graphButtonChart()">GRAPH</button>
                             </li>
                             <li>
                                 <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">CALENDAR</button>
                             </li> 
                         </ul>
+                        
                 </ul>
                 <div id="OccupancyReportChart" style="min-width: 310px; margin: 0 auto"></div>
             </div>        
