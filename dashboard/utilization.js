@@ -70,7 +70,6 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
         //FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
         console.log("dateToUtilMap was ", dateToUtilMap);
         dateToUtilGlobalMap = dateToUtilMap;
-        timeToUtilGlobalMap = timeToUtilMap;
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToUtilGlobalMap);
         } else {
@@ -99,7 +98,6 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
 
         console.log("timeToUtilMap was ", timeToUtilMap);
         FetchUtilization.setUtilizationTimeDictionary(timeToUtilMap);
-        dateToUtilGlobalMap = dateToUtilMap;
         timeToUtilGlobalMap = timeToUtilMap;
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToUtilGlobalMap);
@@ -189,7 +187,6 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         }
 
         dateToOccupancyGlobalMap = dateToOccupancyMap;
-        timeToOccupancyGlobalMap = timeToOccupancyMap;
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToOccupancyGlobalMap);
         } else {
@@ -230,7 +227,6 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         // console.log("@@@@data", timeOMdata[1]);
         
         FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
-        dateToOccupancyGlobalMap = dateToOccupancyMap;
         timeToOccupancyGlobalMap = timeToOccupancyMap;
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToOccupancyGlobalMap);
