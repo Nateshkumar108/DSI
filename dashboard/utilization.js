@@ -70,7 +70,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
         FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
         console.log("dateToUtilMap was ", dateToUtilMap);
         dateToUtilGlobalMap = dateToUtilMap;
-        timeToUtilGlobalMap = timeToUtilMap;
+      
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToUtilGlobalMap);
         } else {
@@ -99,7 +99,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
 
         console.log("timeToUtilMap was ", timeToUtilMap);
         FetchUtilization.setUtilizationTimeDictionary(timeToUtilMap);
-        dateToUtilGlobalMap = dateToUtilMap;
+        
         timeToUtilGlobalMap = timeToUtilMap;
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToUtilGlobalMap);
@@ -189,7 +189,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         }
 
         dateToOccupancyGlobalMap = dateToOccupancyMap;
-        timeToOccupancyGlobalMap = timeToOccupancyMap;
+        
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToOccupancyGlobalMap);
         } else {
@@ -199,7 +199,6 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         
 
         console.log("dateToOccupancyMap was ", dateToOccupancyMap);
-        console.log("date was ", xaxisdate);
         // FetchUtilization.setOccupancyDateDictionary(dateToOccupancyMap);
         
 
@@ -230,7 +229,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         // console.log("@@@@data", timeOMdata[1]);
         
         FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
-        dateToOccupancyGlobalMap = dateToOccupancyMap;
+        
         timeToOccupancyGlobalMap = timeToOccupancyMap;
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToOccupancyGlobalMap);
@@ -335,17 +334,17 @@ var FetchUtilization =  {
     var graph = $('#OccAndUtilReportGraph').highcharts();
     graph.setData([]);
 
-    // for (key, value in dictionary) {
-    //   graph.series[0].addPoint(key, value, false);
-    // }
+    for (map.entrySet() in dictionary) {
+      graph.series[0].addPoint(map.keySet(), Map., false);
+    }
 
-    // if ($('#occupancyBtn').hasClass('active-tab')) {
-    //   // set all necessary properties of highchart, graph for occupancy
+    if ($('#occupancyBtn').hasClass('active-tab')) {
+      // set all necessary properties of highchart, graph for occupancy
 
-    // } else {
-    //   // set all necessary properties of highchart, graph for utilisation 
+    } else {
+      // set all necessary properties of highchart, graph for utilisation 
       
-    // }
+    }
     
 
 
