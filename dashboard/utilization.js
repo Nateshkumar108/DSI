@@ -334,16 +334,19 @@ var FetchUtilization =  {
     var graph = $('#OccAndUtilReportGraph').highcharts();
     graph.setData([]);
 
-    for (map.entrySet() in dictionary) {
-      graph.series[0].addPoint(map.keySet(), Map., false);
+    for (Map.entrySet() in dictionary) {
+      graph.series[0].addPoint(Map.keySet(), Map.values(), false);
     }
 
     if ($('#occupancyBtn').hasClass('active-tab')) {
       // set all necessary properties of highchart, graph for occupancy
+      $('#OccAndUtilReportGraph').show();
+      $('#calendar').hide();
 
     } else {
       // set all necessary properties of highchart, graph for utilisation 
-      
+      $('#OccAndUtilReportGraph').show();
+      $('#calendar').hide();
     }
     
 
