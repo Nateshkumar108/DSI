@@ -405,8 +405,8 @@ $(document).ready(function () {
       }
     });
   });
-$('#page-loader').show();
-  $.ajax({
+  $('#page-loader').show();
+    $.ajax({
     headers: {
       'Access-Control-Allow-Headers': '*',
       'Content-Type': 'application/json',
@@ -489,6 +489,10 @@ $('#page-loader').show();
     }
   });
   //var inppc= [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4];
+
+  createHighchart();
+  
+
 });
 
 Highcharts.createElement('link', {

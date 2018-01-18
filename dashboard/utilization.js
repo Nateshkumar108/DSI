@@ -67,9 +67,17 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
             utilArr.push(util);
           }
         }
-        setUtilizationDateOnCalendar();
-        FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
+        //FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
         console.log("dateToUtilMap was ", dateToUtilMap);
+        dateToUtilGlobalMap = dateToUtilMap;
+        timeToUtilGlobalMap = timeToUtilMap;
+        if($('#graph').hasClass('active-tab')) {
+          showInHighCharts(dateToUtilGlobalMap);
+        } else {
+          showInCalendar(timeToUtilGlobalMap);
+        }
+
+
 
       } else {
         // show hours in x-axis
@@ -91,6 +99,13 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
 
         console.log("timeToUtilMap was ", timeToUtilMap);
         FetchUtilization.setUtilizationTimeDictionary(timeToUtilMap);
+        dateToUtilGlobalMap = dateToUtilMap;
+        timeToUtilGlobalMap = timeToUtilMap;
+        if($('#graph').hasClass('active-tab')) {
+          showInHighCharts(dateToUtilGlobalMap);
+        } else {
+          showInCalendar(timeToUtilGlobalMap);
+        }
       }
 
     }
@@ -119,14 +134,13 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
       console.log("data coming from getPeopleCounterAndFindOccupancy was ", data.data[0].items);
 
       var capacity = 3;
-
       if ($('#txt-custom-cal').hasClass("active-calendar")) {
         // show dates in x-axis
 
         var date = "";
         var numPeople = 0;
         var occupancyArr = [];
-        var dateToOccupancylMap = [];
+        var dateToOccupancyMap = [];
         var length = data.data[0].items.length;
         for (var i = 0; i < length; i++) {
 
@@ -142,13 +156,14 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
               numPeople = 0;
             }
             occupancyArr.push(numPeople);
-
             if (i == length - 1) {
               // add occupancy for the last date
               var total = occupancyArr.reduce((a, b) => a + b, 0);
               var occAvg = total / occupancyArr.length;
               occAvg = Math.round(occAvg);
-              dateToOccupancylMap[date] = occAvg;
+              dateToOccupancyMap[date] = occAvg;
+              //dateToOccupancyMap.push(occAvg);
+              //xaxisdate.push(date);
             }
 
           } else {
@@ -157,25 +172,42 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
               var total = occupancyArr.reduce((a, b) => a + b, 0);
               var occAvg = total / occupancyArr.length;
               occAvg = Math.round(occAvg);
-              dateToOccupancylMap[date] = occAvg;
+              dateToOccupancyMap[date] = occAvg;
+              
+              // dateToOccupancyMap.push(occAvg);
+              // xaxisdate.push(date);
             }
-
+            
             // reset variables for next date
             date = currDate;
             numPeople = 0;
             occupancyArr = [];
             numPeople = item.in - item.out;
             occupancyArr.push(numPeople);
+            
           }
         }
 
-        console.log("dateToOccupancylMap was ", dateToOccupancylMap);
-        FetchUtilization.setOccupancyDateDictionary(dateToOccupancylMap);
+        dateToOccupancyGlobalMap = dateToOccupancyMap;
+        timeToOccupancyGlobalMap = timeToOccupancyMap;
+        if($('#graph').hasClass('active-tab')) {
+          showInHighCharts(dateToOccupancyGlobalMap);
+        } else {
+          showInCalendar(timeToOccupancyGlobalMap);
+        }
+
+        
+
+        console.log("dateToOccupancyMap was ", dateToOccupancyMap);
+        console.log("date was ", xaxisdate);
+        // FetchUtilization.setOccupancyDateDictionary(dateToOccupancyMap);
+        
 
       } else {
         // show hours in x-axis
 
         var time = "";
+       // var tim = [];
         var numPeople = 0;
         var timeToOccupancyMap = [];
         var length = data.data[0].items.length;
@@ -187,42 +219,63 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
           }
           time = item.date.split(" ")[1];
           timeToOccupancyMap[time] = numPeople;
+          //timeToOccupancyMap.push(numPeople);
+          //tim.push(time);
+
         }
         console.log("timeToOccupancyMap was ", timeToOccupancyMap);
+        //console.log("time", tim);
+        //var timeOMdata=timeToOccupancyMap.split(" ");
+        // console.log("@@@@time", timeOMdata[0]);
+        // console.log("@@@@data", timeOMdata[1]);
+        
         FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
+        dateToOccupancyGlobalMap = dateToOccupancyMap;
+        timeToOccupancyGlobalMap = timeToOccupancyMap;
+        if($('#graph').hasClass('active-tab')) {
+          showInHighCharts(dateToOccupancyGlobalMap);
+        } else {
+          showInCalendar(timeToOccupancyGlobalMap);
+        }
+        
       }
+      
 
     }
   });
 }
 
-var utilization;
+var utilizationDate;
+var utilizationTime;
+var OccupancyDate;
+var OccupancyTime;
+
 var FetchUtilization =  {
     
     setUtilizationDateDictionary: function (data) {
-      utilization = data;
+      utilizationDate = data;
     },
     getUtilizationDateDictionary: function () {
-      return utilization;
+      return utilizationDate;
     },
     setUtilizationTimeDictionary: function (data) {
-      utilization = data;
+      utilizationTime = data;
     },
     getUtilizationTimeDictionary: function () {
-      return utilization;
+      return utilizationTime;
     },
 
     setOccupancyDateDictionary: function (data) {
-      utilization = data;
+      OccupancyDate = data;
     },
     getOccupancyDateDictionary: function () {
-      return utilization;
+      return OccupancyDate;
     },
     setOccupancyTimeDictionary: function (data) {
-      utilization = data;
+      OccupancyTime = data;
     },
     getOccupancyTimeDictionary: function () {
-      return utilization;
+      return OccupancyTime;
     }
   };
 
@@ -250,3 +303,79 @@ function setUtilizationDateOnCalendar() {
     }
   });
 }
+  function createHighchart() {
+
+    Highcharts.chart('OccAndUtilReportGraph', {
+      chart: {
+        type: 'column',
+        height: 65 + '%'
+      },
+      title: {
+        text: ''
+      },
+      subtitle: {
+        text: ''
+      },
+      credits: {
+        enabled: false
+      },
+      xAxis: {
+        categories: '',
+        crosshair: true
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: ''
+        }
+      },
+      // tooltip: {
+      //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+      //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+      //   footerFormat: '</table>',
+      //   shared: true,
+      //   useHTML: true
+      // },
+      plotOptions: {
+        column: {
+          pointPadding: 0.2,
+          borderWidth: 0
+        }
+      },
+      series: [{
+        name: 'PERSONS',
+        data: []
+
+      }]
+    });
+
+  }
+
+  function showInHighCharts (dictionary) {
+
+    var graph = $('#OccAndUtilReportGraph').highcharts();
+    graph.setData([]);
+
+    // for (key, value in dictionary) {
+    //   graph.series[0].addPoint(key, value, false);
+    // }
+
+    // if ($('#occupancyBtn').hasClass('active-tab')) {
+    //   // set all necessary properties of highchart, graph for occupancy
+
+    // } else {
+    //   // set all necessary properties of highchart, graph for utilisation 
+      
+    // }
+    
+
+
+  }
+
+  function showInCalendar (dictionary) {
+
+  } 
+
+
+
