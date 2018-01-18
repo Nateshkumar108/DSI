@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <script type="text/javascript" src="demoavg.js"></script>
+    
 </head>
 
 <body>
@@ -48,7 +49,7 @@
             <div class="rooms">
                   <h3>ROOMS</h3>
                   <ul class="roomsButton">
-                    <li><button class="occupancyReport" id="occrpt" onclick="occupyrpt()">Occupancy Report</button></li>
+                    <li><button class="occupancyReport" id="occrptbtn" onclick="occupyrpt()">Occupancy Report</button></li>
                     <li><button class="dwellReport">Dwell Report</button></li>
                   </ul>
                 </div>
@@ -156,8 +157,16 @@
             <div id="container" style="min-width: 310px; margin: 0 auto"></div>
 
             </div>
-            <div class="occupancyrpt" id="occrpt" onclick="occuRpt()">
+            <div class="occupancyrpt" id="occrpt">
                 <ul class="occupancyReportTab">
+                        <ul class="chartButton">
+                                <li>
+                                    <button name="occupancy" id="occupancyBtn" class="orptbtn" onclick="">OCCUPANCY</button>
+                                </li>
+                                <li>
+                                    <button name="utilization" id="utilizationBtn" class="orptbtn" onclick="">UTILIZATION</button>
+                                </li> 
+                            </ul>
                         <ul class="chartButton">
                             <li>
                                 <button name="graph" id="graph" class="orptbtn" onclick="graphButtonChart()">GRAPH</button>
@@ -167,7 +176,7 @@
                             </li> 
                         </ul>
                 </ul>
-                <div id="OccupancyReportChart" style="min-width: 310px; margin: 0 auto"></div>
+                <div id="OccAndUtilReportGraph" style="min-width: 310px; margin: 0 auto"></div>
             </div>        
                     
             <div class="ageCounter" id="agCount">
@@ -367,6 +376,10 @@
         var avgFEMALE=0;
         var sumMaleWeek=0;
         var sumFemaleWeek=0; 
+        var dateToUtilGlobalMap = [];
+        var dateToOccupancyGlobalMap = [];
+        var timeToUtilGlobalMap = [];
+        var timeToOccupancyGlobalMap = [];        
 
     </script>
     <script type="text/javascript" src="js/utility/full-calendar/moment.min.js"></script>
@@ -374,7 +387,7 @@
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="calender.js"></script>
     <script type="text/javascript" src="js/utility/full-calendar/fullcalendar.js"></script>
-
+    
     <script type="text/javascript" src="js/utility/highcharts/highcharts.js"></script>
     <script type="text/javascript" src="js/utility/highcharts/highcharts-more.js"></script>
     <script type="text/javascript" src="highchart.js"></script>
@@ -383,9 +396,8 @@
     <script type="text/javascript" src="demoavg.js"></script>
     <script type="text/javascript" charset="utf-8" src="trackmap.js" ></script>
     <script type="text/javascript" src="buttons.js"></script>
+    <!-- <script type="text/javascript" src="occupancyGraph.js"></script> -->
     <script type="text/javascript" src="utilization.js"></script>
-    <script type="text/javascript" src="occupancyGraph.js"></script>
-    
     <script type="text/javascript">
         var avgI = document.getElementById("avgI");
         var avgO = document.getElementById("avgO");
@@ -684,7 +696,7 @@
             var mm = today.getMonth() + 1;
             var yyyy = today.getFullYear();
             var currentDate = yyyy + '-' + mm + '-' + dd;
-            var utilization = FetchUtilization.getUtilizationDateDictionary();
+            var utilizationDate = FetchUtilization.getUtilizationDateDictionary();
             //console.log("bapu"+utilization);
 
                 $('#calendar').fullCalendar({
