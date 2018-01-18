@@ -24,15 +24,30 @@ function loadOccupancyCalendar(){
 
             dayRender: function (date, cell) {
 
-                date = moment(date).format("YYYY-M-DD");
+                date = moment(date).format("YYYY-MM-DD");
+                //console.log('kunal'+date);
 
-                console.log('kunal'+date);
+                if ($('#occupancyBtn').hasClass('active')){
 
-                //utilisation[]
+                    if(dateToOccupancyGlobalMap[date]==undefined){
+                        $(cell).html('<div class="occupancy-div-fail" > </div>');
+                     }else{
+                         $(cell).html('<div class="occupancy-div" >'+dateToOccupancyGlobalMap[date]+'</div>');
+                     }
 
-                if (date === currentDate) {
-                    $(cell).html('<div class="utilization-div" >50% utilization</div>');
+                } else if ($('#utilizationBtn').hasClass('active')){
+
+                    if(dateToUtilGlobalMap[date]==undefined){
+                        $(cell).html('<div class="utilization-div-fail" > </div>');
+                     }else{
+                         $(cell).html('<div class="utilization-div" >'+dateToUtilGlobalMap[date].toFixed(2)+' %'+'</div>');
+                     }
+                    //$(cell).html(dateToUtilGlobalMap[date]);
+                    
                 }
+                // if (date === currentDate) {
+                //     $(cell).html('<div class="utilization-div" >50% utilization</div>');
+                // }
 
             },
             dayClick: function (date) {
@@ -41,29 +56,29 @@ function loadOccupancyCalendar(){
 
             },
             events: [
-                {
-                    title: 'All Day Event',
-                    start: '2018-01-01'
-                },
-                {
-                    title: 'Long Event',
-                    start: '2018-01-07',
-                    end: '2018-01-10'
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: '2018-12-09T16:00:00'
-                },
-                {
-                    title: 'Lunch',
-                    start: '2018-07-16T12:00:00'
-                },
-                {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: '2018-01-28'
-                }
+                // {
+                //     title: 'All Day Event',
+                //     start: '2018-01-01'
+                // },
+                // {
+                //     title: 'Long Event',
+                //     start: '2018-01-07',
+                //     end: '2018-01-10'
+                // },
+                // {
+                //     id: 999,
+                //     title: 'Repeating Event',
+                //     start: '2018-12-09T16:00:00'
+                // },
+                // {
+                //     title: 'Lunch',
+                //     start: '2018-07-16T12:00:00'
+                // },
+                // {
+                //     title: 'Click for Google',
+                //     url: 'http://google.com/',
+                //     start: '2018-01-28'
+                // }
             ]
         });
 }

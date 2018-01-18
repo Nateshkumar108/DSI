@@ -23,6 +23,9 @@ $(document).ready(function () {
   var date = ""
   // var furl = url+'/'+installation+'/'+projction+'/'+outer_range_start+'/'+outer_range_end;*/
 
+  getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+  getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+
   $('#in').click(function () {
     inData = 1;
     outData = 0;

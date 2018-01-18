@@ -161,10 +161,10 @@
                 <ul class="occupancyReportTab">
                         <ul class="chartButton">
                                 <li>
-                                    <button name="occupancy" id="occupancyBtn" class="orptbtn" onclick="">OCCUPANCY</button>
+                                    <button name="occupancy" id="occupancyBtn" class="orptbtn" onclick="occupancyBtnClicked()">OCCUPANCY</button>
                                 </li>
                                 <li>
-                                    <button name="utilization" id="utilizationBtn" class="orptbtn" onclick="">UTILIZATION</button>
+                                    <button name="utilization" id="utilizationBtn" class="orptbtn" onclick="utilizationBtnClicked()">UTILIZATION</button>
                                 </li> 
                             </ul>
                         <ul class="chartButton">
@@ -611,7 +611,7 @@
             let toDate = $("#to").datepicker("getDate");
 
             
-                toDate = new Date(new Date(toDate).getTime() + (24 * 60 * 60 * 1000));
+            toDate = new Date(new Date(toDate).getTime() + (24 * 60 * 60 * 1000));
             
 
             fromDate = fromDate.getFullYear() + "-" + (fromDate.getMonth() + 1) + "-" + fromDate.getDate();
@@ -688,7 +688,24 @@
 
             apiCal(fromDate, toDate, value,start_time,end_time);
 
+            } else if ($('#occrptbtn').hasClass('active-tab')||$('#calendar').hasClass('active-tab')
+                       ||$('#graph').hasClass('active-tab')) {
+
+                if ($('#occupancyBtn').hasClass('active')) {
+                    getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                } else if ($('#utilizationBtn').hasClass('active')) {
+                    getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                }
+
+                // $('#calendar').empty();
+
+                // var millisecondsToWait = 4000;
+                // setTimeout(function () {
+                //     // Whatever you want to do after the wait
+                //     loadOccupancyCalendar();
+                // }, millisecondsToWait);
             }
+            
         }
 
     </script>
