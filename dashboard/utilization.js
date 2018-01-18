@@ -67,10 +67,9 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
             utilArr.push(util);
           }
         }
-        FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
+        //FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
         console.log("dateToUtilMap was ", dateToUtilMap);
         dateToUtilGlobalMap = dateToUtilMap;
-        timeToUtilGlobalMap = timeToUtilMap;
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToUtilGlobalMap);
         } else {
@@ -99,7 +98,6 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
 
         console.log("timeToUtilMap was ", timeToUtilMap);
         FetchUtilization.setUtilizationTimeDictionary(timeToUtilMap);
-        dateToUtilGlobalMap = dateToUtilMap;
         timeToUtilGlobalMap = timeToUtilMap;
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToUtilGlobalMap);
@@ -189,7 +187,6 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         }
 
         dateToOccupancyGlobalMap = dateToOccupancyMap;
-        timeToOccupancyGlobalMap = timeToOccupancyMap;
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToOccupancyGlobalMap);
         } else {
@@ -230,7 +227,6 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         // console.log("@@@@data", timeOMdata[1]);
         
         FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
-        dateToOccupancyGlobalMap = dateToOccupancyMap;
         timeToOccupancyGlobalMap = timeToOccupancyMap;
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToOccupancyGlobalMap);
@@ -243,8 +239,6 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
 
     }
   });
-
-
 }
 
 var utilizationDate;
@@ -281,6 +275,30 @@ var FetchUtilization =  {
     }
   };
 
+function setUtilizationDateOnCalendar() {
+
+  var fcEl = $('#calendar'),
+  view = fcEl.fullCalendar('getView');
+  view.unrenderDates();
+  view.renderDates();
+
+  fcEl.fullCalendar({
+
+    dayRender: function (date, cell) {
+
+      date = moment(date).format("YYYY-M-DD");
+
+      console.log('kunal' + date);
+
+      //utilisation[]
+
+      if (date === currentDate) {
+        $(cell).html('<div class="utilization-div" >50% utilization</div>');
+      }
+
+    }
+  });
+}
   function createHighchart() {
 
     Highcharts.chart('OccAndUtilReportGraph', {
