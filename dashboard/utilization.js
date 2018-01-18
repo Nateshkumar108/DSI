@@ -67,7 +67,8 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
             utilArr.push(util);
           }
         }
-        FetchUtilization.setUtilizationDate(dateToUtilMap);
+        setUtilizationDateOnCalendar();
+        FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
         console.log("dateToUtilMap was ", dateToUtilMap);
 
       } else {
@@ -89,7 +90,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
         }
 
         console.log("timeToUtilMap was ", timeToUtilMap);
-        FetchUtilization.setUtilizationTime(timeToUtilMap);
+        FetchUtilization.setUtilizationTimeDictionary(timeToUtilMap);
       }
 
     }
@@ -169,7 +170,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         }
 
         console.log("dateToOccupancylMap was ", dateToOccupancylMap);
-        FetchUtilization.setOccupancyDate(dateToOccupancylMap);
+        FetchUtilization.setOccupancyDateDictionary(dateToOccupancylMap);
 
       } else {
         // show hours in x-axis
@@ -188,13 +189,11 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
           timeToOccupancyMap[time] = numPeople;
         }
         console.log("timeToOccupancyMap was ", timeToOccupancyMap);
-        FetchUtilization.setOccupancyTime(timeToOccupancyMap);
+        FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
       }
 
     }
   });
-
-
 }
 
 var utilization;
@@ -226,3 +225,28 @@ var FetchUtilization =  {
       return utilization;
     }
   };
+
+function setUtilizationDateOnCalendar() {
+
+  var fcEl = $('#calendar'),
+  view = fcEl.fullCalendar('getView');
+  view.unrenderDates();
+  view.renderDates();
+
+  fcEl.fullCalendar({
+
+    dayRender: function (date, cell) {
+
+      date = moment(date).format("YYYY-M-DD");
+
+      console.log('kunal' + date);
+
+      //utilisation[]
+
+      if (date === currentDate) {
+        $(cell).html('<div class="utilization-div" >50% utilization</div>');
+      }
+
+    }
+  });
+}
