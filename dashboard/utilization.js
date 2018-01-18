@@ -94,7 +94,14 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
           }
           var util = (numPeople / capacity) * 100;
           time = item.date.split(" ")[1];
-          timeToUtilMap[time] = util;
+          var hours = time.split(":")[0];
+
+          // remove tomorrow
+          if (hours > 20) {
+            timeToUtilMap[time] = 0;
+          } else {
+            timeToUtilMap[time] = util;
+          } 
         }
 
         console.log("timeToUtilMap was ", timeToUtilMap);
@@ -102,7 +109,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
         
         timeToUtilGlobalMap = timeToUtilMap;
         if($('#graph').hasClass('active-tab')) {
-          showInHighCharts(dateToUtilGlobalMap);
+          showInHighCharts(timeToUtilGlobalMap);
         } else {
           showInCalendar(timeToUtilGlobalMap);
         }
@@ -193,7 +200,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToOccupancyGlobalMap);
         } else {
-          showInCalendar(timeToOccupancyGlobalMap);
+          showInCalendar(dateToOccupancyGlobalMap);
         }
 
         
@@ -217,7 +224,13 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
             numPeople = 0;
           }
           time = item.date.split(" ")[1];
-          timeToOccupancyMap[time] = numPeople;
+          var hours = time.split(":")[0];
+          if(hours > 20) {
+            timeToOccupancyMap[time] = 0;
+          } else {
+            timeToOccupancyMap[time] = numPeople;
+          }
+          
           //timeToOccupancyMap.push(numPeople);
           //tim.push(time);
 
@@ -228,11 +241,11 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         // console.log("@@@@time", timeOMdata[0]);
         // console.log("@@@@data", timeOMdata[1]);
         
-        FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
+        // FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
         
         timeToOccupancyGlobalMap = timeToOccupancyMap;
         if($('#graph').hasClass('active-tab')) {
-          showInHighCharts(dateToOccupancyGlobalMap);
+          showInHighCharts(timeToOccupancyGlobalMap);
         } else {
           showInCalendar(timeToOccupancyGlobalMap);
         }
@@ -297,8 +310,12 @@ var FetchUtilization =  {
         enabled: false
       },
       xAxis: {
-        categories: '',
-        crosshair: true
+        type: 'datetime',
+        // categories: xAxis,
+       // min:startdate,
+        //max:endDate,
+        crosshair: true,
+        tickInterval:1
       },
       yAxis: {
         min: 0,
@@ -321,9 +338,8 @@ var FetchUtilization =  {
         }
       },
       series: [{
-        name: 'PERSONS',
+        name: '',
         data: []
-
       }]
     });
 
@@ -332,11 +348,34 @@ var FetchUtilization =  {
   function showInHighCharts (dictionary) {
 
     var graph = $('#OccAndUtilReportGraph').highcharts();
-    graph.setData([]);
+    graph.series[0].setData([]);
 
-    for (Map.entrySet() in dictionary) {
-      graph.series[0].addPoint(Map.keySet(), Map.values(), false);
+    var data = [];
+    
+    var yAxis = [];
+    console.log("dictionary was printed");
+    var xAxis = [];
+    for (var key in dictionary) {
+      // console.log("key " + key + " value " + dictionary[key]);
+
+      // var date = new Date(fromDate + " " + key);
+
+      // console.log("Date was ", date);
+      // xAxis.push(key);
+      // yAxis.push(dictionary[key]);
+      xAxis.push(key);
+      yAxis.push(dictionary[key]);
+      data.push([key, dictionary[key]]);
+
+      // graph.series[0].addPoint(dictionary[key], false);
+
     }
+
+    console.log("Hello world", graph);
+    graph.series[0].setData(yAxis);
+    graph.xAxis[0].setCategories(xAxis);
+
+    
 
     if ($('#occupancyBtn').hasClass('active-tab')) {
       // set all necessary properties of highchart, graph for occupancy
