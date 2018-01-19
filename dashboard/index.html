@@ -157,7 +157,7 @@
             <div id="container" style="min-width: 310px; margin: 0 auto"></div>
 
             </div>
-            <div class="occupancyrpt" id="occrpt">
+            <div class="occupancyrpt hide" id="occrpt">
                 <ul class="occupancyReportTab">
                         <ul class="chartButton">
                                 <li>
@@ -169,7 +169,7 @@
                             </ul>
                         <ul class="chartButton">
                             <li>
-                                <button name="graph" id="graph" class="orptbtn active-tab" onclick="graphButtonChart()">GRAPH</button>
+                                <button name="graph" id="graphBtn" class="orptbtn active-tab" onclick="graphButtonChart()">GRAPH</button>
                             </li>
                             <li>
                                 <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">CALENDAR</button>
@@ -398,9 +398,7 @@
     <script type="text/javascript" src="demoavg.js"></script>
     <script type="text/javascript" charset="utf-8" src="trackmap.js" ></script>
     <script type="text/javascript" src="buttons.js"></script>
-    <!-- <script type="text/javascript" src="occupancyGraph.js"></script> -->
     <script type="text/javascript" src="utilization.js"></script>
-    <script type="text/javascript" src="occupancyGraph.js"></script>
     <script type="text/javascript" src="oCalendar.js"></script>
     
     <script type="text/javascript">
@@ -415,7 +413,7 @@
         $(function () {
             $('#custom-calendar').hide();
             $('#custom-btn').hide();
-            $('#graph').hide();
+            $('#graphBtn').hide();
             $('#oCalendarBtn').hide();
             $("#datepicker").datepicker({
                 onSelect: function (date) {
@@ -514,6 +512,7 @@
 
                 return date;
             }
+
         });
 
         function mainCalSearch(){
@@ -522,9 +521,11 @@
 
             selectedDate = selectedDate.getFullYear() + "-" + (selectedDate.getMonth() + 1) + "-" + selectedDate.getDate();
             calDate = selectedDate;
+            fromDate=selectedDate;
 
             nextDate = nextDate.getFullYear() + "-" + (nextDate.getMonth() + 1) + "-" + nextDate.getDate();
             calNextDate = nextDate;
+            toDate=nextDate;
 
             if ($('#agc').hasClass('active-tab')) {
                 document.getElementById("monthavg").style.display = "none";
@@ -593,6 +594,7 @@
                 }
 
                 apiCal(selectedDate, nextDate, value, start_time, end_time);
+                
             }
             else if ($('#trkMap').hasClass('active-tab')) {
                 from_hr = $('#fhr').val();
@@ -604,7 +606,6 @@
              
                 generateTrackmap(selectedDate, nextDate,start_time,end_time);
             }
-
             
         }
         function customCalSearch() {
@@ -690,8 +691,7 @@
 
             apiCal(fromDate, toDate, value,start_time,end_time);
 
-            } else if ($('#occrptbtn').hasClass('active-tab')||$('#calendar').hasClass('active-tab')
-                       ||$('#graph').hasClass('active-tab')) {
+            } else if ($('#occrptbtn').hasClass('active-tab') && $('#oCalendarBtn').hasClass('active-internal-tab')) {
 
                 if ($('#occupancyBtn').hasClass('active')) {
                     getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
@@ -709,6 +709,16 @@
                     // Whatever you want to do after the wait
                     oCalendar();
                 }, millisecondsToWait);
+
+            } else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active-internal-tab')) {
+
+                if ($('#occupancyBtn').hasClass('active')) {
+                    getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                } else if ($('#utilizationBtn').hasClass('active')) {
+                    getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                }
+
+
             }
             
         }
