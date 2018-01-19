@@ -67,9 +67,10 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
             utilArr.push(util);
           }
         }
-        //FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
+        FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
         console.log("dateToUtilMap was ", dateToUtilMap);
         dateToUtilGlobalMap = dateToUtilMap;
+      
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToUtilGlobalMap);
         } else {
@@ -93,14 +94,22 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
           }
           var util = (numPeople / capacity) * 100;
           time = item.date.split(" ")[1];
-          timeToUtilMap[time] = util;
+          var hours = time.split(":")[0];
+
+          // remove tomorrow
+          if (hours > 20) {
+            timeToUtilMap[time] = 0;
+          } else {
+            timeToUtilMap[time] = util;
+          } 
         }
 
         console.log("timeToUtilMap was ", timeToUtilMap);
         FetchUtilization.setUtilizationTimeDictionary(timeToUtilMap);
+        
         timeToUtilGlobalMap = timeToUtilMap;
         if($('#graph').hasClass('active-tab')) {
-          showInHighCharts(dateToUtilGlobalMap);
+          showInHighCharts(timeToUtilGlobalMap);
         } else {
           showInCalendar(timeToUtilGlobalMap);
         }
@@ -187,16 +196,16 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         }
 
         dateToOccupancyGlobalMap = dateToOccupancyMap;
+        
         if($('#graph').hasClass('active-tab')) {
           showInHighCharts(dateToOccupancyGlobalMap);
         } else {
-          showInCalendar(timeToOccupancyGlobalMap);
+          showInCalendar(dateToOccupancyGlobalMap);
         }
 
         
 
         console.log("dateToOccupancyMap was ", dateToOccupancyMap);
-        console.log("date was ", xaxisdate);
         // FetchUtilization.setOccupancyDateDictionary(dateToOccupancyMap);
         
 
@@ -215,7 +224,13 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
             numPeople = 0;
           }
           time = item.date.split(" ")[1];
-          timeToOccupancyMap[time] = numPeople;
+          var hours = time.split(":")[0];
+          if(hours > 20) {
+            timeToOccupancyMap[time] = 0;
+          } else {
+            timeToOccupancyMap[time] = numPeople;
+          }
+          
           //timeToOccupancyMap.push(numPeople);
           //tim.push(time);
 
@@ -226,10 +241,11 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         // console.log("@@@@time", timeOMdata[0]);
         // console.log("@@@@data", timeOMdata[1]);
         
-        FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
+        // FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
+        
         timeToOccupancyGlobalMap = timeToOccupancyMap;
         if($('#graph').hasClass('active-tab')) {
-          showInHighCharts(dateToOccupancyGlobalMap);
+          showInHighCharts(timeToOccupancyGlobalMap);
         } else {
           showInCalendar(timeToOccupancyGlobalMap);
         }
@@ -239,6 +255,8 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
 
     }
   });
+
+
 }
 
 var utilizationDate;
@@ -275,30 +293,6 @@ var FetchUtilization =  {
     }
   };
 
-function setUtilizationDateOnCalendar() {
-
-  var fcEl = $('#calendar'),
-  view = fcEl.fullCalendar('getView');
-  view.unrenderDates();
-  view.renderDates();
-
-  fcEl.fullCalendar({
-
-    dayRender: function (date, cell) {
-
-      date = moment(date).format("YYYY-M-DD");
-
-      console.log('kunal' + date);
-
-      //utilisation[]
-
-      if (date === currentDate) {
-        $(cell).html('<div class="utilization-div" >50% utilization</div>');
-      }
-
-    }
-  });
-}
   function createHighchart() {
 
     Highcharts.chart('OccAndUtilReportGraph', {
@@ -316,8 +310,12 @@ function setUtilizationDateOnCalendar() {
         enabled: false
       },
       xAxis: {
-        categories: '',
-        crosshair: true
+        type: 'datetime',
+        // categories: xAxis,
+       // min:startdate,
+        //max:endDate,
+        crosshair: true,
+        tickInterval:1
       },
       yAxis: {
         min: 0,
@@ -340,9 +338,8 @@ function setUtilizationDateOnCalendar() {
         }
       },
       series: [{
-        name: 'PERSONS',
+        name: '',
         data: []
-
       }]
     });
 
@@ -351,19 +348,45 @@ function setUtilizationDateOnCalendar() {
   function showInHighCharts (dictionary) {
 
     var graph = $('#OccAndUtilReportGraph').highcharts();
-    graph.setData([]);
+    graph.series[0].setData([]);
 
-    // for (key, value in dictionary) {
-    //   graph.series[0].addPoint(key, value, false);
-    // }
+    var data = [];
+    
+    var yAxis = [];
+    console.log("dictionary was printed");
+    var xAxis = [];
+    for (var key in dictionary) {
+      // console.log("key " + key + " value " + dictionary[key]);
 
-    // if ($('#occupancyBtn').hasClass('active-tab')) {
-    //   // set all necessary properties of highchart, graph for occupancy
+      // var date = new Date(fromDate + " " + key);
 
-    // } else {
-    //   // set all necessary properties of highchart, graph for utilisation 
-      
-    // }
+      // console.log("Date was ", date);
+      // xAxis.push(key);
+      // yAxis.push(dictionary[key]);
+      xAxis.push(key);
+      yAxis.push(dictionary[key]);
+      data.push([key, dictionary[key]]);
+
+      // graph.series[0].addPoint(dictionary[key], false);
+
+    }
+
+    console.log("Hello world", graph);
+    graph.series[0].setData(yAxis);
+    graph.xAxis[0].setCategories(xAxis);
+
+    
+
+    if ($('#occupancyBtn').hasClass('active')) {
+      // set all necessary properties of highchart, graph for occupancy
+      $('#OccAndUtilReportGraph').show();
+      $('#calendar').hide();
+
+    } else {
+      // set all necessary properties of highchart, graph for utilisation 
+      $('#OccAndUtilReportGraph').show();
+      $('#calendar').hide();
+    }
     
 
 

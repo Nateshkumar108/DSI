@@ -14,7 +14,6 @@ var avgINOUT = 0;
 var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=00:00&et=24:00";
 
 $(document).ready(function () {
-
   /*var url = "https://eds.modcam.io/v1/peoplecounter/installation";
   const installation = "5a420343b7e14e0007d73376";
   var projction = "hours";

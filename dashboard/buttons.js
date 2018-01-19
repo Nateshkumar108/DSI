@@ -12,6 +12,8 @@ var s4 = document.getElementById("s4");
 var s5 = document.getElementById("s5");
 function myPeopleCounter() {
     $('#graph').hide();
+    $('#occupancyBtn').hide();
+    $('#utilizationBtn').hide();
     $('#OccAndUtilReportGraph').hide();
     $('#oCalendarBtn').hide();
     $('#in').show();
@@ -135,6 +137,8 @@ function occupyrpt(){
     $('#calendar').hide();
 }
 function oCalendar() {
+    $('#graph').removeClass('active-tab');
+    $('#oCalendar').addClass('active-tab');
     $('#graph').show();
     $('#oCalendarBtn').show();
     $('#OccAndUtilReportGraph').hide();
@@ -174,7 +178,22 @@ function occupyrpt()
 }
 
 function graphButtonChart(){
+    // if($('#txt-main-cal').hasClass('active-calender'))
+    // {
+    //     showInHighCharts(time);
+    // }
+    $('#graph').addClass('active-tab');
+    $('#oCalendar').removeClass('active-tab');
     $('#calendar').hide();
     $('#OccAndUtilReportGraph').show();
    // document.getElementById("OccAndUtilReportGraph").style.display = "block";
+}
+
+function occupancyBtnFunction()
+{
+    if(!$('#occupancyBtn').hasClass('active-tab'))
+    {
+        $('#occupancyBtn').addClass('active-tab');
+        $('#utilizationBtn').removeClass('active-tab')
+    }
 }
