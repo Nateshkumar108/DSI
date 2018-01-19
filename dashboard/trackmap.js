@@ -1,6 +1,10 @@
 function generateTrackmap(fromDate, toDate, startTime, endTime) {
+    /* Currently the api only support single day data. Need to remove the below line once api start
+       supporting multiple days. */
+    toDate = fromDate;
     let furl ="http://18.216.208.225:3001/v1/tracker/motion/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDate + "/" + toDate + "?st="+ startTime +"&et="+ endTime +"&blackpoint=25&whitepoint=1000";
 
+    $('#page-loader').show();
     let xhr = new XMLHttpRequest();
     xhr.open('GET', furl, true);
     xhr.responseType = 'arraybuffer';
@@ -13,7 +17,9 @@ function generateTrackmap(fromDate, toDate, startTime, endTime) {
     xhr.onload = function (e) {
         if (this.status == 200) {
             let data = btoa(String.fromCharCode.apply(null, new Uint8Array(this.response)));
+            $('#page-loader').hide();
             drawArea(data, fromDate, toDate, startTime, endTime);
+            
 
             // var canvas = getImageFor32BitInteger(this.response);
             // let urlForImage = canvas.toDataURL();
@@ -43,11 +49,12 @@ function getImageFor32BitInteger(data) {
     return canvas;
 }
 
-function drawArea(data, fromDate, toDate) {
-    let stDt = fromDate; 
-    let etDt = toDate;
+function drawArea(data, fromDate, toDate, startTime, endTime) {
+    let stDate = fromDate; 
+    let etDate = toDate;
+    let stTime = startTime;
+    let etTime = endTime;
     if(canvas) {
-        canvas.clear().renderAll();
         canvas.dispose();
     }
     canvas = new fabric.Canvas('trackmap', {
@@ -77,7 +84,7 @@ function drawArea(data, fromDate, toDate) {
 
     canvas.on('mouse:down', function (o) {
         isDown = true;
-        var pointer = canvas.getPointer(o.e);
+        let pointer = canvas.getPointer(o.e);
         origX = pointer.x;
         origY = pointer.y;
         rect = new fabric.Rect({
@@ -99,7 +106,7 @@ function drawArea(data, fromDate, toDate) {
         if (!isDown) {
             return;
         }
-        var pointer = canvas.getPointer(o.e);
+        let pointer = canvas.getPointer(o.e);
 
         if (origX > pointer.x) {
             rect.set({ left: Math.abs(pointer.x) });
@@ -115,7 +122,7 @@ function drawArea(data, fromDate, toDate) {
     });
 
     canvas.on('mouse:up', function (o) {
-        var pos = canvas.getPointer(o.e);
+        let pos = canvas.getPointer(o.e);
         isDown = false;
         bX = parseInt(rect.get('left'));
         bY = parseInt(rect.get('top'));
@@ -138,7 +145,7 @@ function drawArea(data, fromDate, toDate) {
     });
 
     function getBoxData(coordinates){
-        let furl = "http://18.216.208.225:3001/v1/tracker/installation/5a4e2d0b9963080006dc9dfb/aoi/" + stDt + "/" + etDt + "?st=00:00&et=23:59&zones=" + coordinates;
+        let furl = "http://18.216.208.225:3001/v1/tracker/installation/5a4e2d0b9963080006dc9dfb/aoi/" + stDate + "/" + etDate + "?st="+ stTime + "&et="+ etTime +"&zones=" + coordinates;
 
         $.ajax({
             headers: {
@@ -165,6 +172,7 @@ function drawArea(data, fromDate, toDate) {
                 let txtArea =  new fabric.Text('Area', {
                     fontSize: 15,
                     fontFamily: 'Calibri',
+                    fontWeight: 'bold',
                     left: ((bWidth/2) + bX) - 12,
                     top: bY + 2,
                 });
@@ -175,6 +183,7 @@ function drawArea(data, fromDate, toDate) {
                 let bAvgSec =  new fabric.Text(bAvgSecText, {
                     fontSize: 15,
                     fontFamily: 'Calibri',
+                    fontWeight: 'bold',
                     left: bAvgSecLeft,
                     top: bAvgSecTop,
                 });
