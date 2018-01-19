@@ -266,12 +266,12 @@ ageCounter ul ul p{
     justify-content: center;
 }
 
-.chartButton button.active {
+.chartButton button.active, .occUtilBtn button.active {
   background:#1DAFEB;
   border: 1px solid #1DAFEB;
 
 }
-.chartButton button.active:hover {
+.chartButton button.active:hover, .occUtilBtn button.active:hover{
   background:transparent;
   border: 1px solid #1DAFEB;
   color:#1DAFEB;
