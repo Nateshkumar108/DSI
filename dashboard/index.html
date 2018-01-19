@@ -38,13 +38,13 @@
                 <h3>WORKSPACE</h3>
                 <ul class="tab-button">
                     <li>
-                        <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()">PEOPLE COUNTER</button>
+                        <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()">People Counter</button>
                     </li>
                     <li>
-                        <button class="ageCount" id="agc" onclick="myAgeCounter()">DEMOGRAPHICS</button>
+                        <button class="ageCount" id="agc" onclick="myAgeCounter()">Demographics</button>
                     </li>
                     <li>
-                        <button class="trakMap" id="trkMap" onclick="myTrackMap()">TRACK MAP</button>
+                        <button class="trakMap" id="trkMap" onclick="myTrackMap()">Trackmap</button>
                     </li>
                 </ul>
             </div>
@@ -65,13 +65,13 @@
                 <ul class="highchartTab">
                     <ul class="chartButton">
                         <li>
-                            <button name="in" id="in">IN</button>
+                            <button name="in" id="in">In</button>
                         </li>
                         <li>
-                            <button name="out" id="out">OUT</button>
+                            <button name="out" id="out">Out</button>
                         </li>
                         <li>
-                            <button name="in" id="inout" class="active">IN/OUT</button>
+                            <button name="in" id="inout" class="active">In/Out</button>
                         </li>
                     </ul>
 
@@ -167,18 +167,18 @@
                 <ul class="occupancyReportTab">
                     <ul class="occUtilBtn">
                         <li>
-                            <button name="occupancy" id="occupancyBtn" class="orptbtn" onclick="occupancyBtnClicked()">OCCUPANCY</button>
+                            <button name="occupancy" id="occupancyBtn" class="orptbtn" onclick="occupancyBtnClicked()">Occupancy</button>
                         </li>
                         <li>
-                            <button name="utilization" id="utilizationBtn" class="orptbtn" onclick="utilizationBtnClicked()">UTILIZATION</button>
+                            <button name="utilization" id="utilizationBtn" class="orptbtn" onclick="utilizationBtnClicked()">Utilization</button>
                         </li>
                     </ul>
                     <ul class="chartButton">
                         <li>
-                            <button name="graph" id="graphBtn" class="orptbtn active-internal-tab" onclick="graphButtonChart()">GRAPH</button>
+                            <button name="graph" id="graphBtn" class="orptbtn active-internal-tab" onclick="graphButtonChart()">Graph</button>
                         </li>
                         <li>
-                            <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">CALENDAR</button>
+                            <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">Calendar</button>
                         </li>
                     </ul>
                 </ul>
@@ -194,8 +194,8 @@
                             <p id="avgFeMale" style="background:#992399;"></p>
                         </li>
                         <li class="captions">
-                            <span>AGE</span>
-                            <span> TODAY</span>
+                            <span>age</span>
+                            <span> today</span>
                         </li>
 
                     </ul>
@@ -205,8 +205,8 @@
                             <p id="avgFemaleWeek" style="background:#992399;"></p>
                         </li>
                         <li class="captions">
-                            <span>AGE</span>
-                            <span> THIS WEEK</span>
+                            <span>age</span>
+                            <span> this week</span>
                         </li>
 
                     </ul>
@@ -216,8 +216,8 @@
                             <p id="avgFemaleMonthWeek" style="background:#992399;"></p>
                         </li>
                         <li class="captions">
-                            <span>AGE</span>
-                            <span> THIS MONTH</span>
+                            <span>age</span>
+                            <span> this month</span>
                         </li>
 
                     </ul>
@@ -259,46 +259,46 @@
                 <h3>SELECT ZONE</h3>
                 <ul class="labdown">
                     <ul>
-                        <li>FACILITY:</li>
+                        <li>Facility:</li>
                         <li>
                             <select disabled>
-                                <option value="volvo">REGUS</option>
+                                <option value="volvo">Regus</option>
 
                             </select>
                         </li>
                     </ul>
                     <ul>
-                        <li>FLOOR:</li>
+                        <li>Floor:</li>
                         <li>
                             <select disabled>
-                                <option value="volvo">7TH FLOOR </option>
+                                <option value="volvo">7th Floor </option>
 
                             </select>
                         </li>
                     </ul>
                     <ul>
-                        <li>ROOM:</li>
+                        <li>Room:</li>
                         <li>
                             <select id="dd">
-                                <option value="volvo">SELECT ROOM</option>
+                                <option value="volvo">Select Room</option>
                                 <option id="r704" style="display:none;">704</option>
                                 <option id="r705" style="display:none;">705</option>
                                 <option id="r706">706</option>
 
-                                <option id="rdo">DEEPAK'S OFFICE</option>
+                                <option id="rdo">Deepak's Office</option>
                             </select>
                         </li>
                     </ul>
                     <ul>
-                        <li>SENSOR:</li>
+                        <li>Sensor:</li>
                         <li>
                             <select>
-                                <option value="volvo">SELECT SENSOR</option>
-                                <option id="s1" style="display:none;">001EAA</option>
-                                <option id="s2">001EEC</option>
-                                <option id="s3" style="display:none;">001D5F</option>
+                                <option value="volvo">Select Sensor</option>
+                                <option id="s1" style="display:none;">001eaa</option>
+                                <option id="s2">001eec</option>
+                                <option id="s3" style="display:none;">001d5f</option>
                                 <option id="s4" style="display:none;">001438</option>
-                                <option id="s5">001E56</option>
+                                <option id="s5">001e56</option>
                             </select>
                         </li>
                     </ul>
@@ -624,9 +624,25 @@
                     }
 
                 }
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active-internal-tab')) {
 
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
+
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active-internal-tab')) {
+
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } 
+                    else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
+        }
+    }
             }
-
             function customCalSearch() {
 
                 let fromDate = $("#from").datepicker("getDate");
@@ -706,9 +722,9 @@
                     }
 
                     apiCal(calDate, calNextDate, value, start_time, end_time);
+                }
 
-                } else if ($('#occrptbtn').hasClass('active-tab') && $('#oCalendarBtn').hasClass('active-internal-tab')
-                    || $('#graph').hasClass('active-tab')) {
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#oCalendarBtn').hasClass('active-internal-tab')){
 
                     if ($('#occupancyBtn').hasClass('active')) {
                         getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
@@ -732,5 +748,4 @@
 
         </script>
 </body>
-
 </html>
