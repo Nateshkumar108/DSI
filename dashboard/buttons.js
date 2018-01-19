@@ -120,13 +120,16 @@ function refreshApi(){
 }
 
 function occupyrpt(){
-    $('#txt-custom-cal').addClass('active-calendar');
-    $('#txt-main-cal').removeClass('active-calendar');
     $('#graph').show();
     $('#oCalendarBtn').show();
     $('#in').hide();
     $('#out').hide();
     $('#inout').hide();
+    getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+    // if($('#occupancyBtn').hasClass('active-tab') && $('#graph').hasClass('active-tab'))
+    // {
+    //     getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+    // }
     hiChart.style.display = "none";
     agCount.style.display = "none";
     trackMap.style.display = "none";
@@ -147,6 +150,8 @@ function occupyrpt(){
     $('#calendar').removeClass('active-tab');
     $('#occupancyBtn').addClass('active');
     $('#calendar').hide();
+    
+}
 function oCalendar() {
     loadOccupancyCalendar();
     $('#graph').show();

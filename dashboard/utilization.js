@@ -74,7 +74,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
         // if($('#graph').hasClass('active-tab')) {
         //   showInHighCharts(dateToUtilGlobalMap);
         // } else {
-        //   showInCalendar(timeToUtilGlobalMap);
+        //   showInCalendar(dateToUtilGlobalMap);
         // }
 
 
@@ -197,7 +197,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
         }
 
         dateToOccupancyGlobalMap = dateToOccupancyMap;
-        showInCalendar(dateToOccupancyGlobalMap);
+        showInHighCharts(dateToOccupancyGlobalMap);
         // if($('#graph').hasClass('active-tab')) {
         //   showInHighCharts(dateToOccupancyGlobalMap);
         // } else {
