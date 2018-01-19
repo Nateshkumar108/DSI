@@ -33,8 +33,6 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#out').removeClass('active');
       $('#inout').removeClass('active');
-      $('#occupancyBtn').removeClass('active');
-      $('#utilizationBtn').removeClass('active');
       // avgI.style.display = "block";
       // totalI.style.display = "block";
       // avgO.style.display = "none";
@@ -153,8 +151,6 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#in').removeClass('active');
       $('#inout').removeClass('active');
-      $('#occupancyBtn').removeClass('active');
-      $('#utilizationBtn').removeClass('active');
       // avgI.style.display = "none";
       // totalI.style.display = "none";
       // avgO.style.display = "block";
@@ -281,9 +277,7 @@ $(document).ready(function () {
     if (!$(this).hasClass('active')) {
       $(this).addClass('active');
       $('#in').removeClass('active');
-      $('#out').removeClass('active');
-      $('#occupancyBtn').removeClass('active');
-      $('#utilizationBtn').removeClass('active');
+      $('#out').removeClass('active');  
       // avgIO.style.display = "block";
       // totalIO.style.display = "block";
       // totalI.style.display = "block";
