@@ -125,9 +125,7 @@ function occupyrpt(){
     $('#in').hide();
     $('#out').hide();
     $('#inout').hide();
-
-
-    
+    getPeopleCounterAndFindOccupancy(fromDate,toDate,start_time,end_time);
     hiChart.style.display = "none";
     agCount.style.display = "none";
     trackMap.style.display = "none";
@@ -144,9 +142,9 @@ function occupyrpt(){
     $('#ppc').removeClass('active-tab');
     $('#agc').removeClass('active-tab');
     $('#occrptbtn').addClass('active-tab');
-    $('#graph').removeClass('active-tab');
+    $('#graph').addClass('active-tab');
     $('#calendar').removeClass('active-tab');
-    $('#occupancyBtn').addClass('active');
+    $('#occupancyBtn').addClass('active-tab');
     $('#calendar').hide();
     
 }
@@ -203,28 +201,42 @@ function graphButtonChart(){
     $('#trkMap').removeClass('active-tab');
     $('#ppc').removeClass('active-tab');
     $('#agc').removeClass('active-tab');
-    $('#occrptbtn').removeClass('active-tab');
-    $('#graph').addClass('active-tab');
+    $('#occrptbtn').addClass('active-tab');
+    //$('#graph').addClass('active-tab');
     $('#calendar').removeClass('active-tab');
-    $('#graph').addClass('active-tab');
+   // $('#graph').addClass('active-tab');
+
+    if( $('#txt-custom-cal').hasClass('active-calendar'))
+    {
+       // $('#utilizationBtn').removeClass('active-tab');
+        //getPeopleCounterAndFindOccupancy(fromDate,toDate,start_time,end_time);
+        customCalSearch();
+
+    }
+    else
+    {
+        //$('#occupancyBtn').removeClass('active-tab');
+        //getPeopleCounterAndFindUtilization(fromDate,toDate,start_time,end_time);
+        mainCalSearch();
+    }
 
    // document.getElementById("OccAndUtilReportGraph").style.display = "block";
 }
 
 function occupancyBtnClicked(){
 
-    $('#in').removeClass('active');
-    $('#out').removeClass('active');
-    $('#inout').removeClass('active');
-    $('#occupancyBtn').addClass('active');
-    $('#utilizationBtn').removeClass('active');
+    $('#in').removeClass('active-tab');
+    $('#out').removeClass('active-tab');
+    $('#inout').removeClass('active-tab');
+    $('#occupancyBtn').addClass('active-tab');
+    $('#utilizationBtn').removeClass('active-tab');
 }
 
 function utilizationBtnClicked(){
 
-    $('#in').removeClass('active');
-    $('#out').removeClass('active');
-    $('#inout').removeClass('active');
-    $('#occupancyBtn').removeClass('active');
-    $('#utilizationBtn').addClass('active');
+    $('#in').removeClass('active-tab');
+    $('#out').removeClass('active-tab');
+    $('#inout').removeClass('active-tab');
+    $('#occupancyBtn').removeClass('active-tab');
+    $('#utilizationBtn').addClass('active-tab');
 }
