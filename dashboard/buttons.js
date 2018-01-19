@@ -130,7 +130,6 @@ function occupyrpt(){
     $('#in').hide();
     $('#out').hide();
     $('#inout').hide();
-    
     $('#occupancyBtn').show();
     $('#utilizationBtn').show();
     $('#graphBtn').show();
@@ -154,7 +153,7 @@ function occupyrpt(){
     $('#trkMap').removeClass('active-tab');
     $('#ppc').removeClass('active-tab');
     $('#agc').removeClass('active-tab');
-    $('#occrptbtn').addClass('active-tab');
+    $('#occrptbtn').addClass('active');
     $('#graphBtn').addClass('active-internal-tab');
     $('#oCalendarBtn').removeClass('active-internal-tab');
     $('#calendar').removeClass('active-tab');
@@ -172,7 +171,9 @@ function occupyrpt(){
     $('#txt-main-cal').addClass('active-calendar');
     $('#txt-custom-cal').removeClass('active-calendar');
     $('#txt-custom-cal').show();
-    // getPeopleCounterAndFindOccupancy(fromDate,toDate,start_time,end_time);
+
+    getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+
 }
 function oCalendar() {
     loadOccupancyCalendar();
@@ -197,7 +198,7 @@ function oCalendar() {
     $('#trkMap').removeClass('active-tab');
     $('#ppc').removeClass('active-tab');
     $('#agc').removeClass('active-tab');
-    $('#occrptbtn').addClass('active-tab');
+    $('#occrptbtn').addClass('active');
     $('#graphBtn').removeClass('active-internal-tab');
     $('#oCalendarBtn').addClass('active-internal-tab');
     $('#calendar').show();
@@ -216,7 +217,6 @@ function oCalendar() {
 // }
 
 function graphButtonChart(){
-
     $('#graphBtn').show();
     $('#oCalendarBtn').removeClass('active-internal-tab');
     $('#calendar').hide();
@@ -225,7 +225,7 @@ function graphButtonChart(){
     $('#ppc').removeClass('active-tab');
     $('#agc').removeClass('active-tab');
     $('#occrptbtn').addClass('active-tab');
-    $('#calendar').removeClass('active-internal-tab');
+   $('#calendar').removeClass('active-internal-tab');
     $('#graphBtn').addClass('active-internal-tab');
 
     if($('#txt-custom-cal').hasClass('active-calendar'))
@@ -242,18 +242,18 @@ function graphButtonChart(){
 
 function occupancyBtnClicked(){
 
-    $('#in').removeClass('active');
-    $('#out').removeClass('active');
-    $('#inout').removeClass('active');
+    $('#in').removeClass('active-tab');
+    $('#out').removeClass('active-tab');
+    $('#inout').removeClass('active-tab');
     $('#occupancyBtn').addClass('active');
     $('#utilizationBtn').removeClass('active');
 }
 
 function utilizationBtnClicked(){
 
-    $('#in').removeClass('active');
-    $('#out').removeClass('active');
-    $('#inout').removeClass('active');
+    $('#in').removeClass('active-tab');
+    $('#out').removeClass('active-tab');
+    $('#inout').removeClass('active-tab');
     $('#occupancyBtn').removeClass('active');
     $('#utilizationBtn').addClass('active');
 }
