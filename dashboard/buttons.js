@@ -125,11 +125,9 @@ function occupyrpt(){
     $('#in').hide();
     $('#out').hide();
     $('#inout').hide();
-    getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
-    // if($('#occupancyBtn').hasClass('active-tab') && $('#graph').hasClass('active-tab'))
-    // {
-    //     getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
-    // }
+
+
+    
     hiChart.style.display = "none";
     agCount.style.display = "none";
     trackMap.style.display = "none";
