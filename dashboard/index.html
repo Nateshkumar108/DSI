@@ -170,7 +170,7 @@
                             <button name="occupancy" id="occupancyBtn" class="orptbtn" onclick="occupancyBtnClicked()">Occupancy</button>
                         </li>
                         <li>
-                            <button name="utilization" id="utilizationBtn" class="orptbtn" onclick="utilizationBtnClicked()">utilization</button>
+                            <button name="utilization" id="utilizationBtn" class="orptbtn" onclick="utilizationBtnClicked()">Utilization</button>
                         </li>
                     </ul>
                     <ul class="chartButton">
@@ -604,9 +604,25 @@
 
                     generateTrackmap(selectedDate, nextDate, start_time, end_time);
                 }
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active-internal-tab')) {
 
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
+
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active-internal-tab')) {
+
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } 
+                    else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
+        }
+    }
             }
-
             function customCalSearch() {
 
                 let fromDate = $("#from").datepicker("getDate");
@@ -686,9 +702,10 @@
                     }
 
                     apiCal(calDate, calNextDate, value, start_time, end_time);
+                }
 
-                } else if ($('#occrptbtn').hasClass('active-tab') || $('#calendar').hasClass('active-tab')
-                    || $('#graph').hasClass('active-tab')) {
+                 else if ($('#occrptbtn').hasClass('active-tab') && $('#calendar').hasClass('active-tab')) 
+                {
 
                     if ($('#occupancyBtn').hasClass('active')) {
                         getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
@@ -700,14 +717,8 @@
                     $('#big-calendar').append($('<div class="oCalendar" id="calendar"></div>'));
 
                     // loadOccupancyCalendar();
-
-                    var millisecondsToWait = 4000;
-                    setTimeout(function () {
-                        // Whatever you want to do after the wait
-                        oCalendar();
-                    }, millisecondsToWait);
-
-                } else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active-internal-tab')) {
+                } 
+                 else if ($('#occrptbtn').hasClass('active') && $('#graphBtn').hasClass('active-internal-tab')) {
 
                     if ($('#occupancyBtn').hasClass('active')) {
                         getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
@@ -720,5 +731,4 @@
 
         </script>
 </body>
-
 </html>
