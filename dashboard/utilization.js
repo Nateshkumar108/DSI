@@ -1,4 +1,4 @@
-function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time, end_time) {
+function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time) {
   var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
 
 
@@ -121,7 +121,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
 }
 
 
-function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, end_time) {
+function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time) {
 
   var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
 
@@ -207,7 +207,6 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         
 
         console.log("dateToOccupancyMap was ", dateToOccupancyMap);
-        // FetchUtilization.setOccupancyDateDictionary(dateToOccupancyMap);
         
 
       } else {
