@@ -10,6 +10,7 @@ var s2 = document.getElementById("s2");
 var s3 = document.getElementById("s3");
 var s4 = document.getElementById("s4");
 var s5 = document.getElementById("s5");
+
 function myPeopleCounter() {
     $('#graphBtn').hide();
     $('#occupancyBtn').hide();
@@ -45,14 +46,14 @@ function myPeopleCounter() {
     $('#agc').removeClass('active-tab');
     $('#trkMap').removeClass('active-tab');
     $('#occrptbtn').removeClass('active-tab');
+
     $('#inout').addClass('active');
+    $('#in').removeClass('active');
+    $('#out').removeClass('active');
+
     $('#occupancyBtn').hide();
-    //$('#utilizationBtn').hide();
     $('#txt-custom-cal').show();
     $('#calendar').hide();
-    // $("hiChart").show();
-    // $("agCount").hide();
-    // $("trackMap").hide();
 
 }
 
@@ -86,7 +87,7 @@ function myAgeCounter() {
     $('#txt-custom-cal').show();
     $('#calendar').hide();
 
-   
+
 }
 
 function myTrackMap() {
@@ -120,20 +121,20 @@ function myTrackMap() {
     $('#txt-custom-cal').hide();
     $('#calendar').hide();
 
-    
-    
-    
-    generateTrackmap(calDate, calNextDate,start_time,end_time);
+
+
+
+    generateTrackmap(calDate, calNextDate, start_time, end_time);
 
 
 
 }
 
-function refreshApi(){
-    apiCal(fromDate, toDate, value,start_time,end_time);
+function refreshApi() {
+    apiCal(fromDate, toDate, value, start_time, end_time);
 }
 
-function occupyrpt(){
+function occupyrpt() {
     $('#in').hide();
     $('#out').hide();
     $('#inout').hide();
@@ -161,8 +162,8 @@ function occupyrpt(){
     $('#ppc').removeClass('active-tab');
     $('#agc').removeClass('active-tab');
     $('#occrptbtn').addClass('active-tab');
-    $('#graphBtn').addClass('active-internal-tab');
-    $('#oCalendarBtn').removeClass('active-internal-tab');
+    $('#graphBtn').addClass('active');
+    $('#oCalendarBtn').removeClass('active');
     $('#calendar').removeClass('active-tab');
     $('#occupancyBtn').addClass('active');
     $('#utilizationBtn').removeClass('active');
@@ -204,8 +205,8 @@ function oCalendar() {
     $('#ppc').removeClass('active-tab');
     $('#agc').removeClass('active-tab');
     $('#occrptbtn').addClass('active');
-    $('#graphBtn').removeClass('active-internal-tab');
-    $('#oCalendarBtn').addClass('active-internal-tab');
+    $('#graphBtn').removeClass('active');
+    $('#oCalendarBtn').addClass('active');
     $('#calendar').show();
 }
 
@@ -221,31 +222,29 @@ function oCalendar() {
 //     trackMap.style.display = "none";
 // }
 
-function graphButtonChart(){
+function graphButtonChart() {
     $('#graphBtn').show();
-    $('#oCalendarBtn').removeClass('active-internal-tab');
+    $('#oCalendarBtn').removeClass('active');
     $('#calendar').hide();
     $('#OccAndUtilReportGraph').show();
     $('#trkMap').removeClass('active-tab');
     $('#ppc').removeClass('active-tab');
     $('#agc').removeClass('active-tab');
     $('#occrptbtn').addClass('active-tab');
-   $('#calendar').removeClass('active-internal-tab');
-    $('#graphBtn').addClass('active-internal-tab');
+    $('#calendar').removeClass('active-internal-tab');
+    $('#graphBtn').addClass('active');
 
-    if($('#txt-custom-cal').hasClass('active-calendar'))
-    {
+    if ($('#txt-custom-cal').hasClass('active-calendar')) {
         customCalSearch();
     }
-    else if($('#txt-main-cal').hasClass('active-calendar'))
-    {
+    else if ($('#txt-main-cal').hasClass('active-calendar')) {
         mainCalSearch();
     }
 
-   // document.getElementById("OccAndUtilReportGraph").style.display = "block";
+    // document.getElementById("OccAndUtilReportGraph").style.display = "block";
 }
 
-function occupancyBtnClicked(){
+function occupancyBtnClicked() {
 
     $('#in').removeClass('active-tab');
     $('#out').removeClass('active-tab');
@@ -254,7 +253,7 @@ function occupancyBtnClicked(){
     $('#utilizationBtn').removeClass('active');
 }
 
-function utilizationBtnClicked(){
+function utilizationBtnClicked() {
 
     $('#in').removeClass('active-tab');
     $('#out').removeClass('active-tab');
