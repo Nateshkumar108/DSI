@@ -374,10 +374,10 @@
             var calNextDate = toDate;
             var from_hr;
             var from_min;
-            var start_time = "00:00";
+            var start_time;
             var to_hr;
             var to_min;
-            var end_time = "23:59";
+            var end_time;
             var avgMALE = 0;
             var avgFEMALE = 0;
             var sumMaleWeek = 0;
@@ -604,8 +604,16 @@
 
                     generateTrackmap(selectedDate, nextDate, start_time, end_time);
                 }
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active-internal-tab')) {
+
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
 
             }
+        }
 
             function customCalSearch() {
 
@@ -686,9 +694,10 @@
                     }
 
                     apiCal(calDate, calNextDate, value, start_time, end_time);
+                }
 
-                } else if ($('#occrptbtn').hasClass('active-tab') || $('#calendar').hasClass('active-tab')
-                    || $('#graph').hasClass('active-tab')) {
+                 else if ($('#occrptbtn').hasClass('active-tab') && $('#calendar').hasClass('active-tab')) 
+                {
 
                     if ($('#occupancyBtn').hasClass('active')) {
                         getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
