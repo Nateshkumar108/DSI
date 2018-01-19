@@ -377,7 +377,7 @@ var FetchUtilization =  {
 
     
 
-    if ($('#occupancyBtn').hasClass('active-tab')) {
+    if ($('#occupancyBtn').hasClass('active')) {
       // set all necessary properties of highchart, graph for occupancy
       $('#OccAndUtilReportGraph').show();
       $('#calendar').hide();

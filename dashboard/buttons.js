@@ -12,6 +12,8 @@ var s4 = document.getElementById("s4");
 var s5 = document.getElementById("s5");
 function myPeopleCounter() {
     $('#graph').hide();
+    $('#occupancyBtn').hide();
+    $('#utilizationBtn').hide();
     $('#OccAndUtilReportGraph').hide();
     $('#oCalendarBtn').hide();
     $('#in').show();
