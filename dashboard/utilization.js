@@ -10,7 +10,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
 
   
 
-
+  $('#page-loader').show();
   $.ajax({
     headers: {
       'Access-Control-Allow-Headers': '*',
@@ -25,7 +25,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
     dataType: 'JSON',
     success: function (data) {
       console.log("data coming from getPeopleCounterAndFindUtilization was ", data.data[0].items);
-
+      $('#page-loader').hide();
       var capacity = 3;
 
       if ($('#txt-custom-cal').hasClass("active-calendar")) {
@@ -81,13 +81,14 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
             timeToUtilMap[time] = 0;
           } else {
             timeToUtilMap[time] = util;
-          } 
+          }
         }
 
         console.log("timeToUtilMap was ", timeToUtilMap);
         FetchUtilization.setUtilizationTimeDictionary(timeToUtilMap);
-        
+
         timeToUtilGlobalMap = timeToUtilMap;
+
         if($('#graphBtn').hasClass('active-internal-tab')) {
           showInHighCharts(timeToUtilGlobalMap);
         } else {
@@ -95,6 +96,10 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
         }
       }
 
+
+      if ($('#oCalendarBtn').hasClass('active-internal-tab')) {
+        oCalendar();
+      }
     }
   });
 }
@@ -114,7 +119,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
     furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/days/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
   }
 
-
+  $('#page-loader').show();
   $.ajax({
     headers: {
       'Access-Control-Allow-Headers': '*',
@@ -129,7 +134,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
     dataType: 'JSON',
     success: function (data) {
       console.log("data coming from getPeopleCounterAndFindOccupancy was ", data.data[0].items);
-
+      $('#page-loader').hide();
       var capacity = 3;
       if ($('#txt-custom-cal').hasClass("active-calendar")) {
         // show dates in x-axis
@@ -149,6 +154,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
           var occupancy = numPeople;
           dateToOccupancyMap[currDate] = util;
           
+
         }
 
         dateToOccupancyGlobalMap = dateToOccupancyMap;
@@ -159,15 +165,14 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
           showInCalendar(dateToOccupancyGlobalMap);
         }
 
-
         console.log("dateToOccupancyMap was ", dateToOccupancyMap);
-        
+
 
       } else {
         // show hours in x-axis
 
         var time = "";
-       // var tim = [];
+        // var tim = [];
         var numPeople = 0;
         var timeToOccupancyMap = [];
         var length = data.data[0].items.length;
@@ -179,12 +184,12 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
           }
           time = item.date.split(" ")[1];
           var hours = time.split(":")[0];
-          if(hours > 20) {
+          if (hours > 20) {
             timeToOccupancyMap[time] = 0;
           } else {
             timeToOccupancyMap[time] = numPeople;
           }
-          
+
           //timeToOccupancyMap.push(numPeople);
           //tim.push(time);
 
@@ -194,10 +199,11 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
         //var timeOMdata=timeToOccupancyMap.split(" ");
         // console.log("@@@@time", timeOMdata[0]);
         // console.log("@@@@data", timeOMdata[1]);
-        
+
         // FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
-        
+
         timeToOccupancyGlobalMap = timeToOccupancyMap;
+
         if($('#graphBtn').hasClass('active-internal-tab')) {
           showInHighCharts(timeToOccupancyGlobalMap);
         } else {
@@ -205,7 +211,11 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
         }
 
       }
-      
+
+      if ($('#oCalendarBtn').hasClass('active-internal-tab')) {
+        oCalendar();
+
+      }
 
     }
   });
@@ -218,137 +228,133 @@ var utilizationTime;
 var OccupancyDate;
 var OccupancyTime;
 
-var FetchUtilization =  {
-    
-    setUtilizationDateDictionary: function (data) {
-      utilizationDate = data;
-    },
-    getUtilizationDateDictionary: function () {
-      return utilizationDate;
-    },
-    setUtilizationTimeDictionary: function (data) {
-      utilizationTime = data;
-    },
-    getUtilizationTimeDictionary: function () {
-      return utilizationTime;
-    },
+var FetchUtilization = {
 
-    setOccupancyDateDictionary: function (data) {
-      OccupancyDate = data;
-    },
-    getOccupancyDateDictionary: function () {
-      return OccupancyDate;
-    },
-    setOccupancyTimeDictionary: function (data) {
-      OccupancyTime = data;
-    },
-    getOccupancyTimeDictionary: function () {
-      return OccupancyTime;
-    }
-  };
+  setUtilizationDateDictionary: function (data) {
+    utilizationDate = data;
+  },
+  getUtilizationDateDictionary: function () {
+    return utilizationDate;
+  },
+  setUtilizationTimeDictionary: function (data) {
+    utilizationTime = data;
+  },
+  getUtilizationTimeDictionary: function () {
+    return utilizationTime;
+  },
 
-  function createHighchart() {
+  setOccupancyDateDictionary: function (data) {
+    OccupancyDate = data;
+  },
+  getOccupancyDateDictionary: function () {
+    return OccupancyDate;
+  },
+  setOccupancyTimeDictionary: function (data) {
+    OccupancyTime = data;
+  },
+  getOccupancyTimeDictionary: function () {
+    return OccupancyTime;
+  }
+};
 
-    Highcharts.chart('OccAndUtilReportGraph', {
-      chart: {
-        type: 'column',
-        height: 65 + '%'
-      },
+function createHighchart() {
+
+  Highcharts.chart('OccAndUtilReportGraph', {
+    chart: {
+      type: 'column',
+      height: 65 + '%'
+    },
+    title: {
+      text: ''
+    },
+    subtitle: {
+      text: ''
+    },
+    credits: {
+      enabled: false
+    },
+    xAxis: {
+      type: 'datetime',
+      // categories: xAxis,
+      // min:startdate,
+      //max:endDate,
+      crosshair: true,
+      tickInterval: 1
+    },
+    yAxis: {
+      min: 0,
       title: {
         text: ''
-      },
-      subtitle: {
-        text: ''
-      },
-      credits: {
-        enabled: false
-      },
-      xAxis: {
-        type: 'datetime',
-        // categories: xAxis,
-       // min:startdate,
-        //max:endDate,
-        crosshair: true,
-        tickInterval:1
-      },
-      yAxis: {
-        min: 0,
-        title: {
-          text: ''
-        }
-      },
-      // tooltip: {
-      //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-      //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-      //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
-      //   footerFormat: '</table>',
-      //   shared: true,
-      //   useHTML: true
-      // },
-      plotOptions: {
-        column: {
-          pointPadding: 0.2,
-          borderWidth: 0
-        }
-      },
-      series: [{
-        name: '',
-        data: []
-      }]
-    });
+      }
+    },
+    // tooltip: {
+    //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+    //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+    //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+    //   footerFormat: '</table>',
+    //   shared: true,
+    //   useHTML: true
+    // },
+    plotOptions: {
+      column: {
+        pointPadding: 0.2,
+        borderWidth: 0
+      }
+    },
+    series: [{
+      name: '',
+      data: []
+    }]
+  });
+
+}
+
+function showInHighCharts(dictionary) {
+
+  var graph = $('#OccAndUtilReportGraph').highcharts();
+  graph.series[0].setData([]);
+
+  var data = [];
+
+  var yAxis = [];
+  console.log("dictionary was printed");
+  var xAxis = [];
+  for (var key in dictionary) {
+    // console.log("key " + key + " value " + dictionary[key]);
+
+    // var date = new Date(fromDate + " " + key);
+
+    // console.log("Date was ", date);
+    // xAxis.push(key);
+    // yAxis.push(dictionary[key]);
+    xAxis.push(key);
+    yAxis.push(dictionary[key]);
+    data.push([key, dictionary[key]]);
+
+    // graph.series[0].addPoint(dictionary[key], false);
 
   }
 
-  function showInHighCharts (dictionary) {
+  console.log("Hello world", graph);
+  graph.series[0].setData(yAxis);
+  graph.xAxis[0].setCategories(xAxis);
 
-    var graph = $('#OccAndUtilReportGraph').highcharts();
-    graph.series[0].setData([]);
+  // if ($('#occupancyBtn').hasClass('active')) {
+  //   // set all necessary properties of highchart, graph for occupancy
+  //   $('#OccAndUtilReportGraph').show();
+  //   $('#calendar').hide();
 
-    var data = [];
-    
-    var yAxis = [];
-    console.log("dictionary was printed");
-    var xAxis = [];
-    for (var key in dictionary) {
-      // console.log("key " + key + " value " + dictionary[key]);
+  // } else {
+  //   // set all necessary properties of highchart, graph for utilisation 
+  //   $('#OccAndUtilReportGraph').show();
+  //   $('#calendar').hide();
+  // }
 
-      // var date = new Date(fromDate + " " + key);
+}
 
-      // console.log("Date was ", date);
-      // xAxis.push(key);
-      // yAxis.push(dictionary[key]);
-      xAxis.push(key);
-      yAxis.push(dictionary[key]);
-      data.push([key, dictionary[key]]);
+function showInCalendar(dictionary) {
 
-      // graph.series[0].addPoint(dictionary[key], false);
-
-    }
-
-    //console.log("Hello world", graph);
-    graph.series[0].setData(yAxis);
-    graph.xAxis[0].setCategories(xAxis);
-
-    
-
-    // if ($('#occupancyBtn').hasClass('active')) {
-    //   // set all necessary properties of highchart, graph for occupancy
-    //   $('#OccAndUtilReportGraph').show();
-    //   $('#calendar').hide();
-
-    // } else {
-    //   // set all necessary properties of highchart, graph for utilisation 
-    //   $('#OccAndUtilReportGraph').show();
-    //   $('#calendar').hide();
-    // }
-    
-
-
-  }
-
-  function showInCalendar (dictionary) {
-
-  } 
+}
 
 
 
