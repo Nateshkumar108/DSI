@@ -402,6 +402,7 @@
     <script type="text/javascript" src="utilization.js"></script>
     <script type="text/javascript" src="occupancyGraph.js"></script>
     <script type="text/javascript" src="oCalendar.js"></script>
+    <script type="text/javascript" src="login.js"></script>
     
     <script type="text/javascript">
         var avgI = document.getElementById("avgI");
@@ -713,6 +714,19 @@
             
         }
 
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBgCfUYjlhyeshrvl-E65dSOdZpbi3FaC0",
+        authDomain: "digitalspacesinc.firebaseapp.com",
+        databaseURL: "https://digitalspacesinc.firebaseio.com",
+        projectId: "digitalspacesinc",
+        storageBucket: "digitalspacesinc.appspot.com",
+        messagingSenderId: "472419349927"
+      };
+      firebase.initializeApp(config);
     </script>
 </body>
 
