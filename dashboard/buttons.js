@@ -47,9 +47,9 @@ function myPeopleCounter() {
     $('#trkMap').removeClass('active-tab');
     $('#occrptbtn').removeClass('active-tab');
 
-    $('#inout').addClass('active');
-    $('#in').removeClass('active');
-    $('#out').removeClass('active');
+    // $('#inout').addClass('active');
+    // $('#in').removeClass('active');
+    // $('#out').removeClass('active');
 
     $('#occupancyBtn').hide();
     $('#txt-custom-cal').show();
