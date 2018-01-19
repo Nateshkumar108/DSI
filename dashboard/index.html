@@ -224,9 +224,7 @@
             
             <div class="trackMaps" id="trackMap">
                 <div class="floor-plan">
-                    <canvas id="trackmap" class="img-trackmap" width="591" height="583">
-                        <!-- <canvas id="imageView"></canvas> -->
-                    </canvas>
+                    <canvas id="trackmap" width="591" height="583"></canvas>
                 </div>
             </div>
 
@@ -354,6 +352,7 @@
 
     <script type="text/javascript">
         var today = new Date();
+        var canvas;
         var day = today.getDate();
         var month = today.getMonth() + 1;
         var year = today.getFullYear();
@@ -385,6 +384,7 @@
     <script type="text/javascript" src="js/utility/full-calendar/moment.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/utility/fabric.min.js"></script>
     <script type="text/javascript" src="calender.js"></script>
     <script type="text/javascript" src="js/utility/full-calendar/fullcalendar.js"></script>
     
