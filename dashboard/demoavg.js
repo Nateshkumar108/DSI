@@ -7,32 +7,23 @@ var weekDate;
 var monthDate;
 function avgData(){
     
-  var today = new Date();
-      var day = today.getDate();
-      var month = today.getMonth() + 1;
-      var year = today.getFullYear();
-      var todayDate = year + "-" + month + "-" + day;
-      todayD=todayDate.split("-");
-      if(todayD[2]==7){
-        weekDate=1;
-      }
-      if(todayD[2]>7){
-        weekDate=todayD[2]-7;
-      }
-      else if(todayD[2]<7){
-        daysLeft= 7-todayD[2];
-        var dim=daysInMonth(month,year);
-        //console.log("~~~~~~~~~~~~~~DIM", dim);
-        weekDate=dim-daysLeft;
-       
-      }
-      startDate= year + "-" + month + "-" + weekDate;
-     fromDate=startDate;
-     todayDate= year + "-" + month + "-" + day;
-     toDate=todayDate;
      sumMaleWeek=0;
+
+     var todate = new Date();
+     var day = todate.getDate();
+     var month = todate.getMonth() + 1;
+     var year = todate.getFullYear();
+     var fromdate = new Date(todate.getTime() - 7*24*3600*1000);
+     todate = year + "-" + month + "-" + day;
+     var day = fromdate.getDate();
+     var month = fromdate.getMonth() + 1;
+     var year = fromdate.getFullYear();
+     fromdate = year + "-" + month + "-" + day;
+
+
+
      
-     var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/days/" + fromDate + "/" + toDate + "?st=00:00&et=24:00";
+     var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/days/" + fromdate + "/" + todate + "?st=00:00&et=24:00";
  
   $.ajax({
 
@@ -169,18 +160,17 @@ function avgData(){
         var day = todate.getDate();
         var month = todate.getMonth() + 1;
         var year = todate.getFullYear();
-
-        var toDate = year + "-" + month + "-" + day;
         var fromdate = new Date(todate.getTime() - 30*24*3600*1000);
+        todate = year + "-" + month + "-" + day;
         var day = fromdate.getDate();
         var month = fromdate.getMonth() + 1;
         var year = fromdate.getFullYear();
 
-        var fromDate = year + "-" + month + "-" + day;
-        console.log("***** startDate",fromDate);
-        console.log("***** toDate",toDate);
+        fromdate = year + "-" + month + "-" + day;
+        console.log("***** startDate",fromdate);
+        console.log("***** toDate",todate);
            
-        var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/days/" + fromDate + "/" + toDate +"?st=00:00&et=24:00"; 
+        var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/days/" + fromdate + "/" + todate +"?st=00:00&et=24:00"; 
        
         $.ajax({
       

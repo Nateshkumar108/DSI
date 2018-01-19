@@ -125,6 +125,11 @@ function occupyrpt(){
     $('#in').hide();
     $('#out').hide();
     $('#inout').hide();
+
+    console.log("fromDate was " + fromDate + " and toDate was " + toDate);
+
+    // document.getElementById("occrptbtn").style.display = "block";
+    
     hiChart.style.display = "none";
     agCount.style.display = "none";
     trackMap.style.display = "none";
