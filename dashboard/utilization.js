@@ -1,4 +1,5 @@
 function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time) {
+
   var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
 
 
@@ -71,10 +72,10 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
         console.log("dateToUtilMap was ", dateToUtilMap);
         dateToUtilGlobalMap = dateToUtilMap;
       
-        if($('#graph').hasClass('active-tab')) {
+        if($('#graphBtn').hasClass('active-internal-tab')) {
           showInHighCharts(dateToUtilGlobalMap);
         } else {
-          showInCalendar(timeToUtilGlobalMap);
+          showInCalendar(dateToUtilGlobalMap);
         }
 
 
@@ -108,7 +109,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
         FetchUtilization.setUtilizationTimeDictionary(timeToUtilMap);
         
         timeToUtilGlobalMap = timeToUtilMap;
-        if($('#graph').hasClass('active-tab')) {
+        if($('#graphBtn').hasClass('active-internal-tab')) {
           showInHighCharts(timeToUtilGlobalMap);
         } else {
           showInCalendar(timeToUtilGlobalMap);
@@ -121,6 +122,10 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
 
 
 function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time) {
+  console.log("start time",start_time);
+  console.log("end time",end_time);
+  console.log("fromDate",fromDate);
+  console.log("toDate",toDate);
 
   var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
 
@@ -197,13 +202,12 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
 
         dateToOccupancyGlobalMap = dateToOccupancyMap;
         
-        if($('#graph').hasClass('active-tab')) {
+        if($('#graphBtn').hasClass('active-internal-tab')) {
           showInHighCharts(dateToOccupancyGlobalMap);
         } else {
           showInCalendar(dateToOccupancyGlobalMap);
         }
 
-        
 
         console.log("dateToOccupancyMap was ", dateToOccupancyMap);
         
@@ -243,12 +247,12 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
         // FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
         
         timeToOccupancyGlobalMap = timeToOccupancyMap;
-        if($('#graph').hasClass('active-tab')) {
+        if($('#graphBtn').hasClass('active-internal-tab')) {
           showInHighCharts(timeToOccupancyGlobalMap);
         } else {
           showInCalendar(timeToOccupancyGlobalMap);
         }
-        
+
       }
       
 
@@ -370,22 +374,22 @@ var FetchUtilization =  {
 
     }
 
-    console.log("Hello world", graph);
+    //console.log("Hello world", graph);
     graph.series[0].setData(yAxis);
     graph.xAxis[0].setCategories(xAxis);
 
     
 
-    if ($('#occupancyBtn').hasClass('active')) {
-      // set all necessary properties of highchart, graph for occupancy
-      $('#OccAndUtilReportGraph').show();
-      $('#calendar').hide();
+    // if ($('#occupancyBtn').hasClass('active')) {
+    //   // set all necessary properties of highchart, graph for occupancy
+    //   $('#OccAndUtilReportGraph').show();
+    //   $('#calendar').hide();
 
-    } else {
-      // set all necessary properties of highchart, graph for utilisation 
-      $('#OccAndUtilReportGraph').show();
-      $('#calendar').hide();
-    }
+    // } else {
+    //   // set all necessary properties of highchart, graph for utilisation 
+    //   $('#OccAndUtilReportGraph').show();
+    //   $('#calendar').hide();
+    // }
     
 
 

@@ -205,12 +205,29 @@ ageCounter ul ul p{
   display: flex;
   width: 100%;
 }
-
+.occUtilBtn{
+  list-style: none;
+  display: flex;
+  width: 100%;
+}
 .chartButton li{
   width: 25%;
   margin-right: 2%;
 }
+.occUtilBtn li{
+  width: 25%;
+  margin-right: 2%;
+}
 .chartButton button{
+  background: transparent;
+  color: white;
+  height: 28px;
+  font-size: small;
+  border: 1px solid white;
+  width: 100%;
+
+}
+.occUtilBtn button{
   background: transparent;
   color: white;
   height: 28px;
@@ -227,10 +244,17 @@ ageCounter ul ul p{
     font-size: small;
    
 }
+.occUtilBtn button:hover{
+  background:transparent;
+  border: 1px solid #1DAFEB;
+  color: #1DAFEB;
+  height: 28px;
+    font-size: small;
+   
+}
 .pignose-calendar{
   width: 100% !important;
 }
-
 .article{
   margin-top: 0 !important;
   padding-top: 0 !important;
@@ -242,12 +266,12 @@ ageCounter ul ul p{
     justify-content: center;
 }
 
-.chartButton button.active {
+.chartButton button.active, .occUtilBtn button.active {
   background:#1DAFEB;
   border: 1px solid #1DAFEB;
 
 }
-.chartButton button.active:hover {
+.chartButton button.active:hover, .occUtilBtn button.active:hover{
   background:transparent;
   border: 1px solid #1DAFEB;
   color:#1DAFEB;
@@ -327,6 +351,11 @@ button, .hand-pointer {
 .active-calendar {
   text-decoration: underline;
   color: #1DB0EC;
+}
+
+.active-internal-tab{
+  background:#1DAFEB;
+  border: 1px solid #1DAFEB;
 }
 
 .clearfix:after {
@@ -493,4 +522,7 @@ button, .hand-pointer {
 .fc-today {
   background:green;
   font-weight: bold;
+}
+.hide{
+  display: none;
 }

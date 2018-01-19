@@ -8,10 +8,10 @@ var totalIN = 0;
 var totalOUT = 0;
 var totalINOUT = 0;
 var avgINOUT = 0;
-//console.log("DATESDFGHJKJHGFD" + fromDate)
-//console.log("DATESDFGHJKJHGFD" + toDate);
+//console.log("DATESDFGHJKJHGFD" + calDate)
+//console.log("DATESDFGHJKJHGFD" + calNextDate);
 
-var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=00:00&et=24:00";
+var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + calDate + "/" + calNextDate + "?st=00:00&et=24:00";
 
 $(document).ready(function () {
   /*var url = "https://eds.modcam.io/v1/peoplecounter/installation";
@@ -33,6 +33,8 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#out').removeClass('active');
       $('#inout').removeClass('active');
+      $('#occupancyBtn').removeClass('active');
+      $('#utilizationBtn').removeClass('active');
       // avgI.style.display = "block";
       // totalI.style.display = "block";
       // avgO.style.display = "none";
@@ -90,7 +92,7 @@ $(document).ready(function () {
           var timeArray = item.date.split(" ");
           times.push(timeArray[1]);
         }
-        loadCaptions("in", furl,fromDate,toDate,start_time,end_time);
+        loadCaptions("in", furl,calDate,calNextDate,start_time,end_time);
         if($('#txt-custom-cal').hasClass('active-calendar'))
         {
           customCalSearch();
@@ -151,6 +153,8 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#in').removeClass('active');
       $('#inout').removeClass('active');
+      $('#occupancyBtn').removeClass('active');
+      $('#utilizationBtn').removeClass('active');
       // avgI.style.display = "none";
       // totalI.style.display = "none";
       // avgO.style.display = "block";
@@ -209,7 +213,7 @@ $(document).ready(function () {
           var timeArray = item.date.split(" ");
           times.push(timeArray[1]);
         }
-        loadCaptions("out", furl,fromDate,toDate,start_time,end_time);
+        loadCaptions("out", furl,calDate,calNextDate,start_time,end_time);
         if($('#txt-custom-cal').hasClass('active-calendar'))
         {
           customCalSearch();
@@ -278,6 +282,8 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#in').removeClass('active');
       $('#out').removeClass('active');
+      $('#occupancyBtn').removeClass('active');
+      $('#utilizationBtn').removeClass('active');
       // avgIO.style.display = "block";
       // totalIO.style.display = "block";
       // totalI.style.display = "block";
@@ -343,7 +349,7 @@ $(document).ready(function () {
           times.push(timeArray[1]);
         }
         // loadCaptions("inout", furl);
-        loadCaptions("inout", furl,fromDate,toDate,start_time,end_time);
+        loadCaptions("inout", furl,calDate,calNextDate,start_time,end_time);
         if($('#txt-custom-cal').hasClass('active-calendar'))
         {
           customCalSearch();
@@ -432,9 +438,9 @@ $(document).ready(function () {
         times.push(timeArray[1]);
       }
       
-      loadCaptions("inout", furl,fromDate,toDate,start_time,end_time);
-      loadCaptions("in", furl,fromDate,toDate,start_time,end_time);
-      loadCaptions("out", furl,fromDate,toDate,start_time,end_time);
+      loadCaptions("inout", furl,calDate,calNextDate,start_time,end_time);
+      loadCaptions("in", furl,calDate,calNextDate,start_time,end_time);
+      loadCaptions("out", furl,calDate,calNextDate,start_time,end_time);
       Highcharts.chart('container', {
         chart: {
           type: 'column',
@@ -703,13 +709,13 @@ Highcharts.theme = {
 Highcharts.setOptions(Highcharts.theme);
 
 
-function loadCaptions(value, furl,fromDate,toDate,start_time,end_time) {
+function loadCaptions(value, furl,calDate,calNextDate,start_time,end_time) {
   var totalIN = 0;
   var totalOUT = 0;
   var totalINOUT = 0;
   var avgINOUT = 0;
-  from=fromDate.split("-");
-  to=toDate.split("-");
+  from=calDate.split("-");
+  to=calNextDate.split("-");
   var diff = to[2]-from[2];
   start=start_time.split(":");
   end=end_time.split(":");
