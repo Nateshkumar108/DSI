@@ -252,6 +252,15 @@ function occupancyBtnClicked(){
     $('#inout').removeClass('active-tab');
     $('#occupancyBtn').addClass('active');
     $('#utilizationBtn').removeClass('active');
+    
+    if($('#txt-custom-cal').hasClass('active-calendar'))
+    {
+        customCalSearch();
+    }
+    else if($('#txt-main-cal').hasClass('active-calendar'))
+    {
+        mainCalSearch();
+    }
 }
 
 function utilizationBtnClicked(){
@@ -261,4 +270,13 @@ function utilizationBtnClicked(){
     $('#inout').removeClass('active-tab');
     $('#occupancyBtn').removeClass('active');
     $('#utilizationBtn').addClass('active');
+
+    if($('#txt-custom-cal').hasClass('active-calendar'))
+    {
+        customCalSearch();
+    }
+    else if($('#txt-main-cal').hasClass('active-calendar'))
+    {
+        mainCalSearch();
+    }
 }

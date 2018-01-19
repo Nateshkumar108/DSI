@@ -1,3 +1,4 @@
+
 function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time) {
 
   var furl = "";
@@ -152,7 +153,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
           var currDate = item.date.split(" ")[0];
           var numPeople = item.in - item.out;
           var occupancy = numPeople;
-          dateToOccupancyMap[currDate] = util;
+          dateToOccupancyMap[currDate] = occupancy;
           
 
         }
@@ -302,7 +303,7 @@ function createHighchart() {
       }
     },
     series: [{
-      name: '',
+      name: 'Occupancy',
       data: []
     }]
   });
