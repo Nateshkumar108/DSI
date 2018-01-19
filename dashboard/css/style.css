@@ -490,3 +490,16 @@ button, .hand-pointer {
   background:#1DAFEB;
   border: 1px solid #1DAFEB;
 }
+.ocr-graph-cal {
+  color: #fff;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.parent-ocr-graph-cal {
+  padding-left: 2.5em;
+}
+
+.ocr-graph-cal.active {
+  text-decoration: underline;
+  color: #1DB0EC;

@@ -164,7 +164,7 @@
 
             </div>
             <div class="occupancyrpt hide" id="occrpt">
-                <ul class="occupancyReportTab">
+                <div class="occupancyReportTab">
                     <ul class="occUtilBtn">
                         <li>
                             <button name="occupancy" id="occupancyBtn" class="orptbtn" onclick="occupancyBtnClicked()">Occupancy</button>
@@ -173,15 +173,13 @@
                             <button name="utilization" id="utilizationBtn" class="orptbtn" onclick="utilizationBtnClicked()">Utilization</button>
                         </li>
                     </ul>
-                    <ul class="chartButton">
-                        <li>
-                            <button name="graph" id="graphBtn" class="orptbtn active-internal-tab" onclick="graphButtonChart()">Graph</button>
-                        </li>
-                        <li>
-                            <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">Calendar</button>
-                        </li>
-                    </ul>
-                </ul>
+                    <div class="clearfix"></div>
+                    <div class="parent-ocr-graph-cal">
+                        <span id="graphBtn" class="ocr-graph-cal active" onclick="graphButtonChart()">Graph</span>
+                        <span class="white">|</span>
+                        <span id="oCalendarBtn" class="ocr-graph-cal" onclick="oCalendar()">Calendar</span>
+                    </div>
+                </div>
                 <div id="OccAndUtilReportGraph" style="min-width: 310px; margin: 0 auto"></div>
             </div>
 
@@ -239,21 +237,6 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        <!-- <div class="occupancyrpt" id="occrpt">
-            <div class="graphs">
-                <div class="highcharts" id="hiChartOR">
-                    <ul class="highchartTab">
-                        <ul class="chartButton">
-                             <li>
-                                <button name="graph" id="graph" class="orptbtn" onclick="">GRAPH</button>
-                            </li>
-                            <li>
-                                <button name="oCalendar" id="oCalendar" class="orptbtn" onclick="">CALENDAR</button>
-                            </li> 
-                        </ul>
-                    </div>
-                </div>
-            </div>  -->
         <div class="event">
             <div class="selectZone">
                 <h3>SELECT ZONE</h3>
@@ -322,18 +305,12 @@
                 <div class="clearfix"></div>
                 <label for="to" class="lbl-calendar">To: </label>
                 <input type="text" id="to" name="to">
-
                 <div class="clearfix"></div>
-
-
             </div>
 
-            <!-- <div class="time">
-                <div id="slider"></div>
-
-            </div> -->
             <div class="medium-space"></div>
             <div class="clearfix"></div>
+
             <div>
                 <span>Time:</span>
                 <div class="timer">
@@ -454,19 +431,10 @@
                                 value = 'in-out';
 
                             }
-
-                            // apiCal(fromDate, toDate, value,start_time,end_time);
-
                         }
-
-                        // else if ($('#trkMap').hasClass('active-tab')) {
-                        //     generateTrackmap(fromDate, toDate);
-                        // }
 
                     }
                 });
-
-                // $("#slider").slider();
 
                 $('#txt-main-cal').click(function () {
                     $('#main-calendar').show();
@@ -603,38 +571,40 @@
                     end_time = to_hr + ":" + to_min;
 
                     generateTrackmap(selectedDate, nextDate, start_time, end_time);
+            } 
+    
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#oCalendarBtn').hasClass('active')) {
+
+                        if ($('#occupancyBtn').hasClass('active')) {
+                            getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                        } else if ($('#utilizationBtn').hasClass('active')) {
+                            getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                        }
+
+                        $('#calendar').remove();
+                        $('#big-calendar').append($('<div class="oCalendar" id="calendar"></div>'));
+
+                        // loadOccupancyCalendar();
+                    }
+                    else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active')) {
+
+                        if ($('#occupancyBtn').hasClass('active')) {
+                            getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                        } else if ($('#utilizationBtn').hasClass('active')) {
+                            getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                        }
+
+                  
                 }
-                else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active-internal-tab')) {
-
-                    if ($('#occupancyBtn').hasClass('active')) {
-                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
-                    } else if ($('#utilizationBtn').hasClass('active')) {
-                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
-                    }
-
-                else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active-internal-tab')) {
-
-                    if ($('#occupancyBtn').hasClass('active')) {
-                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
-                    } 
-                    else if ($('#utilizationBtn').hasClass('active')) {
-                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
-                    }
-        }
-    }
-            }
+    
             function customCalSearch() {
 
                 let fromDate = $("#from").datepicker("getDate");
                 let toDate = $("#to").datepicker("getDate");
 
-
                 toDate = new Date(new Date(toDate).getTime() + (24 * 60 * 60 * 1000));
-
-
                 fromDate = fromDate.getFullYear() + "-" + (fromDate.getMonth() + 1) + "-" + fromDate.getDate();
                 calDate = fromDate;
-
                 toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + (toDate.getDate());
                 calNextDate = toDate;
 
@@ -704,8 +674,8 @@
                     apiCal(calDate, calNextDate, value, start_time, end_time);
                 }
 
-                 else if ($('#occrptbtn').hasClass('active-tab') && $('#calendar').hasClass('active-tab')) 
-                {
+
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#oCalendarBtn').hasClass('active')) {
 
                     if ($('#occupancyBtn').hasClass('active')) {
                         getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
@@ -728,7 +698,7 @@
 
                 }
             }
-
         </script>
 </body>
+
 </html>
