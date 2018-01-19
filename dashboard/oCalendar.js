@@ -45,9 +45,9 @@ function loadOccupancyCalendar(){
                     //$(cell).html(dateToUtilGlobalMap[date]);
                     
                 }
-                // if (date === currentDate) {
-                //     $(cell).html('<div class="utilization-div" >50% utilization</div>');
-                // }
+                if (date === currentDate) {
+                    $(cell).html(timeToOccupancyGlobalMap[date]);
+                }
 
             },
             dayClick: function (date) {

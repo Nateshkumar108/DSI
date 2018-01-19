@@ -230,7 +230,9 @@
                 </div>
             </div>
 
-            <div class="oCalendar" id="calendar"></div>
+            <div id="big-calendar">
+                <div class="oCalendar" id="calendar"></div>
+            </div>
             <div class="clearfix"></div> 
         </div>
         <!-- <div class="occupancyrpt" id="occrpt">
@@ -697,13 +699,16 @@
                     getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
                 }
 
-                // $('#calendar').empty();
+                $('#calendar').remove();
+                $('#big-calendar').append($('<div class="oCalendar" id="calendar"></div>'));
 
-                // var millisecondsToWait = 4000;
-                // setTimeout(function () {
-                //     // Whatever you want to do after the wait
-                //     loadOccupancyCalendar();
-                // }, millisecondsToWait);
+                // loadOccupancyCalendar();
+
+                var millisecondsToWait = 4000;
+                setTimeout(function () {
+                    // Whatever you want to do after the wait
+                    oCalendar();
+                }, millisecondsToWait);
             }
             
         }
