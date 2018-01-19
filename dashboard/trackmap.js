@@ -1,7 +1,8 @@
-function generateTrackmap(fromDt, toDt) {
-    var furl = "http://18.216.208.225:3001/v1/tracker/motion/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDt + "/" + toDt + "?st=00:00&et=23:59&blackpoint=25&whitepoint=1000";
 
-    var xhr = new XMLHttpRequest();
+function generateTrackmap(fromDt, toDt) {
+    let furl = "http://18.216.208.225:3001/v1/tracker/motion/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDt + "/" + toDt + "?st=00:00&et=23:59&blackpoint=25&whitepoint=1000";
+
+    let xhr = new XMLHttpRequest();
     xhr.open('GET', furl, true);
     xhr.responseType = 'arraybuffer';
     xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
@@ -12,7 +13,7 @@ function generateTrackmap(fromDt, toDt) {
 
     xhr.onload = function (e) {
         if (this.status == 200) {
-            var data = btoa(String.fromCharCode.apply(null, new Uint8Array(this.response)));
+            let data = btoa(String.fromCharCode.apply(null, new Uint8Array(this.response)));
             drawArea(data, fromDt, toDt);
 
             // var canvas = getImageFor32BitInteger(this.response);
@@ -44,161 +45,100 @@ function getImageFor32BitInteger(data) {
 }
 
 function drawArea(data, fromDt, toDt) {
-    var canvas, context, canvaso, contexto;
+    let stDt = fromDt; 
+    let etDt = toDt;
+    if(canvas) {
+        canvas.dispose();
+    }
+    canvas = new fabric.Canvas('trackmap', {
+        preserveObjectStacking: true,
+        hoverCursor: 'default',
+        selection: false
+    });
 
-    // The active tool instance.
-    var tool;
-    var boxCoordintates;
-    var bX;
-    var bY;
-    var bWidth;
-    var bHeight;
-    var stDt = fromDt;
-    var etDt = toDt;
+    canvas.clear().renderAll();
+    let mainImage = "data:image/png;base64," + data;
 
-    function init() {
-        // Find the canvas element.
-        canvaso = document.getElementById('trackmap');
-        if (!canvaso) {
-            alert('Error: I cannot find the canvas element!');
+    canvas.setBackgroundImage('img/floor.PNG', canvas.renderAll.bind(canvas), {
+        // Needed to position backgroundImage at 0/0
+        originX: 'left',
+        originY: 'top'
+    });
+
+    fabric.Image.fromURL(mainImage, function (oImg) {
+        oImg.lockMovementX = true;
+        oImg.lockMovementY = true;
+        oImg.hasControls = false;
+        canvas.add(oImg);
+    });
+
+
+    let rect, isDown, origX, origY, bX, bY, bWidth, bHeight, group;
+
+    canvas.on('mouse:down', function (o) {
+        isDown = true;
+        var pointer = canvas.getPointer(o.e);
+        origX = pointer.x;
+        origY = pointer.y;
+        rect = new fabric.Rect({
+            left: origX,
+            top: origY,
+            originX: 'left',
+            originY: 'top',
+            width: pointer.x - origX,
+            height: pointer.y - origY,
+            angle: 0,
+            fill: 'rgba(0,0,0,0)',
+            stroke: 'black',
+            transparentCorners: false
+        });
+        canvas.add(rect);
+    });
+
+    canvas.on('mouse:move', function (o) {
+        if (!isDown) {
             return;
         }
+        var pointer = canvas.getPointer(o.e);
 
-        if (!canvaso.getContext) {
-            alert('Error: no canvas.getContext!');
-            return;
+        if (origX > pointer.x) {
+            rect.set({ left: Math.abs(pointer.x) });
         }
 
-        // Get the 2D canvas context.
-        contexto = canvaso.getContext('2d');
-        if (!contexto) {
-            alert('Error: failed to getContext!');
-            return;
+        if (origY > pointer.y) {
+            rect.set({ top: Math.abs(pointer.y) });
         }
+        rect.set({ width: Math.abs(origX - pointer.x) });
+        rect.set({ height: Math.abs(origY - pointer.y) });
 
+        canvas.renderAll();
+    });
 
-        var image = new Image();
-        image.onload = function () {
-            contexto.drawImage(image, 0, 0);
-        };
-        image.src = "data:image/png;base64," + data;
-
-        // Add the temporary canvas.
-        var container = canvaso.parentNode;
-        canvas = document.createElement('canvas');
-        if (!canvas) {
-            alert('Error: I cannot create a new canvas element!');
-            return;
-        }
-
-        canvas.id = 'imageTemp';
-        canvas.width = canvaso.width;
-        canvas.height = canvaso.height;
-        container.appendChild(canvas);
-
-        context = canvas.getContext('2d');
-
-        // Attach the mousedown, mousemove and mouseup event listeners.
-        canvas.addEventListener('mousedown', ev_canvas, false);
-        canvas.addEventListener('mousemove', ev_canvas, false);
-        canvas.addEventListener('mouseup', ev_canvas, false);
-        canvas.addEventListener('click', ev_canvas, false);
-
-        tool = new tools["rect"]();
-    }
-
-    // The general-purpose event handler. This function just determines the mouse 
-    // position relative to the canvas element.
-    function ev_canvas(ev) {
-        if (ev.layerX || ev.layerX == 0) { // Firefox
-            ev._x = ev.layerX;
-            ev._y = ev.layerY;
-        }
-
-        // Call the event handler of the tool.
-        var func = tool[ev.type];
-        if (func) {
-            func(ev);
-        }
-    }
-
-    // The event handler for any changes made to the tool selector.
-    function ev_tool_change(ev) {
-        if (tools[this.value]) {
-            tool = new tools[this.value]();
-        }
-    }
-
-    // This function draws the #imageTemp canvas on top of #imageView, after which 
-    // #imageTemp is cleared. This function is called each time when the user 
-    // completes a drawing operation.
-    function img_update() {
-        contexto.drawImage(canvas, 0, 0);
-        context.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    // This object holds the implementation of each drawing tool.
-    var tools = {};
-
-    // The rectangle tool.
-    tools.rect = function () {
-        var tool = this;
-        this.started = false;
-
-        this.click = function (ev) {
-            var x = Math.min(ev._x, tool.x0);
-            var y = Math.min(ev._y, tool.y0);
-            // console.log('*****************');
-            // console.log(x, y, bX, bY);
-        }
-
-        this.mousedown = function (ev) {
-            tool.started = true;
-            tool.x0 = ev._x;
-            tool.y0 = ev._y;
-        };
-
-        this.mousemove = function (ev) {
-            if (!tool.started) {
-                return;
+    canvas.on('mouse:up', function (o) {
+        var pos = canvas.getPointer(o.e);
+        isDown = false;
+        bX = parseInt(rect.get('left'));
+        bY = parseInt(rect.get('top'));
+        bWidth = parseInt(rect.get('width'));
+        bHeight = parseInt(rect.get('height'));
+        if (bWidth < 20 && bHeight < 20) {
+            activeObj = canvas.getActiveObject();
+            if (activeObj) {
+                if (Math.abs(pos.x - activeObj.left) < 18 && Math.abs(pos.y - activeObj.top) < 27 &&  Math.abs(pos.y - activeObj.top) > 12) {
+                    canvas.remove(canvas.getActiveObject());
+                } else {
+                    canvas.remove(rect);
+                    canvas.renderAll();
+                }
             }
+        } else {
+            let boxCoordintates = bX + "," + bY + "-" + (bX + bWidth) + "," + (bY + bHeight);
+            getBoxData(boxCoordintates);
+        }
+    });
 
-            var x = Math.min(ev._x, tool.x0),
-                y = Math.min(ev._y, tool.y0),
-                w = Math.abs(ev._x - tool.x0),
-                h = Math.abs(ev._y - tool.y0);
-
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            if (!w || !h) {
-                return;
-            }
-
-            //Format is x1,y1-x2,y2
-            boxCoordintates = x + "," + y + "-" + (x + w) + "," + (y + h);
-            bX = x;
-            bY = y;
-            bWidth = w;
-            bHeight = h;
-
-            context.strokeRect(x, y, w, h);
-        };
-
-        this.mouseup = function (ev) {
-            if (tool.started) {
-                tool.mousemove(ev);
-                tool.started = false;
-                getBoxData(boxCoordintates, stDt, etDt);
-            }
-        };
-    };
-
-    init();
-
-    function getBoxData(coordinates, fromDt, toDt) {
-        var stDt = fromDt;
-        var etDt = toDt;
-        var furl = "http://18.216.208.225:3001/v1/tracker/installation/5a4e2d0b9963080006dc9dfb/aoi/" + stDt + "/" + etDt + "?st=00:00&et=23:59&zones=" + coordinates;
+    function getBoxData(coordinates){
+        let furl = "http://18.216.208.225:3001/v1/tracker/installation/5a4e2d0b9963080006dc9dfb/aoi/" + stDt + "/" + etDt + "?st=00:00&et=23:59&zones=" + coordinates;
 
         $.ajax({
             headers: {
@@ -213,56 +153,128 @@ function drawArea(data, fromDt, toDt) {
             method: 'GET',
             dataType: 'JSON',
             success: function (data) {
-                var boxData = data["data"][0];
-                // console.log('-----------------------');
-                // console.log(boxData);
-                context.font = 'bold 15px Calibri';
-                context.textAlign = 'center';
+                let boxData = data["data"][0];
 
-                var textX = (((bX + bWidth) - bX) / 2) + bX;
-                var textY = (15 + bY);
-                context.fillText('Area', textX, textY);
+                let closeIcon = new fabric.Text('\uf057', {
+                    fontSize: 20,
+                    fontFamily: 'FontAwesome',
+                    left: bX - 20,
+                    top: bY - 10,
+                });
+
+                let txtArea =  new fabric.Text('Area', {
+                    fontSize: 15,
+                    fontFamily: 'Calibri',
+                    left: ((bWidth/2) + bX) - 12,
+                    top: bY + 2,
+                });
+
+                let bAvgSecLeft = ((bWidth/2) + bX) - 25;
+                let bAvgSecTop = ((bHeight / 2) + bY) - 10;
+                let bAvgSecText = "Avg: " + boxData["averageTimeSpent"] + " secs"
+                let bAvgSec =  new fabric.Text(bAvgSecText, {
+                    fontSize: 15,
+                    fontFamily: 'Calibri',
+                    left: bAvgSecLeft,
+                    top: bAvgSecTop,
+                });
+
+            
+                let bNorthLeft = ((bWidth/2) + bX) - 25;
+                let bNorthTop = bY - 20;
+                let bNorthText = "\uf176" + boxData["north"]["out"] + "  \uf175" + boxData["north"]["in"];
+                let bNorth = new fabric.Text(bNorthText, {
+                    fontSize: 15,
+                    fontFamily: 'FontAwesome',
+                    left: bNorthLeft,
+                    top: bNorthTop,
+                });
+
+                let bSouthLeft = ((bWidth/2) + bX) - 25;
+                let bSouthTop = bY + bHeight + 5;
+                let bSouthText = "\uf176" + boxData["south"]["in"] + "  \uf175" + boxData["south"]["out"];
+                let bSouth = new fabric.Text(bSouthText, {
+                    fontSize: 15,
+                    fontFamily: 'FontAwesome',
+                    left: bSouthLeft,
+                    top: bSouthTop,
+                });
+
+                let bWestLeft = bX - 20;
+                let bWestOutIcon = new fabric.Text("\uf177", {
+                    fontSize: 15,
+                    fontFamily: 'FontAwesome',
+                    left: bWestLeft,
+                    top: bAvgSecTop - 15,
+                });
+                let bWestOutText = JSON.stringify(boxData["west"]["out"]);
+                let bWestOut = new fabric.Text(bWestOutText, {
+                    fontSize: 15,
+                    fontFamily: 'FontAwesome',
+                    left: bWestLeft,
+                    top: bAvgSecTop - 5,
+                });
+                let bWestInIcon = new fabric.Text("\uf178", {
+                    fontSize: 15,
+                    fontFamily: 'FontAwesome',
+                    left: bWestLeft,
+                    top: bAvgSecTop + 12,
+                });
+                let bWestInText = JSON.stringify(boxData["west"]["in"]);
+                let bWestIn = new fabric.Text(bWestInText, {
+                    fontSize: 15,
+                    fontFamily: 'FontAwesome',
+                    left: bWestLeft,
+                    top: bAvgSecTop + 22,
+                });
 
 
-                var bAvgSecX = textX;
-                var bAvgSecY = (((bY + bHeight) - bY) / 2) + bY;
-                var bAvgSecText = "Avg: " + boxData["averageTimeSpent"] + " secs"
-                context.fillText(bAvgSecText, bAvgSecX, bAvgSecY);
+                let bEastLeft = bX + bWidth + 5;
+                let bEastOutIcon = new fabric.Text("\uf177", {
+                    fontSize: 15,
+                    fontFamily: 'FontAwesome',
+                    left: bEastLeft,
+                    top: bAvgSecTop - 15,
+                });
+                let bEastOutText = JSON.stringify(boxData["east"]["in"]);
+                let bEastOut = new fabric.Text(bEastOutText, {
+                    fontSize: 15,
+                    fontFamily: 'FontAwesome',
+                    left: bEastLeft,
+                    top: bAvgSecTop - 5,
+                });
+                let bEastInIcon = new fabric.Text("\uf178", {
+                    fontSize: 15,
+                    fontFamily: 'FontAwesome',
+                    left: bEastLeft,
+                    top: bAvgSecTop + 12,
+                });
+                let bEastInText = JSON.stringify(boxData["east"]["out"]);
+                let bEastIn = new fabric.Text(bEastInText, {
+                    fontSize: 15,
+                    fontFamily: 'FontAwesome',
+                    left: bEastLeft,
+                    top: bAvgSecTop + 22,
+                });
 
-                // context.font = '20px FontAwesome';
-                // context.fillText('\uf057', bX - 10, bY - 2);
+                let groupValues = [rect, closeIcon, txtArea, bAvgSec, bNorth, bSouth, bWestOutIcon, bWestOut, bWestInIcon, bWestIn, bEastOutIcon, bEastOut, bEastInIcon, bEastIn];
 
-                context.font = '15px FontAwesome';
-                var bNorthX = textX;
-                var bNorthY = bY - 5;
-                var bNorthText = "\uf176" + boxData["north"]["out"] + "  \uf175" + boxData["north"]["in"];
-                context.fillText(bNorthText, bNorthX, bNorthY);
+                group = new fabric.Group(groupValues, {
+                    lockMovementX: true,
+                    lockMovementY: true,
+                    hasControls: false
+                });
 
-                var bSouthX = textX;
-                var bSouthY = bY + bHeight + 15;
-                var bSouthText = "\uf176" + boxData["south"]["in"] + "  \uf175" + boxData["south"]["out"];
-                context.fillText(bSouthText, bSouthX, bSouthY);
+                let lastItem = canvas.getObjects().length - 1;
+                canvas.remove(canvas.item(lastItem));
 
-                var bWestX = bX - 10;
-
-                context.fillText("\uf177", bWestX, bAvgSecY - 15);
-                context.fillText(boxData["west"]["out"], bWestX, bAvgSecY - 5);
-                context.fillText("\uf178", bWestX, bAvgSecY + 10);
-                context.fillText(boxData["west"]["in"], bWestX, bAvgSecY + 20);
-
-                var bEastX = bX + bWidth + 10;
-
-                context.fillText("\uf177", bEastX, bAvgSecY - 15);
-                context.fillText(boxData["east"]["in"], bEastX, bAvgSecY - 5);
-                context.fillText("\uf178", bEastX, bAvgSecY + 10);
-                context.fillText(boxData["east"]["out"], bEastX, bAvgSecY + 20);
-
-                img_update();
+                canvas.add(group);
+                canvas.renderAll();
+                
 
             }
         });
     }
-
-
-
 }
+
+
