@@ -44,6 +44,7 @@ function myPeopleCounter() {
     $('#agc').removeClass('active-tab');
     $('#trkMap').removeClass('active-tab');
     $('#occrptbtn').removeClass('active-tab');
+    $('#inout').addClass('active');
     $('#occupancyBtn').hide();
     $('#utilizationBtn').hide();
     $('#txt-custom-cal').show();
@@ -126,14 +127,17 @@ function refreshApi(){
 }
 
 function occupyrpt(){
-    $('#graphBtn').show();
-    $('#oCalendarBtn').show();
     $('#in').hide();
     $('#out').hide();
     $('#inout').hide();
-    $('#OccAndUtilReportGraph').show();
+    
     $('#occupancyBtn').show();
     $('#utilizationBtn').show();
+    $('#graphBtn').show();
+    $('#oCalendarBtn').show();
+
+    $('#OccAndUtilReportGraph').show();
+
     $('#occrpt').removeClass("hide");
     hiChart.style.display = "none";
     agCount.style.display = "none";
@@ -152,7 +156,7 @@ function occupyrpt(){
     $('#agc').removeClass('active-tab');
     $('#occrptbtn').addClass('active-tab');
     $('#graphBtn').addClass('active-internal-tab');
-    $('#ocalendarBtn').removeClass('active-internal-tab');
+    $('#oCalendarBtn').removeClass('active-internal-tab');
     $('#calendar').removeClass('active-tab');
     $('#occupancyBtn').addClass('active');
     $('#utilizationBtn').removeClass('active');
@@ -163,6 +167,11 @@ function occupyrpt(){
     } else if ($('#utilizationBtn').hasClass('active')) {
         getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
     }
+    $('#main-calendar').show();
+    $('#custom-calendar').hide();
+    $('#txt-main-cal').addClass('active-calendar');
+    $('#txt-custom-cal').removeClass('active-calendar');
+    $('#txt-custom-cal').show();
 }
 function oCalendar() {
     loadOccupancyCalendar();
