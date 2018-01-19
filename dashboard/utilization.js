@@ -70,12 +70,12 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
         FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
         console.log("dateToUtilMap was ", dateToUtilMap);
         dateToUtilGlobalMap = dateToUtilMap;
-      
-        if($('#graph').hasClass('active-tab')) {
-          showInHighCharts(dateToUtilGlobalMap);
-        } else {
-          showInCalendar(timeToUtilGlobalMap);
-        }
+        showInHighCharts(dateToUtilGlobalMap);
+        // if($('#graph').hasClass('active-tab')) {
+        //   showInHighCharts(dateToUtilGlobalMap);
+        // } else {
+        //   showInCalendar(timeToUtilGlobalMap);
+        // }
 
 
 
@@ -108,11 +108,12 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, value, start_time,
         FetchUtilization.setUtilizationTimeDictionary(timeToUtilMap);
         
         timeToUtilGlobalMap = timeToUtilMap;
-        if($('#graph').hasClass('active-tab')) {
-          showInHighCharts(timeToUtilGlobalMap);
-        } else {
-          showInCalendar(timeToUtilGlobalMap);
-        }
+        showInCalendar(timeToUtilGlobalMap)
+        // if($('#graph').hasClass('active-tab')) {
+        //   showInHighCharts(timeToUtilGlobalMap);
+        // } else {
+        //   showInCalendar(timeToUtilGlobalMap);
+        // }
       }
 
     }
@@ -196,12 +197,12 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         }
 
         dateToOccupancyGlobalMap = dateToOccupancyMap;
-        
-        if($('#graph').hasClass('active-tab')) {
-          showInHighCharts(dateToOccupancyGlobalMap);
-        } else {
-          showInCalendar(dateToOccupancyGlobalMap);
-        }
+        showInCalendar(dateToOccupancyGlobalMap);
+        // if($('#graph').hasClass('active-tab')) {
+        //   showInHighCharts(dateToOccupancyGlobalMap);
+        // } else {
+        //   showInCalendar(dateToOccupancyGlobalMap);
+        // }
 
         
 
@@ -244,11 +245,12 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, e
         // FetchUtilization.setOccupancyTimeDictionary(timeToOccupancyMap);
         
         timeToOccupancyGlobalMap = timeToOccupancyMap;
-        if($('#graph').hasClass('active-tab')) {
-          showInHighCharts(timeToOccupancyGlobalMap);
-        } else {
-          showInCalendar(timeToOccupancyGlobalMap);
-        }
+        showInHighCharts(timeToOccupancyGlobalMap);
+        // if($('#graph').hasClass('active-tab')) {
+        //   showInHighCharts(timeToOccupancyGlobalMap);
+        // } else {
+        //   showInCalendar(timeToOccupancyGlobalMap);
+        // }
         
       }
       

@@ -117,6 +117,8 @@ function refreshApi(){
 }
 
 function occupyrpt(){
+    $('#txt-custom-cal').addClass('active-calendar');
+    $('#txt-main-cal').removeClass('active-calendar');
     $('#graph').show();
     $('#oCalendarBtn').show();
     $('#in').hide();
@@ -135,6 +137,26 @@ function occupyrpt(){
     totalIO.style.display = "none";
     avgIOD.style.display = "none";
     $('#calendar').hide();
+    console.log("fromdate",fromDate);
+    console.log("todate",toDate);
+    getPeopleCounterAndFindOccupancy(fromDate,toDate,start_time,end_time);
+
+    //showInHighCharts(timeToOccupancyGlobalMap);
+    // if($('#occupancyBtn').hasClass('active-tab') && $('#graph').hasClass('active-tab'))
+    // {
+    //     if($('#txt-custom-cal').hasClass('active-calendar'))
+    //     {
+    //         showInHighCharts(dateToOccupancyGlobalMap);
+    //     }
+    //     else
+    //     {
+    //         showInHighCharts(timeToOccupancyGlobalMap);
+    //     }
+    // }
+    // else if($('#').hasClass('active-tab') && $('#graph').hasClass('active-tab'))
+    // {
+
+    // }
 }
 function oCalendar() {
     $('#graph').removeClass('active-tab');
@@ -165,17 +187,17 @@ function oCalendar() {
     $('#calendar').show();
 }
 
-function occupyrpt()
-{
-    //document.getElementById("occrpt").style.display = "block";
-    $('#graph').show();
-    $('#oCalendarBtn').show();
-    $('#OccAndUtilReportGraph').show();
-    $('#calendar').hide();
-    hiChart.style.display = "none";
-    agCount.style.display = "none";
-    trackMap.style.display = "none";
-}
+// function occupyrpt()
+// {
+//     //document.getElementById("occrpt").style.display = "block";
+//     $('#graph').show();
+//     $('#oCalendarBtn').show();
+//     $('#OccAndUtilReportGraph').show();
+//     $('#calendar').hide();
+//     hiChart.style.display = "none";
+//     agCount.style.display = "none";
+//     trackMap.style.display = "none";
+// }
 
 function graphButtonChart(){
     // if($('#txt-main-cal').hasClass('active-calender'))
