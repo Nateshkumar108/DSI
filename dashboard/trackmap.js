@@ -1,6 +1,5 @@
-
-function generateTrackmap(fromDt, toDt) {
-    let furl = "http://18.216.208.225:3001/v1/tracker/motion/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDt + "/" + toDt + "?st=00:00&et=23:59&blackpoint=25&whitepoint=1000";
+function generateTrackmap(fromDate, toDate, startTime, endTime) {
+    let furl ="http://18.216.208.225:3001/v1/tracker/motion/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDate + "/" + toDate + "?st="+ startTime +"&et="+ endTime +"&blackpoint=25&whitepoint=1000";
 
     let xhr = new XMLHttpRequest();
     xhr.open('GET', furl, true);
@@ -14,7 +13,7 @@ function generateTrackmap(fromDt, toDt) {
     xhr.onload = function (e) {
         if (this.status == 200) {
             let data = btoa(String.fromCharCode.apply(null, new Uint8Array(this.response)));
-            drawArea(data, fromDt, toDt);
+            drawArea(data, fromDate, toDate, startTime, endTime);
 
             // var canvas = getImageFor32BitInteger(this.response);
             // let urlForImage = canvas.toDataURL();
@@ -44,10 +43,11 @@ function getImageFor32BitInteger(data) {
     return canvas;
 }
 
-function drawArea(data, fromDt, toDt) {
-    let stDt = fromDt; 
-    let etDt = toDt;
+function drawArea(data, fromDate, toDate) {
+    let stDt = fromDate; 
+    let etDt = toDate;
     if(canvas) {
+        canvas.clear().renderAll();
         canvas.dispose();
     }
     canvas = new fabric.Canvas('trackmap', {
@@ -56,7 +56,7 @@ function drawArea(data, fromDt, toDt) {
         selection: false
     });
 
-    canvas.clear().renderAll();
+    
     let mainImage = "data:image/png;base64," + data;
 
     canvas.setBackgroundImage('img/floor.PNG', canvas.renderAll.bind(canvas), {

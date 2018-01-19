@@ -8,8 +8,8 @@ var totalIN = 0;
 var totalOUT = 0;
 var totalINOUT = 0;
 var avgINOUT = 0;
-console.log("DATESDFGHJKJHGFD" + fromDate)
-console.log("DATESDFGHJKJHGFD" + toDate);
+//console.log("DATESDFGHJKJHGFD" + fromDate)
+//console.log("DATESDFGHJKJHGFD" + toDate);
 
 var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=00:00&et=24:00";
 
@@ -34,12 +34,37 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#out').removeClass('active');
       $('#inout').removeClass('active');
-      avgI.style.display = "block";
-      totalI.style.display = "block";
-      avgO.style.display = "none";
-      totalO.style.display = "none";
-      avgIO.style.display = "none";
-      totalIO.style.display = "none";
+      // avgI.style.display = "block";
+      // totalI.style.display = "block";
+      // avgO.style.display = "none";
+      // totalO.style.display = "none";
+      // avgIO.style.display = "none";
+      // totalIO.style.display = "none";
+      if($('#txt-custom-cal').hasClass('active-calendar'))
+      {
+        avgI.style.display = "none";
+        avgID.style.display = "block"
+        totalI.style.display = "block";
+        avgO.style.display = "none";
+        avgOD.style.display = "none";
+        avgIOD.style.display = "none";
+        totalO.style.display = "none";
+        avgIO.style.display = "none";
+        totalIO.style.display = "none";
+      }
+      else
+      {
+        avgI.style.display = "block";
+        avgID.style.display = "none"
+        totalI.style.display = "block";
+        avgO.style.display = "none";
+        avgOD.style.display = "none";
+        avgIOD.style.display = "none";
+        totalO.style.display = "none";
+        avgIO.style.display = "none";
+        totalIO.style.display = "none";
+      }
+      
     }
     $('#page-loader').show();
     $.ajax({
@@ -55,13 +80,13 @@ $(document).ready(function () {
       method: 'GET',
       dataType: 'JSON',
       success: function (data) {
-        //console.log("Data was ", data);
-        //console.log("Data was ", data.data[0].items);
+        ////console.log("Data was ", data);
+        ////console.log("Data was ", data.data[0].items);
         $('#page-loader').hide();
         inppc = [];
         times = [];
         for (let item of data.data[0].items) {
-          console.log('in', item.in);
+          //console.log('in', item.in);
           inppc.push(item.in);
           var timeArray = item.date.split(" ");
           times.push(timeArray[1]);
@@ -127,12 +152,36 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#in').removeClass('active');
       $('#inout').removeClass('active');
-      avgI.style.display = "none";
-      totalI.style.display = "none";
-      avgO.style.display = "block";
-      totalO.style.display = "block";
-      avgIO.style.display = "none";
-      totalIO.style.display = "none";
+      // avgI.style.display = "none";
+      // totalI.style.display = "none";
+      // avgO.style.display = "block";
+      // totalO.style.display = "block";
+      // avgIO.style.display = "none";
+      // totalIO.style.display = "none";
+      if($('#txt-custom-cal').hasClass('active-calendar'))
+      {
+        avgI.style.display = "none";
+        avgID.style.display = "none"
+        totalI.style.display = "none";
+        avgO.style.display = "none";
+        avgOD.style.display = "block";
+        avgIOD.style.display = "none";
+        totalO.style.display = "block";
+        avgIO.style.display = "none";
+        totalIO.style.display = "none";
+      }
+      else
+      {
+        avgI.style.display = "none";
+        avgID.style.display = "none"
+        totalI.style.display = "none";
+        avgO.style.display = "block";
+        avgOD.style.display = "none";
+        avgIOD.style.display = "none";
+        totalO.style.display = "block";
+        avgIO.style.display = "none";
+        totalIO.style.display = "none";
+      }
 
     }
     $('#page-loader').show();
@@ -149,13 +198,13 @@ $(document).ready(function () {
       method: 'GET',
       dataType: 'JSON',
       success: function (data) {
-        //console.log("Data was ", data);
-        //console.log("Data was ", data.data[0].items);
+        ////console.log("Data was ", data);
+        ////console.log("Data was ", data.data[0].items);
         $('#page-loader').hide();
         outppc = [];
         times = [];
         for (let item of data.data[0].items) {
-          console.log('out', item.out);
+          //console.log('out', item.out);
           totalOUT = totalOUT + item.out;
           outppc.push(item.out);
           var timeArray = item.date.split(" ");
@@ -230,12 +279,36 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('#in').removeClass('active');
       $('#out').removeClass('active');
-      avgIO.style.display = "block";
-      totalIO.style.display = "block";
-      totalI.style.display = "block";
-      totalO.style.display = "block";
-      avgI.style.display = "none";
-      avgO.style.display = "none";
+      // avgIO.style.display = "block";
+      // totalIO.style.display = "block";
+      // totalI.style.display = "block";
+      // totalO.style.display = "block";
+      // avgI.style.display = "none";
+      // avgO.style.display = "none";
+      if($('#txt-custom-cal').hasClass('active-calendar'))
+      {
+        avgI.style.display = "none";
+        avgID.style.display = "none"
+        totalI.style.display = "block";
+        avgO.style.display = "none";
+        avgOD.style.display = "none";
+        totalO.style.display = "block";
+        avgIO.style.display = "none";
+        totalIO.style.display = "block";
+        avgIOD.style.display = "block";
+      }
+      else
+      {
+        avgI.style.display = "none";
+        avgID.style.display = "none"
+        totalI.style.display = "block";
+        avgO.style.display = "none";
+        avgOD.style.display = "none";
+        avgIOD.style.display = "none";
+        totalO.style.display = "block";
+        avgIO.style.display = "block";
+        totalIO.style.display = "block";
+      }
     }
     $('#page-loader').show();
     $.ajax({
@@ -255,14 +328,14 @@ $(document).ready(function () {
       dataType: 'JSON',
       success: function (data) {
         $('#page-loader').hide();
-        console.log("Data was ", data);
-        console.log("Data was ", data.data[0].items);
+        //console.log("Data was ", data);
+        //console.log("Data was ", data.data[0].items);
         inppc = [];
         outppc = [];
         times = [];
 
         for (let item of data.data[0].items) {
-          console.log('in', item.in);
+          //console.log('in', item.in);
           totalIN = totalIN + item.in;
           totalOUT = totalOUT + item.out;
           inppc.push(item.in);
@@ -270,7 +343,8 @@ $(document).ready(function () {
           var timeArray = item.date.split(" ");
           times.push(timeArray[1]);
         }
-        loadCaptions("inout", furl);
+        // loadCaptions("inout", furl);
+        loadCaptions("inout", furl,fromDate,toDate,start_time,end_time);
         if($('#txt-custom-cal').hasClass('active-calendar'))
         {
           customCalSearch();
@@ -331,8 +405,8 @@ $(document).ready(function () {
       }
     });
   });
-$('#page-loader').show();
-  $.ajax({
+  $('#page-loader').show();
+    $.ajax({
     headers: {
       'Access-Control-Allow-Headers': '*',
       'Content-Type': 'application/json',
@@ -346,13 +420,13 @@ $('#page-loader').show();
     dataType: 'JSON',
     success: function (data) {
       $('#page-loader').hide();
-      console.log("Data was ", data);
-      console.log("Data was ", data.data[0].items);
+      //console.log("Data was ", data);
+      //console.log("Data was ", data.data[0].items);
       inppc = [];
       outppc = [];
       times = [];
       for (let item of data.data[0].items) {
-        console.log('in', item.in);
+        //console.log('in', item.in);
         inppc.push(item.in);
         outppc.push(item.out);
         var timeArray = item.date.split(" ");
@@ -415,6 +489,10 @@ $('#page-loader').show();
     }
   });
   //var inppc= [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4];
+
+  createHighchart();
+  
+
 });
 
 Highcharts.createElement('link', {
@@ -653,13 +731,13 @@ function loadCaptions(value, furl,fromDate,toDate,start_time,end_time) {
     method: 'GET',
     dataType: 'JSON',
     success: function (data) {
-      console.log("Data was ", data);
-      console.log("Data was ", data.data[0].items);
+      //console.log("Data was ", data);
+      //console.log("Data was ", data.data[0].items);
       inppc = [];
       outppc = [];
       times = [];
       for (let item of data.data[0].items) {
-        console.log('in', item.in);
+        //console.log('in', item.in);
         inppc.push(item.in);
         totalIN = totalIN + item.in;
         totalOUT = totalOUT + item.out;
@@ -684,14 +762,17 @@ function loadCaptions(value, furl,fromDate,toDate,start_time,end_time) {
       switch (value) {
         case 'in':
           document.getElementById("avgIn").innerHTML = Math.round(avgIN);
+          document.getElementById("avgInD").innerHTML = Math.round(avgIN);
           document.getElementById("totalIn").innerHTML = totalIN;
           break;
         case 'out':
           document.getElementById("avgOut").innerHTML = Math.round(avgOUT);
+          document.getElementById("avgOutD").innerHTML = Math.round(avgOUT);
           document.getElementById("totalOut").innerHTML = totalOUT;
           break;
         case 'inout':
           document.getElementById("avgInOut").innerHTML = Math.round(avgINOUT);
+          document.getElementById("avgInOutD").innerHTML = Math.round(avgINOUT);
           document.getElementById("totalInOut").innerHTML = totalINOUT;
           document.getElementById("totalIn").innerHTML = totalIN;
           document.getElementById("totalOut").innerHTML = totalOUT;
