@@ -205,8 +205,16 @@ ageCounter ul ul p{
   display: flex;
   width: 100%;
 }
-
+.occUtilBtn{
+  list-style: none;
+  display: flex;
+  width: 100%;
+}
 .chartButton li{
+  width: 25%;
+  margin-right: 2%;
+}
+.occUtilBtn li{
   width: 25%;
   margin-right: 2%;
 }
@@ -219,7 +227,24 @@ ageCounter ul ul p{
   width: 100%;
 
 }
+.occUtilBtn button{
+  background: transparent;
+  color: white;
+  height: 28px;
+  font-size: small;
+  border: 1px solid white;
+  width: 100%;
+
+}
 .chartButton button:hover{
+  background:transparent;
+  border: 1px solid #1DAFEB;
+  color: #1DAFEB;
+  height: 28px;
+    font-size: small;
+   
+}
+.occUtilBtn button:hover{
   background:transparent;
   border: 1px solid #1DAFEB;
   color: #1DAFEB;
