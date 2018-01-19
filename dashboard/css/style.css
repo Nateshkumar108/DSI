@@ -35,21 +35,21 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.workspaceButton{
+.tab-button{
   display:flex;
   flex-direction: column;
   list-style: none;
   align-items: center;
   padding: 0;
 }
-.workspaceButton li{
+.tab-button li{
   width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
 
 }
-.workspaceButton button{
+.tab-button button{
     width: 100%;
     height: 25px;
     border-radius: 5px;
@@ -60,7 +60,7 @@ body {
     border: 1px solid white;
     background: transparent;
 }
-.workspaceButton button:hover{
+.tab-button button:hover{
     width: 100%;
     font-size: 14px;
     font-family: 'Open Sans', sans-serif;
@@ -70,47 +70,7 @@ body {
     color: #1DAFEB;
 
 }
-.roomsButton{
-  display:flex;
-  flex-direction: column;
-  list-style: none;
-  align-items: center;
-  padding: 0;
-}
-.roomsButton li{
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.roomsButton button{
-    /* width: 140px;
-    font-size: 14px;
-    margin-bottom: 20px;
-    color: black;
-    border-radius: 5px;
-    border: transparent; */
-    width: 100%;
-    height: 25px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-family: 'Open Sans', sans-serif;
-    margin-bottom: 20px;
-    color: white;
-    border: 1px solid white;
-    background: transparent;
-}
-.roomsButton button:hover{
-    /* background:#1DAFEB;
-    color: white; */
-    width: 100%;
-    font-size: 14px;
-    font-family: 'Open Sans', sans-serif;
-    margin-bottom: 20px;
-    background:transparent;
-    border: 1px solid #1DAFEB;
-    color: #1DAFEB;
-}
+
 .rooms{
   /* height: 150px; */
   height: 200px;
@@ -266,12 +226,12 @@ ageCounter ul ul p{
     justify-content: center;
 }
 
-.chartButton button.active, .occUtilBtn button.active {
+.chartButton button.active, .occUtilBtn button.active, .tab-button button.active-tab {
   background:#1DAFEB;
   border: 1px solid #1DAFEB;
 
 }
-.chartButton button.active:hover, .occUtilBtn button.active:hover{
+.chartButton button.active:hover, .occUtilBtn button.active:hover, .tab-button button.active-tab:hover{
   background:transparent;
   border: 1px solid #1DAFEB;
   color:#1DAFEB;
@@ -525,4 +485,8 @@ button, .hand-pointer {
 }
 .hide{
   display: none;
+}
+.active-tab{
+  background:#1DAFEB;
+  border: 1px solid #1DAFEB;
 }

@@ -19,6 +19,7 @@ function myPeopleCounter() {
     $('#in').show();
     $('#out').show();
     $('#inout').show();
+
     hiChart.style.display = "block";
     agCount.style.display = "none";
     trackMap.style.display = "none";
@@ -46,12 +47,13 @@ function myPeopleCounter() {
     $('#occrptbtn').removeClass('active-tab');
     $('#inout').addClass('active');
     $('#occupancyBtn').hide();
-    $('#utilizationBtn').hide();
+    //$('#utilizationBtn').hide();
     $('#txt-custom-cal').show();
     $('#calendar').hide();
     // $("hiChart").show();
     // $("agCount").hide();
     // $("trackMap").hide();
+
 }
 
 function myAgeCounter() {
@@ -83,6 +85,8 @@ function myAgeCounter() {
     $('#utilizationBtn').hide();
     $('#txt-custom-cal').show();
     $('#calendar').hide();
+
+   
 }
 
 function myTrackMap() {
@@ -116,6 +120,9 @@ function myTrackMap() {
     $('#txt-custom-cal').hide();
     $('#calendar').hide();
 
+    
+    
+    
     generateTrackmap(calDate, calNextDate,start_time,end_time);
 
 
@@ -171,8 +178,6 @@ function occupyrpt(){
     $('#txt-main-cal').addClass('active-calendar');
     $('#txt-custom-cal').removeClass('active-calendar');
     $('#txt-custom-cal').show();
-
-    getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
 
 }
 function oCalendar() {
