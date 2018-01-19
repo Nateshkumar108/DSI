@@ -160,7 +160,7 @@ function occupyrpt(){
     $('#trkMap').removeClass('active-tab');
     $('#ppc').removeClass('active-tab');
     $('#agc').removeClass('active-tab');
-    $('#occrptbtn').addClass('active');
+    $('#occrptbtn').addClass('active-tab');
     $('#graphBtn').addClass('active-internal-tab');
     $('#oCalendarBtn').removeClass('active-internal-tab');
     $('#calendar').removeClass('active-tab');
