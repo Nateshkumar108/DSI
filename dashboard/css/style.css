@@ -255,7 +255,6 @@ ageCounter ul ul p{
 .pignose-calendar{
   width: 100% !important;
 }
-
 .article{
   margin-top: 0 !important;
   padding-top: 0 !important;
@@ -352,6 +351,11 @@ button, .hand-pointer {
 .active-calendar {
   text-decoration: underline;
   color: #1DB0EC;
+}
+
+.active-internal-tab{
+  background:#1DAFEB;
+  border: 1px solid #1DAFEB;
 }
 
 .clearfix:after {
@@ -519,6 +523,6 @@ button, .hand-pointer {
   background:green;
   font-weight: bold;
 }
-/* .occupancyrpt{
+.hide{
   display: none;
-} */
+}
