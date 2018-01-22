@@ -1,3 +1,4 @@
+
 function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time) {
 
   var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
@@ -364,7 +365,7 @@ function createHighchart() {
       }
     },
     series: [{
-      name: '',
+      name: 'Report',
       data: []
     }]
   });

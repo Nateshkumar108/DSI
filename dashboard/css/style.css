@@ -490,7 +490,6 @@ button, .hand-pointer {
   background:#1DAFEB;
   border: 1px solid #1DAFEB;
 }
-
 .ocr-graph-cal {
   color: #fff;
   cursor: pointer;
@@ -504,4 +503,3 @@ button, .hand-pointer {
 .ocr-graph-cal.active {
   text-decoration: underline;
   color: #1DB0EC;
-}
