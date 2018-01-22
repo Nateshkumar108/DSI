@@ -15,13 +15,16 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <script type="text/javascript" src="demoavg.js"></script>
+
 </head>
 
 <body>
-    <div class="div-fake-hidden"><i class="fa fa-square-o fa-3x"></i></div>
+    <div class="div-fake-hidden">
+        <i class="fa fa-square-o fa-3x"></i>
+    </div>
     <div id="page-loader" className={(this.state.isPageLoad) ? "show" : "hide"}>
         <div class="loader"></div>
-    </div> 
+    </div>
 
 
     <header>
@@ -30,46 +33,48 @@
         </a>
     </header>
     <div class="dashboard">
-        
         <div class="tabs">
             <div class="workspace">
                 <h3>WORKSPACE</h3>
-                <ul class="workspaceButton">
+                <ul class="tab-button">
                     <li>
-                        <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()">PEOPLE COUNTER</button>
+                        <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()">People Counter</button>
                     </li>
                     <li>
-                        <button class="ageCount" id="agc" onclick="myAgeCounter()">DEMOGRAPHICS</button>
+                        <button class="ageCount" id="agc" onclick="myAgeCounter()">Demographics</button>
                     </li>
                     <li>
-                        <button class="trakMap" id="trkMap" onclick="myTrackMap()">TRACK MAP</button>
+                        <button class="trakMap" id="trkMap" onclick="myTrackMap()">Trackmap</button>
                     </li>
                 </ul>
             </div>
             <div class="rooms">
-                  <h3>ROOMS</h3>
-                  <ul class="roomsButton">
-                    <li><button class="occupancyReport" id="occrpt" onclick="occupyrpt()">Occupancy Report</button></li>
-                    <li><button class="dwellReport">Dwell Report</button></li>
-                  </ul>
-                </div>
+                <h3>ROOMS</h3>
+                <ul class="tab-button">
+                    <li>
+                        <button class="occupancyReport" id="occrptbtn" onclick="occupyrpt()">Occupancy Report</button>
+                    </li>
+                    <li>
+                        <button class="dwellReport" id="dwellbtn">Dwell Report</button>
+                    </li>
+                </ul>
+            </div>
         </div>
-
         <div class="graphs">
             <div class="highcharts" id="hiChart">
                 <ul class="highchartTab">
                     <ul class="chartButton">
                         <li>
-                            <button name="in" id="in" class="" onclick="refresh()">IN</button>
+                            <button name="in" id="in">In</button>
                         </li>
                         <li>
-                            <button name="out" id="out" class="" onclick="refresh()">OUT</button>
+                            <button name="out" id="out">Out</button>
                         </li>
                         <li>
-                            <button name="in" id="inout" class="active" onclick="refresh()">IN/OUT</button>
+                            <button name="in" id="inout" class="active">In/Out</button>
                         </li>
                     </ul>
-                    
+
                     <ul class="chartValues">
                         <ul id="avgI" style="display:none;">
                             <li>
@@ -155,148 +160,128 @@
                     </ul>
                 </ul>
 
-            <div id="container" style="min-width: 310px; margin: 0 auto"></div>
+                <div id="container" style="min-width: 310px; margin: 0 auto"></div>
 
             </div>
-
-            <div class="occupancyrpt" id="occrpt" onclick="occuRpt()">
-                <ul class="occupancyReportTab">
-                        <ul class="chartButton">
-                            <li>
-                                <button name="occupancy" id="occupancyBtn" class="orptbtns" onclick="graphButtonChart()">OCCUPANCY</button>
-                            </li>
-                            <li>
-                                <button name="utilization" id="utilizationBtn" class="orptbtns" onclick="oCalendar()">UTILIZATION</button>
-                            </li> 
-                        </ul>
-                        <ul class="chartButton">
-                            <li>
-                                <button name="graph" id="graph" class="orptbtn" onclick="graphButtonChart()">GRAPH</button>
-                            </li>
-                            <li>
-                                <button name="oCalendar" id="oCalendarBtn" class="orptbtn" onclick="oCalendar()">CALENDAR</button>
-                            </li> 
-                        </ul>
-                        
-                </ul>
-                <div id="OccupancyReportChart" style="min-width: 310px; margin: 0 auto"></div>
-            </div>        
-                    
+            <div class="occupancyrpt hide" id="occrpt">
+                <div class="occupancyReportTab">
+                    <ul class="occUtilBtn">
+                        <li>
+                            <button name="occupancy" id="occupancyBtn" class="orptbtn" onclick="occupancyBtnClicked()">Occupancy</button>
+                        </li>
+                        <li>
+                            <button name="utilization" id="utilizationBtn" class="orptbtn" onclick="utilizationBtnClicked()">Utilization</button>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <div class="parent-ocr-graph-cal">
+                        <span id="graphBtn" class="ocr-graph-cal active" onclick="graphButtonChart()">Graph</span>
+                        <span class="white">|</span>
+                        <span id="oCalendarBtn" class="ocr-graph-cal" onclick="oCalendar()">Calendar</span>
+                    </div>
+                </div>
+                <div id="OccAndUtilReportGraph" style="min-width: 310px; margin: 0 auto"></div>
+            </div>
 
             <div class="ageCounter" id="agCount">
                 <ul class="MaleFemale">
-                    
+
                     <ul>
                         <li>
-                                <p id="avgMale"></p>
+                            <p id="avgMale"></p>
                             <p id="avgFeMale" style="background:#992399;"></p>
                         </li>
                         <li class="captions">
-                                <span>AGE</span>
-                                <span> TODAY</span>
-                            </li>
-                        
+                            <span>age</span>
+                            <span> today</span>
+                        </li>
+
                     </ul>
                     <ul id="weekavg">
-                            <li>
-                                <p id="avgMaleWeek"></p>
-                                <p id="avgFemaleWeek" style="background:#992399;"></p>
-                            </li>
-                            <li class="captions">
-                                    <span>AGE</span>
-                                    <span> THIS WEEK</span>
-                                </li>
-                            
+                        <li>
+                            <p id="avgMaleWeek"></p>
+                            <p id="avgFemaleWeek" style="background:#992399;"></p>
+                        </li>
+                        <li class="captions">
+                            <span>age</span>
+                            <span> this week</span>
+                        </li>
+
                     </ul>
                     <ul id="monthavg">
-                            <li>
-                                <p id="avgMaleMonthWeek"></p>
-                                <p id="avgFemaleMonthWeek" style="background:#992399;"></p>
-                            </li>
-                            <li class="captions">
-                                    <span>AGE</span>
-                                    <span> THIS MONTH</span>
-                                </li>
-                            
+                        <li>
+                            <p id="avgMaleMonthWeek"></p>
+                            <p id="avgFemaleMonthWeek" style="background:#992399;"></p>
+                        </li>
+                        <li class="captions">
+                            <span>age</span>
+                            <span> this month</span>
+                        </li>
+
                     </ul>
-                    
+
                 </ul>
                 <div id="demogra" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
                 <!-- <h1>AGE COUNTER</h1> -->
             </div>
-            
+
             <div class="trackMaps" id="trackMap">
                 <div class="floor-plan">
-                    <canvas id="trackmap" class="img-trackmap" width="591" height="583">
-                        <!-- <canvas id="imageView"></canvas> -->
-                    </canvas>
+                    <canvas id="trackmap" width="591" height="583"></canvas>
                 </div>
             </div>
 
-            <div class="oCalendar" id="calendar"></div>
-            <div class="clearfix"></div> 
+            <div id="big-calendar">
+                <div class="oCalendar" id="calendar"></div>
+            </div>
+            <div class="clearfix"></div>
         </div>
-        <!-- <div class="occupancyrpt" id="occrpt">
-            <div class="graphs">
-                <div class="highcharts" id="hiChartOR">
-                    <ul class="highchartTab">
-                        <ul class="chartButton">
-                             <li>
-                                <button name="graph" id="graph" class="orptbtn" onclick="">GRAPH</button>
-                            </li>
-                            <li>
-                                <button name="oCalendar" id="oCalendar" class="orptbtn" onclick="">CALENDAR</button>
-                            </li> 
-                        </ul>
-                    </div>
-                </div>
-            </div>  -->
         <div class="event">
             <div class="selectZone">
                 <h3>SELECT ZONE</h3>
                 <ul class="labdown">
                     <ul>
-                        <li>FACILITY:</li>
+                        <li>Facility:</li>
                         <li>
                             <select disabled>
-                                <option value="volvo">REGUS</option>
+                                <option value="volvo">Regus</option>
 
                             </select>
                         </li>
                     </ul>
                     <ul>
-                        <li>FLOOR:</li>
+                        <li>Floor:</li>
                         <li>
                             <select disabled>
-                                <option value="volvo">7TH FLOOR </option>
+                                <option value="volvo">7th Floor </option>
 
                             </select>
                         </li>
                     </ul>
                     <ul>
-                        <li>ROOM:</li>
+                        <li>Room:</li>
                         <li>
                             <select id="dd">
-                                <option value="volvo">SELECT ROOM</option>
+                                <option value="volvo">Select Room</option>
                                 <option id="r704" style="display:none;">704</option>
                                 <option id="r705" style="display:none;">705</option>
                                 <option id="r706">706</option>
 
-                                <option id="rdo">DEEPAK'S OFFICE</option>
+                                <option id="rdo">Deepak's Office</option>
                             </select>
                         </li>
                     </ul>
                     <ul>
-                        <li>SENSOR:</li>
+                        <li>Sensor:</li>
                         <li>
                             <select>
-                                <option value="volvo">SELECT SENSOR</option>
-                                <option id="s1" style="display:none;">001EAA</option>
-                                <option id="s2">001EEC</option>
-                                <option id="s3" style="display:none;">001D5F</option>
+                                <option value="volvo">Select Sensor</option>
+                                <option id="s1" style="display:none;">001eaa</option>
+                                <option id="s2">001eec</option>
+                                <option id="s3" style="display:none;">001d5f</option>
                                 <option id="s4" style="display:none;">001438</option>
-                                <option id="s5">001E56</option>
+                                <option id="s5">001e56</option>
                             </select>
                         </li>
                     </ul>
@@ -312,8 +297,7 @@
                 <div class="calender">
                     <div id="datepicker"></div>
                 </div>
-            
-                
+
             </div>
             <div id="custom-calendar">
                 <label for="from" class="lbl-calendar">From: </label>
@@ -321,28 +305,22 @@
                 <div class="clearfix"></div>
                 <label for="to" class="lbl-calendar">To: </label>
                 <input type="text" id="to" name="to">
-
                 <div class="clearfix"></div>
-                
-
             </div>
 
-            <!-- <div class="time">
-                <div id="slider"></div>
-
-            </div> -->
             <div class="medium-space"></div>
-            <div class="clearfix"></div>    
+            <div class="clearfix"></div>
+
             <div>
                 <span>Time:</span>
                 <div class="timer">
                     <input type="number" id="fhr" class="input-timer" min="0" max="23" placeholder="hh" value="00" />
                     <span>:</span>
-                    <input type="number" id="fmin" class="input-timer" min="0" max="59" placeholder="mm" value="00"/>
+                    <input type="number" id="fmin" class="input-timer" min="0" max="59" placeholder="mm" value="00" />
                     <span class="lbl-to-timer ">to</span>
-                    <input type="number" id="thr" class="input-timer"  min="0" max="23" placeholder="hh" value="23"/>
+                    <input type="number" id="thr" class="input-timer" min="0" max="23" placeholder="hh" value="23" />
                     <span>:</span>
-                    <input type="number" id="tmin" class="input-timer" min="0" max="59" placeholder="mm" value="59"/>
+                    <input type="number" id="tmin" class="input-timer" min="0" max="59" placeholder="mm" value="59" />
                 </div>
             </div>
             <div class="medium-space"></div>
@@ -356,412 +334,383 @@
 
         </div>
 
-    <script type="text/javascript">
-        var today = new Date();
-        var day = today.getDate();
-        var month = today.getMonth() + 1;
-        var year = today.getFullYear();
-        var fromDate = year + "-" + month + "-" + day;
-        var tomorrowDate = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
-        var tomorrow = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
-        var day = tomorrow.getDate();
-        var month = tomorrow.getMonth() + 1;
-        var year = tomorrow.getFullYear();
-        var toDate = year + "-" + month + "-" + day;
-        var calDate = fromDate;
-        var calNextDate = toDate;
-        var from_hr;
-        var from_min;
-        var start_time="00:00";
-        var to_hr;
-        var to_min;
-        var end_time="23:59";
-        var avgMALE=0;
-        var avgFEMALE=0;
-        var sumMaleWeek=0;
-        var sumFemaleWeek=0; 
+        <script type="text/javascript">
+            var today = new Date();
+            var canvas;
+            var day = today.getDate();
+            var month = today.getMonth() + 1;
+            var year = today.getFullYear();
+            var fromDate = year + "-" + month + "-" + day;
+            var tomorrowDate = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+            var tomorrow = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+            var day = tomorrow.getDate();
+            var month = tomorrow.getMonth() + 1;
+            var year = tomorrow.getFullYear();
+            var toDate = year + "-" + month + "-" + day;
+            var calDate = fromDate;
+            var calNextDate = toDate;
+            var from_hr;
+            var from_min;
+            var start_time = "00:00";
+            var to_hr;
+            var to_min;
+            var end_time = "23:59";
+            var avgMALE = 0;
+            var avgFEMALE = 0;
+            var sumMaleWeek = 0;
+            var sumFemaleWeek = 0;
+            var dateToUtilGlobalMap = [];
+            var dateToOccupancyGlobalMap = [];
+            var timeToUtilGlobalMap = [];
+            var timeToOccupancyGlobalMap = [];
 
-    </script>
-    <script type="text/javascript" src="js/utility/full-calendar/moment.min.js"></script>
-    <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="calender.js"></script>
-    <script type="text/javascript" src="js/utility/full-calendar/fullcalendar.js"></script>
+        </script>
+        <script type="text/javascript" src="js/utility/full-calendar/moment.min.js"></script>
+        <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/utility/fabric.min.js"></script>
+        <script type="text/javascript" src="calender.js"></script>
+        <script type="text/javascript" src="js/utility/full-calendar/fullcalendar.js"></script>
 
-    <script type="text/javascript" src="js/utility/highcharts/highcharts.js"></script>
-    <script type="text/javascript" src="js/utility/highcharts/highcharts-more.js"></script>
-    <script type="text/javascript" src="highchart.js"></script>
-    <script type="text/javascript" src="demographic.js"></script>
-    <script type="text/javascript" src="demoApiCal.js"></script>
-    <script type="text/javascript" src="demoavg.js"></script>
-    <script type="text/javascript" charset="utf-8" src="trackmap.js" ></script>
-    <script type="text/javascript" src="buttons.js"></script>
-    <script type="text/javascript" src="utilization.js"></script>
-    <script type="text/javascript" src="occupancyGraph.js"></script>
-    
-    <script type="text/javascript">
-        var avgI = document.getElementById("avgI");
-        var avgO = document.getElementById("avgO");
-        var avgIO = document.getElementById("avgIO");
-        var totalIO = document.getElementById("totalIO");
-        var totalI = document.getElementById("totalI");
-        var totalO = document.getElementById("totalO");
-    </script>
-    <script type="text/javascript">
-        $(function () {
-            $('#custom-calendar').hide();
-            $('#custom-btn').hide();
-            $('#graph').hide();
-            $('#oCalendarBtn').hide();
+        <script type="text/javascript" src="js/utility/highcharts/highcharts.js"></script>
+        <script type="text/javascript" src="js/utility/highcharts/highcharts-more.js"></script>
+        <script type="text/javascript" src="highchart.js"></script>
+        <script type="text/javascript" src="demographic.js"></script>
+        <script type="text/javascript" src="demoApiCal.js"></script>
+        <script type="text/javascript" src="demoavg.js"></script>
+        <script type="text/javascript" charset="utf-8" src="trackmap.js"></script>
+        <script type="text/javascript" src="buttons.js"></script>
+        <script type="text/javascript" src="utilization.js"></script>
+        <script type="text/javascript" src="oCalendar.js"></script>
 
-            $("#datepicker").datepicker({
-                onSelect: function (date) {
-                    document.getElementById("monthavg").style.display = "none";
-                document.getElementById("weekavg").style.display = "none";
-                    var tomorrow = new Date(new Date(date).getTime() + (24 * 60 * 60 * 1000));
-                    var day = tomorrow.getDate();
-                    var month = tomorrow.getMonth() + 1;
-                    var year = tomorrow.getFullYear();
-                    var toDate = year + "-" + month + "-" + day;
-                    calNextDate = toDate;
-
-                    var today = new Date(new Date(date));
-                    var day = today.getDate();
-                    var month = today.getMonth() + 1;
-                    var year = today.getFullYear();
-                    var fromDate = year + "-" + month + "-" + day;
-                    calDate = fromDate;
-                    value = null;
-
-                    if ($('#agc').hasClass('active-tab')) {
-                          // demoApi(fromDate, toDate,start_time,end_time);
-                          // demoStats(fromDate, toDate,start_time,end_time);
-                    } else if ($('#ppc').hasClass('active-tab')) {
-                        //Check which tab is currently active
-                        if ($('#in').hasClass('active')) {
-                            value = 'in';
-
-                        } else if ($('#out').hasClass('active')) {
-                            value = 'out';
-
-                        } else {
-                            value = 'in-out';
-
-                        }   
-           
-            // apiCal(fromDate, toDate, value,start_time,end_time);
-
-                    } 
-
-                    // else if ($('#trkMap').hasClass('active-tab')) {
-                    //     generateTrackmap(fromDate, toDate);
-                    // }
-
-                }
-            });
-
-            // $("#slider").slider();
-
-            $('#txt-main-cal').click(function () {
-                $('#main-calendar').show();
+        <script type="text/javascript">
+            var avgI = document.getElementById("avgI");
+            var avgO = document.getElementById("avgO");
+            var avgIO = document.getElementById("avgIO");
+            var totalIO = document.getElementById("totalIO");
+            var totalI = document.getElementById("totalI");
+            var totalO = document.getElementById("totalO");
+        </script>
+        <script type="text/javascript">
+            $(function () {
                 $('#custom-calendar').hide();
-                $('#txt-main-cal').addClass('active-calendar');
-                $('#txt-custom-cal').removeClass('active-calendar');
-                $('#main-btn').show();
                 $('#custom-btn').hide();
+                $('#graph').hide();
+                $('#oCalendarBtn').hide();
+                $("#datepicker").datepicker({
+                    onSelect: function (date) {
+                        document.getElementById("monthavg").style.display = "none";
+                        document.getElementById("weekavg").style.display = "none";
+                        var tomorrow = new Date(new Date(date).getTime() + (24 * 60 * 60 * 1000));
+                        var day = tomorrow.getDate();
+                        var month = tomorrow.getMonth() + 1;
+                        var year = tomorrow.getFullYear();
+                        var toDate = year + "-" + month + "-" + day;
+                        calNextDate = toDate;
+
+                        var today = new Date(new Date(date));
+                        var day = today.getDate();
+                        var month = today.getMonth() + 1;
+                        var year = today.getFullYear();
+                        var fromDate = year + "-" + month + "-" + day;
+                        calDate = fromDate;
+                        value = null;
+
+                        if ($('#agc').hasClass('active-tab')) {
+                            demoApi(fromDate, toDate, start_time, end_time);
+                            demoStats(fromDate, toDate, start_time, end_time);
+                        } else if ($('#ppc').hasClass('active-tab')) {
+                            //Check which tab is currently active
+                            if ($('#in').hasClass('active')) {
+                                value = 'in';
+
+                            } else if ($('#out').hasClass('active')) {
+                                value = 'out';
+
+                            } else {
+                                value = 'in-out';
+
+                            }
+                        }
+
+                    }
+                });
+
+                $('#txt-main-cal').click(function () {
+                    $('#main-calendar').show();
+                    $('#custom-calendar').hide();
+                    $('#txt-main-cal').addClass('active-calendar');
+                    $('#txt-custom-cal').removeClass('active-calendar');
+                    $('#main-btn').show();
+                    $('#custom-btn').hide();
+                });
+
+                $('#txt-custom-cal').click(function () {
+                    $('#main-calendar').hide();
+                    $('#custom-calendar').show();
+                    $('#txt-main-cal').removeClass('active-calendar');
+                    $('#txt-custom-cal').addClass('active-calendar');
+                    $('#main-btn').hide();
+                    $('#custom-btn').show();
+                });
+
+                var fromCustomCal = $("#from").datepicker({
+                    showOn: "both",
+                    buttonText: '<i class="fa fa-calendar" aria-hidden="true"></i>'
+                })
+                    .on("change", function () {
+                        toCustomCal.datepicker("option", "minDate", getCustomDate(this));
+                    });
+                fromCustomCal.datepicker("setDate", new Date());
+
+                var toCustomCal = $("#to").datepicker({
+                    showOn: "both",
+                    buttonText: '<i class="fa fa-calendar" aria-hidden="true"></i>'
+                })
+                    .on("change", function () {
+                        fromCustomCal.datepicker("option", "maxDate", getCustomDate(this));
+                    });
+                toCustomCal.datepicker("setDate", new Date());
+
+                function getCustomDate(element) {
+                    var date;
+                    var dateFormat = "mm/dd/yy";
+                    try {
+                        date = $.datepicker.parseDate(dateFormat, element.value);
+                    } catch (error) {
+                        date = null;
+                    }
+
+                    return date;
+                }
+
             });
 
-            $('#txt-custom-cal').click(function () {
-                $('#main-calendar').hide();
-                $('#custom-calendar').show();
-                $('#txt-main-cal').removeClass('active-calendar');
-                $('#txt-custom-cal').addClass('active-calendar');
-                $('#main-btn').hide();
-                $('#custom-btn').show();
-            });
+            function mainCalSearch() {
+                let selectedDate = $("#datepicker").datepicker("getDate");
+                let nextDate = new Date(new Date(selectedDate).getTime() + (24 * 60 * 60 * 1000));
 
+                selectedDate = selectedDate.getFullYear() + "-" + (selectedDate.getMonth() + 1) + "-" + selectedDate.getDate();
+                calDate = selectedDate;
+                fromDate = selectedDate;
 
+                nextDate = nextDate.getFullYear() + "-" + (nextDate.getMonth() + 1) + "-" + nextDate.getDate();
+                calNextDate = nextDate;
+                toDate = nextDate;
 
-            var fromCustomCal = $("#from").datepicker({
-                showOn: "both",
-                buttonText: '<i class="fa fa-calendar" aria-hidden="true"></i>'
-            })
-                .on("change", function () {
-                    toCustomCal.datepicker("option", "minDate", getCustomDate(this));
-                });
-            fromCustomCal.datepicker("setDate", new Date());
+                if ($('#agc').hasClass('active-tab')) {
+                    document.getElementById("monthavg").style.display = "none";
+                    document.getElementById("weekavg").style.display = "none";
+                    from_hr = $('#fhr').val();
+                    from_min = $('#fmin').val();
+                    start_time = from_hr + ":" + from_min;
+                    to_hr = $('#thr').val();
+                    to_min = $('#tmin').val();
+                    end_time = to_hr + ":" + to_min;
+                    demoApi(fromDate, toDate, start_time, end_time);
+                    demoStats(fromDate, toDate, start_time, end_time);
+                } else if ($('#ppc').hasClass('active-tab')) {
+                    //Check which tab is currently active
+                    let value = null;
+                    if ($('#in').hasClass('active')) {
+                        value = 'in';
+                    } else if ($('#out').hasClass('active')) {
+                        value = 'out';
+                    } else {
+                        value = 'in-out';
+                    }
+                    from_hr = $('#fhr').val();
+                    from_min = $('#fmin').val();
+                    start_time = from_hr + ":" + from_min;
+                    to_hr = $('#thr').val();
+                    to_min = $('#tmin').val();
+                    end_time = to_hr + ":" + to_min;
 
-            var toCustomCal = $("#to").datepicker({
-                showOn: "both",
-                buttonText: '<i class="fa fa-calendar" aria-hidden="true"></i>'
-            })
-                .on("change", function () {
-                    fromCustomCal.datepicker("option", "maxDate", getCustomDate(this));
-                });
-            toCustomCal.datepicker("setDate", new Date());
+                    if ($('#in').hasClass('active')) {
+                        avgI.style.display = "none";
+                        avgID.style.display = "block"
+                        totalI.style.display = "block";
+                        avgO.style.display = "none";
+                        avgOD.style.display = "none";
+                        avgIOD.style.display = "none";
+                        totalO.style.display = "none";
+                        avgIO.style.display = "none";
+                        totalIO.style.display = "none";
+                    }
+                    else if ($('#out').hasClass('active')) {
+                        avgI.style.display = "none";
+                        avgID.style.display = "none"
+                        totalI.style.display = "none";
+                        avgO.style.display = "none";
+                        avgOD.style.display = "block";
+                        avgIOD.style.display = "none";
+                        totalO.style.display = "block";
+                        avgIO.style.display = "none";
+                        totalIO.style.display = "none";
+                    }
+                    else {
+                        avgI.style.display = "none";
+                        avgID.style.display = "none"
+                        totalI.style.display = "block";
+                        avgO.style.display = "none";
+                        avgOD.style.display = "none";
+                        totalO.style.display = "block";
+                        avgIO.style.display = "none";
+                        totalIO.style.display = "block";
+                        avgIOD.style.display = "block";
+                    }
 
-            function getCustomDate(element) {
-                var date;
-                var dateFormat = "mm/dd/yy";
-                try {
-                    date = $.datepicker.parseDate(dateFormat, element.value);
-                } catch (error) {
-                    date = null;
+                    apiCal(calDate, calNextDate, value, start_time, end_time);
+
+                } else if ($('#trkMap').hasClass('active-tab')) {
+                    from_hr = $('#fhr').val();
+                    from_min = $('#fmin').val();
+                    start_time = from_hr + ":" + from_min;
+                    to_hr = $('#thr').val();
+                    to_min = $('#tmin').val();
+                    end_time = to_hr + ":" + to_min;
+
+                    generateTrackmap(selectedDate, nextDate, start_time, end_time);
+                } else if ($('#occrptbtn').hasClass('active-tab') && $('#oCalendarBtn').hasClass('active')
+                    || $('#graph').hasClass('active-tab')) {
+
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
+
+                    $('#calendar').remove();
+                    $('#big-calendar').append($('<div class="oCalendar" id="calendar"></div>'));
+
+                } else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active')) {
+
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
+
                 }
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active')) {
 
-                return date;
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
+
+                    else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active')) {
+
+                        if ($('#occupancyBtn').hasClass('active')) {
+                            getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                        }
+                        else if ($('#utilizationBtn').hasClass('active')) {
+                            getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                        }
+                    }
+                }
             }
-        });
+            function customCalSearch() {
 
-        function mainCalSearch(){
-            let selectedDate = $("#datepicker").datepicker("getDate");
-            let nextDate = new Date(new Date(selectedDate).getTime() + (24 * 60 * 60 * 1000));
+                let fromDate = $("#from").datepicker("getDate");
+                let toDate = $("#to").datepicker("getDate");
 
-            selectedDate = selectedDate.getFullYear() + "-" + (selectedDate.getMonth() + 1) + "-" + selectedDate.getDate();
-            calDate = selectedDate;
-
-            nextDate = nextDate.getFullYear() + "-" + (nextDate.getMonth() + 1) + "-" + nextDate.getDate();
-            calNextDate = nextDate;
-
-            if ($('#agc').hasClass('active-tab')) {
-                document.getElementById("monthavg").style.display = "none";
-                document.getElementById("weekavg").style.display = "none";
-                from_hr = $('#fhr').val();
-                from_min = $('#fmin').val();
-                start_time = from_hr+":"+from_min;
-                to_hr = $('#thr').val();
-                to_min = $('#tmin').val();
-                end_time = to_hr+":"+to_min;
-                demoApi(calDate, calNextDate,start_time,end_time);
-                demoStats(calDate, calNextDate,start_time,end_time);
-            } else if ($('#ppc').hasClass('active-tab')) {
-                //Check which tab is currently active
-                let value = null;
-                if ($('#in').hasClass('active')) {
-                    value = 'in';
-                } else if ($('#out').hasClass('active')) {
-                    value = 'out';
-                } else {
-                    value = 'in-out';
-                }
-
-                from_hr = $('#fhr').val();
-                from_min = $('#fmin').val();
-                start_time = from_hr+":"+from_min;
-                to_hr = $('#thr').val();
-                to_min = $('#tmin').val();
-                end_time = to_hr+":"+to_min;
-                
-                if($('#in').hasClass('active'))
-                {
-                    avgI.style.display = "block";
-                    avgID.style.display = "none"
-                    totalI.style.display = "block";
-                    avgO.style.display = "none";
-                    avgOD.style.display = "none";
-                    avgIOD.style.display = "none";
-                    totalO.style.display = "none";
-                    avgIO.style.display = "none";
-                    totalIO.style.display = "none";
-                }
-                else if($('#out').hasClass('active'))
-                {
-                    avgI.style.display = "none";
-                    avgID.style.display = "none"
-                    totalI.style.display = "none";
-                    avgO.style.display = "block";
-                    avgOD.style.display = "none";
-                    avgIOD.style.display = "none";
-                    totalO.style.display = "block";
-                    avgIO.style.display = "none";
-                    totalIO.style.display = "none";
-                }
-                else
-                {
-                    avgI.style.display = "none";
-                    avgID.style.display = "none"
-                    totalI.style.display = "block";
-                    avgO.style.display = "none";
-                    avgOD.style.display = "none";
-                    avgIOD.style.display = "none";
-                    totalO.style.display = "block";
-                    avgIO.style.display = "block";
-                    totalIO.style.display = "block";
-                }
-
-                apiCal(selectedDate, nextDate, value, start_time, end_time);
-            }
-            else if ($('#trkMap').hasClass('active-tab')) {
-                from_hr = $('#fhr').val();
-                from_min = $('#fmin').val();
-                start_time = from_hr+":"+from_min;
-                to_hr = $('#thr').val();
-                to_min = $('#tmin').val();
-                end_time = to_hr+":"+to_min;  
-                generateTrackmap(selectedDate, nextDate,start_time,end_time);
-            }
-
-            
-        }
-        function customCalSearch() {
-            
-            let fromDate = $("#from").datepicker("getDate");
-            let toDate = $("#to").datepicker("getDate");
-
-            
                 toDate = new Date(new Date(toDate).getTime() + (24 * 60 * 60 * 1000));
-            
+                fromDate = fromDate.getFullYear() + "-" + (fromDate.getMonth() + 1) + "-" + fromDate.getDate();
+                calDate = fromDate;
+                toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + (toDate.getDate());
+                calNextDate = toDate;
 
-            fromDate = fromDate.getFullYear() + "-" + (fromDate.getMonth() + 1) + "-" + fromDate.getDate();
-            calDate = fromDate;
+                if ($('#agc').hasClass('active-tab')) {
+                    document.getElementById("monthavg").style.display = "none";
+                    document.getElementById("weekavg").style.display = "none";
+                    from_hr = $('#fhr').val();
+                    from_min = $('#fmin').val();
+                    start_time = from_hr + ":" + from_min;
+                    to_hr = $('#thr').val();
+                    to_min = $('#tmin').val();
+                    end_time = to_hr + ":" + to_min;
+                    demoApi(fromDate, toDate, start_time, end_time);
+                    demoStats(fromDate, toDate, start_time, end_time);
+                } else if ($('#ppc').hasClass('active-tab')) {
+                    //Check which tab is currently active
+                    let value = null;
+                    if ($('#in').hasClass('active')) {
+                        value = 'in';
+                    } else if ($('#out').hasClass('active')) {
+                        value = 'out';
+                    } else {
+                        value = 'in-out';
+                    }
 
-            toDate = toDate.getFullYear() + "-" + (toDate.getMonth() + 1) + "-" + (toDate.getDate());
-            calNextDate = toDate;
+                    from_hr = $('#fhr').val();
+                    from_min = $('#fmin').val();
+                    start_time = from_hr + ":" + from_min;
+                    to_hr = $('#thr').val();
+                    to_min = $('#tmin').val();
+                    end_time = to_hr + ":" + to_min;
 
-            if ($('#agc').hasClass('active-tab')) {
-                document.getElementById("monthavg").style.display = "none";
-                document.getElementById("weekavg").style.display = "none";
-                from_hr = $('#fhr').val();
-                from_min = $('#fmin').val();
-                start_time = from_hr+":"+from_min;
-                to_hr = $('#thr').val();
-                to_min = $('#tmin').val();
-                end_time = to_hr+":"+to_min;    
-                demoApi(fromDate, toDate,start_time,end_time);
-                demoStats(fromDate, toDate,start_time,end_time);
-            } else if ($('#ppc').hasClass('active-tab')) {
-                //Check which tab is currently active
-                let value = null;
-                if ($('#in').hasClass('active')) {
-                    value = 'in';
-                } else if ($('#out').hasClass('active')) {
-                    value = 'out';
-                } else {
-                    value = 'in-out';
+                    if ($('#in').hasClass('active')) {
+                        avgI.style.display = "none";
+                        avgID.style.display = "block"
+                        totalI.style.display = "block";
+                        avgO.style.display = "none";
+                        avgOD.style.display = "none";
+                        avgIOD.style.display = "none";
+                        totalO.style.display = "none";
+                        avgIO.style.display = "none";
+                        totalIO.style.display = "none";
+                    }
+                    else if ($('#out').hasClass('active')) {
+                        avgI.style.display = "none";
+                        avgID.style.display = "none"
+                        totalI.style.display = "none";
+                        avgO.style.display = "none";
+                        avgOD.style.display = "block";
+                        avgIOD.style.display = "none";
+                        totalO.style.display = "block";
+                        avgIO.style.display = "none";
+                        totalIO.style.display = "none";
+                    }
+                    else {
+                        avgI.style.display = "none";
+                        avgID.style.display = "none"
+                        totalI.style.display = "block";
+                        avgO.style.display = "none";
+                        avgOD.style.display = "none";
+                        totalO.style.display = "block";
+                        avgIO.style.display = "none";
+                        totalIO.style.display = "block";
+                        avgIOD.style.display = "block";
+                    }
+
+                    apiCal(calDate, calNextDate, value, start_time, end_time);
                 }
 
-                from_hr = $('#fhr').val();
-                from_min = $('#fmin').val();
-                start_time = from_hr+":"+from_min;
-                to_hr = $('#thr').val();
-                to_min = $('#tmin').val();
-                end_time = to_hr+":"+to_min; 
-                
-                if($('#in').hasClass('active'))
-                {
-                    avgI.style.display = "none";
-                    avgID.style.display = "block"
-                    totalI.style.display = "block";
-                    avgO.style.display = "none";
-                    avgOD.style.display = "none";
-                    avgIOD.style.display = "none";
-                    totalO.style.display = "none";
-                    avgIO.style.display = "none";
-                    totalIO.style.display = "none";
-                }
-                else if($('#out').hasClass('active'))
-                {
-                    avgI.style.display = "none";
-                    avgID.style.display = "none"
-                    totalI.style.display = "none";
-                    avgO.style.display = "none";
-                    avgOD.style.display = "block";
-                    avgIOD.style.display = "none";
-                    totalO.style.display = "block";
-                    avgIO.style.display = "none";
-                    totalIO.style.display = "none";
-                }
-                else
-                {
-                    avgI.style.display = "none";
-                    avgID.style.display = "none"
-                    totalI.style.display = "block";
-                    avgO.style.display = "none";
-                    avgOD.style.display = "none";
-                    totalO.style.display = "block";
-                    avgIO.style.display = "none";
-                    totalIO.style.display = "block";
-                    avgIOD.style.display = "block";
-                }
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#oCalendarBtn').hasClass('active')) {
 
-            apiCal(fromDate, toDate, value,start_time,end_time);
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
 
+                    $('#calendar').remove();
+                    $('#big-calendar').append($('<div class="oCalendar" id="calendar"></div>'));
+
+
+                } else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active-internal-tab')) {
+
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
+
+                }
             }
-        }
-
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-          // page is now ready, initialize the calendar... 
-          var today = new Date
-          var dd = today.getDate();
-          var mm = today.getMonth() + 1;
-          var yyyy = today.getFullYear();
-          var currentDate = yyyy + '-' + mm + '-' + dd;
-        
-    
-          $('#calendar').fullCalendar({
-            header: {
-              left: 'prev,next today',
-              center: 'title',
-              right: 'month,basicWeek,basicDay'
-            },
-    
-            defaultDate: currentDate,
-            navLinks: true, // can click day/week names to navigate views
-            editable: true,
-            selectable: true,
-            eventLimit: true, // allow "more" link when too many events
-    
-            dayRender: function (date, cell) {
-    
-                date = moment(date).format("YYYY-M-DD");
-
-                //console.log('kunal'+date);
-
-                
-
-                if (date === currentDate) {
-                    $(cell).html('<div class="utilization-div" >50% utilization</div>');
-                }
-            
-            },
-    
-            dayClick: function (date) {
-    
-              $(this).css('background-color', 'yellow');;
-    
-            },
-    
-            events: [
-              {
-                title: 'All Day Event',
-                start: '2018-01-01'
-              },
-              {
-                title: 'Long Event',
-                start: '2018-01-07',
-                end: '2018-01-10'
-              },
-              {
-                id: 999,
-                title: 'Repeating Event',
-                start: '2018-12-09T16:00:00'
-              },
-              {
-                title: 'Lunch',
-                start: '2018-07-16T12:00:00'
-              },
-              {
-                title: 'Click for Google',
-                url: 'http://google.com/',
-                start: '2018-01-28'
-              }
-            ]
-          });
-        });
-    
-      </script>
+        </script>
 </body>
 
 </html>

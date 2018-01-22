@@ -1,7 +1,11 @@
 function apiCal(fromDate, toDate, value,start_time,end_time) {
-  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
-
-  // getPeopleCounterAndFindOccupancy(fromDate, toDate, value, start_time, end_time);
+  if($('#txt-custom-cal').hasClass('active-calendar')){
+    var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/days/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
+  }
+  else{
+    var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
+  }
+  
 
   var inppc = [];
   var times = [];
@@ -27,7 +31,12 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
           for (let item of data.data[0].items) {
             inppc.push(item.in);
             var timeArray = item.date.split(" ");
-            times.push(timeArray[1]);
+            if($('#txt-custom-cal').hasClass('active-calendar')){
+              times.push(timeArray[0]);
+            }
+            else{
+              times.push(timeArray[1]);
+            }
           }
           loadCaptions("in",furl,fromDate,toDate,start_time,end_time);
           Highcharts.chart('container', {
@@ -96,7 +105,12 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
           for (let item of data.data[0].items) {
             outppc.push(item.out);
             var timeArray = item.date.split(" ");
-            times.push(timeArray[1]);
+            if($('#txt-custom-cal').hasClass('active-calendar')){
+              times.push(timeArray[0]);
+            }
+            else{
+              times.push(timeArray[1]);
+            }
           }
           loadCaptions("out",furl,fromDate,toDate,start_time,end_time);
           Highcharts.chart('container', {
@@ -169,7 +183,14 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
             inppc.push(item.in);
             outppc.push(item.out);
             var timeArray = item.date.split(" ");
-            times.push(timeArray[1]);
+            if($('#txt-custom-cal').hasClass('active-calendar')){
+              times.push(timeArray[0]);
+            }
+            else{
+              times.push(timeArray[1]);
+            }
+            
+
           }
           loadCaptions("inout",furl,fromDate,toDate,start_time,end_time);
           Highcharts.chart('container', {
