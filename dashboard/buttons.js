@@ -12,6 +12,7 @@ var s4 = document.getElementById("s4");
 var s5 = document.getElementById("s5");
 
 function myPeopleCounter() {
+
     $('#graphBtn').hide();
     $('#occupancyBtn').hide();
     $('#utilizationBtn').hide();
@@ -55,6 +56,15 @@ function myPeopleCounter() {
     $('#txt-custom-cal').show();
     $('#calendar').hide();
 
+    if($('#txt-custom-cal').hasClass('active-calendar'))
+    {
+      customCalSearch();
+      console.log("Falsely Called");
+    }
+    else
+    {
+      mainCalSearch();
+    }
 }
 
 function myAgeCounter() {

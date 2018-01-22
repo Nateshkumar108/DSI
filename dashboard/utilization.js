@@ -302,7 +302,7 @@ function createHighchart() {
       }
     },
     series: [{
-      name: 'Occupancy',
+      name: 'Report',
       data: []
     }]
   });
