@@ -35,28 +35,35 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
           var item = data.data[0].items[i];
           var currDate = item.date.split(" ")[0];
           var currTime = item.date.split(" ")[1];
-
+          var hours = curreTime.split(":")[0];
           if (date == currDate) {
 
             numPeople += item.in - item.out;    
              if (numPeople < 0) {    
                numPeople = 0;    
              }   
-             var util = (numPeople / capacity) * 100;    
+             var util = (numPeople / capacity) * 100;
+             // temporarily set working hours from 8:00 to 20:00
+             if (hours > 20) {
+              util = 0;
+             }
+
              utilArr.push(util);   
      
              if (i == length - 1) {    
                // add utilization for the last date    
-               var total = utilArr.reduce((a, b) => a + b, 0);   
-               var utilAvg = total / utilArr.length;   
+               var total = utilArr.reduce((a, b) => a + b, 0);
+               // Divide by 12 for now, as we have 12 working hours.   
+               var utilAvg = total / 12;   
                dateToUtilMap[date] = utilAvg;    
              }   
      
            } else {    
              if (i != 0) {   
                // push average utilization for a day into dateToUtilMap    
-               var total = utilArr.reduce((a, b) => a + b, 0);   
-               var utilAvg = total / utilArr.length;   
+               var total = utilArr.reduce((a, b) => a + b, 0);
+               // Divide by 12 for now, as we have 12 working hours. 
+               var utilAvg = total / 12;   
                dateToUtilMap[date] = utilAvg;    
              }   
      
@@ -170,17 +177,25 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
           var item = data.data[0].items[i];
           var currDate = item.date.split(" ")[0];
           var currTime = item.date.split(" ")[1]
-          
+          var hours = currTime.split(":")[0];
           if (date == currDate) {
             numPeople += item.in - item.out;
+
             if (numPeople < 0) {    
                numPeople = 0;    
-             }   
-             occupancyArr.push(numPeople);   
+             }
+
+             if (hours > 20) {
+              numPeople = 0;
+             }
+
+             occupancyArr.push(numPeople); 
+
              if (i == length - 1) {    
                // add occupancy for the last date    
-               var total = occupancyArr.reduce((a, b) => a + b, 0);    
-               var occAvg = total / occupancyArr.length;   
+               var total = occupancyArr.reduce((a, b) => a + b, 0);
+               // Divide by 12 for now, as we have 12 working hours.     
+               var occAvg = total / 12;   
                occAvg = Math.round(occAvg);    
                dateToOccupancyMap[date] = occAvg;  
              }   
@@ -188,8 +203,9 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
            } else {    
              if (i != 0) {   
                // push average occupancy for a day into dateToOccupancyMap   
-               var total = occupancyArr.reduce((a, b) => a + b, 0);    
-               var occAvg = total / occupancyArr.length;   
+               var total = occupancyArr.reduce((a, b) => a + b, 0); 
+               // Divide by 12 for now, as we have 12 working hours.    
+               var occAvg = total / 12;   
                occAvg = Math.round(occAvg);    
                dateToOccupancyMap[date] = occAvg;
              }   
