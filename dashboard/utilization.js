@@ -36,7 +36,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
           var item = data.data[0].items[i];
           var currDate = item.date.split(" ")[0];
           var currTime = item.date.split(" ")[1];
-          var hours = curreTime.split(":")[0];
+          var hours = currTime.split(":")[0];
           if (date == currDate) {
 
             numPeople += item.in - item.out;    
