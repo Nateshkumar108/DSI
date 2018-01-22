@@ -176,7 +176,6 @@
                     <div class="clearfix"></div>
                     <div class="parent-ocr-graph-cal">
                         <span id="graphBtn" class="ocr-graph-cal active" onclick="graphButtonChart()">Graph</span>
-                        <span class="white">|</span>
                         <span id="oCalendarBtn" class="ocr-graph-cal" onclick="oCalendar()">Calendar</span>
                     </div>
                 </div>
@@ -593,8 +592,6 @@
                         } else if ($('#utilizationBtn').hasClass('active')) {
                             getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
                         }
-
-                  
                 }
             }
     
@@ -687,9 +684,7 @@
                     $('#calendar').remove();
                     $('#big-calendar').append($('<div class="oCalendar" id="calendar"></div>'));
 
-                    // loadOccupancyCalendar();
-                } 
-                 else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active')) {
+                } else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active')) {
 
                     if ($('#occupancyBtn').hasClass('active')) {
                         getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
