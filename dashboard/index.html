@@ -585,14 +585,14 @@
 
                         // loadOccupancyCalendar();
                     }
-                else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active')) {
+                    else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active')) {
 
                         if ($('#occupancyBtn').hasClass('active')) {
                             getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
                         } else if ($('#utilizationBtn').hasClass('active')) {
                             getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
                         }
-
+                }
             }
     
             function customCalSearch() {
