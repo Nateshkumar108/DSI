@@ -39,6 +39,16 @@ $(document).ready(function () {
       // totalO.style.display = "none";
       // avgIO.style.display = "none";
       // totalIO.style.display = "none";
+
+      if($('#txt-custom-cal').hasClass('active-calendar'))
+      {
+        customCalSearch();
+      }
+      else
+      {
+        mainCalSearch();
+      }
+
       if($('#txt-custom-cal').hasClass('active-calendar'))
       {
         avgI.style.display = "none";
@@ -91,6 +101,7 @@ $(document).ready(function () {
           times.push(timeArray[1]);
         }
         loadCaptions("in", furl,calDate,calNextDate,start_time,end_time);
+
         if($('#txt-custom-cal').hasClass('active-calendar'))
         {
           customCalSearch();
