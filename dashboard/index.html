@@ -311,7 +311,7 @@
             <div class="medium-space"></div>
             <div class="clearfix"></div>
 
-            <div>
+            <div class="TimeSelect" id="TS">
                 <span>Time:</span>
                 <div class="timer">
                     <input type="number" id="fhr" class="input-timer" min="0" max="23" placeholder="hh" value="00" />
@@ -612,7 +612,6 @@
                 }
             }
             function customCalSearch() {
-
                 let fromDate = $("#from").datepicker("getDate");
                 let toDate = $("#to").datepicker("getDate");
 
