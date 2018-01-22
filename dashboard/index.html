@@ -22,7 +22,7 @@
     <div class="div-fake-hidden">
         <i class="fa fa-square-o fa-3x"></i>
     </div>
-    <div id="page-loader" className={(this.state.isPageLoad) ? "show" : "hide"}>
+    <div id="page-loader">
         <div class="loader"></div>
     </div>
 
@@ -225,9 +225,20 @@
                 <!-- <h1>AGE COUNTER</h1> -->
             </div>
 
+            <!-- Trackmap -->
             <div class="trackMaps" id="trackMap">
-                <div class="floor-plan">
-                    <canvas id="trackmap" width="591" height="583"></canvas>
+                <h2 class="title">DSI Trackmap</h2>
+                <div class="parent-ocr-graph-cal">
+                    <span id="lbl-motion" class="ocr-graph-cal active" onclick="trackmapMotion()">Motion</span>
+                    <span id="lbl-dwell" class="ocr-graph-cal" onclick="trackmapDwell()">Dwell</span>
+                </div>
+                <div class="medium-space"></div>
+                <div class="clearfix"></div>
+                <div class="floor-plan" id="motion-trackmap">
+                    <canvas id="canvas-motion" width="591" height="583"></canvas>
+                </div>
+                <div class="floor-plan" id="dwell-trackmap">
+                    <canvas id="canvas-dwell" width="591" height="583"></canvas>
                 </div>
             </div>
 
@@ -335,7 +346,8 @@
 
         <script type="text/javascript">
             var today = new Date();
-            var canvas;
+            var canvasMotion;
+            var canvasDwell;
             var day = today.getDate();
             var month = today.getMonth() + 1;
             var year = today.getFullYear();
@@ -396,6 +408,7 @@
                 $('#custom-btn').hide();
                 $('#graph').hide();
                 $('#oCalendarBtn').hide();
+                $('#dwell-trackmap').hide();
                 $("#datepicker").datepicker({
                     onSelect: function (date) {
                         document.getElementById("monthavg").style.display = "none";
