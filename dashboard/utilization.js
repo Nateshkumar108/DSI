@@ -75,8 +75,8 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
         // FetchUtilization.setUtilizationDateDictionary(dateToUtilMap);
         console.log("dateToUtilMap was ", dateToUtilMap);
         dateToUtilGlobalMap = dateToUtilMap;
-      
-        if($('#graphBtn').hasClass('active-internal-tab')) {
+
+        if ($('#graphBtn').hasClass('active')) {
           showInHighCharts(dateToUtilGlobalMap);
         } else {
           showInCalendar(dateToUtilGlobalMap);
@@ -114,7 +114,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
 
         timeToUtilGlobalMap = timeToUtilMap;
 
-        if($('#graphBtn').hasClass('active-internal-tab')) {
+        if ($('#graphBtn').hasClass('active')) {
           showInHighCharts(timeToUtilGlobalMap);
         } else {
           showInCalendar(timeToUtilGlobalMap);
@@ -122,7 +122,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
       }
 
 
-      if ($('#oCalendarBtn').hasClass('active-internal-tab')) {
+      if ($('#oCalendarBtn').hasClass('active')) {
         oCalendar();
       }
     }
@@ -131,10 +131,10 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
 
 
 function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time) {
-  console.log("start time",start_time);
-  console.log("end time",end_time);
-  console.log("fromDate",fromDate);
-  console.log("toDate",toDate);
+  console.log("start time", start_time);
+  console.log("end time", end_time);
+  console.log("fromDate", fromDate);
+  console.log("toDate", toDate);
 
   var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
 
@@ -205,8 +205,8 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
         }
 
         dateToOccupancyGlobalMap = dateToOccupancyMap;
-        
-        if($('#graphBtn').hasClass('active-internal-tab')) {
+
+        if ($('#graphBtn').hasClass('active')) {
           showInHighCharts(dateToOccupancyGlobalMap);
         } else {
           showInCalendar(dateToOccupancyGlobalMap);
@@ -251,7 +251,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
 
         timeToOccupancyGlobalMap = timeToOccupancyMap;
 
-        if($('#graphBtn').hasClass('active-internal-tab')) {
+        if ($('#graphBtn').hasClass('active')) {
           showInHighCharts(timeToOccupancyGlobalMap);
         } else {
           showInCalendar(timeToOccupancyGlobalMap);
@@ -259,7 +259,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
 
       }
 
-      if ($('#oCalendarBtn').hasClass('active-internal-tab')) {
+      if ($('#oCalendarBtn').hasClass('active')) {
         oCalendar();
       }
 
