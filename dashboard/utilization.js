@@ -71,7 +71,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
              date = currDate;    
              numPeople = 0;    
              utilArr = [];   
-             numPeople = item.in  item.out;   
+             numPeople = item.in - item.out;   
              var util = (numPeople / capacity) * 100;    
              utilArr.push(util);   
            }
