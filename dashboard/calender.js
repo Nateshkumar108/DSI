@@ -57,13 +57,13 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
             yAxis: {
               min: 0,
               title: {
-                text: 'PERSONS'
+                text: 'Number of People'
               }
             },
             // tooltip: {
             //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+            //     '<td style="padding:0"><b>{point.y:.1f} Number of People</b></td></tr>',
             //   footerFormat: '</table>',
             //   shared: true,
             //   useHTML: true
@@ -75,7 +75,7 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
               }
             },
             series: [{
-              name: 'IN',
+              name: 'In',
               data: inppc
 
             }]
@@ -134,13 +134,13 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
             yAxis: {
               min: 0,
               title: {
-                text: 'PERSONS'
+                text: 'Number of People'
               }
             },
             // tooltip: {
             //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+            //     '<td style="padding:0"><b>{point.y:.1f} Number of People</b></td></tr>',
             //   footerFormat: '</table>',
             //   shared: true,
             //   useHTML: true
@@ -152,7 +152,7 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
               }
             },
             series: [{
-              name: 'OUT',
+              name: 'Out',
               data: outppc
 
             }]
@@ -214,13 +214,13 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
             yAxis: {
               min: 0,
               title: {
-                text: 'PERSONS'
+                text: 'Number of People'
               }
             },
             // tooltip: {
             //   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             //   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            //     '<td style="padding:0"><b>{point.y:.1f} persons</b></td></tr>',
+            //     '<td style="padding:0"><b>{point.y:.1f} Number of People</b></td></tr>',
             //   footerFormat: '</table>',
             //   shared: true,
             //   useHTML: true
@@ -232,11 +232,11 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
               }
             },
             series: [{
-              name: 'IN',
+              name: 'In',
               data: inppc
 
             }, {
-              name: 'OUT',
+              name: 'Out',
               data: outppc
             }]
           });
