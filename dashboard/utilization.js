@@ -328,7 +328,7 @@ function createHighchart() {
       height: 65 + '%'
     },
     title: {
-      text: ''
+      text: 'Chart Title'
     },
     subtitle: {
       text: ''
@@ -365,7 +365,7 @@ function createHighchart() {
       }
     },
     series: [{
-      name: 'Report',
+      name: '',
       data: []
     }]
   });
@@ -401,6 +401,28 @@ function showInHighCharts(dictionary) {
   console.log("Hello world", graph);
   graph.series[0].setData(yAxis);
   graph.xAxis[0].setCategories(xAxis);
+
+ if($('#utilizationBtn').hasClass('active'))
+  {
+    var new_title = "Utilization";
+    var chart = $('#OccAndUtilReportGraph').highcharts();
+    chart.setTitle({ text: new_title });
+    
+    graph.series[0].update({name:"Utilization"}, false);
+    graph.yAxis[0].update({title:{text:"PERCENTAGE"}});
+    graph.redraw();
+  }
+
+  if($('#occupancyBtn').hasClass('active'))
+  {
+    var new_title = "Occupancy";
+    var chart = $('#OccAndUtilReportGraph').highcharts();
+    chart.setTitle({ text: new_title });
+    
+    graph.series[0].update({name:"Occupancy"}, false);
+    graph.yAxis[0].update({title:{text:"PERSONS"}});
+    graph.redraw();
+  }
 
   // if ($('#occupancyBtn').hasClass('active')) {
   //   // set all necessary properties of highchart, graph for occupancy
