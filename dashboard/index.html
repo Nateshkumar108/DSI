@@ -324,13 +324,13 @@
             <div class="TimeSelect" id="TS">
                 <span>Time:</span>
                 <div class="timer">
-                    <input type="number" id="fhr" class="input-timer" min="0" max="23" placeholder="hh" value="00" />
+                    <input type="number" id="fhr" class="input-timer" min="0" max="24" placeholder="hh" value="00" />
                     <span>:</span>
-                    <input type="number" id="fmin" class="input-timer" min="0" max="59" placeholder="mm" value="00" />
+                    <input type="number" id="fmin" class="input-timer" min="0" max="00" placeholder="mm" value="00" />
                     <span class="lbl-to-timer ">to</span>
-                    <input type="number" id="thr" class="input-timer" min="0" max="23" placeholder="hh" value="23" />
+                    <input type="number" id="thr" class="input-timer" min="0" max="24" placeholder="hh" value="24" />
                     <span>:</span>
-                    <input type="number" id="tmin" class="input-timer" min="0" max="59" placeholder="mm" value="59" />
+                    <input type="number" id="tmin" class="input-timer" min="0" max="00" placeholder="mm" value="00" />
                 </div>
             </div>
             <div class="medium-space"></div>
@@ -365,7 +365,7 @@
             var start_time = "00:00";
             var to_hr;
             var to_min;
-            var end_time = "23:59";
+            var end_time = "24:00";
             var avgMALE = 0;
             var avgFEMALE = 0;
             var sumMaleWeek = 0;
@@ -505,6 +505,8 @@
                 selectedDate = selectedDate.getFullYear() + "-" + (selectedDate.getMonth() + 1) + "-" + selectedDate.getDate();
                 calDate = selectedDate;
                 fromDate = selectedDate;
+
+                console.log("buff "+start_time+" "+end_time);
 
                 nextDate = nextDate.getFullYear() + "-" + (nextDate.getMonth() + 1) + "-" + nextDate.getDate();
                 calNextDate = nextDate;
