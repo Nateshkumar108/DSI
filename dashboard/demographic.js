@@ -104,11 +104,11 @@ $(document).ready(function () {
             }
           },
           series: [{
-            name: 'MALE',
+            name: 'Male',
             data: maleCount
       
           },{
-            name: 'FEMALE',
+            name: 'Female',
             data: femaleCount
            }]
         });
