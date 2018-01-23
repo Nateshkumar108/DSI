@@ -401,7 +401,7 @@ function showInHighCharts(dictionary) {
   console.log("Hello world", graph);
   graph.series[0].setData(yAxis);
   graph.xAxis[0].setCategories(xAxis);
-
+  
  if($('#utilizationBtn').hasClass('active'))
   {
     var new_title = "Utilization";
@@ -423,6 +423,7 @@ function showInHighCharts(dictionary) {
     graph.yAxis[0].update({title:{text:"PERSONS"}});
     graph.redraw();
   }
+
 
   // if ($('#occupancyBtn').hasClass('active')) {
   //   // set all necessary properties of highchart, graph for occupancy

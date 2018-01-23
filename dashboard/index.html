@@ -22,7 +22,7 @@
     <div class="div-fake-hidden">
         <i class="fa fa-square-o fa-3x"></i>
     </div>
-    <div id="page-loader" className={(this.state.isPageLoad) ? "show" : "hide"}>
+    <div id="page-loader">
         <div class="loader"></div>
     </div>
 
@@ -38,13 +38,13 @@
                 <h3>WORKSPACE</h3>
                 <ul class="tab-button">
                     <li>
-                        <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()">People Counter</button>
+                        <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()"><i class="fa fa-users" aria-hidden="true"></i> People Counter</button>
                     </li>
                     <li>
-                        <button class="ageCount" id="agc" onclick="myAgeCounter()">Demographics</button>
+                        <button class="ageCount" id="agc" onclick="myAgeCounter()"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i> Demographics</button>
                     </li>
                     <li>
-                        <button class="trakMap" id="trkMap" onclick="myTrackMap()">Trackmap</button>
+                        <button class="trakMap" id="trkMap" onclick="myTrackMap()"><i class="	fa fa-shekel" aria-hidden="true"></i> Trackmap</button>
                     </li>
                 </ul>
             </div>
@@ -52,10 +52,10 @@
                 <h3>ROOMS</h3>
                 <ul class="tab-button">
                     <li>
-                        <button class="occupancyReport" id="occrptbtn" onclick="occupyrpt()">Occupancy Report</button>
+                        <button class="occupancyReport" id="occrptbtn" onclick="occupyrpt()"><i class="fa fa-sellsy" aria-hidden="true"></i> Occupancy Report</button>
                     </li>
                     <li>
-                        <button class="dwellReport">Dwell Report</button>
+                        <button class="dwellReport"><i class="fa fa-ravelry" aria-hidden="true"></i> Dwell Report</button>
                     </li>
                 </ul>
             </div>
@@ -175,8 +175,8 @@
                     </ul>
                     <div class="clearfix"></div>
                     <div class="parent-ocr-graph-cal">
-                        <span id="graphBtn" class="ocr-graph-cal active" onclick="graphButtonChart()">Graph</span>
-                        <span id="oCalendarBtn" class="ocr-graph-cal" onclick="oCalendar()">Calendar</span>
+                        <span id="graphBtn" class="ocr-graph-cal active" onclick="graphButtonChart()"><i class="fa fa-bar-chart" aria-hidden="true"></i> Graph</span>
+                        <span id="oCalendarBtn" class="ocr-graph-cal" onclick="oCalendar()"><i class="fa fa-calendar-o" aria-hidden="true"></i> Calendar</span>
                     </div>
                 </div>
                 <div id="OccAndUtilReportGraph" style="min-width: 310px; margin: 0 auto"></div>
@@ -225,9 +225,20 @@
                 <!-- <h1>AGE COUNTER</h1> -->
             </div>
 
+            <!-- Trackmap -->
             <div class="trackMaps" id="trackMap">
-                <div class="floor-plan">
-                    <canvas id="trackmap" width="591" height="583"></canvas>
+                <h2 class="title">DSI Trackmap</h2>
+                <div class="parent-ocr-graph-cal">
+                    <span id="lbl-motion" class="ocr-graph-cal active" onclick="trackmapMotion()">Motion</span>
+                    <span id="lbl-dwell" class="ocr-graph-cal" onclick="trackmapDwell()">Dwell</span>
+                </div>
+                <div class="medium-space"></div>
+                <div class="clearfix"></div>
+                <div class="floor-plan" id="motion-trackmap">
+                    <canvas id="canvas-motion" width="591" height="583"></canvas>
+                </div>
+                <div class="floor-plan" id="dwell-trackmap">
+                    <canvas id="canvas-dwell" width="591" height="583"></canvas>
                 </div>
             </div>
 
@@ -310,16 +321,16 @@
             <div class="medium-space"></div>
             <div class="clearfix"></div>
 
-            <div>
+            <div class="TimeSelect" id="TS">
                 <span>Time:</span>
                 <div class="timer">
-                    <input type="number" id="fhr" class="input-timer" min="0" max="23" placeholder="hh" value="00" />
+                    <input type="number" id="fhr" class="input-timer" min="0" max="24" placeholder="hh" value="00" />
                     <span>:</span>
-                    <input type="number" id="fmin" class="input-timer" min="0" max="59" placeholder="mm" value="00" />
+                    <input type="number" id="fmin" class="input-timer" min="0" max="00" placeholder="mm" value="00" />
                     <span class="lbl-to-timer ">to</span>
-                    <input type="number" id="thr" class="input-timer" min="0" max="23" placeholder="hh" value="23" />
+                    <input type="number" id="thr" class="input-timer" min="0" max="24" placeholder="hh" value="24" />
                     <span>:</span>
-                    <input type="number" id="tmin" class="input-timer" min="0" max="59" placeholder="mm" value="59" />
+                    <input type="number" id="tmin" class="input-timer" min="0" max="00" placeholder="mm" value="00" />
                 </div>
             </div>
             <div class="medium-space"></div>
@@ -335,7 +346,8 @@
 
         <script type="text/javascript">
             var today = new Date();
-            var canvas;
+            var canvasMotion;
+            var canvasDwell;
             var day = today.getDate();
             var month = today.getMonth() + 1;
             var year = today.getFullYear();
@@ -353,7 +365,7 @@
             var start_time = "00:00";
             var to_hr;
             var to_min;
-            var end_time = "23:59";
+            var end_time = "24:00";
             var avgMALE = 0;
             var avgFEMALE = 0;
             var sumMaleWeek = 0;
@@ -396,6 +408,7 @@
                 $('#custom-btn').hide();
                 $('#graph').hide();
                 $('#oCalendarBtn').hide();
+                $('#dwell-trackmap').hide();
                 $("#datepicker").datepicker({
                     onSelect: function (date) {
                         document.getElementById("monthavg").style.display = "none";
@@ -492,6 +505,8 @@
                 selectedDate = selectedDate.getFullYear() + "-" + (selectedDate.getMonth() + 1) + "-" + selectedDate.getDate();
                 calDate = selectedDate;
                 fromDate = selectedDate;
+
+                console.log("buff "+start_time+" "+end_time);
 
                 nextDate = nextDate.getFullYear() + "-" + (nextDate.getMonth() + 1) + "-" + nextDate.getDate();
                 calNextDate = nextDate;
@@ -596,7 +611,9 @@
             }
     
             function customCalSearch() {
-
+                // $('#TS').removeClass('TimeSelect');
+                // $('#TS').addClass('customTimeSelect');
+                
                 let fromDate = $("#from").datepicker("getDate");
                 let toDate = $("#to").datepicker("getDate");
 
