@@ -401,7 +401,14 @@ function showInHighCharts(dictionary) {
   console.log("Hello world", graph);
   graph.series[0].setData(yAxis);
   graph.xAxis[0].setCategories(xAxis);
+  
+  if ($('#occupancyBtn').hasClass('active')) {
+  graph.series[0].update({name:"Room Data"}, false);
+  graph.redraw();
+  }
+  if ($('#occupancyBtn').hasClass('active')){
 
+  }
   // if ($('#occupancyBtn').hasClass('active')) {
   //   // set all necessary properties of highchart, graph for occupancy
   //   $('#OccAndUtilReportGraph').show();
