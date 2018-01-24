@@ -97,7 +97,7 @@ function demoApi(fromDate, toDate){
           yAxis: {
             min: 0,
             title: {
-              text: ''
+              text: 'Number Of People'
             }
           },
         //   tooltip: {
