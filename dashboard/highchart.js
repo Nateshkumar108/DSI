@@ -131,7 +131,7 @@ $(document).ready(function () {
           yAxis: {
             min: 0,
             title: {
-              text: 'PERSONS'
+              text: 'NUMBER OR PEOPLE'
             }
           },
           plotOptions: {
@@ -141,7 +141,7 @@ $(document).ready(function () {
             }
           },
           series: [{
-            name: 'IN',
+            name: 'In',
             data: inppc
 
           }]
@@ -250,7 +250,7 @@ $(document).ready(function () {
           yAxis: {
             min: 0,
             title: {
-              text: 'PERSONS'
+              text: 'Number of People'
             }
           },
           // tooltip: {
@@ -268,7 +268,7 @@ $(document).ready(function () {
             }
           },
           series: [{
-            name: 'OUT',
+            name: 'Out',
             data: outppc
 
           }]
@@ -384,7 +384,7 @@ $(document).ready(function () {
           yAxis: {
             min: 0,
             title: {
-              text: 'PERSONS'
+              text: 'Number of People'
             }
           },
           // tooltip: {
@@ -402,11 +402,11 @@ $(document).ready(function () {
             }
           },
           series: [{
-            name: 'IN',
+            name: 'In',
             data: inppc
 
           }, {
-            name: 'OUT',
+            name: 'Out',
             data: outppc
           }]
         });
@@ -467,7 +467,7 @@ $(document).ready(function () {
         yAxis: {
           min: 0,
           title: {
-            text: 'PERSONS'
+            text: 'Number of People'
           }
         },
         //       tooltip: {
@@ -486,11 +486,11 @@ $(document).ready(function () {
           }
         },
         series: [{
-          name: 'IN',
+          name: 'In',
           data: inppc
 
         }, {
-          name: 'OUT',
+          name: 'Out',
           data: outppc
         }]
       });

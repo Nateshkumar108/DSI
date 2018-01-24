@@ -1,7 +1,37 @@
 
 function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time) {
 
-  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
+  var currentDate = new Date().toISOString().split("T")[0];
+  var localDate = new Date();
+  console.log('Currentdate',currentDate);
+  console.log('fromdate',fromDate);
+
+  var month = fromDate.split("-")[1];
+  var day = fromDate.split("-")[2];
+
+  if (month < 10) {
+    month = '0'+month;
+  }
+
+  if(day < 10) {
+    day = '0'+day;
+  }
+
+  
+
+  var localFromDate  = fromDate.split("-")[0] + "-" + month + "-" + day;
+  var report_endTime = "";
+
+  if(localFromDate == currentDate)
+  {
+    report_endTime = localDate.getHours();
+    report_endTime += ':00';
+    console.log('time',report_endTime);
+  } else {
+    report_endTime = end_time;
+  }
+
+  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + report_endTime;
 
   $('#page-loader').show();
   $.ajax({
@@ -55,7 +85,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
                // add utilization for the last date    
                var total = utilArr.reduce((a, b) => a + b, 0);
                // Divide by 12 for now, as we have 12 working hours.   
-               var utilAvg = total / 12;   
+               var utilAvg = total / utilArr.length;   
                dateToUtilMap[date] = utilAvg;    
              }   
      
@@ -64,7 +94,7 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
                // push average utilization for a day into dateToUtilMap    
                var total = utilArr.reduce((a, b) => a + b, 0);
                // Divide by 12 for now, as we have 12 working hours. 
-               var utilAvg = total / 12;   
+               var utilAvg = total / utilArr.length;   
                dateToUtilMap[date] = utilAvg;    
              }   
      
@@ -139,12 +169,38 @@ function getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_ti
 
 
 function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time) {
-  console.log("start time", start_time);
-  console.log("end time", end_time);
-  console.log("fromDate", fromDate);
-  console.log("toDate", toDate);
 
-  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + end_time;
+  var currentDate = new Date().toISOString().split("T")[0];
+  var localDate = new Date();
+  console.log('Currentdate',currentDate);
+  console.log('fromdate',fromDate);
+
+  var month = fromDate.split("-")[1];
+  var day = fromDate.split("-")[2];
+
+  if (month < 10) {
+    month = '0'+month;
+  }
+
+  if(day < 10) {
+    day = '0'+day;
+  }
+
+  
+
+  var localFromDate  = fromDate.split("-")[0] + "-" + month + "-" + day;
+  var report_endTime = "";
+
+  if(localFromDate == currentDate)
+  {
+    report_endTime = localDate.getHours();
+    report_endTime += ':00';
+    console.log('time',report_endTime);
+  } else {
+    report_endTime = end_time;
+  }
+  
+  var furl = "http://18.216.208.225:3000/v1/peoplecounter/installation/5a420343b7e14e0007d73376/hours/" + fromDate + "/" + toDate + "?st=" + start_time + "&et=" + report_endTime;
 
   $('#page-loader').show();
   $.ajax({
@@ -206,7 +262,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
                // push average occupancy for a day into dateToOccupancyMap   
                var total = occupancyArr.reduce((a, b) => a + b, 0); 
                // Divide by 12 for now, as we have 12 working hours.    
-               var occAvg = total / 12;   
+               var occAvg = total / occupancyArr.length;   
                occAvg = Math.round(occAvg);    
                dateToOccupancyMap[date] = occAvg;
              }   
@@ -347,7 +403,7 @@ function createHighchart() {
     yAxis: {
       min: 0,
       title: {
-        text: ''
+        text: 'Number Of People'
       }
     },
     // tooltip: {
@@ -365,7 +421,7 @@ function createHighchart() {
       }
     },
     series: [{
-      name: 'Report',
+      name: 'Occupancy',
       data: []
     }]
   });
@@ -401,6 +457,30 @@ function showInHighCharts(dictionary) {
   console.log("Hello world", graph);
   graph.series[0].setData(yAxis);
   graph.xAxis[0].setCategories(xAxis);
+  console.log("Dictionary",dictionary);
+  
+ if($('#utilizationBtn').hasClass('active'))
+  {
+    var new_title = "DSI UTILIZATION REPORT";
+    var chart = $('#OccAndUtilReportGraph').highcharts();
+    chart.setTitle({ text: new_title });
+    
+    graph.series[0].update({name:"Utilization"}, false);
+    graph.yAxis[0].update({title:{text:"Percentage"}});
+    graph.redraw();
+  }
+
+  if($('#occupancyBtn').hasClass('active'))
+  {
+    var new_title = "DSI OCCUPANCY REPORT";
+    var chart = $('#OccAndUtilReportGraph').highcharts();
+    chart.setTitle({ text: new_title });
+    
+    graph.series[0].update({name:"Occupancy"}, false);
+    graph.yAxis[0].update({title:{text:"Number Of People"}});
+    graph.redraw();
+  }
+
 
   // if ($('#occupancyBtn').hasClass('active')) {
   //   // set all necessary properties of highchart, graph for occupancy

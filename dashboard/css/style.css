@@ -501,6 +501,21 @@ button, .hand-pointer {
 }
 
 .ocr-graph-cal.active {
-  text-decoration: underline;
+  text-decoration: none;
   color: #1DB0EC;
+}
 
+.title {
+  color: #E0E0E3;
+  text-align: center;
+}
+
+.TimeSelect{
+  padding-left: 11px;
+}
+.customTimeSelect{
+  padding-left: 32px;
+}
+button i{
+  font-size: 16px;
+}
