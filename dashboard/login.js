@@ -1,3 +1,5 @@
+var auth = firebase.auth();
+
 $(document).ready(function () {
     $('#signup-form').hide();
 });
@@ -42,7 +44,7 @@ $('#signUpBtn').click(function () {
         return false;
     }
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
+    auth.createUserWithEmailAndPassword(email, password).then(function () {
         // signed up successfully and logged in
         console.log("signup");
         //redirect to dashboard
@@ -84,7 +86,7 @@ $('#loginBtn').click(function () {
         return false;
     }
 
-    firebase.auth().signInWithEmailAndPassword(email, password).then(function (data) {
+    auth.signInWithEmailAndPassword(email, password).then(function (data) {
 
         console.log("Signed IN Successfully with data ", data);
 
@@ -113,16 +115,15 @@ $('#loginBtn').click(function () {
 
 });
 
-$('#logoutId').click(function () {
-    console.log("logout clicked");
+auth.onAuthStateChanged(function (user) {
 
-    firebase.auth().signOut().then(function () {
-        console.log("Signed OUT Successfully");
-        //redirect to Login.html
-        window.location.href = "login.html";
+    user = auth.currentUser;
 
-    }).catch(function (error) {
-        console.log("The error occured with ", error);
-    });
+    if (user) {
+        console.log("signed in", user);
+        window.location.href = "index.html";
 
+    } else {
+        console.log("Not signed in", user);
+    }
 });
