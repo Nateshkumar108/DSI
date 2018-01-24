@@ -2,56 +2,130 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>
-        DSI Dashboard Login
-    </title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>DSI Login</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="../img/favicon-96x96.png" type="image/png">
-    
-
-
-    <link rel="stylesheet" href="js/utility/jquery-ui/jquery-ui.css">
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    
+
+
+    <style>
+        .active-div {
+            display: block;
+        }
+
+        .section {
+            display: none;
+        }
+    </style>
+
 </head>
 
 <body>
-    <div>
-        <input type="text" name="Username" placeholder="Username" id="usernameSignUpTextField">
-        <input type="password" name="Password" placeholder="Password" id="passwordSignUpTextField">
-        <button type="submit" name="submit" value="Submit" id="signUpBtn">Sign Up</button>
-    </div>
-    <div>
-        <input type="text" name="Username" placeholder="Username" id="usernameLoginTextField">
-        <input type="password" name="Password" placeholder="Password" id="passwordLoginTextField">
-        <button type="submit" name="submit" value="Submit" id="loginBtn">Login</button>
-    </div>
-    
+    <header>
+        <a href="http://www.digitalspacesinc.com/">
+            <img src="img/logo.png" alt="" style="width: 15%;">
+        </a>
+    </header>
 
-</body>
-<footer>
-    
-    
+    <div class="login-form" id="login-form">
+
+        <div class="container">
+            <div class="logo">
+                <h3 class="inline">DSI Login</h3>
+            </div>
+            <div class="login-item">
+
+                <form action="#" method="post" class="form form-login">
+                    <div class="form-field">
+                        <label class="user" for="login-username">
+                            <span class="hidden">Username</span>
+                        </label>
+                        <input type="text" name="Username" class="form-input" id="usernameLoginTextField" placeholder="Username">
+                    </div>
+
+                    <div class="form-field">
+                        <label class="lock" for="login-password">
+                            <span class="hidden">Password</span>
+                        </label>
+                        <input type="password" name="Password" class="form-input" id="passwordLoginTextField" placeholder="Password">
+                    </div>
+
+                    <div class="form-field">
+                        <input type="button" name="submit" value="Log in" id="loginBtn">
+                    </div>
+                </form>
+
+                <div class="form-field">
+                    <input type="button" name="submit" value="Sign Up" id="signUpBtnInLogin">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="login-form" id="signup-form">
+        <div class="container">
+            <div class="logo">
+                <!-- <span>DSI Create Account</span> -->
+                <h3 class="inline">DSI Create Account</h3>
+                <button type="button" class="btn" id="back">Log In</button>
+            </div>
+            <div class="login-item">
+                <form action="#" method="post" class="form form-login">
+                    <div class="form-field">
+                        <label class="user" for="login-username">
+                            <span class="hidden">Username</span>
+                        </label>
+                        <input type="text" name="Username" class="form-input" id="usernameSignUpTextField" placeholder="Email">
+                    </div>
+
+                    <div class="form-field">
+                        <label class="lock" for="login-password">
+                            <span class="hidden">Password</span>
+                        </label>
+                        <input type="password" name="Password" class="form-input" id="passwordSignUpTextField" placeholder="Password">
+                    </div>
+
+                    <div class="form-field">
+                        <label class="lock" for="login-password">
+                            <span class="hidden">Password</span>
+                        </label>
+                        <input type="password" name="Password" class="form-input" id="c_passwordSignUpTextField" placeholder="Confirm Password">
+                    </div>
+
+                    <div class="form-field">
+                        <input type="button" name="submit" value="Create Account" id="signUpBtn">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="js/utility/jquery/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/utility/jquery-ui/jquery-ui.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
     <script type="text/javascript" src="login.js"></script>
-    <script>
-      // Initialize Firebase      
-      var config = {
-        apiKey: "AIzaSyBgCfUYjlhyeshrvl-E65dSOdZpbi3FaC0",
-        authDomain: "digitalspacesinc.firebaseapp.com",
-        databaseURL: "https://digitalspacesinc.firebaseio.com",
-        projectId: "digitalspacesinc",
-        storageBucket: "digitalspacesinc.appspot.com",
-        messagingSenderId: "472419349927"
-      };
-      firebase.initializeApp(config);
-    </script>
 
-</footer>
+    <script>
+        // Initialize Firebase      
+        var config = {
+            apiKey: "AIzaSyBgCfUYjlhyeshrvl-E65dSOdZpbi3FaC0",
+            authDomain: "digitalspacesinc.firebaseapp.com",
+            databaseURL: "https://digitalspacesinc.firebaseio.com",
+            projectId: "digitalspacesinc",
+            storageBucket: "digitalspacesinc.appspot.com",
+            messagingSenderId: "472419349927"
+        };
+        firebase.initializeApp(config);
+    </script>
+</body>
 
 </html>

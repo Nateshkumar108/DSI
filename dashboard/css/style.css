@@ -338,7 +338,7 @@ button, .hand-pointer {
 .search-button{
   display: flex;
   justify-content: center;
-  padding-top: 5px;
+  padding-top: 5px; 
 }
 
 .button {
@@ -503,3 +503,4 @@ button, .hand-pointer {
 .ocr-graph-cal.active {
   text-decoration: underline;
   color: #1DB0EC;
+
