@@ -31,6 +31,12 @@
         <a href="http://www.digitalspacesinc.com/">
             <img src="img/logo.png" alt="" style="width: 179px;">
         </a>
+        <span class="logout" id="logoutId" style="float:right; padding:10px">
+            <b>
+                <u style="color:white;">logout</u>
+            </b>
+        </span>
+
     </header>
     <div class="dashboard">
         <div class="tabs">
@@ -393,6 +399,23 @@
         <script type="text/javascript" src="buttons.js"></script>
         <script type="text/javascript" src="utilization.js"></script>
         <script type="text/javascript" src="oCalendar.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
+        <script>
+            // Initialize Firebase      
+            var config = {
+                apiKey: "AIzaSyBgCfUYjlhyeshrvl-E65dSOdZpbi3FaC0",
+                authDomain: "digitalspacesinc.firebaseapp.com",
+                databaseURL: "https://digitalspacesinc.firebaseio.com",
+                projectId: "digitalspacesinc",
+                storageBucket: "digitalspacesinc.appspot.com",
+                messagingSenderId: "472419349927"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+
+        <script type="text/javascript" src="login.js"></script>
 
         <script type="text/javascript">
             var avgI = document.getElementById("avgI");
@@ -404,6 +427,9 @@
         </script>
         <script type="text/javascript">
             $(function () {
+
+               
+
                 $('#custom-calendar').hide();
                 $('#custom-btn').hide();
                 $('#graph').hide();
@@ -585,31 +611,31 @@
                     end_time = to_hr + ":" + to_min;
 
                     generateTrackmap(selectedDate, nextDate, start_time, end_time);
-            } 
-    
+                }
+
                 else if ($('#occrptbtn').hasClass('active-tab') && $('#oCalendarBtn').hasClass('active')) {
 
-                        if ($('#occupancyBtn').hasClass('active')) {
-                            getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
-                        } else if ($('#utilizationBtn').hasClass('active')) {
-                            getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
-                        }
-
-                        $('#calendar').remove();
-                        $('#big-calendar').append($('<div class="oCalendar" id="calendar"></div>'));
-
-                        // loadOccupancyCalendar();
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
                     }
-                    else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active')) {
 
-                        if ($('#occupancyBtn').hasClass('active')) {
-                            getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
-                        } else if ($('#utilizationBtn').hasClass('active')) {
-                            getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
-                        }
+                    $('#calendar').remove();
+                    $('#big-calendar').append($('<div class="oCalendar" id="calendar"></div>'));
+
+                    // loadOccupancyCalendar();
+                }
+                else if ($('#occrptbtn').hasClass('active-tab') && $('#graphBtn').hasClass('active')) {
+
+                    if ($('#occupancyBtn').hasClass('active')) {
+                        getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time);
+                    } else if ($('#utilizationBtn').hasClass('active')) {
+                        getPeopleCounterAndFindUtilization(fromDate, toDate, start_time, end_time);
+                    }
                 }
             }
-    
+
             function customCalSearch() {
                 // $('#TS').removeClass('TimeSelect');
                 // $('#TS').addClass('customTimeSelect');

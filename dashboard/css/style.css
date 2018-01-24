@@ -338,7 +338,7 @@ button, .hand-pointer {
 .search-button{
   display: flex;
   justify-content: center;
-  padding-top: 5px;
+  padding-top: 5px; 
 }
 
 .button {
