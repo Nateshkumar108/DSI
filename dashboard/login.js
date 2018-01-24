@@ -1,5 +1,10 @@
+// import * as firebase from 'firebase';
+
 $(document).ready(function () {
     $('#signup-form').hide();
+
+    var user = window.firebase.auth().currentUser;
+    
 });
 
 $('#signUpBtnInLogin').click(function () {
@@ -83,7 +88,6 @@ $('#loginBtn').click(function () {
         alert("Password must contain minimum 6 characters");
         return false;
     }
-
     firebase.auth().signInWithEmailAndPassword(email, password).then(function (data) {
 
         console.log("Signed IN Successfully with data ", data);
@@ -112,6 +116,17 @@ $('#loginBtn').click(function () {
     // });
 
 });
+
+// firebase.auth().onAuthStateChanged(function(user) {
+
+//     if (user) {
+//         // you're logged in
+//         console.log("already logged in", user);
+//         window.location.href = "index.html";
+//     }
+//     // console.log("already", user);
+    
+// });
 
 $('#logoutId').click(function () {
     console.log("logout clicked");
