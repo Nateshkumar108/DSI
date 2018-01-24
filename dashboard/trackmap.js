@@ -2,6 +2,9 @@ function generateTrackmap(fromDate, toDate, startTime, endTime) {
     /* Currently the api only support single day data. Need to remove the below line once api start
        supporting multiple days. */
     toDate = fromDate;
+    if (endTime == "24:00") {
+        endTime = "23:59";
+    }
 
     $('#page-loader').show();
 
