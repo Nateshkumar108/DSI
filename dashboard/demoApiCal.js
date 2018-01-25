@@ -79,7 +79,7 @@ function demoApi(fromDate, toDate,start_time,end_time){
         Highcharts.chart('demogra', {
           chart: {
             type: 'column',
-            height: 55 + '%'
+            height: 70 + '%'
           },
           title: {
             text: 'DSI Demographics'
