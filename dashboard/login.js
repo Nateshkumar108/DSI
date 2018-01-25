@@ -2,6 +2,9 @@ var auth = firebase.auth();
 
 $(document).ready(function () {
     $('#signup-form').hide();
+
+    var user = window.firebase.auth().currentUser;
+    
 });
 
 $('#signUpBtnInLogin').click(function () {

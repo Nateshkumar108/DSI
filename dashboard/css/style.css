@@ -20,7 +20,7 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif;
   background: #2b2b2d;
-}
+}   
 .dashboard{
   height: 100vh;
   margin: 0 auto;
@@ -531,4 +531,24 @@ button, .hand-pointer {
 }
 button i{
   font-size: 16px;
+}
+
+.logout
+{
+  float:right;  
+  color:white; 
+  margin:20px;
+  height: 25px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border: 1px solid white;
+  background: transparent;
+  width: 8em;
+}
+.logout:hover
+{
+  background: #1DAFEB;
+  border: 1px solid #1DAFEB;
+  border-radius: 5px; 
 }
