@@ -20,9 +20,10 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif;
   background: #2b2b2d;
+  overflow: auto;
 }
 .dashboard{
-  height: 100vh;
+  /* height: 100vh; */
   margin: 0 auto;
   display: flex;
   width: 100%;
@@ -530,4 +531,14 @@ button, .hand-pointer {
 }
 button i{
   font-size: 16px;
+}
+
+.footer {
+  position: absolute;
+  width:100%;
+  color: #cccccc;
+  font-size: 14px;
+  display: block;
+  text-align: center;
+  bottom: 0;
 }

@@ -68,7 +68,7 @@ $(document).ready(function () {
         Highcharts.chart('demogra', {
           chart: {
             type: 'column',
-            height: 70 + '%'
+            height: 55 + '%'
           },
           title: {
             text: 'DSI Demographics'
