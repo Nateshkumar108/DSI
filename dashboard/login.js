@@ -60,7 +60,6 @@ $('#signUpBtn').click(function () {
         console.log("data from server ", errorMessage);
         console.log("code from server ", errorCode);
 
-
     });
 
 });
@@ -107,23 +106,4 @@ $('#loginBtn').click(function () {
 
     });
 
-    // firebase.auth().signOut().then(function () {
-    // 	console.log("Signed OUT Successfully");
-    // }).catch(function(error) {
-    // 	console.log("The error occured with ", error);
-    // });
-
-});
-
-auth.onAuthStateChanged(function (user) {
-
-    user = auth.currentUser;
-
-    if (user) {
-        console.log("signed in", user);
-        window.location.href = "index.html";
-
-    } else {
-        console.log("Not signed in", user);
-    }
 });
