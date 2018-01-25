@@ -51,19 +51,18 @@
     </div>
 
 
+    <!-- <header style="height:100px; margin:5px;"> -->
     <header>
-        <a href="http://www.digitalspacesinc.com/">
-            <img src="img/logo.png" alt="" style="width: 179px;">
-        </a>
-        <span class="logout" id="logoutId" style="float:right; padding:10px">
-            <b>
-                <u style="color:white;">logout</u>
-            </b>
-        </span>
-
+        
     </header>
 
     <nav>
+
+        <a href="http://www.digitalspacesinc.com/">
+            <img src="img/logo.png" alt="" class="logo" >
+        </a>
+
+        <button id="logoutId" class="logout">Logout</button>
 
     </nav>
     <div class="dashboard">
@@ -73,8 +72,8 @@
                 <ul class="tab-button">
                     <li>
                         <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()">
-                            <!--<i class="fa fa-users" aria-hidden="true"></i>-->People Counter</button>
-                    </li>
+				<!--<i class="fa fa-users" aria-hidden="true"></i>-->People Counter</button>
+		    </li>
                     <li>
                         <button class="ageCount" id="agc" onclick="myAgeCounter()">
                             <!--<i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>-->Demographics</button>
@@ -294,8 +293,8 @@
                 <h3>SELECT ZONE</h3>
                 <ul class="labdown">
                     <ul>
-                        <li>Facility:</li>
-                        <li>
+                        <li class="select-zone-lbl">Facility:</li>
+                        <li class="select-zone-dropdown">
                             <select disabled>
                                 <option value="volvo">Regus</option>
 
@@ -303,8 +302,8 @@
                         </li>
                     </ul>
                     <ul>
-                        <li>Floor:</li>
-                        <li>
+                        <li class="select-zone-lbl">Floor:</li>
+                        <li class="select-zone-dropdown">
                             <select disabled>
                                 <option value="volvo">7th Floor </option>
 
@@ -312,8 +311,8 @@
                         </li>
                     </ul>
                     <ul>
-                        <li>Room:</li>
-                        <li>
+                        <li class="select-zone-lbl">Room:</li>
+                        <li class="select-zone-dropdown">
                             <select id="dd">
                                 <option value="volvo">Select Room</option>
                                 <option id="r704" value="r704">704</option>
@@ -324,8 +323,8 @@
                         </li>
                     </ul>
                     <ul>
-                        <li>Sensor:</li>
-                        <li>
+                        <li class="select-zone-lbl">Sensor:</li>
+                        <li class="select-zone-dropdown">
                             <select id="sensorDropDownList">
                                 <option value="volvo">Select Sensor</option>
                                 <!-- <option id="s1">001EEA</option>
@@ -341,38 +340,68 @@
 
             <div class="calendars">
                 <span id="txt-main-cal" class="active-calendar hand-pointer">Calendar</span>
+                <span> | </span>
                 <span id="txt-custom-cal" class="hand-pointer">Custom</span>
             </div>
 
+            <div class="clearfix"></div>
+            <div class="medium-space"></div>
+
             <div id="main-calendar">
                 <div class="calender">
-                    <div id="datepicker"></div>
+                    <div class="date-lbl">
+                        <span>Date: </span>
+                    </div>
+                    <div class="date-cal">
+                        <input type="text" class="wd-cal" id="datepicker">
+                    </div> 
                 </div>
-
+                <div class="clearfix"></div>
             </div>
             <div id="custom-calendar">
-                <label for="from" class="lbl-calendar">From: </label>
-                <input type="text" id="from" name="from">
+                <div class="calender">
+                    <div class="date-lbl">
+                        <span>From: </span>
+                    </div>
+                    <div class="date-cal">
+                        <input type="text" class="wd-cal" id="from" name="from">
+                    </div>
+                </div>
                 <div class="clearfix"></div>
-                <label for="to" class="lbl-calendar">To: </label>
-                <input type="text" id="to" name="to">
+                <div class="medium-space"></div>
+                <div class="clearfix"></div>
+                <div class="calender">
+                    <div class="date-lbl">
+                        <span>To: </span>
+                    </div>
+                    <div class="date-cal">
+                        <input type="text" class="wd-cal" id="to" name="to">
+                    </div>
+                </div>
                 <div class="clearfix"></div>
             </div>
 
             <div class="medium-space"></div>
             <div class="clearfix"></div>
 
-            <div class="TimeSelect" id="TS">
-                <span>Time:</span>
-                <div class="timer">
-                    <input type="number" id="fhr" class="input-timer" min="0" max="24" placeholder="hh" value="00" />
-                    <span>:</span>
-                    <input type="number" id="fmin" class="input-timer" min="0" max="00" placeholder="mm" value="00" />
-                    <span class="lbl-to-timer ">to</span>
-                    <input type="number" id="thr" class="input-timer" min="0" max="24" placeholder="hh" value="24" />
-                    <span>:</span>
-                    <input type="number" id="tmin" class="input-timer" min="0" max="00" placeholder="mm" value="00" />
+            <div id="TS">
+                <div class="calender">
+                    <div class="date-lbl">
+                        <span>Time:</span>
+                    </div>
+                    <div class="date-cal">
+                        <div class="timer">
+                            <input type="number" id="fhr" class="input-timer" min="0" max="24" placeholder="hh" value="00" />
+                            <span>:</span>
+                            <input type="number" id="fmin" class="input-timer" min="0" max="00" placeholder="mm" value="00" />
+                            <span class="lbl-to-timer ">to</span>
+                            <input type="number" id="thr" class="input-timer" min="0" max="24" placeholder="hh" value="24" />
+                            <span>:</span>
+                            <input type="number" id="tmin" class="input-timer" min="0" max="00" placeholder="mm" value="00" />
+                        </div>
+                    </div>
                 </div>
+                <div class="clearfix"></div>
             </div>
             <div class="medium-space"></div>
             <div class="clearfix"></div>
@@ -457,7 +486,9 @@
                 $('#graph').hide();
                 $('#oCalendarBtn').hide();
                 $('#dwell-trackmap').hide();
-                $("#datepicker").datepicker({
+                var mainCalendar = $("#datepicker").datepicker({
+                    showOn: "both",
+                    buttonText: '<i class="fa fa-calendar" aria-hidden="true"></i>',
                     onSelect: function (date) {
                         document.getElementById("monthavg").style.display = "none";
                         document.getElementById("weekavg").style.display = "none";
@@ -495,6 +526,8 @@
 
                     }
                 });
+                mainCalendar.datepicker("setDate", new Date());
+
 
                 $('#txt-main-cal').click(function () {
                     $('#main-calendar').show();
