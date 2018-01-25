@@ -6,7 +6,7 @@ var sumMale=0;
 var sumFemale=0;
 var avgMALE=0;
 var avgFEMALE=0;
-function demoApi(fromDate, toDate){
+function demoApi(fromDate, toDate,start_time,end_time){
 
   
 
@@ -18,7 +18,8 @@ function demoApi(fromDate, toDate){
   var date = ""
   // var furl = url+'/'+installation+'/'+projction+'/'+outer_range_start+'/'+outer_range_end;*/
   var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/range/" + fromDate + "/" + toDate + "?st="+start_time+"&et="+end_time;
- 
+  
+  $('#page-loader').show();
   $.ajax({
 
     headers: {
@@ -35,6 +36,7 @@ function demoApi(fromDate, toDate){
     method: 'GET',
     dataType: 'JSON',
     success: function (data) {
+      $('#page-loader').hide();
     //   console.log("Data was ", data);
     //   console.log("Data was ", data.data[0].items);
     
@@ -115,11 +117,11 @@ function demoApi(fromDate, toDate){
             }
           },
           series: [{
-            name: 'MALE',
+            name: 'Male',
             data: maleCount
       
           },{
-            name: 'FEMALE',
+            name: 'Female',
             data: femaleCount
            }]
         });

@@ -47,6 +47,9 @@ function apiCal(fromDate, toDate, value,start_time,end_time) {
             title: {
               text: 'DSI People Counter'
             },
+            credits: {
+              enabled: false
+            },
             subtitle: {
               text: 'Visitors per hour'
             },
