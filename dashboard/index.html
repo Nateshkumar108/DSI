@@ -8,6 +8,30 @@
     </title>
 
     <link rel="icon" href="../img/favicon-96x96.png" type="image/png">
+
+    <script type="text/javascript" src="js/utility/firebase/firebase.js"></script>
+
+    <script>
+        // Initialize Firebase      
+        var config = {
+            apiKey: "AIzaSyBgCfUYjlhyeshrvl-E65dSOdZpbi3FaC0",
+            authDomain: "digitalspacesinc.firebaseapp.com",
+            databaseURL: "https://digitalspacesinc.firebaseio.com",
+            projectId: "digitalspacesinc",
+            storageBucket: "digitalspacesinc.appspot.com",
+            messagingSenderId: "472419349927"
+        };
+        firebase.initializeApp(config);
+        firebase.auth().onAuthStateChanged(function (user) {
+
+            user = firebase.auth().currentUser;
+
+            if (!user) {
+                window.location.href = "login.html";
+            }
+        });
+    </script>
+
     <link rel="stylesheet" type="text/css" href="css/full-calendar/fullcalendar.css" />
     <link rel="stylesheet" type="text/css" href="css/full-calendar/fullcalendar.print.css" media='print' />
     <link rel="stylesheet" href="js/utility/jquery-ui/jquery-ui.css">
@@ -37,15 +61,19 @@
 
 
     </header>
+
+    <nav>
+
+    </nav>
     <div class="dashboard">
         <div class="tabs">
             <div class="workspace">
-                <h3>WORKSPACE</h3>
+                <!-- <h3>WORKSPACE</h3> -->
                 <ul class="tab-button">
                     <li>
                         <button class="peopleCounter active-tab" id="ppc" onclick="myPeopleCounter()">
-                            <!--<i class="fa fa-users" aria-hidden="true"></i>-->People Counter</button>
-                    </li>
+				<!--<i class="fa fa-users" aria-hidden="true"></i>-->People Counter</button>
+		    </li>
                     <li>
                         <button class="ageCount" id="agc" onclick="myAgeCounter()">
                             <!--<i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>-->Demographics</button>
@@ -54,21 +82,22 @@
                         <button class="trakMap" id="trkMap" onclick="myTrackMap()">
                             <!--<i class="	fa fa-shekel" aria-hidden="true"></i>-->Trackmap</button>
                     </li>
+                    <li>
+                        <button class="occupancyReport" id="occrptbtn" onclick="occupyrpt()"><!--<i class="fa fa-sellsy" aria-hidden="true"></i>--> Occupancy Report</button>
+                    </li>
                 </ul>
             </div>
-            <div class="rooms">
+            <!-- <div class="rooms">
                 <h3>ROOMS</h3>
                 <ul class="tab-button">
                     <li>
-                        <button class="occupancyReport" id="occrptbtn" onclick="occupyrpt()">
-                            <!--<i class="fa fa-sellsy" aria-hidden="true"></i>-->Occupancy Report</button>
+                        <button class="occupancyReport" id="occrptbtn" onclick="occupyrpt()"><<i class="fa fa-sellsy" aria-hidden="true"></i> Occupancy Report</button>
                     </li>
                     <li>
-                        <button class="dwellReport">
-                            <!--<i class="fa fa-ravelry" aria-hidden="true"></i>-->Dwell Report</button>
+                        <button class="dwellReport"><<i class="fa fa-ravelry" aria-hidden="true"></i> Dwell Report</button>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
         <div class="graphs">
             <div class="highcharts" id="hiChart">
@@ -239,7 +268,7 @@
 
             <!-- Trackmap -->
             <div class="trackMaps" id="trackMap">
-                <h2 class="title">DSI Trackmap</h2>
+                <h2 class="title">DSI TRACKMAP</h2>
                 <div class="parent-ocr-graph-cal">
                     <span id="lbl-motion" class="ocr-graph-cal active" onclick="trackmapMotion()">Motion</span>
                     <span id="lbl-dwell" class="ocr-graph-cal" onclick="trackmapDwell()">Dwell</span>
@@ -286,24 +315,23 @@
                         <li>
                             <select id="dd">
                                 <option value="volvo">Select Room</option>
-                                <option id="r704" style="display:none;">704</option>
-                                <option id="r705" style="display:none;">705</option>
-                                <option id="r706">706</option>
-
-                                <option id="rdo">Deepak's Office</option>
+                                <option id="r704" value="r704">704</option>
+                                <option id="r705" value="r705">705</option>
+                                <option id="r706" value="r706">706</option>
+                                <!-- <option id="rdo">Deepak's Office</option> -->
                             </select>
                         </li>
                     </ul>
                     <ul>
                         <li>Sensor:</li>
                         <li>
-                            <select>
+                            <select id="sensorDropDownList">
                                 <option value="volvo">Select Sensor</option>
-                                <option id="s1" style="display:none;">001eaa</option>
-                                <option id="s2">001eec</option>
-                                <option id="s3" style="display:none;">001d5f</option>
-                                <option id="s4" style="display:none;">001438</option>
-                                <option id="s5">001e56</option>
+                                <!-- <option id="s1">001EEA</option>
+                                <option id="s2">001EEC</option>
+                                <option id="s3">001D5F</option>
+                                <option id="s4">001438</option> -->
+                                <!-- <option id="s5">001e56</option> -->
                             </select>
                         </li>
                     </ul>
@@ -405,23 +433,10 @@
         <script type="text/javascript" src="buttons.js"></script>
         <script type="text/javascript" src="utilization.js"></script>
         <script type="text/javascript" src="oCalendar.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+        <script type="text/javascript" src="roomVsSensorMap.json"></script>
+        <script type="text/javascript" src="modification.js"></script>
+        <script type="text/javascript" src="logout.js"></script>
 
-        <script>
-            // Initialize Firebase      
-            var config = {
-                apiKey: "AIzaSyBgCfUYjlhyeshrvl-E65dSOdZpbi3FaC0",
-                authDomain: "digitalspacesinc.firebaseapp.com",
-                databaseURL: "https://digitalspacesinc.firebaseio.com",
-                projectId: "digitalspacesinc",
-                storageBucket: "digitalspacesinc.appspot.com",
-                messagingSenderId: "472419349927"
-            };
-            firebase.initializeApp(config);
-        </script>
-
-
-        <script type="text/javascript" src="login.js"></script>
 
         <script type="text/javascript">
             var avgI = document.getElementById("avgI");
@@ -461,8 +476,8 @@
                         value = null;
 
                         if ($('#agc').hasClass('active-tab')) {
-                            demoApi(fromDate, toDate, start_time, end_time);
-                            demoStats(fromDate, toDate, start_time, end_time);
+                            //demoApi(fromDate, toDate, start_time, end_time);
+                            //demoStats(fromDate, toDate, start_time, end_time);
                         } else if ($('#ppc').hasClass('active-tab')) {
                             //Check which tab is currently active
                             if ($('#in').hasClass('active')) {

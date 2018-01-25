@@ -1,4 +1,4 @@
-// import * as firebase from 'firebase';
+var auth = firebase.auth();
 
 $(document).ready(function () {
     $('#signup-form').hide();
@@ -47,7 +47,7 @@ $('#signUpBtn').click(function () {
         return false;
     }
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
+    auth.createUserWithEmailAndPassword(email, password).then(function () {
         // signed up successfully and logged in
         console.log("signup");
         //redirect to dashboard
@@ -62,7 +62,6 @@ $('#signUpBtn').click(function () {
         alert(errorMessage);
         console.log("data from server ", errorMessage);
         console.log("code from server ", errorCode);
-
 
     });
 
@@ -88,7 +87,8 @@ $('#loginBtn').click(function () {
         alert("Password must contain minimum 6 characters");
         return false;
     }
-    firebase.auth().signInWithEmailAndPassword(email, password).then(function (data) {
+
+    auth.signInWithEmailAndPassword(email, password).then(function (data) {
 
         console.log("Signed IN Successfully with data ", data);
 
@@ -107,37 +107,6 @@ $('#loginBtn').click(function () {
         console.log("data from server ", errorMessage);
         console.log("code from server ", errorCode);
 
-    });
-
-    // firebase.auth().signOut().then(function () {
-    // 	console.log("Signed OUT Successfully");
-    // }).catch(function(error) {
-    // 	console.log("The error occured with ", error);
-    // });
-
-});
-
-// firebase.auth().onAuthStateChanged(function(user) {
-
-//     if (user) {
-//         // you're logged in
-//         console.log("already logged in", user);
-//         window.location.href = "index.html";
-//     }
-//     // console.log("already", user);
-    
-// });
-
-$('#logoutId').click(function () {
-    console.log("logout clicked");
-
-    firebase.auth().signOut().then(function () {
-        console.log("Signed OUT Successfully");
-        //redirect to Login.html
-        window.location.href = "login.html";
-
-    }).catch(function (error) {
-        console.log("The error occured with ", error);
     });
 
 });

@@ -42,7 +42,7 @@ function avgData(){
     dataType: 'JSON',
     success: function (data) {
 
-     console.log("helo");
+     // console.log("helo");
     //   console.log("Data was ", data);
     //   console.log("Data was ", data.data[0].items);
     
@@ -75,10 +75,10 @@ function avgData(){
         // j++;
       
       }
-      console.log("________",sumMale);
+      // console.log("________",sumMale);
       avgMALE= sumMale/totalMale;
       avgFEMALE= sumFemale/totalFeMale;
-      console.log("!!!!!!!!!!!! avgMaleWEEK",avgMALE);
+      // console.log("!!!!!!!!!!!! avgMaleWEEK",avgMALE);
       document.getElementById("avgMaleWeek").innerHTML = Math.round(avgMALE);
       document.getElementById("avgFemaleWeek").innerHTML = Math.round(avgFEMALE);
       
@@ -167,8 +167,8 @@ function avgData(){
         var year = fromdate.getFullYear();
 
         fromdate = year + "-" + month + "-" + day;
-        console.log("***** startDate",fromdate);
-        console.log("***** toDate",todate);
+        // console.log("***** startDate",fromdate);
+        // console.log("***** toDate",todate);
            
         var furl = "http://18.216.208.225:3000/v1/demographics/installation/5a42030e1ac137000520d8c4/days/" + fromdate + "/" + todate +"?st=00:00&et=24:00"; 
        
@@ -189,7 +189,7 @@ function avgData(){
           dataType: 'JSON',
           success: function (data) {
       
-           console.log("mohito");
+           // console.log("mohito");
           //   console.log("Data was ", data);
           //   console.log("Data was ", data.data[0].items);
           
@@ -202,9 +202,7 @@ function avgData(){
           totalFeMale=0;
           sumMale=0;
           sumFemale=0;
-          console.log("Data: " ,  data.data[0].items);
           
-          // console.log("Data: " ,  dataValue);
           var j=0;
             for (let item of data.data[0].items) {
       
@@ -212,7 +210,7 @@ function avgData(){
               for (i=0;i<20;i++){
                  //console.log('%%%%man', item.male[i]);
                   totalMale=totalMale + item.male[i];
-                 console.log('%%%%totalMale', totalMale);
+                 // console.log('%%%%totalMale', totalMale);
                   totalFeMale=totalFeMale + item.female[i];
                   demodata(item.male[i],item.female[i],i);
                   
@@ -225,7 +223,7 @@ function avgData(){
             // console.log("________",sumMale);
             avgMALE= sumMale/totalMale;
             avgFEMALE= sumFemale/totalFeMale;
-            console.log("!!!!!!!!!!!! avgMaleWEEK",avgMALE);
+            // console.log("!!!!!!!!!!!! avgMaleWEEK",avgMALE);
             document.getElementById("avgMaleMonthWeek").innerHTML = Math.round(avgMALE);
             document.getElementById("avgFemaleMonthWeek").innerHTML = Math.round(avgFEMALE);
       

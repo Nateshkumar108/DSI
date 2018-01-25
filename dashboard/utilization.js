@@ -252,7 +252,7 @@ function getPeopleCounterAndFindOccupancy(fromDate, toDate, start_time, end_time
                // add occupancy for the last date    
                var total = occupancyArr.reduce((a, b) => a + b, 0);
                // Divide by 12 for now, as we have 12 working hours.     
-               var occAvg = total / 12;   
+               var occAvg = total / occupancyArr.length;   
                occAvg = Math.round(occAvg);    
                dateToOccupancyMap[date] = occAvg;  
              }   
