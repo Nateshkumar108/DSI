@@ -449,7 +449,7 @@
         <script type="text/javascript">
             $(function () {
 
-
+                $('#page-loader').css('zIndex', 9999);
 
                 $('#custom-calendar').hide();
                 $('#custom-btn').hide();
@@ -620,7 +620,7 @@
                         totalIO.style.display = "block";
                         avgIOD.style.display = "none";
                     }
-
+                    //$('#page-loader').show();
                     apiCal(calDate, calNextDate, value, start_time, end_time);
 
                 } else if ($('#trkMap').hasClass('active-tab')) {
@@ -683,6 +683,7 @@
                     demoStats(fromDate, toDate, start_time, end_time);
                 } else if ($('#ppc').hasClass('active-tab')) {
                     //Check which tab is currently active
+                    
                     let value = null;
                     if ($('#in').hasClass('active')) {
                         value = 'in';
@@ -732,7 +733,7 @@
                         totalIO.style.display = "block";
                         avgIOD.style.display = "block";
                     }
-
+                    // $('#page-loader').show();
                     apiCal(calDate, calNextDate, value, start_time, end_time);
                 }
 

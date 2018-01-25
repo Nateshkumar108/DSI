@@ -56,13 +56,18 @@ function myPeopleCounter() {
     $('#txt-custom-cal').show();
     $('#calendar').hide();
 
+    //  $('#page-loader').show();
+    //  console.log("people counter");
     if($('#txt-custom-cal').hasClass('active-calendar'))
     {
-      customCalSearch();
+        
+        customCalSearch();
+
     }
     else
     {
-      mainCalSearch();
+      
+        mainCalSearch();
     }
 }
 
