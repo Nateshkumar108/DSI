@@ -59,7 +59,6 @@ function myPeopleCounter() {
     if($('#txt-custom-cal').hasClass('active-calendar'))
     {
       customCalSearch();
-      console.log("Falsely Called");
     }
     else
     {
