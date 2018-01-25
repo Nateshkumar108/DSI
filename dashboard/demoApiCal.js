@@ -81,7 +81,7 @@ function demoApi(fromDate, toDate,start_time,end_time){
         Highcharts.chart('demogra', {
           chart: {
             type: 'column',
-            height: 70 + '%'
+            height: 55 + '%'
           },
           title: {
             text: 'DSI Demographics'
@@ -117,11 +117,11 @@ function demoApi(fromDate, toDate,start_time,end_time){
             }
           },
           series: [{
-            name: 'MALE',
+            name: 'Male',
             data: maleCount
       
           },{
-            name: 'FEMALE',
+            name: 'Female',
             data: femaleCount
            }]
         });

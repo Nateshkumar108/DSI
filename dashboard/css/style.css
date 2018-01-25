@@ -1,19 +1,18 @@
 header{
   position: relative;
   width: 100%;
-  height:120px;
+  height:80px;
   background: #2b2b2d;
 }
 nav {
   position: absolute;
-  top: 100px;
+  top: 0px;
   left: 0;
   right: 0;
   bottom: 0;
   min-width: 800px;
   text-align: left;
-  height: 20px;
-  padding: 10px 20px;
+  height: 70px;
 }
 body {
   margin: 0;
@@ -22,7 +21,7 @@ body {
   background: #2b2b2d;
 }   
 .dashboard{
-  height: 100vh;
+  /* height: 100vh; */
   margin: 0 auto;
   display: flex;
   width: 100%;
@@ -120,6 +119,8 @@ ageCounter ul ul p{
 
 }
 .event{
+  position: relative;
+  top: 10px;
   width: 25%;
   background: #2b2b2d;
   color: white;
@@ -174,6 +175,8 @@ ageCounter ul ul p{
 
 }
 .chartButton{
+  position: relative;
+  top:5px;
   list-style: none;
   display: flex;
   width: 100%;
@@ -235,8 +238,12 @@ ageCounter ul ul p{
 }
 
 .calender {
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
+    width: 95%;
+    float: left;
+    font-size: 14px;
+    padding-left: 15px;
 }
 
 .chartButton button.active, .occUtilBtn button.active, .tab-button button.active-tab {
@@ -255,18 +262,30 @@ button, .hand-pointer {
   cursor: pointer;
 }
 .labdown{
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   list-style: none;
   padding: 0 21px 0 59px;
+  font-size: 14px; */
+
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  font-size: 14px;
+  padding-left: 15px;
 }
 .labdown ul{
-  display: flex;
+  /* display: flex;
   list-style: none;
   align-items: end;
   justify-content: space-between;
   margin: 0;
+  padding: 0; */
+
+  list-style: none;
+  margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .labdown ul select{
@@ -309,6 +328,8 @@ button, .hand-pointer {
   font-size: 14px;
 }
 .highchartTab{
+  position: relative;
+  top:10px;
   display: flex;
     padding: 0;
     margin:0;
@@ -316,9 +337,10 @@ button, .hand-pointer {
 }
 
 .calendars {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  /* display: flex;
+  justify-content: space-between; */
+  padding-left: 15px;
+  font-size: 14px;
 }
 
 .active-calendar {
@@ -385,8 +407,8 @@ button, .hand-pointer {
 }
 
 .timer {
-  padding-left: 2em;
-  display: inline-block;
+  /* padding-left: 2em;
+  display: inline-block; */
 }
 
 .lbl-to-timer {
@@ -533,15 +555,53 @@ button i{
   font-size: 16px;
 }
 
+.footer {
+  position: absolute;
+  width:100%;
+  color: #cccccc;
+  font-size: 14px;
+  display: block;
+  text-align: center;
+  bottom: 0;
+}
+.select-zone-lbl {
+  display: inline-block;
+  width: 30%;
+  text-align: right;
+}
+
+.select-zone-dropdown {
+  display: inline-block;
+  width: 50%;
+}
+
+.date-lbl {
+  float: left;
+  width: 30%;
+  text-align: right;
+}
+
+.date-cal {
+  float: left;
+  width: 70%;
+}
+
+.date-lbl > span {
+  margin-right: 5px;
+}
+
+.wd-cal {
+  width: 110px;
+}
+
 .logout
 {
   float:right;  
   color:white; 
-  margin:20px;
+  margin:20px 30px;
   height: 25px;
   border-radius: 5px;
   font-size: 14px;
-  margin-bottom: 20px;
   border: 1px solid white;
   background: transparent;
   width: 8em;
@@ -551,4 +611,10 @@ button i{
   background: #1DAFEB;
   border: 1px solid #1DAFEB;
   border-radius: 5px; 
+}
+
+.logo {
+  width: 120px;
+  margin-left: 40px;
+  margin-top: 5px;
 }
