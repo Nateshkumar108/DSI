@@ -589,11 +589,10 @@ button i{
 {
   float:right;  
   color:white; 
-  margin:20px;
+  margin:20px 30px;
   height: 25px;
   border-radius: 5px;
   font-size: 14px;
-  margin-bottom: 20px;
   border: 1px solid white;
   background: transparent;
   width: 8em;
@@ -603,4 +602,10 @@ button i{
   background: #1DAFEB;
   border: 1px solid #1DAFEB;
   border-radius: 5px; 
+}
+
+.logo {
+  width: 120px;
+  margin-left: 40px;
+  margin-top: 5px;
 }
