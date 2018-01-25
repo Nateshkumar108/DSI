@@ -1,19 +1,18 @@
 header{
   position: relative;
   width: 100%;
-  height:120px;
+  height:80px;
   background: #2b2b2d;
 }
 nav {
   position: absolute;
-  top: 100px;
+  top: 0px;
   left: 0;
   right: 0;
   bottom: 0;
   min-width: 800px;
   text-align: left;
-  height: 20px;
-  padding: 10px 20px;
+  height: 70px;
 }
 body {
   margin: 0;
@@ -120,6 +119,8 @@ ageCounter ul ul p{
 
 }
 .event{
+  position: relative;
+  top: 10px;
   width: 25%;
   background: #2b2b2d;
   color: white;
@@ -174,6 +175,8 @@ ageCounter ul ul p{
 
 }
 .chartButton{
+  position: relative;
+  top:5px;
   list-style: none;
   display: flex;
   width: 100%;
@@ -309,6 +312,8 @@ button, .hand-pointer {
   font-size: 14px;
 }
 .highchartTab{
+  position: relative;
+  top:10px;
   display: flex;
     padding: 0;
     margin:0;
