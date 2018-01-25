@@ -124,6 +124,7 @@ ageCounter ul ul p{
   background: #2b2b2d;
   color: white;
   font-family: 'Open Sans', sans-serif;
+  z-index: 999;
 }
 .selectZone h3{
   padding: 0;
