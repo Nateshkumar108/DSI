@@ -274,24 +274,23 @@
                         <li>
                             <select id="dd">
                                 <option value="volvo">Select Room</option>
-                                <option id="r704" style="display:none;">704</option>
-                                <option id="r705" style="display:none;">705</option>
-                                <option id="r706">706</option>
-
-                                <option id="rdo">Deepak's Office</option>
+                                <option id="r704" value="r704">704</option>
+                                <option id="r705" value="r705">705</option>
+                                <option id="r706" value="r706">706</option>
+                                <!-- <option id="rdo">Deepak's Office</option> -->
                             </select>
                         </li>
                     </ul>
                     <ul>
                         <li>Sensor:</li>
                         <li>
-                            <select>
+                            <select id="sensorDropDownList">
                                 <option value="volvo">Select Sensor</option>
-                                <option id="s1" style="display:none;">001eaa</option>
-                                <option id="s2">001eec</option>
-                                <option id="s3" style="display:none;">001d5f</option>
-                                <option id="s4" style="display:none;">001438</option>
-                                <option id="s5">001e56</option>
+                                <!-- <option id="s1">001EEA</option>
+                                <option id="s2">001EEC</option>
+                                <option id="s3">001D5F</option>
+                                <option id="s4">001438</option> -->
+                                <!-- <option id="s5">001e56</option> -->
                             </select>
                         </li>
                     </ul>
@@ -393,6 +392,8 @@
         <script type="text/javascript" src="buttons.js"></script>
         <script type="text/javascript" src="utilization.js"></script>
         <script type="text/javascript" src="oCalendar.js"></script>
+        <script type="text/javascript" src="roomVsSensorMap.json"></script>
+        <script type="text/javascript" src="modification.js"></script>
 
         <script type="text/javascript">
             var avgI = document.getElementById("avgI");

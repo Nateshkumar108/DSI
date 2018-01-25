@@ -1,12 +1,15 @@
+var canvasMotion = '';
+
+
 function generateTrackmap(fromDate, toDate, startTime, endTime) {
     /* Currently the api only support single day data. Need to remove the below line once api start
        supporting multiple days. */
-    toDate = fromDate;
-
+    var localToDate = fromDate;
+    var localEndTime = endTime;
     $('#page-loader').show();
 
     //Motion api call
-    let urlMotion ="http://18.216.208.225:3001/v1/tracker/motion/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDate + "/" + toDate + "?st="+ startTime +"&et="+ endTime +"&blackpoint=25&whitepoint=1000";
+    let urlMotion ="http://18.216.208.225:3001/v1/tracker/motion/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDate + "/" + localToDate + "?st="+ startTime +"&et="+ localEndTime +"&blackpoint=25&whitepoint=1000";
     
     let xhr = new XMLHttpRequest();
     xhr.open('GET', urlMotion, true);
@@ -30,7 +33,7 @@ function generateTrackmap(fromDate, toDate, startTime, endTime) {
     xhr.send();
 
     //Dwell api call
-    let urlDwell ="http://18.216.208.225:3001/v1/tracker/dwell/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDate + "/" + toDate + "?st="+ startTime +"&et="+ endTime +"&blackpoint=200&whitepoint=11000";
+    let urlDwell ="http://18.216.208.225:3001/v1/tracker/dwell/installation/5a4e2d0b9963080006dc9dfb/compose/" + fromDate + "/" + localToDate + "?st="+ startTime +"&et="+ localEndTime +"&blackpoint=200&whitepoint=11000";
 
     let xhrDwell = new XMLHttpRequest();
     xhrDwell.open('GET', urlDwell, true);
@@ -91,16 +94,19 @@ function drawArea(data, fromDate, toDate, startTime, endTime) {
     let etDate = toDate;
     let stTime = startTime;
     let etTime = endTime;
-    if(canvasMotion) {
+
+    if(canvasMotion != '' && canvasMotion != null) {
         canvasMotion.dispose();
     }
+
     canvasMotion = new fabric.Canvas('canvas-motion', {
         preserveObjectStacking: true,
         hoverCursor: 'default',
         selection: false
     });
 
-    
+    canvasMotion.sendToBack();
+
     let mainImage = "data:image/png;base64," + data;
 
     canvasMotion.setBackgroundImage('img/floor.PNG', canvasMotion.renderAll.bind(canvasMotion), {
@@ -341,9 +347,11 @@ function drawAreaDwell(data, fromDate, toDate, startTime, endTime) {
     let etDate = toDate;
     let stTime = startTime;
     let etTime = endTime;
+
     if(canvasDwell) {
         canvasDwell.dispose();
     }
+
     canvasDwell = new fabric.Canvas('canvas-dwell', {
         preserveObjectStacking: true,
         hoverCursor: 'default',
