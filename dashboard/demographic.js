@@ -86,7 +86,7 @@ $(document).ready(function () {
           yAxis: {
             min: 0,
             title: {
-              text: ''
+              text: 'Number Of People'
             }
           },
         //   tooltip: {
