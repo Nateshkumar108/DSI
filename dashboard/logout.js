@@ -11,3 +11,17 @@ $('#logoutId').click(function () {
     });
 
 });
+
+firebase.auth().onAuthStateChanged(function (user) {
+
+    user = firebase.auth().currentUser;
+
+    if (user) {
+        console.log("signed in", user);
+
+    } else {
+        console.log("Not signed in", user);
+        window.location.href = "login.html";
+
+    }
+});
