@@ -7,8 +7,8 @@ function generateTrackmap(fromDate, toDate, startTime, endTime) {
     var localToDate = fromDate;
     var localEndTime = endTime;
 
-    if (endTime == "24:00") {
-        endTime = "23:59";
+    if (localEndTime == "24:00") {
+        localEndTime = "23:59";
     }
 
     $('#page-loader').show();
