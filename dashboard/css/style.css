@@ -555,15 +555,14 @@ button i{
   font-size: 16px;
 }
 
-.footer {
-  position: absolute;
+/* .footer {
   width:100%;
   color: #cccccc;
   font-size: 14px;
   display: block;
   text-align: center;
   bottom: 0;
-}
+} */
 .select-zone-lbl {
   display: inline-block;
   width: 30%;
