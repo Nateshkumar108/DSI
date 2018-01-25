@@ -1,14 +1,25 @@
 header{
-width: 100%;
-height:120px;
-background: #2b2b2d;
+  position: relative;
+  width: 100%;
+  height:80px;
+  background: #2b2b2d;
+}
+nav {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 800px;
+  text-align: left;
+  height: 70px;
 }
 body {
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
   background: #2b2b2d;
-}
+}   
 .dashboard{
   height: 100vh;
   margin: 0 auto;
@@ -108,10 +119,13 @@ ageCounter ul ul p{
 
 }
 .event{
+  position: relative;
+  top: 10px;
   width: 25%;
   background: #2b2b2d;
   color: white;
   font-family: 'Open Sans', sans-serif;
+  z-index: 999;
 }
 .selectZone h3{
   padding: 0;
@@ -161,6 +175,8 @@ ageCounter ul ul p{
 
 }
 .chartButton{
+  position: relative;
+  top:5px;
   list-style: none;
   display: flex;
   width: 100%;
@@ -312,6 +328,8 @@ button, .hand-pointer {
   font-size: 14px;
 }
 .highchartTab{
+  position: relative;
+  top:10px;
   display: flex;
     padding: 0;
     margin:0;
@@ -355,7 +373,7 @@ button, .hand-pointer {
 .search-button{
   display: flex;
   justify-content: center;
-  padding-top: 5px;
+  padding-top: 5px; 
 }
 
 .button {
@@ -565,4 +583,24 @@ button i{
 
 .wd-cal {
   width: 110px;
+}
+
+.logout
+{
+  float:right;  
+  color:white; 
+  margin:20px;
+  height: 25px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border: 1px solid white;
+  background: transparent;
+  width: 8em;
+}
+.logout:hover
+{
+  background: #1DAFEB;
+  border: 1px solid #1DAFEB;
+  border-radius: 5px; 
 }
