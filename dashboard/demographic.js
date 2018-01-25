@@ -160,7 +160,7 @@ $(document).ready(function () {
 //       }
 //       avgMaleWEEK=sumMaleWeek/7;
 //       avgFemaleWEEK=sumFemaleWeek/7;
-//       ////console.log("!!!!!!!!!!!! avgMaleWEEK",avgMaleWEEK);
+      // console.log("!!!!!!!!!!!! avgMaleWEEK",avgMaleWEEK);
 //       document.getElementById("avgMaleWeek").innerHTML = Math.round(avgMaleWEEK);
 //       document.getElementById("avgFemaleWeek").innerHTML = Math.round(avgFemaleWEEK);
 //     }
