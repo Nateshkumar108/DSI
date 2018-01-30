@@ -54,6 +54,7 @@ function myPeopleCounter() {
 
     $('#occupancyBtn').hide();
     $('#txt-custom-cal').show();
+    $('#txt-custom-pipe').show();
     $('#calendar').hide();
 
     //  $('#page-loader').show();
@@ -99,6 +100,7 @@ function myAgeCounter() {
     $('#occupancyBtn').hide();
     $('#utilizationBtn').hide();
     $('#txt-custom-cal').show();
+    $('#txt-custom-pipe').show();
     $('#calendar').hide();
 
 
@@ -133,6 +135,7 @@ function myTrackMap() {
     $('#txt-main-cal').addClass('active-calendar');
     $('#txt-custom-cal').removeClass('active-calendar');
     $('#txt-custom-cal').hide();
+    $('#txt-custom-pipe').hide();
     $('#calendar').hide();
 
 
@@ -193,6 +196,7 @@ function occupyrpt() {
     $('#txt-main-cal').addClass('active-calendar');
     $('#txt-custom-cal').removeClass('active-calendar');
     $('#txt-custom-cal').show();
+    $('#txt-custom-pipe').show();
 
 }
 function oCalendar() {
